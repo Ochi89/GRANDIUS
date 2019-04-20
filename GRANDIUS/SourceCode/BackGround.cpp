@@ -43,7 +43,7 @@ void BackGround::Create()
 	m_productionTime = 0.0f;
 
     //	ƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
-    m_modelHandle = MV1LoadModel("Data/Model/BackGround/Skydome.x");
+    m_modelHandle = MV1LoadModel("Data/Model/BackGround/Skydome.pmx");
     CommonDebug::Assert((m_modelHandle <= -1), " [ BackGround.cpp ] : error : model loading failed.");
 
     //	Še•Ï”‚Ì‰Šú‰»
