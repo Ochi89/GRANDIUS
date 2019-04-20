@@ -1,79 +1,79 @@
-
+ï»¿
 //=============================================================================
 //	@file	UpDownEnemy.h
-//	@brief	ã‰ºƒGƒlƒ~[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ä¸Šä¸‹ã‚¨ãƒãƒŸãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/20
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "EnemyBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class PlayerManager;
 class ShotManager;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ã‰ºƒGƒlƒ~[ƒNƒ‰ƒX
+//	@brief	ä¸Šä¸‹ã‚¨ãƒãƒŸãƒ¼ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class UpDownEnemy : public EnemyBase
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	UpDownEnemy(const int _modelHandle);
 	~UpDownEnemy();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create() override final;
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release() override final;
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize() override final;
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(PlayerManager& _playerManager, ShotManager& _shotManager, SoundEffect& _soundEffect) override final;
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	Œü‚«‚ÌØ‚è‘Ö‚¦ˆ—
+	//	å‘ãã®åˆ‡ã‚Šæ›¿ãˆå‡¦ç†
 	void _ChangeDir() override final;
 
-	//	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 	void _UpdateHitPoint() override final;
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease() override final;
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	float	m_moveAngle;			//	ˆÚ“®Šp“x
-	float	m_moveAngleWaitTime;	//	ˆÚ“®Šp“x‚Ì‘Ò‹@ŠÔ
-	bool	m_isOnReverse;			//	”½“]ˆ—ƒtƒ‰ƒO
-	bool	m_isOneTime;			//	ˆê“x‚Ì‚İƒtƒ‰ƒO
+	float	m_moveAngle;			//	ç§»å‹•è§’åº¦
+	float	m_moveAngleWaitTime;	//	ç§»å‹•è§’åº¦ã®å¾…æ©Ÿæ™‚é–“
+	bool	m_isOnReverse;			//	åè»¢å‡¦ç†ãƒ•ãƒ©ã‚°
+	bool	m_isOneTime;			//	ä¸€åº¦ã®ã¿ãƒ•ãƒ©ã‚°
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float MOVE_ANGLE_SPEED;			//	‰ñ“]Šp“x‚Ì‰ñ“]‘¬“x
-	static const float MAX_MOVE_ANGLE_WAIT_TIME;	//	‰ñ“]‘¬“x‚Ì‘Ò‹@ŠÔ‚ÌÅ‘å
-	static const float MAX_MOVE_ANGLE;				//	‰ñ“]Šp“x‚ÌÅ‘å
-	static const float MIN_MOVE_ANGLE;				//	‰ñ“]Šp“x‚ÌÅ¬
+	static const float MOVE_ANGLE_SPEED;			//	å›è»¢è§’åº¦ã®å›è»¢é€Ÿåº¦
+	static const float MAX_MOVE_ANGLE_WAIT_TIME;	//	å›è»¢é€Ÿåº¦ã®å¾…æ©Ÿæ™‚é–“ã®æœ€å¤§
+	static const float MAX_MOVE_ANGLE;				//	å›è»¢è§’åº¦ã®æœ€å¤§
+	static const float MIN_MOVE_ANGLE;				//	å›è»¢è§’åº¦ã®æœ€å°
 
 };

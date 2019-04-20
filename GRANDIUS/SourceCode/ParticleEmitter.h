@@ -1,128 +1,128 @@
-
+ï»¿
 //=============================================================================
 //	@file	ParticleEmitter.h
-//	@brief	ƒp[ƒeƒBƒNƒ‹‚Ì¶¬
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®ç”Ÿæˆ
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/10/3
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒp[ƒeƒBƒNƒ‹‚Ì¶¬ƒNƒ‰ƒX
+//	@brief	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®ç”Ÿæˆã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class ParticleEmitter final
 {
 public:
 
-//==================== \‘¢‘Ì =====================//
+//==================== æ§‹é€ ä½“ =====================//
 
-	//	ƒpƒ‰ƒ[ƒ^‚Ìí—Ş
+	//	ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®ç¨®é¡
 	enum PARAMETER_KIND
 	{
 		MIN_PARAMETER,
 		MAX_PARAMETER,
 	};
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	ParticleEmitter(const int _spriteHandle, const int _size);
 	~ParticleEmitter();
 
-	//	‰Šú‰»
+	//	åˆæœŸåŒ–
 	void Initialize();
 
-	//	XV
+	//	æ›´æ–°
 	void Update();
 
-	//	Œ»İ‚Ìo‚Ä‚¢‚é‚Ì‚İƒGƒtƒFƒNƒg‚ğXV‚·‚é
+	//	ç¾åœ¨ã®å‡ºã¦ã„ã‚‹ã®ã¿ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’æ›´æ–°ã™ã‚‹
 	void End();
 
-	//	•`‰æ
+	//	æç”»
 	void Draw();
 
-	//	íœ
+	//	å‰Šé™¤
 	void Release();
 
 //==================== getter =====================//
 
-	//	ƒp[ƒeƒBƒNƒ‹”‚Ì getter
+	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æ•°ã® getter
 	const int& GetParticleNum() const { return m_particleNum; }
 
-	//	ƒp[ƒeƒBƒNƒ‹‚ÌI—¹‚Ì getter
+	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®çµ‚äº†ã® getter
 	const bool& GetIsEndParticle() const { return m_isEndParticle; }
 
 //==================== setter =====================//
 
-	//	ƒpƒ‰ƒ[ƒ^‚Ìİ’è
+	//	ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®š
 	void SetParameters(const PARAMETER_KIND _paramKind, const VECTOR _pos, const VECTOR _dir, const float _speed, const float _size, const float _life);
 
-	//	F‚Ì setter
+	//	è‰²ã® setter
 	void SetColor(const float _red, const float _green, const float _blue) { m_red = _red; m_green = _green; m_blue = _blue; }
 
-	//	‰Ò“­ŠÔ‚Ì setter
+	//	ç¨¼åƒæ™‚é–“ã® setter
 	void SetActiveTime(const float _set) { m_maxActiveTime = _set; }
 
-	//	ƒp[ƒeƒBƒNƒ‹‚ÌI—¹‚Ì setter
+	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®çµ‚äº†ã® setter
 	void SetIsEndParticle(const bool _set) { m_isEndParticle = _set; }
 
 private:
 
-//==================== \‘¢‘Ì =====================//
+//==================== æ§‹é€ ä½“ =====================//
 
-	//	ƒp[ƒeƒBƒNƒ‹
+	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
 	struct Particle
 	{
-		VECTOR	m_pos;			//	ˆÊ’u
-		VECTOR	m_dir;			//	Œü‚«
-		float	m_speed;		//	‘¬“x
-		float	m_size;			//	‘å‚«‚³
-		float	m_life;			//	õ–½ƒtƒŒ[ƒ€”
-		float	m_red;			//	ÔF
-		float	m_green;		//	ÂF
-		float	m_blue;			//	—ÎF
-		float	m_alpha;		//	•s“§–¾“x
-		bool	m_isActive;		//	‰Ò“­’†‚©‚Ç‚¤‚©
+		VECTOR	m_pos;			//	ä½ç½®
+		VECTOR	m_dir;			//	å‘ã
+		float	m_speed;		//	é€Ÿåº¦
+		float	m_size;			//	å¤§ãã•
+		float	m_life;			//	å¯¿å‘½ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
+		float	m_red;			//	èµ¤è‰²
+		float	m_green;		//	é’è‰²
+		float	m_blue;			//	ç·‘è‰²
+		float	m_alpha;		//	ä¸é€æ˜åº¦
+		bool	m_isActive;		//	ç¨¼åƒä¸­ã‹ã©ã†ã‹
 	};
 
-	//	ƒp[ƒeƒBƒNƒ‹‚Ìî•ñ
+	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æƒ…å ±
 	struct ParticleInfo
 	{
-		VECTOR	m_pos;			//	ˆÊ’u
-		VECTOR	m_dir;			//	Œü‚«
-		float	m_size;			//	‘å‚«‚³
-		float	m_speed;		//	‘¬“x
-		float	m_life;			//	õ–½ƒtƒŒ[ƒ€”
+		VECTOR	m_pos;			//	ä½ç½®
+		VECTOR	m_dir;			//	å‘ã
+		float	m_size;			//	å¤§ãã•
+		float	m_speed;		//	é€Ÿåº¦
+		float	m_life;			//	å¯¿å‘½ãƒ•ãƒ¬ãƒ¼ãƒ æ•°
 	};
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	¶¬
+	//	ç”Ÿæˆ
 	void _Create();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 	
-	Particle*		m_pParticles;			//	ƒp[ƒeƒBƒNƒ‹
-	int				m_particleNum;			//	ƒp[ƒeƒBƒNƒ‹‚Ì”
-	int				m_spriteHandle;			//	ƒXƒvƒ‰ƒCƒgƒnƒ“ƒhƒ‹
-	float			m_activeTime;			//	•`‰æŠÔ
-	float			m_maxActiveTime;		//	Å‘åŠÔ
-	ParticleInfo	m_minParam;				//	Å¬’l‚Ìî•ñ
-	ParticleInfo	m_maxParam;				//	Å‘å’l‚Ìî•ñ
-	float			m_red;					//	Ô
-	float			m_green;				//	—Î
-	float			m_blue;					//	Â
-	bool			m_isEndParticle;		//	ƒp[ƒeƒBƒNƒ‹‚ÌI—¹
+	Particle*		m_pParticles;			//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«
+	int				m_particleNum;			//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æ•°
+	int				m_spriteHandle;			//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒ³ãƒ‰ãƒ«
+	float			m_activeTime;			//	æç”»æ™‚é–“
+	float			m_maxActiveTime;		//	æœ€å¤§æ™‚é–“
+	ParticleInfo	m_minParam;				//	æœ€å°å€¤ã®æƒ…å ±
+	ParticleInfo	m_maxParam;				//	æœ€å¤§å€¤ã®æƒ…å ±
+	float			m_red;					//	èµ¤
+	float			m_green;				//	ç·‘
+	float			m_blue;					//	é’
+	bool			m_isEndParticle;		//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®çµ‚äº†
 };

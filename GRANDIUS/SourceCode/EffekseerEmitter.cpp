@@ -1,31 +1,31 @@
-
+ï»¿
 //=============================================================================
 //	@file	EffekseerEmitter.cpp
 //	@brief	EffekseerEmitter
-//	@autor	‘Š’m ‘ñ–í
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/26
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "EffekseerEmitter.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 EffekseerEmitter::EffekseerEmitter(const char* _fileName)
 {
-	//	ƒGƒtƒFƒNƒg‚Ì“Ç‚İ‚İ
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®èª­ã¿è¾¼ã¿
 	m_effectResourceHandle = LoadEffekseerEffect(_fileName);
 	CommonDebug::Assert((m_effectResourceHandle <= -1), " [ EffekseerEmitter.cpp ] : error : effect resource loading failed.");
 
-	//	Še•Ï”‚Ì‰Šú‰»
+	//	å„å¤‰æ•°ã®åˆæœŸåŒ–
 	m_playingEffectHandle = -1;
 	m_pos = CommonConstant::ORIGIN;
 	m_scale = CommonConstant::ORIGIN;
@@ -42,34 +42,34 @@ EffekseerEmitter::EffekseerEmitter(const char* _fileName)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 EffekseerEmitter::~EffekseerEmitter()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒtƒFƒNƒg‚ÌÄ¶ˆ—
+//	@brief	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿå‡¦ç†
 //-----------------------------------------------------------------------------
 void EffekseerEmitter::OnPlayEffect()
 {
-	//	‚Ü‚¾ƒGƒtƒFƒNƒg‚ğŠJn‚µ‚Ä‚¢‚È‚¯‚ê‚ÎAŠJn
+	//	ã¾ã ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’é–‹å§‹ã—ã¦ã„ãªã‘ã‚Œã°ã€é–‹å§‹
 	if (!m_isPlayEffect)
 	{
-		//	ƒGƒtƒFƒNƒg‚ÌÄ¶
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿ
 		m_playingEffectHandle = PlayEffekseer3DEffect(m_effectResourceHandle);
 		m_isPlayEffect = true;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒtƒFƒNƒg‚ÌI—¹ˆ—
+//	@brief	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†å‡¦ç†
 //-----------------------------------------------------------------------------
 void EffekseerEmitter::OnEndEffect()
 {
-	//	•Ï”‚Ì‰Šú‰»
+	//	å¤‰æ•°ã®åˆæœŸåŒ–
 	m_pos = CommonConstant::ORIGIN;
 	m_scale = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
@@ -88,56 +88,56 @@ void EffekseerEmitter::OnEndEffect()
 	SetScalePlayingEffekseer3DEffect(m_playingEffectHandle, m_scale.x, m_scale.y, m_scale.z);
 	SetSpeedPlayingEffekseer3DEffect(m_playingEffectHandle, m_speed);
 
-	//	ƒGƒtƒFƒNƒg‚Ì’â~
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®åœæ­¢
 	StopEffekseer3DEffect(m_playingEffectHandle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void EffekseerEmitter::Update()
 {
 	if (m_isUsePos)
 	{
-		//	ƒ|ƒWƒVƒ‡ƒ“‚ğİ’è‚·‚é
+		//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’è¨­å®šã™ã‚‹
 		SetPosPlayingEffekseer3DEffect(m_playingEffectHandle, m_pos.x, m_pos.y, m_pos.z);
 	}
 
 	if (m_isUseAngle)
 	{
-		//	ƒ‰ƒWƒAƒ“‚É•ÏŠ·‚µAİ’è‚·‚é
+		//	ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›ã—ã€è¨­å®šã™ã‚‹
 		VECTOR radian = CommonFunction::DegToRad(m_angle);
 		SetRotationPlayingEffekseer3DEffect(m_playingEffectHandle, radian.x, radian.y, radian.z);
 	}
 
 	if (m_isUseScale)
 	{
-		//	Šg‘å—¦‚ğİ’è‚·‚é
+		//	æ‹¡å¤§ç‡ã‚’è¨­å®šã™ã‚‹
 		SetScalePlayingEffekseer3DEffect(m_playingEffectHandle, m_scale.x, m_scale.y, m_scale.z);
 	}
 
 	if (m_isUseSpeed)
 	{
-		//	Ä¶‘¬“x‚ğİ’è‚·‚é
+		//	å†ç”Ÿé€Ÿåº¦ã‚’è¨­å®šã™ã‚‹
 		SetSpeedPlayingEffekseer3DEffect(m_playingEffectHandle, m_speed);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	Ä¶‘¬“x‚Ì getter
+//	@brief	å†ç”Ÿé€Ÿåº¦ã® getter
 //-----------------------------------------------------------------------------
 const float EffekseerEmitter::GetPlaySpeed() const
 {
-	//	Ä¶‘¬“x‚ğæ“¾‚·‚é
+	//	å†ç”Ÿé€Ÿåº¦ã‚’å–å¾—ã™ã‚‹
 	return GetSpeedPlayingEffekseer3DEffect(m_playingEffectHandle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void EffekseerEmitter::_FinalRelease()
 {
-	//	ƒGƒtƒFƒNƒgƒŠƒ\[ƒX‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒªã‚½ãƒ¼ã‚¹ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteEffekseerEffect(m_playingEffectHandle);
 	DeleteEffekseerEffect(m_effectResourceHandle);
 }

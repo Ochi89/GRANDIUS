@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	Main.h
-//	@brief	ƒƒCƒ“
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ¡ã‚¤ãƒ³
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "EffekseerForDXLib.h"
@@ -16,76 +16,76 @@
 #include "SceneBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
-bool _isInitializeDxLib();              //  DxLib‚Ì‰Šú‰»ˆ—
-bool _isInitializeEffekseer();          //  Effekseer‚Ì‰Šú‰»ˆ—
+bool _isInitializeDxLib();              //  DxLibã®åˆæœŸåŒ–å‡¦ç†
+bool _isInitializeEffekseer();          //  Effekseerã®åˆæœŸåŒ–å‡¦ç†
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒƒCƒ“ˆ—
+//	@brief	ãƒ¡ã‚¤ãƒ³å‡¦ç†
 //-----------------------------------------------------------------------------
 int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {
-	//	DxLib‚Ì‰Šú‰»ˆ—
+	//	DxLibã®åˆæœŸåŒ–å‡¦ç†
 	if (_isInitializeDxLib()) { DxLib_End(); return 0; }
 
-	//	Effekseer‚Ì‰Šú‰»ˆ—
+	//	Effekseerã®åˆæœŸåŒ–å‡¦ç†
 	if (_isInitializeEffekseer()) { DxLib_End(); return 0; }
 
-	//	ƒV[ƒ“ƒ}ƒl[ƒWƒƒ[‚Ìì¬
+	//	ã‚·ãƒ¼ãƒ³ãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®ä½œæˆ
     SceneManager* pSceneManager = new SceneManager();
     if (CommonDebug::Assert((pSceneManager == NULL), " [ Main.cpp ] : error : create scene manager failed.")) { DxLib_End(); return 0; }
 
-	//	ƒ^ƒCƒgƒ‹ƒV[ƒ“‚Æ‚µ‚Äì¬‚µA‰Šú‰»‚·‚é
+	//	ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã¨ã—ã¦ä½œæˆã—ã€åˆæœŸåŒ–ã™ã‚‹
     pSceneManager->Create();
     pSceneManager->ChangeScene(pSceneManager->SCENE_KIND::TITLE_SCENE);
     pSceneManager->Initialize();
 	
-	//	ƒƒCƒ“ƒ‹[ƒv
+	//	ãƒ¡ã‚¤ãƒ³ãƒ«ãƒ¼ãƒ—
 	pSceneManager->Ran();
 
-	//	ƒV[ƒ“ŠÇ—ƒNƒ‰ƒX‚Ì‰ð•ú
+	//	ã‚·ãƒ¼ãƒ³ç®¡ç†ã‚¯ãƒ©ã‚¹ã®è§£æ”¾
     CommonSafe::Release(pSceneManager);
 
-	//	‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‚ÌI—¹ˆ—
+	//	ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®çµ‚äº†å‡¦ç†
 	DxLib_End();
 
-	//	ƒ\ƒtƒg‚ÌI—¹ 
+	//	ã‚½ãƒ•ãƒˆã®çµ‚äº† 
 	return 0;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	DxLib‚Ì‰Šú‰»ˆ—
+//	@brief	DxLibã®åˆæœŸåŒ–å‡¦ç†
 //-----------------------------------------------------------------------------
 bool _isInitializeDxLib()
 {
-	//	•`‰ææ‚ð— ‰æ–Ê‚É•ÏX‚·‚éB
+	//	æç”»å…ˆã‚’è£ç”»é¢ã«å¤‰æ›´ã™ã‚‹ã€‚
 	SetDrawScreen(DX_SCREEN_BACK);
 
-	//	‚c‚wƒ‰ƒCƒuƒ‰ƒŠ‰Šú‰»ˆ—
-	//	ƒGƒ‰[‚ª‹N‚«‚½‚ç’¼‚¿‚ÉI—¹
+	//	ï¼¤ï¼¸ãƒ©ã‚¤ãƒ–ãƒ©ãƒªåˆæœŸåŒ–å‡¦ç†
+	//	ã‚¨ãƒ©ãƒ¼ãŒèµ·ããŸã‚‰ç›´ã¡ã«çµ‚äº†
 	if (DxLib_Init() == -1) { return true; }
 
-	//	‰æ–Êƒ‚[ƒh‚ÌƒZƒbƒg
+	//	ç”»é¢ãƒ¢ãƒ¼ãƒ‰ã®ã‚»ãƒƒãƒˆ
 	SetGraphMode(CommonConstant::WINDOW_WIDTH, CommonConstant::WINDOW_HEIGHT, CommonConstant::COLOR_BIT);
 	ChangeWindowMode(FALSE);
 
-	//	ƒ}ƒEƒX‚Ì•\Ž¦–³Œø
+	//	ãƒžã‚¦ã‚¹ã®è¡¨ç¤ºç„¡åŠ¹
 	SetMouseDispFlag(FALSE);
 
 	return false;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	Effekseer‚Ì‰Šú‰»ˆ—
+//	@brief	Effekseerã®åˆæœŸåŒ–å‡¦ç†
 //-----------------------------------------------------------------------------
 bool _isInitializeEffekseer()
 {
-	//	ƒtƒ‹ƒXƒNƒŠ[ƒ“ƒEƒCƒ“ƒhƒE‚ÌØ‚è‘Ö‚¦‚ÅƒŠƒ\[ƒX‚ªÁ‚¦‚é‚Ì‚ð–h‚®
+	//	ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã®åˆ‡ã‚Šæ›¿ãˆã§ãƒªã‚½ãƒ¼ã‚¹ãŒæ¶ˆãˆã‚‹ã®ã‚’é˜²ã
 	SetChangeScreenModeGraphicsSystemResetFlag(FALSE);
 
-	//	DXƒ‰ƒCƒuƒ‰ƒŠ‚ÌƒfƒoƒCƒXƒƒXƒg‚µ‚½Žž‚ÌƒR[ƒ‹ƒoƒbƒN
-	//	ƒEƒCƒ“ƒhƒE‚Æƒtƒ‹ƒXƒNƒŠ[ƒ“‚ÌØ‚è‘Ö‚¦‚ª”­¶‚·‚éê‡‚Í•K‚¸ŽÀs‚·‚éB
+	//	DXãƒ©ã‚¤ãƒ–ãƒ©ãƒªã®ãƒ‡ãƒã‚¤ã‚¹ãƒ­ã‚¹ãƒˆã—ãŸæ™‚ã®ã‚³ãƒ¼ãƒ«ãƒãƒƒã‚¯
+	//	ã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ã¨ãƒ•ãƒ«ã‚¹ã‚¯ãƒªãƒ¼ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆãŒç™ºç”Ÿã™ã‚‹å ´åˆã¯å¿…ãšå®Ÿè¡Œã™ã‚‹ã€‚
 	Effekseer_SetGraphicsDeviceLostCallbackFunctions();
 
 	return false;

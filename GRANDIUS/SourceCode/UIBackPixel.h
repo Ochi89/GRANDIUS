@@ -1,77 +1,77 @@
-
+ï»¿
 //=============================================================================
 //	@file	UIBackPixel.h
-//	@brief	”wŒiƒsƒNƒZƒ‹UI
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UI
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/15
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	UIGameOverƒNƒ‰ƒX
+//	@brief	UIGameOverã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class UIBackPixel final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^/ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿/ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	UIBackPixel();
 	~UIBackPixel();
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Update();
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
 private:
 
-//===================== \‘¢‘Ì =====================//
+//===================== æ§‹é€ ä½“ =====================//
 	
-	//	ƒsƒNƒZƒ‹
+	//	ãƒ”ã‚¯ã‚»ãƒ«
 	struct BackPixel
 	{
-		VECTOR		m_centerPoint;		//	’†S“_
-		float		m_radius;			//	”¼Œa
-		float		m_speed;			//	‘¬“x
-		bool		m_isInUse;			//	g—pó‹µ
+		VECTOR		m_centerPoint;		//	ä¸­å¿ƒç‚¹
+		float		m_radius;			//	åŠå¾„
+		float		m_speed;			//	é€Ÿåº¦
+		bool		m_isInUse;			//	ä½¿ç”¨çŠ¶æ³
 	};
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	“_‚Ìì¬ˆ—
+	//	ç‚¹ã®ä½œæˆå‡¦ç†
 	void _CreateBackPixel();
 
-	//	“_‚ÌXVˆ—
+	//	ç‚¹ã®æ›´æ–°å‡¦ç†
 	void _UpdateBackPixel();
 
-	//	“_‚Ì•`‰æˆ—
+	//	ç‚¹ã®æç”»å‡¦ç†
 	void _DrawBackPixel();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	BackPixel	m_backPixel[CommonConstant::MAX_BACK_PIXEL_NUM];	//	”wŒiƒsƒNƒZƒ‹
+	BackPixel	m_backPixel[CommonConstant::MAX_BACK_PIXEL_NUM];	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float		MIN_RADIUS_SIZE;	//	”¼ŒaƒTƒCƒY‚ÌÅ¬
-	static const float		MAX_RADIUS_SIZE;	//	”¼ŒaƒTƒCƒY‚ÌÅ‘å
-	static const float		MIN_SPEED;			//	‘¬“x‚ÌÅ¬
-	static const float		MAX_SPEED;			//	‘¬“x‚ÌÅ‘å
-	static const VECTOR		START_POSTION;		//	À•W‚ÌŠJnˆÊ’u
-	static const VECTOR		MIN_POSTION;		//	À•W‚ÌÅ¬
-	static const VECTOR		MAX_POSTION;		//	À•W‚ÌÅ‘å
+	static const float		MIN_RADIUS_SIZE;	//	åŠå¾„ã‚µã‚¤ã‚ºã®æœ€å°
+	static const float		MAX_RADIUS_SIZE;	//	åŠå¾„ã‚µã‚¤ã‚ºã®æœ€å¤§
+	static const float		MIN_SPEED;			//	é€Ÿåº¦ã®æœ€å°
+	static const float		MAX_SPEED;			//	é€Ÿåº¦ã®æœ€å¤§
+	static const VECTOR		START_POSTION;		//	åº§æ¨™ã®é–‹å§‹ä½ç½®
+	static const VECTOR		MIN_POSTION;		//	åº§æ¨™ã®æœ€å°
+	static const VECTOR		MAX_POSTION;		//	åº§æ¨™ã®æœ€å¤§
 
 };

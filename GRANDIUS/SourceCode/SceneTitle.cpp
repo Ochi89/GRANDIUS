@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	SceneTitle.cpp
-//	@brief	ƒ^ƒCƒgƒ‹ƒV[ƒ“
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "SceneTitle.h"
 #include "PlayerManager.h"
@@ -25,17 +25,17 @@
 #include "Opening.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float		SceneTitle::MAX_CHANGE_SCENE_WAIT_TIME = 80.0f;		//	ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì’x‰„‚ÌÅ‘å
-const float		SceneTitle::START_DEMO_TIME = 600.0f;				//	ƒfƒ‚ŠJnŠÔ
+const float		SceneTitle::MAX_CHANGE_SCENE_WAIT_TIME = 80.0f;		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã®é…å»¶ã®æœ€å¤§
+const float		SceneTitle::START_DEMO_TIME = 600.0f;				//	ãƒ‡ãƒ¢é–‹å§‹æ™‚é–“
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 SceneTitle::SceneTitle()
 {
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
     m_pPlayerManager = NULL;
     m_pBackgroundMusic = NULL;
 	m_pUIBackPixel = NULL;
@@ -43,168 +43,168 @@ SceneTitle::SceneTitle()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 SceneTitle::~SceneTitle()
 {
-	//	ÅIŠm”F
+	//	æœ€çµ‚ç¢ºèª
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void SceneTitle::Create()
 {
-    //  ƒvƒŒƒCƒ„[‚Ìì¬
+    //  ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½œæˆ
     m_pPlayerManager = new PlayerManager();
     m_pPlayerManager->Create(m_pPlayerManager->PLAYER_INFO::PLAYER_TITLE);
 
-	//	ƒ^ƒCƒgƒ‹‚Ìì¬
+	//	ã‚¿ã‚¤ãƒˆãƒ«ã®ä½œæˆ
 	m_pTitle = new Title();
     m_pTitle->Create();
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ìì¬
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®ä½œæˆ
 	m_pUIBackPixel = new UIBackPixel();
 
-	//	ƒTƒEƒ“ƒh‚Ìì¬
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®ä½œæˆ
 	m_pBackgroundMusic = new Sound("Data/Sound/BGM/Title.mp3");
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•ú
+//	@brief	è§£æ”¾
 //-----------------------------------------------------------------------------   
 void SceneTitle::Release()
 {
-    //	ƒvƒŒƒCƒ„[‚Ì‰ğ•ú
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£æ”¾
     CommonSafe::Release(m_pPlayerManager);
 
-	//	ƒ^ƒCƒgƒ‹‚Ì‰ğ•ú
+	//	ã‚¿ã‚¤ãƒˆãƒ«ã®è§£æ”¾
 	CommonSafe::Release(m_pTitle);
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ì‰ğ•ú
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®è§£æ”¾
 	CommonSafe::Delete(m_pUIBackPixel);
 
-	//	BGM‚Ì‰ğ•ú
+	//	BGMã®è§£æ”¾
 	CommonSafe::Delete(m_pBackgroundMusic);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šú‰»
+//	@brief	åˆæœŸåŒ–
 //-----------------------------------------------------------------------------
 void SceneTitle::Initialize(Pad& _pad, Camera& _camera)
 {
-	//	ŠeƒNƒ‰ƒX‚Ì‰Šúˆ—
+	//	å„ã‚¯ãƒ©ã‚¹ã®åˆæœŸå‡¦ç†
 	_camera.InitializeForTitle();
 
-	//	ƒV[ƒ“‘JˆÚ’x‰„ŠÔ‚Ì‰Šú‰»
+	//	ã‚·ãƒ¼ãƒ³é·ç§»é…å»¶æ™‚é–“ã®åˆæœŸåŒ–
 	m_changeSceneWaitTime = 0.0f;
 
-	//	‰‰o‚Ì‰Šú‰»
+	//	æ¼”å‡ºã®åˆæœŸåŒ–
 	PRODUCTION->AllReset();
 
-	//	ƒXƒRƒA‚Ì‰Šú‰»
+	//	ã‚¹ã‚³ã‚¢ã®åˆæœŸåŒ–
 	SCORE->ScoreReset();
 
-	//	ƒƒjƒ…[‚Ì‰Šú‰»
+	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®åˆæœŸåŒ–
 	MENU->Initialize();
 
-	//	ƒŠƒZƒbƒg
+	//	ãƒªã‚»ãƒƒãƒˆ
 	HAND_OVER_RESULT->Reset();
 
-	//	ƒL[‚Ì“ü—Í‚ğg—p’†‚É‚·‚é
+	//	ã‚­ãƒ¼ã®å…¥åŠ›ã‚’ä½¿ç”¨ä¸­ã«ã™ã‚‹
 	KEY->AllInUse();
 
-	//	ƒpƒbƒh‚Ì“ü—Í‚ğg—p’†‚É‚·‚é
+	//	ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›ã‚’ä½¿ç”¨ä¸­ã«ã™ã‚‹
 	_pad.AllInUse();
 
-	//	ƒfƒ‚ŠJnŠÔ‚Ì‰Šú‰»
+	//	ãƒ‡ãƒ¢é–‹å§‹æ™‚é–“ã®åˆæœŸåŒ–
 	m_demoTime = 0.0f;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XV
+//	@brief	æ›´æ–°
 //-----------------------------------------------------------------------------
 void SceneTitle::Update(Pad& _pad, Camera& _camera, BackGround& _backGround, SoundEffect& _soundEffect, SceneManager* _sceneManager)
 {
-	//	ƒI[ƒvƒjƒ“ƒO‚ªI—¹‚µ‚½‚ç
+	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ãŒçµ‚äº†ã—ãŸã‚‰
 	const bool isOpeningEnd = OPENING->GetIsEndOpening();
 	if (isOpeningEnd)
 	{
-		//	BGM‚ÌÄ¶
+		//	BGMã®å†ç”Ÿ
 		m_pBackgroundMusic->OnPlay(DX_PLAYTYPE_LOOP);
 
-		//	ƒJƒƒ‰‚ÌXVˆ—
+		//	ã‚«ãƒ¡ãƒ©ã®æ›´æ–°å‡¦ç†
 		_camera.UpdateForTitle(*m_pPlayerManager);
 
-		//	ƒvƒŒƒCƒ„[‚ÌXVˆ—
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ›´æ–°å‡¦ç†
         m_pPlayerManager->Update();
 
-		//	”wŒi‚ÌXVˆ—
+		//	èƒŒæ™¯ã®æ›´æ–°å‡¦ç†
 		_backGround.Update();
 
-		//	”wŒiƒsƒNƒZƒ‹‚ÌXVˆ—
+		//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«ã®æ›´æ–°å‡¦ç†
 		m_pUIBackPixel->Update();
 
-		//	ƒ^ƒCƒgƒ‹‚ÌXVˆ—
+		//	ã‚¿ã‚¤ãƒˆãƒ«ã®æ›´æ–°å‡¦ç†
 		m_pTitle->Update(_soundEffect);
 
-		//	SE‚ÌXV
+		//	SEã®æ›´æ–°
 		_soundEffect.Update();
 
-		//	ƒV[ƒ“‚Ì•ÏX
+		//	ã‚·ãƒ¼ãƒ³ã®å¤‰æ›´
 		_ChangeScene(_pad, _soundEffect, _sceneManager);
 
-		//	ƒfƒ‚ŠJnŠÔ
+		//	ãƒ‡ãƒ¢é–‹å§‹æ™‚é–“
 		if (!PRODUCTION->GetIsTitleProduction()) { m_demoTime++; }
 	}
 	else
 	{
-		//	ƒI[ƒvƒjƒ“ƒO‚ÌXVˆ—
+		//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®æ›´æ–°å‡¦ç†
 		OPENING->Update(_pad);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æ
+//	@brief	æç”»
 //-----------------------------------------------------------------------------
 void SceneTitle::Draw(BackGround& _backGround)
 {
-	//	ƒI[ƒvƒjƒ“ƒO‚ªI—¹‚µ‚½‚ç
+	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ãŒçµ‚äº†ã—ãŸã‚‰
 	const bool isOpeningEnd = OPENING->GetIsEndOpening();
 	if (isOpeningEnd)
 	{
-		//	”wŒi‚Ì•`‰æˆ—
+		//	èƒŒæ™¯ã®æç”»å‡¦ç†
 		_backGround.Draw();
 
-		//	”wŒiƒsƒNƒZƒ‹UI‚Ì•`‰æˆ—
+		//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®æç”»å‡¦ç†
 		m_pUIBackPixel->Draw();
 
-		//	ƒvƒŒƒCƒ„[‚Ì•`‰æˆ—
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æç”»å‡¦ç†
         m_pPlayerManager->Draw();
 
-		//	ƒ^ƒCƒgƒ‹‚Ì•`‰æˆ—
+		//	ã‚¿ã‚¤ãƒˆãƒ«ã®æç”»å‡¦ç†
 		m_pTitle->Draw();
 	}
 	else
 	{
-		//	ƒI[ƒvƒjƒ“ƒO‚Ì•`‰æˆ—
+		//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®æç”»å‡¦ç†
 		OPENING->Draw();
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒV[ƒ“‚ÌØ‚è‘Ö‚¦
+//	@brief	ã‚·ãƒ¼ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆ
 //-----------------------------------------------------------------------------
 void SceneTitle::_ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManager* _sceneManager)
 {
-	//	‰‰KŠJn
+	//	æ¼”ç¿’é–‹å§‹
 	const bool isKeyActive = KEY->Push(KEY_INPUT_RETURN) || KEY->Push(KEY_INPUT_SPACE) || KEY->Push(KEY_INPUT_X) || KEY->Push(KEY_INPUT_K) || KEY->Push(KEY_INPUT_A);
 	const bool isNextActive = isKeyActive || _pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A);
 	const bool isActive = isNextActive && !PRODUCTION->GetIsTitleProduction();
 	if (isActive) { PRODUCTION->SetIsTitleProduction(true); _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_SELECT); }
 
-	//	ƒQ[ƒ€ƒV[ƒ“‚ÌØ‚è‘Ö‚¦
+	//	ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆ
 	if (PRODUCTION->GetIsTitleProduction())
 	{
 		m_changeSceneWaitTime++;
@@ -213,7 +213,7 @@ void SceneTitle::_ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManager
 		return;
 	}
 
-	//	ƒfƒ‚ƒV[ƒ“‚ÌØ‚è‘Ö‚¦
+	//	ãƒ‡ãƒ¢ã‚·ãƒ¼ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆ
 	const bool isDemoStart = m_demoTime >= START_DEMO_TIME;
 	if (isDemoStart)
 	{
@@ -223,19 +223,19 @@ void SceneTitle::_ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManager
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void SceneTitle::_FinalRelease()
 {
-    //	ƒvƒŒƒCƒ„[‚Ì‰ğ•ú
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£æ”¾
     CommonSafe::Release(m_pPlayerManager);
 
-	//	ƒ^ƒCƒgƒ‹‚Ì‰ğ•ú
+	//	ã‚¿ã‚¤ãƒˆãƒ«ã®è§£æ”¾
 	CommonSafe::Release(m_pTitle);
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ì‰ğ•ú
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®è§£æ”¾
 	CommonSafe::Delete(m_pUIBackPixel);
 
-	//	BGM‚Ì‰ğ•ú
+	//	BGMã®è§£æ”¾
 	CommonSafe::Delete(m_pBackgroundMusic);
 }

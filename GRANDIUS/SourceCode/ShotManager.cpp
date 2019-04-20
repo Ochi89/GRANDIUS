@@ -1,98 +1,98 @@
-
+ï»¿
 //=============================================================================
 //	@file	ShotManager.h
-//	@brief	ƒVƒ‡ƒbƒgƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/12
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "ShotManager.h"
 #include "Shot.h"
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float ShotManager::MAX_X_POS = 110.0f;	//	XÀ•W‚ÌÅ‘å
-const float ShotManager::MIN_X_POS = -110.0f;	//	XÀ•W‚ÌÅ¬
-const float ShotManager::MAX_Y_POS = 120.0f;	//	YÀ•W‚ÌÅ‘å
-const float ShotManager::MIN_Y_POS = 0.0f;		//	YÀ•W‚ÌÅ¬
+const float ShotManager::MAX_X_POS = 110.0f;	//	Xåº§æ¨™ã®æœ€å¤§
+const float ShotManager::MIN_X_POS = -110.0f;	//	Xåº§æ¨™ã®æœ€å°
+const float ShotManager::MAX_Y_POS = 120.0f;	//	Yåº§æ¨™ã®æœ€å¤§
+const float ShotManager::MIN_Y_POS = 0.0f;		//	Yåº§æ¨™ã®æœ€å°
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 ShotManager::ShotManager()
 {
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
 	for (int i = 0; i < CommonConstant::MAX_SHOT_NUM; i++)
 	{
 		m_pPlayerShot[i] = NULL;
 		m_pEnemyShot[i] = NULL;
 	}
 
-	//	Še•Ï”‚Ì‰Šú‰»
+	//	å„å¤‰æ•°ã®åˆæœŸåŒ–
 	m_sourcePlayerShotModelHandle = -1;
 	m_sourceEnemyShotModelHandle = -1;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 ShotManager::~ShotManager()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void ShotManager::Create()
 {
-	//	‘å–{ƒ‚ƒfƒ‹‚Ìƒ[ƒh
+	//	å¤§æœ¬ãƒ¢ãƒ‡ãƒ«ã®ãƒ­ãƒ¼ãƒ‰
 	m_sourcePlayerShotModelHandle = MV1LoadModel("Data/Model/Player/PlayerShot.mqo");
 	m_sourceEnemyShotModelHandle = MV1LoadModel("Data/Model/Enemy/EnemyShot.mqo");
 
 	CommonDebug::Assert((m_sourcePlayerShotModelHandle <= -1), " [ ShotManager.cpp ] : error : model loading failed.");
 	CommonDebug::Assert((m_sourceEnemyShotModelHandle <= -1), " [ ShotManager.cpp ] : error : model loading failed.");
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	for (int i = 0; i < CommonConstant::MAX_SHOT_NUM; i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìì¬
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ä½œæˆ
 		m_pPlayerShot[i] = new Shot(m_sourcePlayerShotModelHandle);
 		m_pEnemyShot[i] = new Shot(m_sourceEnemyShotModelHandle);
 
-		//	–¢g—pƒŠƒXƒg‚É“o˜^
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		m_unusedPlayerShotList.push_back(m_pPlayerShot[i]);
 		m_unusedEnemyShotList.push_back(m_pEnemyShot[i]);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void ShotManager::Release()
 {
-	//	‘å–{ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	å¤§æœ¬ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_sourcePlayerShotModelHandle);
 	MV1DeleteModel(m_sourceEnemyShotModelHandle);
 
-	//	ƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚½‚çíœ
+	//	ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ãŸã‚‰å‰Šé™¤
 	if (!m_unusedPlayerShotList.empty()) { m_unusedPlayerShotList.clear(); }
 	if (!m_unusedEnemyShotList.empty()) { m_unusedEnemyShotList.clear(); }
 	if (!m_usePlayerShotList.empty()) { m_usePlayerShotList.clear(); }
 	if (!m_useEnemyShotList.empty()) { m_useEnemyShotList.clear(); }
 
-	//	ƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	for (int i = 0; i < CommonConstant::MAX_SHOT_NUM; i++)
 	{
 		CommonSafe::Delete(m_pPlayerShot[i]);
@@ -101,26 +101,26 @@ void ShotManager::Release()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void ShotManager::Update()
 {
-	//	•KE‹Z‚Ì‚Æ‚«‚ÍXV‚µ‚È‚¢
+	//	å¿…æ®ºæŠ€ã®ã¨ãã¯æ›´æ–°ã—ãªã„
 	const bool isNotSpecialProduction = !PRODUCTION->GetIsSpecialProduction();
 	if (isNotSpecialProduction)
 	{
-		//	ƒŠƒXƒg‚ÌXV
+		//	ãƒªã‚¹ãƒˆã®æ›´æ–°
 		_UpdateList(SHOT_KIND::PLAYER_SHOT);
 		_UpdateList(SHOT_KIND::ENEMY_SHOT);
 
-		//	‰ğ•úˆ—
+		//	è§£æ”¾å‡¦ç†
 		_RemoveFromList(SHOT_KIND::PLAYER_SHOT);
 		_RemoveFromList(SHOT_KIND::ENEMY_SHOT);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void ShotManager::Draw()
 {
@@ -129,11 +129,11 @@ void ShotManager::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚É“o˜^
+//	@brief	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 //-----------------------------------------------------------------------------
 void ShotManager::RegisterOnList(const SHOT_KIND _shotKind, const VECTOR _startPos, const VECTOR _startDir, const float _speed, SoundEffect& _soundEffect)
 {
-	//	–¢g—pƒŠƒXƒg‚©‚çg—pƒŠƒXƒg‚É“o˜^
+	//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 	switch (_shotKind)
 	{
 	case SHOT_KIND::PLAYER_SHOT:
@@ -147,11 +147,11 @@ void ShotManager::RegisterOnList(const SHOT_KIND _shotKind, const VECTOR _startP
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚É“o˜^
+//	@brief	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 //-----------------------------------------------------------------------------
 void ShotManager::RegisterOnList(const SHOT_KIND _shotKind, const VECTOR _startPos, const VECTOR _startDir, const float _speed)
 {
-	//	–¢g—pƒŠƒXƒg‚©‚çg—pƒŠƒXƒg‚É“o˜^
+	//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 	switch (_shotKind)
 	{
 	case SHOT_KIND::PLAYER_SHOT:
@@ -165,11 +165,11 @@ void ShotManager::RegisterOnList(const SHOT_KIND _shotKind, const VECTOR _startP
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void ShotManager::RemoveFromList(const SHOT_KIND _shotKind, const Shot* _shotPtr)
 {
-	//	g—pƒŠƒXƒg‚©‚çíœ
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 	switch (_shotKind)
 	{
 	case SHOT_KIND::PLAYER_SHOT:
@@ -183,11 +183,11 @@ void ShotManager::RemoveFromList(const SHOT_KIND _shotKind, const Shot* _shotPtr
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚ÌƒTƒCƒY‚Ìæ“¾
+//	@brief	ãƒªã‚¹ãƒˆã®ã‚µã‚¤ã‚ºã®å–å¾—
 //-----------------------------------------------------------------------------
 const int ShotManager::GetListSize(const SHOT_KIND _shotKind) const
 {
-	//	ƒŠƒXƒg‚ÌƒTƒCƒY‚Ìæ“¾
+	//	ãƒªã‚¹ãƒˆã®ã‚µã‚¤ã‚ºã®å–å¾—
 	switch (_shotKind)
 	{
 	case SHOT_KIND::PLAYER_SHOT:
@@ -201,11 +201,11 @@ const int ShotManager::GetListSize(const SHOT_KIND _shotKind) const
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒVƒ‡ƒbƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 //-----------------------------------------------------------------------------
 Shot* ShotManager::GetShotPtr(const SHOT_KIND _shotKind, const int _num)
 {
-	//	ƒVƒ‡ƒbƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ã‚·ãƒ§ãƒƒãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	switch (_shotKind)
 	{
 	case SHOT_KIND::PLAYER_SHOT:
@@ -219,20 +219,20 @@ Shot* ShotManager::GetShotPtr(const SHOT_KIND _shotKind, const int _num)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒVƒ‡ƒbƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 //-----------------------------------------------------------------------------
 Shot* ShotManager::_GetShotPtr(std::list<Shot*>& _useList, const int _num)
 {
 	int counter = 0;
 
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Shot*>::iterator 	ite;
 		for (ite = _useList.begin(); ite != _useList.end(); ite++)
 		{
-			//	_num ‚Æˆê’v‚µ‚½ƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+			//	_num ã¨ä¸€è‡´ã—ãŸãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
 			const bool isSame = counter == _num;
 			if (isSame) { return (*ite); }
 			counter++;
@@ -243,21 +243,21 @@ Shot* ShotManager::_GetShotPtr(std::list<Shot*>& _useList, const int _num)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚É“o˜^
+//	@brief	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 //-----------------------------------------------------------------------------
 void ShotManager::_RegisterOnList(std::list<Shot*>& _useList, std::list<Shot*>& _unusedList, const VECTOR _startPos, const VECTOR _startDir, const float _speed, SoundEffect& _soundEffect)
 {
-	//	–¢g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!_unusedList.empty())
 	{
-		//	–¢g—pƒŠƒXƒg‚Ìæ“ª‚ÌƒCƒeƒŒ[ƒ^[‚ğæ‚é
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã®å…ˆé ­ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ãƒ¼ã‚’å–ã‚‹
 		std::list<Shot*>::iterator 	ite;
 		ite = _unusedList.begin();
 
-		//	‚Ü‚¾Œü‚«‚ğİ’è‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚Íİ’è‚·‚é
+		//	ã¾ã å‘ãã‚’è¨­å®šã—ã¦ã„ãªã„ã¨ãã¯è¨­å®šã™ã‚‹
 		if (!(*ite)->GetIsOneTime())
 		{
-			//	“à—e‚Ì‰Šú‰»
+			//	å†…å®¹ã®åˆæœŸåŒ–
 			(*ite)->SetStartPos(_startPos);
 			(*ite)->SetStartDir(_startDir);
 			(*ite)->SetSpeed(_speed);
@@ -265,50 +265,50 @@ void ShotManager::_RegisterOnList(std::list<Shot*>& _useList, std::list<Shot*>& 
 			_soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_SHOT);
 		}
 
-		//	–¢g—pƒŠƒXƒg‚©‚çg—pƒŠƒXƒg‚É“o˜^
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		_useList.push_back(*ite);
 
-		//	–¢g—pƒŠƒXƒg‚©‚çíœ
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		_unusedList.remove(*ite);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚É“o˜^
+//	@brief	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 //-----------------------------------------------------------------------------
 void ShotManager::_RegisterOnList(std::list<Shot*>& _useList, std::list<Shot*>& _unusedList, const VECTOR _startPos, const VECTOR _startDir, const float _speed)
 {
-	//	–¢g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!_unusedList.empty())
 	{
-		//	–¢g—pƒŠƒXƒg‚Ìæ“ª‚ÌƒCƒeƒŒ[ƒ^[‚ğæ‚é
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã®å…ˆé ­ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ãƒ¼ã‚’å–ã‚‹
 		std::list<Shot*>::iterator 	ite;
 		ite = _unusedList.begin();
 
-		//	‚Ü‚¾Œü‚«‚ğİ’è‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚Íİ’è‚·‚é
+		//	ã¾ã å‘ãã‚’è¨­å®šã—ã¦ã„ãªã„ã¨ãã¯è¨­å®šã™ã‚‹
 		if (!(*ite)->GetIsOneTime())
 		{
-			//	“à—e‚Ì‰Šú‰»
+			//	å†…å®¹ã®åˆæœŸåŒ–
 			(*ite)->SetStartPos(_startPos);
 			(*ite)->SetStartDir(_startDir);
 			(*ite)->SetSpeed(_speed);
 			(*ite)->SetIsOneTime(true);
 		}
 
-		//	–¢g—pƒŠƒXƒg‚©‚çg—pƒŠƒXƒg‚É“o˜^
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		_useList.push_back(*ite);
 
-		//	–¢g—pƒŠƒXƒg‚©‚çíœ
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		_unusedList.remove(*ite);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚ÌXV
+//	@brief	ãƒªã‚¹ãƒˆã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void ShotManager::_UpdateList(const SHOT_KIND _shotKind)
 {
-	//	g—pƒŠƒXƒg‚ÌXV
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã®æ›´æ–°
 	switch (_shotKind)
 	{
 	case SHOT_KIND::PLAYER_SHOT:
@@ -322,29 +322,29 @@ void ShotManager::_UpdateList(const SHOT_KIND _shotKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚ÌXV
+//	@brief	ãƒªã‚¹ãƒˆã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void ShotManager::_UpdateList(std::list<Shot*>& _useList)
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Shot*>::iterator 	ite;
 		for (ite = _useList.begin(); ite != _useList.end(); ite++)
 		{
-			//	XVˆ—
+			//	æ›´æ–°å‡¦ç†
 			(*ite)->Update();
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void ShotManager::_DrawList(const SHOT_KIND _shotKind)
 {
-	//	g—pƒŠƒXƒg‚Ì•`‰æ
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã®æç”»
 	switch (_shotKind)
 	{
 	case SHOT_KIND::PLAYER_SHOT:
@@ -358,14 +358,14 @@ void ShotManager::_DrawList(const SHOT_KIND _shotKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void ShotManager::_DrawList(std::list<Shot*>& _useList)
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Shot*>::iterator 	ite;
 		for (ite = _useList.begin(); ite != _useList.end(); ite++)
 		{
@@ -375,11 +375,11 @@ void ShotManager::_DrawList(std::list<Shot*>& _useList)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void ShotManager::_RemoveFromList(const SHOT_KIND _shotKind)
 {
-	//	g—pƒŠƒXƒg‚©‚çíœ
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 	switch (_shotKind)
 	{
 	case SHOT_KIND::PLAYER_SHOT:
@@ -393,18 +393,18 @@ void ShotManager::_RemoveFromList(const SHOT_KIND _shotKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void ShotManager::_RemoveFromList(std::list<Shot*>& _useList, std::list<Shot*>& _unusedList)
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Shot*>::iterator 	ite;
 		for (ite = _useList.begin(); ite != _useList.end(); ite++)
 		{
-			//	”ÍˆÍŠO‚Ì‚Æ‚«‚ÍAíœ‚·‚é
+			//	ç¯„å›²å¤–ã®ã¨ãã¯ã€å‰Šé™¤ã™ã‚‹
 			const bool isArrivalTop = (*ite)->GetPos().y >= MAX_Y_POS;
 			const bool isArrivalButtom = (*ite)->GetPos().y <= MIN_Y_POS;
 			const bool isArrivalRight = (*ite)->GetPos().x >= MAX_X_POS;
@@ -412,13 +412,13 @@ void ShotManager::_RemoveFromList(std::list<Shot*>& _useList, std::list<Shot*>& 
 			const bool isActive = isArrivalTop || isArrivalButtom || isArrivalRight || isArrivalLeft;
 			if (isActive)
 			{
-				//	İ’è‰Â”\‚É‚·‚é
+				//	è¨­å®šå¯èƒ½ã«ã™ã‚‹
 				(*ite)->SetIsOneTime(false);
 
-				//	g—pƒŠƒXƒg‚©‚ç–¢g—pƒŠƒXƒg‚É“o˜^
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰æœªä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 				_unusedList.push_back(*ite);
 
-				//	g—pƒŠƒXƒg‚©‚çíœ
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 				_useList.remove(*ite);
 
 				break;
@@ -428,28 +428,28 @@ void ShotManager::_RemoveFromList(std::list<Shot*>& _useList, std::list<Shot*>& 
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void ShotManager::_RemoveFromList(std::list<Shot*>& _useList, std::list<Shot*>& _unusedList, const Shot* _shotPtr)
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Shot*>::iterator 	ite;
 		for (ite = _useList.begin(); ite != _useList.end(); ite++)
 		{
-			//	_num ‚Æˆê’v‚µ‚½ƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+			//	_num ã¨ä¸€è‡´ã—ãŸãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
 			const bool isSame = _shotPtr == (*ite);
 			if (isSame)
 			{
-				//	İ’è‰Â”\‚É‚·‚é
+				//	è¨­å®šå¯èƒ½ã«ã™ã‚‹
 				(*ite)->SetIsOneTime(false);
 
-				//	g—pƒŠƒXƒg‚©‚ç–¢g—pƒŠƒXƒg‚É“o˜^
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰æœªä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 				_unusedList.push_back(*ite);
 
-				//	g—pƒŠƒXƒg‚©‚çíœ
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 				_useList.remove(*ite);
 
 				break;
@@ -459,21 +459,21 @@ void ShotManager::_RemoveFromList(std::list<Shot*>& _useList, std::list<Shot*>& 
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void ShotManager::_FinalRelease()
 {
-	//	‘å–{ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	å¤§æœ¬ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_sourcePlayerShotModelHandle);
 	MV1DeleteModel(m_sourceEnemyShotModelHandle);
 
-	//	ƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚½‚çíœ
+	//	ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ãŸã‚‰å‰Šé™¤
 	if (!m_unusedPlayerShotList.empty()) { m_unusedPlayerShotList.clear(); }
 	if (!m_unusedEnemyShotList.empty()) { m_unusedEnemyShotList.clear(); }
 	if (!m_usePlayerShotList.empty()) { m_usePlayerShotList.clear(); }
 	if (!m_useEnemyShotList.empty()) { m_useEnemyShotList.clear(); }
 
-	//	ƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	for (int i = 0; i < CommonConstant::MAX_SHOT_NUM; i++)
 	{
 		CommonSafe::Delete(m_pPlayerShot[i]);

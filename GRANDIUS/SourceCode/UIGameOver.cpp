@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	UIGameOver.cpp
 //	@brief	UIGameOver
-//	@autor	‘Š’m ‘ñ–í
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/15
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "UIGameOver.h"
 #include "PlayerManager.h"
@@ -15,35 +15,35 @@
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const int		UIGameOver::MIN_ALPHA = 128;			//	ƒAƒ‹ƒtƒ@’l‚ÌÅ¬
-const int		UIGameOver::MAX_ALPHA = 255;			//	ƒAƒ‹ƒtƒ@’l‚ÌÅ‘å
-const int		UIGameOver::ALPHA_SPEED = 5;			//	ƒAƒ‹ƒtƒ@’l‚Ì‘¬“x
+const int		UIGameOver::MIN_ALPHA = 128;			//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å°
+const int		UIGameOver::MAX_ALPHA = 255;			//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å¤§
+const int		UIGameOver::ALPHA_SPEED = 5;			//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®é€Ÿåº¦
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UIGameOver::UIGameOver()
 {
-	//	ˆ—‚È‚µ
+	//	å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UIGameOver::~UIGameOver()
 {
-	//	ÅI“I‚È‰ğ•ú
+	//	æœ€çµ‚çš„ãªè§£æ”¾
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬
+//	@brief	ä½œæˆ
 //-----------------------------------------------------------------------------
 void UIGameOver::Create()
 {
-	//	ƒQ[ƒ€ƒI[ƒo[UI
+	//	ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼UI
 	m_gameOverUI.m_spriteHendle = LoadGraph("Data/Sprite/GameOver/GameOver.png");
 	CommonDebug::Assert((m_gameOverUI.m_spriteHendle <= -1), " [ UIGameOver.cpp ] : error : sprite loading failed.");
 
@@ -54,29 +54,29 @@ void UIGameOver::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•ú
+//	@brief	è§£æ”¾
 //-----------------------------------------------------------------------------
 void UIGameOver::Release()
 {
-	//	ƒQ[ƒ€ƒI[ƒo[UI‚ÌƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼UIã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_gameOverUI.m_spriteHendle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIGameOver::Update(PlayerManager& _playerManager)
 {
-	//	ƒQ[ƒ€ƒI[ƒo[UI‚Ì•`‰æ
+	//	ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼UIã®æç”»
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 	const bool isGameOver = !player->GetIsAlive();
 	if (isGameOver) { m_isGameOver = true; }
 
-	//	ƒAƒ‹ƒtƒ@’l‚Ì‰ÁZŒ¸Z‚ÌØ‚è‘Ö‚¦
+	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®åŠ ç®—æ¸›ç®—ã®åˆ‡ã‚Šæ›¿ãˆ
 	if (m_isChangeAlpha) { m_alpha -= ALPHA_SPEED; }
 	else { m_alpha += ALPHA_SPEED; }
 
-	//	Å‘åÅ¬ˆ—
+	//	æœ€å¤§æœ€å°å‡¦ç†
 	const bool isMaxVal = m_alpha >= MAX_ALPHA;
 	const bool isMinVal = m_alpha <= MIN_ALPHA;
 	if (isMaxVal) { m_alpha = MAX_ALPHA; m_isChangeAlpha = true; }
@@ -85,7 +85,7 @@ void UIGameOver::Update(PlayerManager& _playerManager)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIGameOver::Draw()
 {
@@ -98,10 +98,10 @@ void UIGameOver::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void UIGameOver::_FinalRelease()
 {
-	//	ƒQ[ƒ€ƒI[ƒo[ƒ‰ƒCƒtUI‚ÌƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼ãƒ©ã‚¤ãƒ•UIã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_gameOverUI.m_spriteHendle);
 }

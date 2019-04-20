@@ -1,191 +1,191 @@
-
+ï»¿
 //=============================================================================
 //	@file	Pad.h
-//	@brief	ƒpƒbƒh“ü—Í
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ‘ãƒƒãƒ‰å…¥åŠ›
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/2
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	–¼‘O‹óŠÔ	[ƒpƒbƒh‚ÌŽí—Þ]
+//	@brief	åå‰ç©ºé–“	[ãƒ‘ãƒƒãƒ‰ã®ç¨®é¡ž]
 //-----------------------------------------------------------------------------
 namespace PadInfo
 {
 
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-	//	ƒpƒbƒh‚ÌŽí—Þ
+	//	ãƒ‘ãƒƒãƒ‰ã®ç¨®é¡ž
 	enum PAD_KIND
 	{
-		PAD_1,	//	ƒpƒbƒh‚P
-		PAD_2,	//	ƒpƒbƒh‚Q
-		PAD_3,	//	ƒpƒbƒh‚R
-		PAD_4,	//	ƒpƒbƒh‚S
+		PAD_1,	//	ãƒ‘ãƒƒãƒ‰ï¼‘
+		PAD_2,	//	ãƒ‘ãƒƒãƒ‰ï¼’
+		PAD_3,	//	ãƒ‘ãƒƒãƒ‰ï¼“
+		PAD_4,	//	ãƒ‘ãƒƒãƒ‰ï¼”
 	};
 
-	//	ƒ{ƒ^ƒ“‚ÌŽí—Þ
+	//	ãƒœã‚¿ãƒ³ã®ç¨®é¡ž
 	enum PAD_BUTTON_KIND
 	{
-		BUTTON_A,			//	Aƒ{ƒ^ƒ“
-		BUTTON_B,			//	Bƒ{ƒ^ƒ“
-		BUTTON_X,			//	Xƒ{ƒ^ƒ“
-		BUTTON_Y,			//	Yƒ{ƒ^ƒ“
-		BUTTON_LB,			//	Lƒ{ƒ^ƒ“
-		BUTTON_RB,			//	Rƒ{ƒ^ƒ“
-		BUTTON_START,		//	STARTƒ{ƒ^ƒ“
-		BUTTON_BACK,		//	BUCKƒ{ƒ^ƒ“
-		BUTTON_LSB,			//	LƒXƒeƒBƒbƒN‰Ÿ‚µž‚Ýƒ{ƒ^ƒ“
-		BUTTON_RSB,			//	RƒXƒeƒBƒbƒN‰Ÿ‚µž‚Ýƒ{ƒ^ƒ“
-		BUTTON_LT,			//	LƒgƒŠƒK[
-		BUTTON_RT,			//	RƒgƒŠƒK[
-		BUTTON_ALL,			//	‚·‚×‚Ä‚Ìƒ{ƒ^ƒ“
+		BUTTON_A,			//	Aãƒœã‚¿ãƒ³
+		BUTTON_B,			//	Bãƒœã‚¿ãƒ³
+		BUTTON_X,			//	Xãƒœã‚¿ãƒ³
+		BUTTON_Y,			//	Yãƒœã‚¿ãƒ³
+		BUTTON_LB,			//	Lãƒœã‚¿ãƒ³
+		BUTTON_RB,			//	Rãƒœã‚¿ãƒ³
+		BUTTON_START,		//	STARTãƒœã‚¿ãƒ³
+		BUTTON_BACK,		//	BUCKãƒœã‚¿ãƒ³
+		BUTTON_LSB,			//	Lã‚¹ãƒ†ã‚£ãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
+		BUTTON_RSB,			//	Rã‚¹ãƒ†ã‚£ãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
+		BUTTON_LT,			//	Lãƒˆãƒªã‚¬ãƒ¼
+		BUTTON_RT,			//	Rãƒˆãƒªã‚¬ãƒ¼
+		BUTTON_ALL,			//	ã™ã¹ã¦ã®ãƒœã‚¿ãƒ³
 	};
 
-	//	DPAD‚ÌŽí—Þ
+	//	DPADã®ç¨®é¡ž
 	enum PAD_DPAD_KIND
 	{
-		DPAD_UP,		//	DPAD@ã•ûŒü
-		DPAD_DOWN,		//	DPAD@‰º•ûŒü
-		DPAD_RIGHT,		//	DPAD@‰E•ûŒü
-		DPAD_LEFT,		//	DPAD@¶•ûŒü
+		DPAD_UP,		//	DPADã€€ä¸Šæ–¹å‘
+		DPAD_DOWN,		//	DPADã€€ä¸‹æ–¹å‘
+		DPAD_RIGHT,		//	DPADã€€å³æ–¹å‘
+		DPAD_LEFT,		//	DPADã€€å·¦æ–¹å‘
 	};
 
-	//	ƒXƒeƒBƒbƒN‚ÌŽí—Þ
+	//	ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ç¨®é¡ž
 	enum PAD_STICK_KIND
 	{
-		LEFT_STICK_UP,		//	¶ƒXƒeƒBƒbƒN‚Ìã•ûŒü
-		LEFT_STICK_DOWN,	//	¶ƒXƒeƒBƒbƒN‚Ì‰º•ûŒü
-		LEFT_STICK_RIGHT,	//	¶ƒXƒeƒBƒbƒN‚Ì‰E•ûŒü
-		LEFT_STICK_LEFT,	//	¶ƒXƒeƒBƒbƒN‚Ì¶•ûŒü
-		RIGHT_STICK_UP,		//	‰EƒXƒeƒBƒbƒN‚Ìã•ûŒü
-		RIGHT_STICK_DOWN,	//	‰EƒXƒeƒBƒbƒN‚Ì‰º•ûŒü
-		RIGHT_STICK_RIGHT,	//	‰EƒXƒeƒBƒbƒN‚Ì‰E•ûŒü
-		RIGHT_STICK_LEFT,	//	‰EƒXƒeƒBƒbƒN‚Ì¶•ûŒü
+		LEFT_STICK_UP,		//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ä¸Šæ–¹å‘
+		LEFT_STICK_DOWN,	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ä¸‹æ–¹å‘
+		LEFT_STICK_RIGHT,	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å³æ–¹å‘
+		LEFT_STICK_LEFT,	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å·¦æ–¹å‘
+		RIGHT_STICK_UP,		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ä¸Šæ–¹å‘
+		RIGHT_STICK_DOWN,	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®ä¸‹æ–¹å‘
+		RIGHT_STICK_RIGHT,	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å³æ–¹å‘
+		RIGHT_STICK_LEFT,	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å·¦æ–¹å‘
 	};
 
-	//	ƒXƒeƒBƒbƒN‚ÆDPAD‚ÌŽí—Þ
+	//	ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®ç¨®é¡ž
 	enum PAD_STICK_TO_DPAD_KIND
 	{
-		LEFT_STICK_TO_DPAD_UP,		//	¶ƒXƒeƒBƒbƒN‚ÆDPAD‚Ìã•ûŒü
-		LEFT_STICK_TO_DPAD_DOWN,	//	¶ƒXƒeƒBƒbƒN‚ÆDPAD‚Ì‰º•ûŒü
-		LEFT_STICK_TO_DPAD_RIGHT,	//	¶ƒXƒeƒBƒbƒN‚ÆDPAD‚Ì‰E•ûŒü
-		LEFT_STICK_TO_DPAD_LEFT,	//	¶ƒXƒeƒBƒbƒN‚ÆDPAD‚Ì¶•ûŒü
-		RIGHT_STICK_TO_DPAD_UP,		//	‰EƒXƒeƒBƒbƒN‚ÆDPAD‚Ìã•ûŒü
-		RIGHT_STICK_TO_DPAD_DOWN,	//	‰EƒXƒeƒBƒbƒN‚ÆDPAD‚Ì‰º•ûŒü
-		RIGHT_STICK_TO_DPAD_RIGHT,	//	‰EƒXƒeƒBƒbƒN‚ÆDPAD‚Ì‰E•ûŒü
-		RIGHT_STICK_TO_DPAD_LEFT,	//	‰EƒXƒeƒBƒbƒN‚ÆDPAD‚Ì¶•ûŒü
+		LEFT_STICK_TO_DPAD_UP,		//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®ä¸Šæ–¹å‘
+		LEFT_STICK_TO_DPAD_DOWN,	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®ä¸‹æ–¹å‘
+		LEFT_STICK_TO_DPAD_RIGHT,	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®å³æ–¹å‘
+		LEFT_STICK_TO_DPAD_LEFT,	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®å·¦æ–¹å‘
+		RIGHT_STICK_TO_DPAD_UP,		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®ä¸Šæ–¹å‘
+		RIGHT_STICK_TO_DPAD_DOWN,	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®ä¸‹æ–¹å‘
+		RIGHT_STICK_TO_DPAD_RIGHT,	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®å³æ–¹å‘
+		RIGHT_STICK_TO_DPAD_LEFT,	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨DPADã®å·¦æ–¹å‘
 	};
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const int TRIGGER_DEAD_ZONE = 128;		//	ƒgƒŠƒK[“ü—Í‚Ìƒfƒbƒhƒ][ƒ“
-	static const int STICK_DEAD_ZONE = 10000;		//	ƒXƒeƒBƒbƒN“ü—Í‚Ìƒfƒbƒhƒ][ƒ“
-	static const int PAD_VIBRATION_POWER = 1000;	//	ƒpƒbƒh‚ÌU“®‹@”\ ‹­‚³
-	static const int PAD_VIBRATION_LOOP = -1;		//	ƒpƒbƒh‚ÌU“®‹@”\ ƒ‹[ƒv
+	static const int TRIGGER_DEAD_ZONE = 128;		//	ãƒˆãƒªã‚¬ãƒ¼å…¥åŠ›ã®ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³
+	static const int STICK_DEAD_ZONE = 10000;		//	ã‚¹ãƒ†ã‚£ãƒƒã‚¯å…¥åŠ›ã®ãƒ‡ãƒƒãƒ‰ã‚¾ãƒ¼ãƒ³
+	static const int PAD_VIBRATION_POWER = 1000;	//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½ å¼·ã•
+	static const int PAD_VIBRATION_LOOP = -1;		//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½ ãƒ«ãƒ¼ãƒ—
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
 	//-----------------------------------------------------------------------------
-	//	@brief	–¼‘O‹óŠÔ	[ŠÖ”]
+	//	@brief	åå‰ç©ºé–“	[é–¢æ•°]
 	//-----------------------------------------------------------------------------
 	namespace Function
 	{
-		//	U“®‹@”\
-		//	U“®‚Ì‹­‚³( 0`1000 )
+		//	æŒ¯å‹•æ©Ÿèƒ½
+		//	æŒ¯å‹•ã®å¼·ã•( 0ï½ž1000 )
 		void VibrationFunction(const PadInfo::PAD_KIND _padKind, const int _vibrationPower, const int _vibrationTime);
 
-		//	U“®‹@”\
-		//	U“®‚Ì‹­‚³ : Å‘å
-		//	‰i‹vƒ‹[ƒv
+		//	æŒ¯å‹•æ©Ÿèƒ½
+		//	æŒ¯å‹•ã®å¼·ã• : æœ€å¤§
+		//	æ°¸ä¹…ãƒ«ãƒ¼ãƒ—
 		void VibrationFunction(const PadInfo::PAD_KIND _padKind);
 
-		//	U“®‹@”\
-		//	‰i‹vƒ‹[ƒv
+		//	æŒ¯å‹•æ©Ÿèƒ½
+		//	æ°¸ä¹…ãƒ«ãƒ¼ãƒ—
 		void VibrationFunction(const PadInfo::PAD_KIND _padKind, const int _vibrationPower);
 
-		//	U“®‹@”\‚ÌI—¹
+		//	æŒ¯å‹•æ©Ÿèƒ½ã®çµ‚äº†
 		void EndVibrationFunction(const PadInfo::PAD_KIND _padKind);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒpƒbƒh“ü—ÍƒNƒ‰ƒX
+//	@brief	ãƒ‘ãƒƒãƒ‰å…¥åŠ›ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Pad final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Pad();
 	~Pad();
 
-	//	‚·‚×‚ÄŽg—p’†‚É‚·‚é
-	//	ƒV[ƒ“Ø‚è‘Ö‚¦Žž‚Ì‚Æ‚«‚Ì‚ÝŒÄ‚Ô
+	//	ã™ã¹ã¦ä½¿ç”¨ä¸­ã«ã™ã‚‹
+	//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆæ™‚ã®ã¨ãã®ã¿å‘¼ã¶
 	void AllInUse();
 
-	// ƒpƒbƒh‚Ì“ü—Í‚ðŽæ‚é
+	// ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›ã‚’å–ã‚‹
 	bool InputPadNum(const PadInfo::PAD_KIND _padKind);
 
-	//	ƒ{ƒ^ƒ“‚ð‰Ÿ‚µ‚½uŠÔ
+	//	ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸçž¬é–“
 	bool GetXInputPushButton(const PadInfo::PAD_BUTTON_KIND _buttonKind);
 
-	//	ƒ{ƒ^ƒ“‚ð—£‚µ‚½uŠÔ
+	//	ãƒœã‚¿ãƒ³ã‚’é›¢ã—ãŸçž¬é–“
 	bool GetXInputDisuniteButton(const PadInfo::PAD_BUTTON_KIND _buttonKind);
 
-	//	ƒ{ƒ^ƒ“‚Ì‰Ÿ‚µ‚Ä‚¢‚éŠÔ
+	//	ãƒœã‚¿ãƒ³ã®æŠ¼ã—ã¦ã„ã‚‹é–“
 	bool GetXInputButton(const PadInfo::PAD_BUTTON_KIND _buttonKind);
 
-	//	ƒgƒŠƒK[‚ð‰Ÿ‚µ‚½uŠÔ
+	//	ãƒˆãƒªã‚¬ãƒ¼ã‚’æŠ¼ã—ãŸçž¬é–“
 	bool GetXInputPushTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, const short _deadZone);
 
-	//	ƒgƒŠƒK[‚ð—£‚µ‚½uŠÔ
+	//	ãƒˆãƒªã‚¬ãƒ¼ã‚’é›¢ã—ãŸçž¬é–“
 	bool GetXInputDisuniteTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, const short _deadZone);
 
-	//	ƒgƒŠƒK[‚Ì‰Ÿ‚µ‚Ä‚¢‚éŠÔ
+	//	ãƒˆãƒªã‚¬ãƒ¼ã®æŠ¼ã—ã¦ã„ã‚‹é–“
 	bool GetXInputTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, const short _deadZone);
 
-	//	DPAD‚Ì“ü—Í
+	//	DPADã®å…¥åŠ›
 	bool GetXInputDpad(const PadInfo::PAD_DPAD_KIND _dpadKind);
 
-	//	ƒXƒeƒBƒbƒN‚Ì“ü—Í
+	//	ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã®å…¥åŠ›
 	bool GetXInputStick(const PadInfo::PAD_STICK_KIND _stickKind, const short _deadZone);
 
-	//	ƒXƒeƒbƒN‚ÆDPAD‚Ì“ü—Í
+	//	ã‚¹ãƒ†ãƒƒã‚¯ã¨DPADã®å…¥åŠ›
 	bool GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpadKind, const short _deadZone);
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒ{ƒ^ƒ“‚Ì‰Ÿ‚µ‚½uŠÔ
+	//	ãƒœã‚¿ãƒ³ã®æŠ¼ã—ãŸçž¬é–“
 	bool _PushButton(const int _button, const int _buttonNum);
 
-	//	ƒ{ƒ^ƒ“‚Ì—£‚µ‚½uŠÔ
+	//	ãƒœã‚¿ãƒ³ã®é›¢ã—ãŸçž¬é–“
 	bool _DisuniteButton(const int _button, const int _buttonNum);
 
-	//	ƒgƒŠƒK[‚Ì‰Ÿ‚µ‚½uŠÔ
+	//	ãƒˆãƒªã‚¬ãƒ¼ã®æŠ¼ã—ãŸçž¬é–“
 	bool _PushTrigger(const bool _trigger, const int _buttonNum);
 
-	//	ƒgƒŠƒK[‚Ì—£‚µ‚½uŠÔ
+	//	ãƒˆãƒªã‚¬ãƒ¼ã®é›¢ã—ãŸçž¬é–“
 	bool _DisuniteTrigger(const bool _trigger, const int _buttonNum);
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
 	XINPUT_STATE	m_xInput;												//	xInput
-	int				m_nowButton[PadInfo::PAD_BUTTON_KIND::BUTTON_ALL];		//	¡ƒtƒŒ[ƒ€‚Ìƒ{ƒ^ƒ“‚Ì“ü—Í
-	int				m_prevButton[PadInfo::PAD_BUTTON_KIND::BUTTON_ALL];		//	‘OƒtƒŒ[ƒ€‚Ìƒ{ƒ^ƒ“‚Ì“ü—Í
+	int				m_nowButton[PadInfo::PAD_BUTTON_KIND::BUTTON_ALL];		//	ä»Šãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒœã‚¿ãƒ³ã®å…¥åŠ›
+	int				m_prevButton[PadInfo::PAD_BUTTON_KIND::BUTTON_ALL];		//	å‰ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒœã‚¿ãƒ³ã®å…¥åŠ›
 };
 

@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	SceneResult.cpp
-//	@brief	ƒŠƒUƒ‹ƒgƒV[ƒ“
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "SceneResult.h"
 #include "PlayerManager.h"
@@ -22,16 +22,16 @@
 #include "Sound.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float SceneResult::MAX_CHANGE_SCENE_WAIT_TIME = 60.0f;		//	ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì’x‰„‚ÌÅ‘å
+const float SceneResult::MAX_CHANGE_SCENE_WAIT_TIME = 60.0f;		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã®é…å»¶ã®æœ€å¤§
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 SceneResult::SceneResult()
 {
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
     m_pPlayerManager = NULL;
 	m_pRanking = NULL;
 	m_pUIBackPixel = NULL;
@@ -39,140 +39,140 @@ SceneResult::SceneResult()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 SceneResult::~SceneResult()
 {
-	// ÅIŠm”F
+	// æœ€çµ‚ç¢ºèª
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void SceneResult::Create()
 {
-    //  ƒvƒŒƒCƒ„[‚Ìì¬
+    //  ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½œæˆ
     m_pPlayerManager = new PlayerManager();
     m_pPlayerManager->Create(m_pPlayerManager->PLAYER_INFO::PLAYER_RESULT);
 
-	//	ƒ‰ƒ“ƒLƒ“ƒO‚Ìì¬
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®ä½œæˆ
 	m_pRanking = new Ranking();
     m_pRanking->Initialize();
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ìì¬
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®ä½œæˆ
 	m_pUIBackPixel = new UIBackPixel();
 
-	//	ƒTƒEƒ“ƒh‚Ìì¬
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®ä½œæˆ
 	m_pBackgroundMusic = new Sound("Data/Sound/BGM/Result.mp3");
 	m_pBackgroundMusic->OnPlay(DX_PLAYTYPE_LOOP);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•ú
+//	@brief	è§£æ”¾
 //-----------------------------------------------------------------------------
 void SceneResult::Release()
 {
-    //	ƒvƒŒƒCƒ„[‚Ì‰ğ•ú
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£æ”¾
     CommonSafe::Release(m_pPlayerManager);
 
-	//	ƒ‰ƒ“ƒLƒ“ƒO‚Ì‰ğ•ú
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®è§£æ”¾
 	CommonSafe::Delete(m_pRanking);
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ì‰ğ•ú
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®è§£æ”¾
 	CommonSafe::Delete(m_pUIBackPixel);
 
-	//	BGM‚Ì‰ğ•ú
+	//	BGMã®è§£æ”¾
 	CommonSafe::Delete(m_pBackgroundMusic);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šú‰»
+//	@brief	åˆæœŸåŒ–
 //-----------------------------------------------------------------------------
 void SceneResult::Initialize(Pad& _pad, Camera& _camera)
 {
-	//	‰Šú‰»
+	//	åˆæœŸåŒ–
     m_pRanking->Initialize();
 	_camera.Initialize();
 
-	//	ƒV[ƒ“‘JˆÚ’x‰„ŠÔ‚Ì‰Šú‰»
+	//	ã‚·ãƒ¼ãƒ³é·ç§»é…å»¶æ™‚é–“ã®åˆæœŸåŒ–
 	m_changeSceneWaitTime = 0.0f;
 
-	//	ƒL[‚Ì“ü—Í‚ğg—p’†‚É‚·‚é
+	//	ã‚­ãƒ¼ã®å…¥åŠ›ã‚’ä½¿ç”¨ä¸­ã«ã™ã‚‹
 	KEY->AllInUse();
 
-	//	ƒpƒbƒh‚Ì“ü—Í‚ğg—p’†‚É‚·‚é
+	//	ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›ã‚’ä½¿ç”¨ä¸­ã«ã™ã‚‹
 	_pad.AllInUse();
 
-	//	ƒV[ƒ“‘JˆÚƒtƒ‰ƒO‚Ì‰Šú‰»
+	//	ã‚·ãƒ¼ãƒ³é·ç§»ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
 	m_isChangeScene = false;
 
-	//	ƒpƒbƒh‚ÌU“®‹@”\‚ÌI—¹
+	//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½ã®çµ‚äº†
 	PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XV
+//	@brief	æ›´æ–°
 //-----------------------------------------------------------------------------
 void SceneResult::Update(Pad& _pad, Camera& _camera, BackGround& _backGround, SoundEffect& _soundEffect, SceneManager* _sceneManager)
 {
-	//	ƒ‰ƒ“ƒLƒ“ƒO‚ÌXVˆ—
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®æ›´æ–°å‡¦ç†
 	m_pRanking->Update(_pad, _soundEffect);
 
-	//	ƒJƒƒ‰‚ÌXVˆ—
+	//	ã‚«ãƒ¡ãƒ©ã®æ›´æ–°å‡¦ç†
 	_camera.UpdateForResult(*m_pPlayerManager);
 
-	//	ƒvƒŒƒCƒ„[‚ÌXVˆ—
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ›´æ–°å‡¦ç†
     m_pPlayerManager->Update();
 
-	//	”wŒi‚ÌXVˆ—
+	//	èƒŒæ™¯ã®æ›´æ–°å‡¦ç†
 	_backGround.Update();
 
-	//	”wŒiƒsƒNƒZƒ‹‚ÌXVˆ—
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«ã®æ›´æ–°å‡¦ç†
 	m_pUIBackPixel->Update();
 
-	//	SE‚ÌXV
+	//	SEã®æ›´æ–°
 	_soundEffect.Update();
 
-	//ƒV[ƒ“‚Ì•ÏX
+	//ã‚·ãƒ¼ãƒ³ã®å¤‰æ›´
 	_ChangeScene(_pad, _soundEffect, _sceneManager);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æ
+//	@brief	æç”»
 //-----------------------------------------------------------------------------
 void SceneResult::Draw(BackGround& _backGround)
 {
-	//	”wŒi‚Ì•`‰æˆ—
+	//	èƒŒæ™¯ã®æç”»å‡¦ç†
 	_backGround.Draw();
 	
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ì•`‰æˆ—
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®æç”»å‡¦ç†
 	m_pUIBackPixel->Draw();
 	
-	//	ƒvƒŒƒCƒ„[‚Ì•`‰æˆ—
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æç”»å‡¦ç†
     m_pPlayerManager->Draw();
 
-	//	ƒ‰ƒ“ƒLƒ“ƒO‚Ì•`‰æˆ—
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®æç”»å‡¦ç†
 	m_pRanking->Draw();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒV[ƒ“‚ÌØ‚è‘Ö‚¦
+//	@brief	ã‚·ãƒ¼ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆ
 //-----------------------------------------------------------------------------
 void SceneResult::_ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManager* _sceneManager)
 {
-	//	ƒ‰ƒ“ƒLƒ“ƒO‚ªŠJn‚µ‚½‚ç
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ãŒé–‹å§‹ã—ãŸã‚‰
 	const bool isRankingStart = m_pRanking->GetIsRankingStart();
 	if (isRankingStart)
 	{
-		//	“ü—Í‚ª‚ ‚Á‚½‚çŸ‚Ö
+		//	å…¥åŠ›ãŒã‚ã£ãŸã‚‰æ¬¡ã¸
 		const bool isKeyActive = KEY->Push(KEY_INPUT_RETURN) || KEY->Push(KEY_INPUT_SPACE) || KEY->Push(KEY_INPUT_X) || KEY->Push(KEY_INPUT_K) || KEY->Push(KEY_INPUT_A);
 		const bool isNextActive = isKeyActive || _pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A);
 		const bool isActive = isNextActive && !m_isChangeScene;
 		if (isActive) { m_isChangeScene = true; _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_DECISION); }
 
-		//	ƒ^ƒCƒgƒ‹ƒV[ƒ“‚Ö
-		//	ƒV[ƒ“‚ÌØ‚è‘Ö‚¦
+		//	ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã¸
+		//	ã‚·ãƒ¼ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆ
 		if (m_isChangeScene)
 		{
 			m_changeSceneWaitTime++;
@@ -182,25 +182,25 @@ void SceneResult::_ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManage
 		}
 	}
 
-	//	ŠÔŒo‰ß‚É‚æ‚éAƒV[ƒ“Ø‚è‘Ö‚¦
+	//	æ™‚é–“çµŒéã«ã‚ˆã‚‹ã€ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆ
 	const bool isSceneChange = m_pRanking->GetIsSceneChange();
 	if (isSceneChange) { _sceneManager->ChangeScene(SceneManager::SCENE_KIND::TITLE_SCENE); }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void SceneResult::_FinalRelease()
 {
-    //	ƒvƒŒƒCƒ„[‚Ì‰ğ•ú
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£æ”¾
     CommonSafe::Release(m_pPlayerManager);
 
-	//	ƒ‰ƒ“ƒLƒ“ƒO‚Ì‰ğ•ú
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®è§£æ”¾
 	CommonSafe::Delete(m_pRanking);
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ì‰ğ•ú
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®è§£æ”¾
 	CommonSafe::Delete(m_pUIBackPixel);
 
-	//	BGM‚Ì‰ğ•ú
+	//	BGMã®è§£æ”¾
 	CommonSafe::Delete(m_pBackgroundMusic);
 }

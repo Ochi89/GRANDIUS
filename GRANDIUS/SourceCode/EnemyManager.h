@@ -1,25 +1,25 @@
-
+ï»¿
 //=============================================================================
 //	@file	EnemyManager.h
-//	@brief	ƒGƒlƒ~[ƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/16
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 #include <list>
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class EnemyBase;
 class BossManager;
@@ -32,173 +32,173 @@ class Sound;
 class Warning;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[ŠÇ—ƒNƒ‰ƒX
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ç®¡ç†ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class EnemyManager final
 {
 public:
 
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-	//	ƒGƒlƒ~[‚Ìí—Ş
+	//	ã‚¨ãƒãƒŸãƒ¼ã®ç¨®é¡
 	enum ENEMY_KIND
 	{
-		NONE = -1,			//	‚È‚µ
-		ENEMY_LINE = 0,		//	’¼ü
-		ENEMY_FLOATING,		//	•‚—V
-		ENEMY_CURVE,		//	‹Èü
-		ENEMY_RETURN,		//	‹AŠÒ
-		ENEMY_TURNING,		//	ù‰ñ
-		ENEMY_UP_DOWN,		//	ã‰º
-		ENEMY_NUM			//	”Ô•º
+		NONE = -1,			//	ãªã—
+		ENEMY_LINE = 0,		//	ç›´ç·š
+		ENEMY_FLOATING,		//	æµ®éŠ
+		ENEMY_CURVE,		//	æ›²ç·š
+		ENEMY_RETURN,		//	å¸°é‚„
+		ENEMY_TURNING,		//	æ—‹å›
+		ENEMY_UP_DOWN,		//	ä¸Šä¸‹
+		ENEMY_NUM			//	ç•ªå…µ
 	};
 
-	//	“G‚Ì‘à—ñ”
+	//	æ•µã®éšŠåˆ—æ•°
 	enum ENEMY_FORMATION_NUM
 	{
-		FORMATION_NONE,	//	‘à—ñ‚È‚µ
-		FORMATION_1,	//	‘à—ñ‚P
-		FORMATION_2,	//	‘à—ñ‚Q
-		FORMATION_3,	//	‘à—ñ‚R
-		FORMATION_4,	//	‘à—ñ‚S
-		FORMATION_5,	//	‘à—ñ‚T
-		FORMATION_NUM,	//	‘à—ñ”
+		FORMATION_NONE,	//	éšŠåˆ—ãªã—
+		FORMATION_1,	//	éšŠåˆ—ï¼‘
+		FORMATION_2,	//	éšŠåˆ—ï¼’
+		FORMATION_3,	//	éšŠåˆ—ï¼“
+		FORMATION_4,	//	éšŠåˆ—ï¼”
+		FORMATION_5,	//	éšŠåˆ—ï¼•
+		FORMATION_NUM,	//	éšŠåˆ—æ•°
 	};
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	EnemyManager();
 	~EnemyManager();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create();
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release();
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(PlayerManager& _playerManager, ShotManager& _shotManager, BossManager& _bossManager, ItemManager& _item, Sound& _sound, SoundEffect& _soundEffect, Warning& _warning);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
-	//	ƒŠƒXƒg‚©‚ç‰ğ•ú
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰è§£æ”¾
 	void RemoveFromList(const EnemyBase* _enemyPtr, ItemManager& _item);
 
-	//	‘à—ñ“àƒGƒlƒ~[”‚ÌŒ¸Z
+	//	éšŠåˆ—å†…ã‚¨ãƒãƒŸãƒ¼æ•°ã®æ¸›ç®—
 	void SubEnemyCount(const ENEMY_FORMATION_NUM _formationNum) { m_enemyCounter[(int)_formationNum]--; };
 
-	//	‘à—ñ“àƒGƒlƒ~[”‚ÌŒ¸Z
+	//	éšŠåˆ—å†…ã‚¨ãƒãƒŸãƒ¼æ•°ã®æ¸›ç®—
 	void SubEnemyCount(const int _formationNum) { m_enemyCounter[_formationNum]--; };
 
 //==================== getter =====================//
 
-	//	g—pƒŠƒXƒg‚ÌƒTƒCƒY‚Ì getter
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã®ã‚µã‚¤ã‚ºã® getter
 	const int GetListSize() const { return (int)m_useList.size(); }
 
-	//	ƒGƒlƒ~[‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ì getter
+	//	ã‚¨ãƒãƒŸãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã® getter
 	EnemyBase* GetEnemyPtr(const int _num);
 
-	//	‘à—ñ“à‚ÌƒGƒlƒ~[”‚Ì getter
+	//	éšŠåˆ—å†…ã®ã‚¨ãƒãƒŸãƒ¼æ•°ã® getter
 	const int GetEnemyInFormationNum(const ENEMY_FORMATION_NUM _formationNum) const { return m_enemyCounter[(int)_formationNum]; };
 
-	//	‘à—ñ“à‚ÌƒGƒlƒ~[”‚Ì getter
+	//	éšŠåˆ—å†…ã®ã‚¨ãƒãƒŸãƒ¼æ•°ã® getter
 	const int GetEnemyInFormationNum(const int _formationNum) const { return m_enemyCounter[_formationNum]; };
 
-	//	‘à—ñ“à‚ÉƒGƒlƒ~[‚Í‘¶İ‚·‚é‚©‚Ì getter
+	//	éšŠåˆ—å†…ã«ã‚¨ãƒãƒŸãƒ¼ã¯å­˜åœ¨ã™ã‚‹ã‹ã® getter
 	const bool GetIsEnemyExistence(const ENEMY_FORMATION_NUM _formationNum) const { return (m_enemyCounter[(int)_formationNum] > 0); };
 
-	//	‘à—ñ“à‚ÉƒGƒlƒ~[‚Í‘¶İ‚·‚é‚©‚Ì getter
+	//	éšŠåˆ—å†…ã«ã‚¨ãƒãƒŸãƒ¼ã¯å­˜åœ¨ã™ã‚‹ã‹ã® getter
 	const bool GetIsEnemyExistence(const int _formationNum) const { return (m_enemyCounter[_formationNum] > 0); };
 
 private:
 
-//===================== \‘¢‘Ì =====================//
+//===================== æ§‹é€ ä½“ =====================//
 
 	struct EntryBuffer
 	{
-		EnemyBase*	m_pBuf[CommonConstant::MAX_ENEMY_ENTRY_NUM];			//	ƒoƒbƒtƒ@
-		bool		m_isInUse[CommonConstant::MAX_ENEMY_ENTRY_NUM];			//	ƒƒ‚ƒŠ‚Ìg—pó‹µ
+		EnemyBase*	m_pBuf[CommonConstant::MAX_ENEMY_ENTRY_NUM];			//	ãƒãƒƒãƒ•ã‚¡
+		bool		m_isInUse[CommonConstant::MAX_ENEMY_ENTRY_NUM];			//	ãƒ¡ãƒ¢ãƒªã®ä½¿ç”¨çŠ¶æ³
 	};
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒGƒlƒ~[‚Ì“o˜^
+	//	ã‚¨ãƒãƒŸãƒ¼ã®ç™»éŒ²
 	void _EnemyEntry();
 
-	//	ƒŠƒXƒg‚ÌXV
+	//	ãƒªã‚¹ãƒˆã®æ›´æ–°
 	void _ListUpdate(PlayerManager& _playerManager, ShotManager& _shot, SoundEffect& _soundEffect);
 
-	//	ƒŠƒXƒg‚©‚ç‰ğ•ú
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰è§£æ”¾
 	void _RemoveFromList(ItemManager& _item);
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚P
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼‘
 	void _EnemyParts1();
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚Q
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼’
 	void _EnemyParts2();
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚R
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼“
 	void _EnemyParts3();
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚S
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼”
 	void _EnemyParts4();
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚T
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼•
 	void _EnemyParts5();
 
-	//	‘à—ñ‚ğ‘g‚ñ‚Å“o˜^
+	//	éšŠåˆ—ã‚’çµ„ã‚“ã§ç™»éŒ²
 	void _FormationEntry(const ENEMY_KIND _enemyKind, const float _startTime, const float _intervalTime, const VECTOR _startPos, const int _formationNum, 
 						 const bool _isUseShot, const bool _isRestriction,  const int _formation);
 
-	//	“o˜^ˆ—
+	//	ç™»éŒ²å‡¦ç†
 	void _Registration(const ENEMY_KIND _enemyKind, const VECTOR _startPos, const float _entryTime, const bool _isUseShot, const bool _isRestriction, const int _formation);
 
-	//	c‘à—ñ‚ğ‘g‚ñ‚Å“o˜^
+	//	ç¸¦éšŠåˆ—ã‚’çµ„ã‚“ã§ç™»éŒ²
 	void _VerticalFormationEntry(const ENEMY_KIND _enemyKind, const float _startTime, const float _intervalTime, const float _shiftInterval, const VECTOR _startPos, 
 								 const int _formationNum, const bool _isUseShot, const bool _isHavingItem, const int _formation);
 
-	//	c‚É“o˜^ˆ—
+	//	ç¸¦ã«ç™»éŒ²å‡¦ç†
 	void _VerticalRegistration(const ENEMY_KIND _enemyKind, const VECTOR _startPos, const float _entryTime, const float _shiftInterval, const int _num,
 							   const bool _isUseShot, const bool _isHavingItem, const int _formation);
 
-	//	ˆê‘Ì•ª‚Ì“o˜^
+	//	ä¸€ä½“åˆ†ã®ç™»éŒ²
 	bool _OneEnemyRegistration(const int _enemyKind, const VECTOR _startPos, const bool _isUseShot, const bool _isHavingItem, const int _formation);
 
-	//	ˆê‘Ì•ª‚Ì“o˜^‚µAƒVƒ‡ƒbƒg‚Í“ñ•ª‚Ìˆê‚ÌŠm—¦‚Åg—p‚·‚é
+	//	ä¸€ä½“åˆ†ã®ç™»éŒ²ã—ã€ã‚·ãƒ§ãƒƒãƒˆã¯äºŒåˆ†ã®ä¸€ã®ç¢ºç‡ã§ä½¿ç”¨ã™ã‚‹
 	bool _OneEnemyRegistrationToShotProbaility(const int _enemyKind, const VECTOR _startPos, const bool _isUseShot, const bool _isRestriction, const int _formation);
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int						m_sourceModelHandle[ENEMY_KIND::ENEMY_NUM];				//	‘å–{ƒnƒ“ƒhƒ‹
-	EntryBuffer				m_entryBuffer[ENEMY_KIND::ENEMY_NUM];					//	“o˜^ƒoƒbƒtƒ@
-	std::list<EnemyBase*>	m_useList;												//	g—pƒGƒlƒ~[ƒŠƒXƒg
-	float					m_entryTime;											//	oŒ»ƒ^ƒCƒ}[
-	int						m_enemyCounter[ENEMY_FORMATION_NUM::FORMATION_NUM];		//	‘à—ñ“à‚ÌƒGƒlƒ~[”
+	int						m_sourceModelHandle[ENEMY_KIND::ENEMY_NUM];				//	å¤§æœ¬ãƒãƒ³ãƒ‰ãƒ«
+	EntryBuffer				m_entryBuffer[ENEMY_KIND::ENEMY_NUM];					//	ç™»éŒ²ãƒãƒƒãƒ•ã‚¡
+	std::list<EnemyBase*>	m_useList;												//	ä½¿ç”¨ã‚¨ãƒãƒŸãƒ¼ãƒªã‚¹ãƒˆ
+	float					m_entryTime;											//	å‡ºç¾ã‚¿ã‚¤ãƒãƒ¼
+	int						m_enemyCounter[ENEMY_FORMATION_NUM::FORMATION_NUM];		//	éšŠåˆ—å†…ã®ã‚¨ãƒãƒŸãƒ¼æ•°
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float	MAX_EMERGNCE_INTERVAL_TIME;	//	oŒ‚ƒ^ƒCƒ}[‚ÌÅ‘åŠÔŠu
-	static const float	MAX_WAIT_TIME;				//	‘Ò‹@ŠÔ‚ÌÅ‘å
-	static const float	PART_INTERAL;				//	ƒp[ƒg‚ÌŠÔŠu
-	static const float	MIN_ALIVE_TIME;				//	¶‘¶ŠÔ‚ÌÅ¬
-	static const float	MEDIUM_BOSS_EMERGE_TIME;	//	’†ƒ{ƒX‚ÌoŒ»‚ÌŠÔ
-	static const float	WARNING_SE_TIME;			//	Œx‰¹‚ÌŠÔ
-	static const float	LAST_BOSS_EMERGE_TIME;		//	ÅIƒ{ƒX‚ÌoŒ»‚ÌŠÔ
-	static const float	MAX_FLAME;					//	ƒtƒŒ[ƒ€‚ÌÅ‘å
-	static const float	RESET_FLAME;				//	ƒtƒŒ[ƒ€‚ÌƒŠƒZƒbƒg’l
- 	static const float	PRODUCTION_TIME;			//	‰‰o‚ÌŠÔ
-	static const float	MAX_X_POS;					//	XÀ•W‚ÌÅ‘å
-	static const float	MIN_X_POS;					//	XÀ•W‚ÌÅ¬
-	static const float	MAX_Y_POS;					//	YÀ•W‚ÌÅ‘å
-	static const float	MIN_Y_POS;					//	YÀ•W‚ÌÅ¬
-	static const float	SKIP;						//	ƒXƒLƒbƒv
+	static const float	MAX_EMERGNCE_INTERVAL_TIME;	//	å‡ºæ’ƒã‚¿ã‚¤ãƒãƒ¼ã®æœ€å¤§é–“éš”
+	static const float	MAX_WAIT_TIME;				//	å¾…æ©Ÿæ™‚é–“ã®æœ€å¤§
+	static const float	PART_INTERAL;				//	ãƒ‘ãƒ¼ãƒˆã®é–“éš”
+	static const float	MIN_ALIVE_TIME;				//	ç”Ÿå­˜æ™‚é–“ã®æœ€å°
+	static const float	MEDIUM_BOSS_EMERGE_TIME;	//	ä¸­ãƒœã‚¹ã®å‡ºç¾æ™‚ã®æ™‚é–“
+	static const float	WARNING_SE_TIME;			//	è­¦å‘ŠéŸ³ã®æ™‚é–“
+	static const float	LAST_BOSS_EMERGE_TIME;		//	æœ€çµ‚ãƒœã‚¹ã®å‡ºç¾æ™‚ã®æ™‚é–“
+	static const float	MAX_FLAME;					//	ãƒ•ãƒ¬ãƒ¼ãƒ ã®æœ€å¤§
+	static const float	RESET_FLAME;				//	ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒªã‚»ãƒƒãƒˆå€¤
+ 	static const float	PRODUCTION_TIME;			//	æ¼”å‡ºã®æ™‚é–“
+	static const float	MAX_X_POS;					//	Xåº§æ¨™ã®æœ€å¤§
+	static const float	MIN_X_POS;					//	Xåº§æ¨™ã®æœ€å°
+	static const float	MAX_Y_POS;					//	Yåº§æ¨™ã®æœ€å¤§
+	static const float	MIN_Y_POS;					//	Yåº§æ¨™ã®æœ€å°
+	static const float	SKIP;						//	ã‚¹ã‚­ãƒƒãƒ—
 
 };

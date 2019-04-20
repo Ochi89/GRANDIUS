@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	PlayerBase.h
-//	@brief	ƒvƒŒƒCƒ„[ƒx[ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ™ãƒ¼ã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "CharacterBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct Circle;
 struct Rect;
@@ -31,181 +31,181 @@ class SoundEffect;
 class EnemyManager;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[Šî’êƒNƒ‰ƒX
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼åŸºåº•ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class PlayerBase : public CharacterBase
 {
 public:
 	
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	PlayerBase(const int _modelHandle);
 	virtual ~PlayerBase();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	virtual void Create() override = 0;
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	virtual void Release() override = 0;
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	virtual void Initialize() override = 0;
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
     virtual void Update() {};
     virtual void Update(Pad& _pad, ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gaugeUI) {};
     virtual void Update(ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gaugeUI, EnemyManager& _enemyManager) {};
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	virtual void Draw() override final;
 
-	//	ƒ_ƒ[ƒW”»’è
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 	void OnHitDamage() { m_life--; }
 
 //==================== getter =====================//
 
-	//	c‚èƒ‰ƒCƒt‚Ì getter
+	//	æ®‹ã‚Šãƒ©ã‚¤ãƒ•ã® getter
 	const int& GetLife() const { return m_life; }
 
-	//	oŒ»ƒtƒ‰ƒO‚Ì getter
+	//	å‡ºç¾ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsEmerge() const { return m_isEmerge; }
 
-	//	ƒ_ƒ[ƒWƒtƒ‰ƒO‚Ì getter
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsDamage() const { return m_isDamage; }
 
-	//	–³“Gƒtƒ‰ƒO‚Ì getter
+	//	ç„¡æ•µãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsInvincible() const { return m_isInvincible; }
 
-	//	ƒŒ[ƒU[g—pŒã‚Ì–³“Gƒtƒ‰ƒO‚Ì getter
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ä½¿ç”¨å¾Œã®ç„¡æ•µãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsInvincibleAfterLaser() const { return m_isInvincibleAfterLaser; }
 
-	//	c‹@‚ª‚ ‚é‚©‚Ì getter
+	//	æ®‹æ©ŸãŒã‚ã‚‹ã‹ã® getter
 	const bool GetIsAlive() const { return (m_life > 0); }
 
-	//	ƒŒ[ƒU[‚Ìƒ|ƒWƒVƒ‡ƒ“‚Ì getter
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã® getter
 	const Rect& GetLaserHitRect() const { return m_laserHitRect; }
 
-	//	‘Øİ’e‚Ì’x‰„ŠÔ‚Ì getter
+	//	æ»åœ¨å¼¾ã®é…å»¶æ™‚é–“ã® getter
 	const float& GetStayShotWaitTime() const { return m_stayShotWaitTime; }
 
-	//	‰ŠúˆÊ’u‚Ì getter
+	//	åˆæœŸä½ç½®ã® getter
 	const VECTOR GetStartPos() const;
 
-	//	‘ØİƒVƒ‡ƒbƒg‚Ìg—pó‹µ‚Ì getter
+	//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®ä½¿ç”¨çŠ¶æ³ã® getter
 	const bool& GetIsUseStayShot() const { return m_isUseStayShot; }
 
-	//	ƒAƒCƒeƒ€—p‚Ì“–‚½‚è”»’è‚Ì getter
+	//	ã‚¢ã‚¤ãƒ†ãƒ ç”¨ã®å½“ãŸã‚Šåˆ¤å®šã® getter
 	const Rect& GetItemHitRect() const { return m_itemHitRect; }
 
-	//	ƒAƒCƒeƒ€æ“¾‚ÌƒGƒtƒFƒNƒg‚ÌŠJnƒtƒ‰ƒO‚Ì getter
+	//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—æ™‚ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsStartEffectGetItem() const { return m_isStartEffectGetItem; }
 
 //==================== setter =====================//
 		
-	//	oŒ»ƒtƒ‰ƒO‚Ì setter
+	//	å‡ºç¾ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsEmerge(const bool _set) { m_isEmerge = _set; }
 
-	//	ƒ_ƒ[ƒWƒtƒ‰ƒO‚Ì setter
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsDamage(const bool _set) { m_isDamage = _set; }
 
-	//	–³“Gƒtƒ‰ƒO‚Ì setter
+	//	ç„¡æ•µãƒ•ãƒ©ã‚°ã® setter
 	void SetIsInvincible(const bool _set) { m_isInvincible = _set; }
 
-	//	ƒŒ[ƒU[g—pŒã‚Ì–³“Gƒtƒ‰ƒO‚Ì setter
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ä½¿ç”¨å¾Œã®ç„¡æ•µãƒ•ãƒ©ã‚°ã® setter
 	void SetIsInvincibleAfterLaser(const bool _set) { m_isInvincibleAfterLaser = _set; }
 
-	//	ˆÚ“®’â~ƒtƒ‰ƒO‚Ì setter
+	//	ç§»å‹•åœæ­¢ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsStopMove(const bool _set) { m_isStopMove = _set; }
 
-	//	ƒV[ƒ“‰‰oƒtƒ‰ƒO‚Ì setter
+	//	ã‚·ãƒ¼ãƒ³æ¼”å‡ºãƒ•ãƒ©ã‚°ã® setter
 	void SetIsSceneProduction(const bool _set) { m_isSceneProduction = _set; }
 
-	//	ƒNƒŠƒA‰‰oƒtƒ‰ƒO‚Ì setter
+	//	ã‚¯ãƒªã‚¢æ¼”å‡ºãƒ•ãƒ©ã‚°ã® setter
 	void SetIsClearProduction(const bool _set) { m_isClearProduction = _set; }
 
-	//	ƒAƒCƒeƒ€æ“¾‚ÌƒGƒtƒFƒNƒg‚ÌŠJnƒtƒ‰ƒO‚Ì setter
+	//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—æ™‚ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsStartEffectGetItem(const bool _set) { m_isStartEffectGetItem = _set; }
 
 protected:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-    //  sinƒJ[ƒu‚É‚æ‚éŒü‚«‚ğ‹‚ß‚é
+    //  sinã‚«ãƒ¼ãƒ–ã«ã‚ˆã‚‹å‘ãã‚’æ±‚ã‚ã‚‹
     void _AskSinCurveDirection();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	virtual void _FinalRelease() = 0;
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	float	m_emergeMoveTaim;				//	oŒ»‚ÌˆÚ“®ŠÔ
-	bool	m_isEmerge;						//	oŒ»ƒtƒ‰ƒO
-	float	m_speed;						//	‘¬“x
-	int		m_life;							//	c‹@
-	bool	m_isDamage;						//	ƒ_ƒ[ƒWƒtƒ‰ƒO
-	bool	m_offDraw;						//	•`‰æ‚µ‚È‚¢ƒtƒ‰ƒO
-	float	m_invincibleTime;				//	“–‚½‚è”»’è‚Ì–³ŒøŠÔ
-	bool	m_isInvincible;					//	–³“Gƒtƒ‰ƒO
-	bool	m_isInvincibleAfterLaser;		//	ƒŒ[ƒU[g—pŒã‚Ì–³“Gƒtƒ‰ƒO
-	bool	m_isMove;						//	ˆÚ“®’†‚©‚Ìƒtƒ‰ƒO
-	bool	m_isStopMove;					//	ˆÚ“®’â~ƒtƒ‰ƒO
-	bool	m_isSceneProduction;			//	ƒV[ƒ“‰‰oƒtƒ‰ƒO
-	bool	m_isClearProduction;			//	ƒNƒŠƒA‰‰oƒtƒ‰ƒO
-	Rect	m_laserHitRect;					//	ƒŒ[ƒU[‚Ì“–‚½‚è”»’è
-	float	m_laserTime;					//	ƒŒ[ƒU[‚ÌoŒ»ŠÔ
-	bool	m_isStartLaser;					//	ƒŒ[ƒU[ŠJnƒtƒ‰ƒO
-	float	m_stayShotWaitTime;				//	‘Øİ’e‚Ì’x‰„ŠÔ
-	float	m_radian;						//	ƒ‰ƒWƒAƒ“
-	bool	m_isUseStayShot;				//	‘ØİƒVƒ‡ƒbƒg‚Ìg—pó‹µ
-	Rect	m_itemHitRect;					//	ƒAƒCƒeƒ€—p‚Ì“–‚½‚è”»’è
-	bool	m_isStartEffectGetItem;			//	ƒAƒCƒeƒ€æ“¾‚ÌƒGƒtƒFƒNƒg‚ÌŠJnƒtƒ‰ƒO
+	float	m_emergeMoveTaim;				//	å‡ºç¾æ™‚ã®ç§»å‹•æ™‚é–“
+	bool	m_isEmerge;						//	å‡ºç¾ãƒ•ãƒ©ã‚°
+	float	m_speed;						//	é€Ÿåº¦
+	int		m_life;							//	æ®‹æ©Ÿ
+	bool	m_isDamage;						//	ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ•ãƒ©ã‚°
+	bool	m_offDraw;						//	æç”»ã—ãªã„ãƒ•ãƒ©ã‚°
+	float	m_invincibleTime;				//	å½“ãŸã‚Šåˆ¤å®šã®ç„¡åŠ¹æ™‚é–“
+	bool	m_isInvincible;					//	ç„¡æ•µãƒ•ãƒ©ã‚°
+	bool	m_isInvincibleAfterLaser;		//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ä½¿ç”¨å¾Œã®ç„¡æ•µãƒ•ãƒ©ã‚°
+	bool	m_isMove;						//	ç§»å‹•ä¸­ã‹ã®ãƒ•ãƒ©ã‚°
+	bool	m_isStopMove;					//	ç§»å‹•åœæ­¢ãƒ•ãƒ©ã‚°
+	bool	m_isSceneProduction;			//	ã‚·ãƒ¼ãƒ³æ¼”å‡ºãƒ•ãƒ©ã‚°
+	bool	m_isClearProduction;			//	ã‚¯ãƒªã‚¢æ¼”å‡ºãƒ•ãƒ©ã‚°
+	Rect	m_laserHitRect;					//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
+	float	m_laserTime;					//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã®å‡ºç¾æ™‚é–“
+	bool	m_isStartLaser;					//	ãƒ¬ãƒ¼ã‚¶ãƒ¼é–‹å§‹ãƒ•ãƒ©ã‚°
+	float	m_stayShotWaitTime;				//	æ»åœ¨å¼¾ã®é…å»¶æ™‚é–“
+	float	m_radian;						//	ãƒ©ã‚¸ã‚¢ãƒ³
+	bool	m_isUseStayShot;				//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®ä½¿ç”¨çŠ¶æ³
+	Rect	m_itemHitRect;					//	ã‚¢ã‚¤ãƒ†ãƒ ç”¨ã®å½“ãŸã‚Šåˆ¤å®š
+	bool	m_isStartEffectGetItem;			//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—æ™‚ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹ãƒ•ãƒ©ã‚°
 
-	//	ƒfƒ‚—p
-	float	m_demoDirChangeTime;			//	ƒfƒ‚—p‚ÌŒü‚«Ø‚è‘Ö‚¦’x‰„ŠÔ
-	VECTOR	m_demoTargetPos;				//	ƒfƒ‚—p‚Ì–Ú“I‚ÌˆÊ’u
+	//	ãƒ‡ãƒ¢ç”¨
+	float	m_demoDirChangeTime;			//	ãƒ‡ãƒ¢ç”¨ã®å‘ãåˆ‡ã‚Šæ›¿ãˆé…å»¶æ™‚é–“
+	VECTOR	m_demoTargetPos;				//	ãƒ‡ãƒ¢ç”¨ã®ç›®çš„ã®ä½ç½®
 
-	//	ƒGƒtƒFƒNƒgŠÖŒW
-	EffekseerEmitter*	m_effectLaser;		//	ƒŒ[ƒU[ƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectHit;		//	ƒqƒbƒgƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectExplosion;	//	”š”­ƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectSpeedUp;	//	‘¬“xƒAƒbƒvƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectGetItem;	//	ƒAƒCƒeƒ€æ“¾ƒGƒtƒFƒNƒg
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆé–¢ä¿‚
+	EffekseerEmitter*	m_effectLaser;		//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectHit;		//	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectExplosion;	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectSpeedUp;	//	é€Ÿåº¦ã‚¢ãƒƒãƒ—ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectGetItem;	//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 	
-	static const VECTOR		TITLE_POS;							//	ƒ^ƒCƒgƒ‹‚ÌÀ•W
-	static const VECTOR		RESULT_POS;							//	ƒŠƒUƒ‹ƒg‚ÌÀ•W
-	static const VECTOR		EMERGE_POS;							//	oŒ»‚ÌÀ•W
-	static const VECTOR		START_POS;							//	ŠJn‚ÌÀ•W
-	static const VECTOR		RECT_CORRECTION;					//	À•W‚Ì•â³
-	static const VECTOR		ITEM_RECT_CORRECTION;				//	ƒAƒCƒeƒ€À•W‚Ì•â³
-	static const float		EMERGE_MOVE_SPEED;					//	oŒ»‚ÌˆÚ“®‘¬“x
-	static const float		SHOT_SPEED;							//	ƒVƒ‡ƒbƒg‘¬“x
-	static const float		MAX_SHOT_WAIT_TIME;					//	ƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-	static const float		MAX_STAY_SHOT_WAIT_TIME;			//	‘ØİƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-	static const float		CENTER_CORRECTION;					//	’†SÀ•W‚Ì•â³
-	static const float		HIT_RADIUS;							//	“–‚½‚è”»’è—p‚Ì”¼Œa
-	static const float		MAX_INVINCIBLE_TIME_1;				//	“–‚½‚è”»’è‚Ì–³ŒøŠÔ‚ÌÅ‘å
-	static const float		MAX_INVINCIBLE_TIME_2;				//	“–‚½‚è”»’è‚Ì–³ŒøŠÔ‚ÌÅ‘å
-	static const float		MOVE_SPEED;							//	ˆÚ“®‘¬“x
-	static const float		MIN_POS_X;							//	‚˜À•W‚ÌÅ¬
-	static const float		MAX_POS_X;							//	‚˜À•W‚ÌÅ‘å
-	static const float		MIN_POS_Y;							//	‚™À•W‚ÌÅ¬
-	static const float		MAX_POS_Y;							//	‚™À•W‚ÌÅ‘å
-	static const float		LASER_SIZE;							//	ƒŒ[ƒU[ƒTƒCƒY
-	static const float		LASER_SIZE_DEPTH;					//	ƒŒ[ƒU[ƒTƒCƒY‚Ì‰œs‚«
-	static const float		LASER_SPEED;						//	ƒŒ[ƒU[‘¬“x
-	static const float		ADD_RADIAN_SPEED;					//	ƒ‰ƒWƒAƒ“Šp‚Ì‰ÁZ‘¬“x
-	static const float		MAX_DEMO_SHOT_FIRING_TIME;			//	ƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-	static const float		MAX_DEMO_STAY_SHOT_FIRING_TIME;		//	‘ØİƒVƒ‡ƒbƒg‚Ì”­ËŠÔ
-	static const float		MAX_DEMO_CHANGE_DIR_WAIT_TIME;		//	ƒfƒ‚—p‚ÌŒü‚«Ø‚è‘Ö‚¦’x‰„ŠÔ
-	static const float		MAX_DEMO_DISTANCE_TO_ENEMY;			//	ƒfƒ‚—p‚Ì“G‚Æ‚Ì‹——£‚ÌŠÔŠu
-	static const int		START_LIFE;							//	ŠJn‚Ìc‹@
-	static const int		ZERO_LIFE;							//	c‹@‚È‚µ
+	static const VECTOR		TITLE_POS;							//	ã‚¿ã‚¤ãƒˆãƒ«æ™‚ã®åº§æ¨™
+	static const VECTOR		RESULT_POS;							//	ãƒªã‚¶ãƒ«ãƒˆæ™‚ã®åº§æ¨™
+	static const VECTOR		EMERGE_POS;							//	å‡ºç¾æ™‚ã®åº§æ¨™
+	static const VECTOR		START_POS;							//	é–‹å§‹æ™‚ã®åº§æ¨™
+	static const VECTOR		RECT_CORRECTION;					//	åº§æ¨™ã®è£œæ­£
+	static const VECTOR		ITEM_RECT_CORRECTION;				//	ã‚¢ã‚¤ãƒ†ãƒ åº§æ¨™ã®è£œæ­£
+	static const float		EMERGE_MOVE_SPEED;					//	å‡ºç¾æ™‚ã®ç§»å‹•é€Ÿåº¦
+	static const float		SHOT_SPEED;							//	ã‚·ãƒ§ãƒƒãƒˆé€Ÿåº¦
+	static const float		MAX_SHOT_WAIT_TIME;					//	ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+	static const float		MAX_STAY_SHOT_WAIT_TIME;			//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+	static const float		CENTER_CORRECTION;					//	ä¸­å¿ƒåº§æ¨™ã®è£œæ­£
+	static const float		HIT_RADIUS;							//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+	static const float		MAX_INVINCIBLE_TIME_1;				//	å½“ãŸã‚Šåˆ¤å®šã®ç„¡åŠ¹æ™‚é–“ã®æœ€å¤§
+	static const float		MAX_INVINCIBLE_TIME_2;				//	å½“ãŸã‚Šåˆ¤å®šã®ç„¡åŠ¹æ™‚é–“ã®æœ€å¤§
+	static const float		MOVE_SPEED;							//	ç§»å‹•é€Ÿåº¦
+	static const float		MIN_POS_X;							//	ï½˜åº§æ¨™ã®æœ€å°
+	static const float		MAX_POS_X;							//	ï½˜åº§æ¨™ã®æœ€å¤§
+	static const float		MIN_POS_Y;							//	ï½™åº§æ¨™ã®æœ€å°
+	static const float		MAX_POS_Y;							//	ï½™åº§æ¨™ã®æœ€å¤§
+	static const float		LASER_SIZE;							//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚µã‚¤ã‚º
+	static const float		LASER_SIZE_DEPTH;					//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚µã‚¤ã‚ºã®å¥¥è¡Œã
+	static const float		LASER_SPEED;						//	ãƒ¬ãƒ¼ã‚¶ãƒ¼é€Ÿåº¦
+	static const float		ADD_RADIAN_SPEED;					//	ãƒ©ã‚¸ã‚¢ãƒ³è§’ã®åŠ ç®—é€Ÿåº¦
+	static const float		MAX_DEMO_SHOT_FIRING_TIME;			//	ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+	static const float		MAX_DEMO_STAY_SHOT_FIRING_TIME;		//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®ç™ºå°„æ™‚é–“
+	static const float		MAX_DEMO_CHANGE_DIR_WAIT_TIME;		//	ãƒ‡ãƒ¢ç”¨ã®å‘ãåˆ‡ã‚Šæ›¿ãˆé…å»¶æ™‚é–“
+	static const float		MAX_DEMO_DISTANCE_TO_ENEMY;			//	ãƒ‡ãƒ¢ç”¨ã®æ•µã¨ã®è·é›¢ã®é–“éš”
+	static const int		START_LIFE;							//	é–‹å§‹æ™‚ã®æ®‹æ©Ÿ
+	static const int		ZERO_LIFE;							//	æ®‹æ©Ÿãªã—
 
 private:
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	float m_flashingTime;	//	“_–ÅŠÔ
+	float m_flashingTime;	//	ç‚¹æ»…æ™‚é–“
 
 };

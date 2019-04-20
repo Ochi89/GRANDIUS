@@ -1,58 +1,58 @@
-
+ï»¿
 //=============================================================================
 //	@file	MediumBoss.h
-//	@brief	’†ƒ{ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ä¸­ãƒœã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/18
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "CharacterBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class ShotManager;
 class EffekseerEmitter;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	’†ƒ{ƒXƒNƒ‰ƒX
+//	@brief	ä¸­ãƒœã‚¹ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class MediumBoss : public CharacterBase
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	MediumBoss(const int _modelHandle);
 	~MediumBoss();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create();
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release();
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(ShotManager& _shot, SoundEffect& _soundEffect);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	virtual void Draw() override final;
 
-	//	ƒ_ƒ[ƒW”»’è
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 	void OnHitDamage()
 	{
 		if (!m_isDamage)
@@ -62,7 +62,7 @@ public:
 		}
 	}
 
-	//	ƒ_ƒ[ƒW”»’è
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 	void OnHitDamage(const int _damage)
 	{
 		if (!m_isDamage)
@@ -74,97 +74,97 @@ public:
 
 //==================== getter =====================//
 
-	//	ƒ‰ƒCƒt‚Ì getter
+	//	ãƒ©ã‚¤ãƒ•ã® getter
 	const int& GetLife() const { return m_life; }
 
-	//	¶‚«‚Ä‚¢‚é‚©‚Ì getter
+	//	ç”Ÿãã¦ã„ã‚‹ã‹ã® getter
 	const bool GetIsAlive() const { return m_life > 0; }
 
-	//	ƒ_ƒ[ƒW”»’è‚Ì getter
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šã® getter
 	const bool& GetIsDamage() const { return m_isDamage; }
 
-	//	oŒ»ƒtƒ‰ƒO‚Ì getter
+	//	å‡ºç¾ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsEmerge() const { return m_isEmerge; }
 
-	//	s“®ŠJnƒtƒ‰ƒO‚Ì getter
+	//	è¡Œå‹•é–‹å§‹ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsStarted() const { return m_isStarted; }
 
-	//	íœƒtƒ‰ƒO‚Ì getter
+	//	å‰Šé™¤ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsDeleate() const { return m_isDeleate; }
 
 //==================== setter =====================//
 
-	//	oŒ»ƒtƒ‰ƒO‚Ì setter
+	//	å‡ºç¾ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsEmerge(const bool _set) { m_isEmerge = _set; m_isStart = _set; }
 
-	//	ƒ‰ƒCƒt‚Ì setter
+	//	ãƒ©ã‚¤ãƒ•ã® setter
 	void SetLife(const int _set) { m_life = _set; };
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ŠJn‚ÌˆÚ“®
+	//	é–‹å§‹æ™‚ã®ç§»å‹•
 	void _EmergeMove();
 
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	void _Move();
 
-	//	üŒ`•ÛŠÇ‚ğg—p‚µ‚½ˆÚ“®
+	//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ç”¨ã—ãŸç§»å‹•
 	void _LerpMove(bool _isConditions, VECTOR _targetPos, float _lerpSpeed);
 
-	//	ËŒ‚ˆ—
+	//	å°„æ’ƒå‡¦ç†
 	void _Shot(ShotManager& _shot);
 
-	//	ƒqƒbƒgƒGƒtƒFƒNƒg
+	//	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnHitEffect(SoundEffect& _soundEffect);
 
-	//	”š”­ƒGƒtƒFƒNƒg
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnEffectExplosion(SoundEffect& _soundEffect);
 
-	//	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 	void _UpdateHitPoint();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int		m_life;				//	ƒ‰ƒCƒt
-	float	m_emergeMoveTaim;	//	‰‰oŠÔ
-	float	m_behaviorTime;		//	s“®ŠÔ
-	float	m_moveSpeed;		//	ˆÚ“®‘¬“x
-	bool	m_isEmerge;			//	oŒ»ƒtƒ‰ƒO
-	bool	m_isStart;			//	ŠJnƒtƒ‰ƒO
-	bool	m_isDamage;			//	ƒ_ƒ[ƒWƒtƒ‰ƒO
-	bool	m_isDeleate;		//	íœƒtƒ‰ƒO
-	bool	m_isStarted;		//	s“®ŠJnƒtƒ‰ƒO
-	bool	m_isOffDraw;		//	•`‰æƒIƒtƒtƒ‰ƒO
-	float	m_flashingTime;		//	“_–ÅŠÔ
+	int		m_life;				//	ãƒ©ã‚¤ãƒ•
+	float	m_emergeMoveTaim;	//	æ¼”å‡ºæ™‚é–“
+	float	m_behaviorTime;		//	è¡Œå‹•æ™‚é–“
+	float	m_moveSpeed;		//	ç§»å‹•é€Ÿåº¦
+	bool	m_isEmerge;			//	å‡ºç¾ãƒ•ãƒ©ã‚°
+	bool	m_isStart;			//	é–‹å§‹ãƒ•ãƒ©ã‚°
+	bool	m_isDamage;			//	ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ•ãƒ©ã‚°
+	bool	m_isDeleate;		//	å‰Šé™¤ãƒ•ãƒ©ã‚°
+	bool	m_isStarted;		//	è¡Œå‹•é–‹å§‹ãƒ•ãƒ©ã‚°
+	bool	m_isOffDraw;		//	æç”»ã‚ªãƒ•ãƒ•ãƒ©ã‚°
+	float	m_flashingTime;		//	ç‚¹æ»…æ™‚é–“
 
-	//	ƒGƒtƒFƒNƒgŠÖŒW
-	EffekseerEmitter*	m_effectHit;			//	ƒqƒbƒgƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectExplosion;		//	”š”­ƒGƒtƒFƒNƒg
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆé–¢ä¿‚
+	EffekseerEmitter*	m_effectHit;			//	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectExplosion;		//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const VECTOR		EMERGE_POS;						//	oŒ»‚ÌÀ•W
-	static const VECTOR		END_POS;						//	‘Ş‹p‚ÌÀ•W
-	static const VECTOR		START_POS;						//	ŠJn‚ÌÀ•W
-	static const VECTOR		MOVE_PATTERN_1;					//	s“®ƒpƒ^[ƒ“‚P
-	static const VECTOR		MOVE_PATTERN_2;					//	s“®ƒpƒ^[ƒ“‚Q
-	static const VECTOR		MOVE_PATTERN_3;					//	s“®ƒpƒ^[ƒ“‚R
-	static const VECTOR		MOVE_PATTERN_4;					//	s“®ƒpƒ^[ƒ“‚S
-	static const VECTOR		SHOT_START_POS_CORRECTION_1;	//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-	static const VECTOR		SHOT_START_POS_CORRECTION_2;	//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-	static const VECTOR		SHOT_START_POS_CORRECTION_3;	//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-	static const VECTOR		SHOT_START_POS_CORRECTION_4;	//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-	static const VECTOR		RECT_CORRECTION;				//	À•W‚Ì•â³
-	static const float		SHOT_SPEED;						//	ƒVƒ‡ƒbƒg‘¬“x
-	static const float		MAX_START_WAIT_TIME;			//	ƒVƒ‡ƒbƒg‚ÌŠJn‚Ì’x‰„ŠÔ
-	static const float		MAX_WAIT_TIME;					//	ƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-	static const float		HIT_RADIUS;						//	“–‚½‚è”»’è—p‚Ì”¼Œa
-	static const int		MAX_LIFE;						//	ƒ‰ƒCƒt‚ÌÅ‘å
-	static const int		MIN_LIFE;						//	ƒ‰ƒCƒt‚ÌÅ¬
+	static const VECTOR		EMERGE_POS;						//	å‡ºç¾æ™‚ã®åº§æ¨™
+	static const VECTOR		END_POS;						//	é€€å´æ™‚ã®åº§æ¨™
+	static const VECTOR		START_POS;						//	é–‹å§‹æ™‚ã®åº§æ¨™
+	static const VECTOR		MOVE_PATTERN_1;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼‘
+	static const VECTOR		MOVE_PATTERN_2;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼’
+	static const VECTOR		MOVE_PATTERN_3;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼“
+	static const VECTOR		MOVE_PATTERN_4;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼”
+	static const VECTOR		SHOT_START_POS_CORRECTION_1;	//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+	static const VECTOR		SHOT_START_POS_CORRECTION_2;	//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+	static const VECTOR		SHOT_START_POS_CORRECTION_3;	//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+	static const VECTOR		SHOT_START_POS_CORRECTION_4;	//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+	static const VECTOR		RECT_CORRECTION;				//	åº§æ¨™ã®è£œæ­£
+	static const float		SHOT_SPEED;						//	ã‚·ãƒ§ãƒƒãƒˆé€Ÿåº¦
+	static const float		MAX_START_WAIT_TIME;			//	ã‚·ãƒ§ãƒƒãƒˆã®é–‹å§‹æ™‚ã®é…å»¶æ™‚é–“
+	static const float		MAX_WAIT_TIME;					//	ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+	static const float		HIT_RADIUS;						//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+	static const int		MAX_LIFE;						//	ãƒ©ã‚¤ãƒ•ã®æœ€å¤§
+	static const int		MIN_LIFE;						//	ãƒ©ã‚¤ãƒ•ã®æœ€å°
 
 };

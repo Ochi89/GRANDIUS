@@ -1,127 +1,127 @@
-
+ï»¿
 //=============================================================================
 //	@file	SoundEffect.h
-//	@brief	ƒTƒEƒ“ƒhƒGƒtƒFƒNƒg
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/04
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 #include <list>
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class Sound;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒTƒEƒ“ƒhƒGƒtƒFƒNƒgƒNƒ‰ƒX
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class SoundEffect final
 {
 public:
 	
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-	//	SE‚ÌŽí—Þ
+	//	SEã®ç¨®é¡ž
 	enum SE_KIND
 	{
-		SE_ITEM,			//	ƒAƒCƒeƒ€Žæ“¾SE
-		SE_SHOT,			//	ƒVƒ‡ƒbƒgSE
-		SE_MOVE_SHOT,		//	‘ØÝƒVƒ‡ƒbƒgSE‚P
-		SE_STAY_SHOT,		//	‘ØÝƒVƒ‡ƒbƒgSE‚Q
-		SE_HIT,				//	ƒqƒbƒgSE
-		SE_EXPLOSION,		//	”š”­SE
-		SE_NUM,				//	SE‚Ì”
+		SE_ITEM,			//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—SE
+		SE_SHOT,			//	ã‚·ãƒ§ãƒƒãƒˆSE
+		SE_MOVE_SHOT,		//	æ»žåœ¨ã‚·ãƒ§ãƒƒãƒˆSEï¼‘
+		SE_STAY_SHOT,		//	æ»žåœ¨ã‚·ãƒ§ãƒƒãƒˆSEï¼’
+		SE_HIT,				//	ãƒ’ãƒƒãƒˆSE
+		SE_EXPLOSION,		//	çˆ†ç™ºSE
+		SE_NUM,				//	SEã®æ•°
 	};
 
-	//	SE‚ÌŽí—Þ
+	//	SEã®ç¨®é¡ž
 	enum ONE_SE_KIND
 	{
-		ONE_SE_SELECT,				//	ƒZƒŒƒNƒgSE
-		ONE_SE_PLAYER_LASER,		//	ƒvƒŒƒCƒ„[ƒŒ[ƒU[SE
-		ONE_SE_ENEMY_LASER,			//	ƒGƒlƒ~[ƒŒ[ƒU[SE
-		ONE_SE_ROCKET,				//	ƒƒPƒbƒgSE
-		ONE_SE_WARNING,				//	Œx‰¹SE
-		ONE_SE_TITLE,				//	ƒ^ƒCƒgƒ‹SE
-		ONE_SE_MENU_OPEN,			//	ƒƒjƒ…[ŠJ‚­SE
-		ONE_SE_MENU_CLOSE,			//	ƒƒjƒ…[•Â‚¶‚éSE
-		ONE_SE_MENU_BACK,			//	ƒƒjƒ…[ƒoƒbƒNSE
-		ONE_SE_MENU_CURSOR,			//	ƒƒjƒ…[ƒJ[ƒ\ƒ‹SE
-		ONE_SE_MENU_DECISION,		//	ƒƒjƒ…[Œˆ’èSE
-		ONE_SE_MENU_COUNTDOWN,		//	ƒƒjƒ…[ƒJƒEƒ“ƒgƒ_ƒEƒ“SE
-		ONE_SE_GAUGE_MAX,			//	ƒQ[ƒWÅ‘åSE
-		ONE_SE_STAY_SHOT_GAUGE_MAX,	//	‘ØÝƒVƒ‡ƒbƒg‚ÌƒQ[ƒWÅ‘åSE
-		ONE_SE_WIND,				//	‰‰o‚Ì•—SE
-		ONE_SE_SCORE_UP,				//	ƒXƒRƒAƒAƒbƒvSE
-		ONE_SE_NUM,					//	SE‚Ì”
+		ONE_SE_SELECT,				//	ã‚»ãƒ¬ã‚¯ãƒˆSE
+		ONE_SE_PLAYER_LASER,		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¬ãƒ¼ã‚¶ãƒ¼SE
+		ONE_SE_ENEMY_LASER,			//	ã‚¨ãƒãƒŸãƒ¼ãƒ¬ãƒ¼ã‚¶ãƒ¼SE
+		ONE_SE_ROCKET,				//	ãƒ­ã‚±ãƒƒãƒˆSE
+		ONE_SE_WARNING,				//	è­¦å‘ŠéŸ³SE
+		ONE_SE_TITLE,				//	ã‚¿ã‚¤ãƒˆãƒ«SE
+		ONE_SE_MENU_OPEN,			//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼é–‹ãSE
+		ONE_SE_MENU_CLOSE,			//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼é–‰ã˜ã‚‹SE
+		ONE_SE_MENU_BACK,			//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒãƒƒã‚¯SE
+		ONE_SE_MENU_CURSOR,			//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚«ãƒ¼ã‚½ãƒ«SE
+		ONE_SE_MENU_DECISION,		//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼æ±ºå®šSE
+		ONE_SE_MENU_COUNTDOWN,		//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³SE
+		ONE_SE_GAUGE_MAX,			//	ã‚²ãƒ¼ã‚¸æœ€å¤§SE
+		ONE_SE_STAY_SHOT_GAUGE_MAX,	//	æ»žåœ¨ã‚·ãƒ§ãƒƒãƒˆã®ã‚²ãƒ¼ã‚¸æœ€å¤§SE
+		ONE_SE_WIND,				//	æ¼”å‡ºã®é¢¨SE
+		ONE_SE_SCORE_UP,				//	ã‚¹ã‚³ã‚¢ã‚¢ãƒƒãƒ—SE
+		ONE_SE_NUM,					//	SEã®æ•°
 	};
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	SoundEffect();
 	~SoundEffect();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create();
 
-	//	‰ð•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update();
 
-	//	Ä¶ˆ—
+	//	å†ç”Ÿå‡¦ç†
 	void OnPlaySound(const SE_KIND _kind);
 
-	//	Ä¶ˆ—
+	//	å†ç”Ÿå‡¦ç†
 	void OnPlaySound(const ONE_SE_KIND _kind);
 
 private:
 
-//==================== \‘¢‘Ì =====================//
+//==================== æ§‹é€ ä½“ =====================//
 
-	//	SEƒoƒbƒtƒ@
+	//	SEãƒãƒƒãƒ•ã‚¡
 	struct SeBuffer
 	{
-		Sound*	m_pBuf[CommonConstant::MAX_ENEMY_SE_NUM];		//	ƒoƒbƒtƒ@
-		bool	m_isInUse[CommonConstant::MAX_ENEMY_SE_NUM];	//	ƒƒ‚ƒŠ‚ÌŽg—pó‹µ
+		Sound*	m_pBuf[CommonConstant::MAX_ENEMY_SE_NUM];		//	ãƒãƒƒãƒ•ã‚¡
+		bool	m_isInUse[CommonConstant::MAX_ENEMY_SE_NUM];	//	ãƒ¡ãƒ¢ãƒªã®ä½¿ç”¨çŠ¶æ³
 	};
 
-	//	SEƒoƒbƒtƒ@
+	//	SEãƒãƒƒãƒ•ã‚¡
 	struct OneSeBuffer
 	{
-		Sound*	m_pBuf;			//	ƒoƒbƒtƒ@
-		bool	m_isInUse;		//	ƒƒ‚ƒŠ‚ÌŽg—pó‹µ
+		Sound*	m_pBuf;			//	ãƒãƒƒãƒ•ã‚¡
+		bool	m_isInUse;		//	ãƒ¡ãƒ¢ãƒªã®ä½¿ç”¨çŠ¶æ³
 	};
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 	
-	//	ƒŠƒXƒg‚ÌXV
+	//	ãƒªã‚¹ãƒˆã®æ›´æ–°
 	void _ListUpdate();
 
-	//	ƒŠƒXƒg‚©‚ç‰ð•ú
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰è§£æ”¾
 	void _RemoveFromList();
 
-	//	ÅI“I‚È‰ð•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int					m_sourceSoundHandle[SE_KIND::SE_NUM];				//	ƒTƒEƒ“ƒhƒnƒ“ƒhƒ‹
-	int					m_sourceOneSoundHandle[ONE_SE_KIND::ONE_SE_NUM];	//	ƒTƒEƒ“ƒhƒnƒ“ƒhƒ‹
-	SeBuffer			m_seBuffer[SE_KIND::SE_NUM];						//	“o˜^ƒoƒbƒtƒ@
-	OneSeBuffer			m_oneSeBuffer[ONE_SE_KIND::ONE_SE_NUM];				//	“o˜^ƒoƒbƒtƒ@
-	std::list<Sound*>	m_useList;											//	Žg—pƒGƒlƒ~[ƒŠƒXƒg
+	int					m_sourceSoundHandle[SE_KIND::SE_NUM];				//	ã‚µã‚¦ãƒ³ãƒ‰ãƒãƒ³ãƒ‰ãƒ«
+	int					m_sourceOneSoundHandle[ONE_SE_KIND::ONE_SE_NUM];	//	ã‚µã‚¦ãƒ³ãƒ‰ãƒãƒ³ãƒ‰ãƒ«
+	SeBuffer			m_seBuffer[SE_KIND::SE_NUM];						//	ç™»éŒ²ãƒãƒƒãƒ•ã‚¡
+	OneSeBuffer			m_oneSeBuffer[ONE_SE_KIND::ONE_SE_NUM];				//	ç™»éŒ²ãƒãƒƒãƒ•ã‚¡
+	std::list<Sound*>	m_useList;											//	ä½¿ç”¨ã‚¨ãƒãƒŸãƒ¼ãƒªã‚¹ãƒˆ
 
 };

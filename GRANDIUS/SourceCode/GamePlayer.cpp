@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	Player.cpp
-//	@brief	ƒvƒŒƒCƒ„[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "GamePlayer.h"
 #include "Common.h"
@@ -23,12 +23,12 @@
 #include "EnemyBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 GamePlayer::GamePlayer(const int _modelHandle)
 	: PlayerBase(_modelHandle)
 {
-	//	Še•Ï”‚ğ‰Šú‰»
+	//	å„å¤‰æ•°ã‚’åˆæœŸåŒ–
 	m_pos = CommonConstant::ORIGIN;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
@@ -41,7 +41,7 @@ GamePlayer::GamePlayer(const int _modelHandle)
 	m_hitCircle.m_radius = HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
 	m_effectLaser = NULL;
 	m_effectHit = NULL;
 	m_effectExplosion = NULL;
@@ -50,20 +50,20 @@ GamePlayer::GamePlayer(const int _modelHandle)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 GamePlayer::~GamePlayer()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void GamePlayer::Create()
 {
-	//	ƒGƒtƒFƒNƒg‚Ì“Ç‚İ‚İ
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®èª­ã¿è¾¼ã¿
 	m_effectLaser = new EffekseerEmitter("Data/Effect/Player/Laser/Laser.efk");
 	m_effectHit = new EffekseerEmitter("Data/Effect/Hit/Hit.efk");
 	m_effectExplosion = new EffekseerEmitter("Data/Effect/Explosion/Explosion.efk");
@@ -72,11 +72,11 @@ void GamePlayer::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void GamePlayer::Release()
 {
-	//	ƒGƒtƒFƒNƒg‚Ìíœ
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å‰Šé™¤
 	CommonSafe::Delete(m_effectLaser);
 	CommonSafe::Delete(m_effectHit);
 	CommonSafe::Delete(m_effectExplosion);
@@ -85,11 +85,11 @@ void GamePlayer::Release()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void GamePlayer::Initialize()
 {
-	//	Še•Ï”‚ğ‰Šúó‘Ô‚Éİ’è
+	//	å„å¤‰æ•°ã‚’åˆæœŸçŠ¶æ…‹ã«è¨­å®š
 	m_pos = EMERGE_POS;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = VGet(0.0f, 1.4f, 0.0f);
@@ -118,145 +118,145 @@ void GamePlayer::Initialize()
 	m_offDraw = false;
 	m_isStartEffectGetItem = false;
 
-	//	ƒfƒ‚—p
+	//	ãƒ‡ãƒ¢ç”¨
 	m_demoDirChangeTime = 0.0f;
 	m_demoTargetPos = CommonConstant::ORIGIN;
 
-	//	“–‚½‚è”»’è—p‚Ì‰~Œ`\‘¢‘Ì‚Ì‰Šú‰»
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††å½¢æ§‹é€ ä½“ã®åˆæœŸåŒ–
 	m_hitCircle.m_radius = HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
-	//	“–‚½‚è”»’è—p‚Ì’·•ûŒ`\‘¢‘Ì‚Ì‰Šú‰»
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢æ§‹é€ ä½“ã®åˆæœŸåŒ–
 	m_hitRect.m_vertexTop = CommonConstant::ORIGIN;
 	m_hitRect.m_vertexUnder = CommonConstant::ORIGIN;
 
-	//	Šp“x‚ÆƒTƒCƒY‚ğŠ„‚è“–‚Ä‚é
+	//	è§’åº¦ã¨ã‚µã‚¤ã‚ºã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	MV1SetRotationXYZ(m_modelHandle, m_angle);
 	MV1SetScale(m_modelHandle, m_size);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void GamePlayer::Update(Pad& _pad, ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gaugeUI)
 {
-	//	c‹@‚ª‚ ‚èAˆÚ“®‰Â”\‚Ì‚Æ‚«‚Ì‚İXV‚·‚é
+	//	æ®‹æ©ŸãŒã‚ã‚Šã€ç§»å‹•å¯èƒ½ã®ã¨ãã®ã¿æ›´æ–°ã™ã‚‹
 	const int notLife = 0;
 	const bool isAlive = m_life > notLife;
 	const bool isActive = !m_isStopMove && isAlive && !m_isDamage;
 	if (isActive)
 	{
-		//	ŠJn‚ÌˆÚ“®
+		//	é–‹å§‹æ™‚ã®ç§»å‹•
 		_EmergeMove();
 
-		//	–³“GŠÔ‚ÌŒv‘ª
+		//	ç„¡æ•µæ™‚é–“ã®è¨ˆæ¸¬
 		_MeasuringInvincibleTime();
 
-		//	oŒ»‚ªI‚í‚Á‚Ä‚¢‚½‚çA
-		//	“®‚¯‚é‚æ‚¤‚É‚·‚é
+		//	å‡ºç¾ãŒçµ‚ã‚ã£ã¦ã„ãŸã‚‰ã€
+		//	å‹•ã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
 		if (!m_isEmerge)
 		{
-			//	ˆÚ“®ˆ—
-			//	moving ‚Ìƒmƒ‹ƒ€‚ª0ˆÈŠO‚Ì‚Æ‚«‚ÍAˆÚ“®’†
+			//	ç§»å‹•å‡¦ç†
+			//	moving ã®ãƒãƒ«ãƒ ãŒ0ä»¥å¤–ã®ã¨ãã¯ã€ç§»å‹•ä¸­
 			VECTOR moving = MoveHelper::AskMoveAmount(m_dir, _pad, m_speed, true, true);
 			m_isMove = VSize(moving) != 0;
 
-			//	ƒ|ƒWƒVƒ‡ƒ“‚ÌXV
+			//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã®æ›´æ–°
 			m_pos = VAdd(m_pos, moving);
 
-			//	”ÍˆÍŠOw’è
+			//	ç¯„å›²å¤–æŒ‡å®š
 			_OutOfRange();
 
-			//	ËŒ‚ˆ—
+			//	å°„æ’ƒå‡¦ç†
 			_Shot(_pad, _shot, _stayShot, _soundEffect);
 
-			//	•KE‹Zˆ—
+			//	å¿…æ®ºæŠ€å‡¦ç†
 			_SpecialAttack(_pad, _gaugeUI);
 
-			//	Šp“xˆ—
+			//	è§’åº¦å‡¦ç†
 			AngleHelper::AskAngle(m_angle, _pad);
 		}
 	}
 
-	//	ƒV[ƒ“‰‰o‚ÌŠJn
+	//	ã‚·ãƒ¼ãƒ³æ¼”å‡ºã®é–‹å§‹
 	if (m_isSceneProduction)
 	{
 		VECTOR tmpDir = VGet(1.0f, 0.0f, 0.0f);
 		const float tmpSpeed = 5.0f;
 		VECTOR moving = MoveHelper::AskMoveAmount(tmpDir, tmpSpeed);
 
-		//	ƒ|ƒWƒVƒ‡ƒ“‚ÌXV
+		//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã®æ›´æ–°
 		m_pos = VAdd(m_pos, moving);
 	}
 
-	//	ƒNƒŠƒA‰‰o‚ÌŠJn
+	//	ã‚¯ãƒªã‚¢æ¼”å‡ºã®é–‹å§‹
 	if (m_isClearProduction)
 	{
 		VECTOR tmpDir = VGet(1.0f, 0.0f, 0.0f);
 		const float tmpSpeed = 10.0f;
 		VECTOR moving = MoveHelper::AskMoveAmount(tmpDir, tmpSpeed);
 
-		//	ƒ|ƒWƒVƒ‡ƒ“‚ÌXV
+		//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã®æ›´æ–°
 		m_pos = VAdd(m_pos, moving);
 	}
 
-	//	ƒŒ[ƒU[ˆ—
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼å‡¦ç†
 	_Laser();
 
-	//	ƒŒ[ƒU[ƒGƒtƒFƒNƒg
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	_LaseEffect(_soundEffect);
 
-	//	ƒqƒbƒgƒGƒtƒFƒNƒg
+	//	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	_OnHitEffect(_soundEffect);
 
-	//	”š”­ƒGƒtƒFƒNƒg
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	_OnEffectExplosion(_soundEffect);
 
-	//	‘¬“xƒAƒbƒv
+	//	é€Ÿåº¦ã‚¢ãƒƒãƒ—
 	_OnEffectSpeedUp(_soundEffect);
 
-	//	ƒAƒCƒeƒ€æ“¾ƒGƒtƒFƒNƒg
+	//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	_OnEffectGetItem();
 
-	//	ƒ‚ƒfƒ‹‚Éƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä‚é
+	//	ãƒ¢ãƒ‡ãƒ«ã«ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	MV1SetPosition(m_modelHandle, m_pos);
 
-	//	ƒ‚ƒfƒ‹‚ÉŠp“x‚ğŠ„‚è“–‚Ä‚é
+	//	ãƒ¢ãƒ‡ãƒ«ã«è§’åº¦ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	MV1SetRotationXYZ(m_modelHandle, m_angle);
 
-	//	“–‚½‚è”»’è‚ª‚¸‚ê‚é‚Ì‚ÅA
-	//	ƒ‚ƒfƒ‹‚Éƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä‚½Œã‚ÉA
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV‚·‚é
+	//	å½“ãŸã‚Šåˆ¤å®šãŒãšã‚Œã‚‹ã®ã§ã€
+	//	ãƒ¢ãƒ‡ãƒ«ã«ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦ãŸå¾Œã«ã€
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°ã™ã‚‹
 	_UpdateHitPoint();
 
-	//	c‹@‚ğƒŠƒUƒ‹ƒg‚Öˆø‚«“n‚·
+	//	æ®‹æ©Ÿã‚’ãƒªã‚¶ãƒ«ãƒˆã¸å¼•ãæ¸¡ã™
 	HAND_OVER_RESULT->SetLife(m_life);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	’e‚Ìˆ—
+//	@brief	å¼¾ã®å‡¦ç†
 //-----------------------------------------------------------------------------
 void GamePlayer::_Shot(Pad& _pad, ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect)
 {
-	//	ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚é‚Æ‚«A’e‚ğ¶¬‚·‚é
+	//	ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã‚‹ã¨ãã€å¼¾ã‚’ç”Ÿæˆã™ã‚‹
 	const bool isInputActiveShot = KEY->Press(KEY_INPUT_K) || KEY->Press(KEY_INPUT_X) || _pad.GetXInputButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A);
 	const bool isActiveShot = isInputActiveShot && m_shotWaitTime-- <= 0.0f;
 	if (isActiveShot)
 	{
-		//	’eƒŠƒXƒg‚É’Ç‰Á‚·‚é
+		//	å¼¾ãƒªã‚¹ãƒˆã«è¿½åŠ ã™ã‚‹
 		_shot.RegisterOnList(ShotManager::SHOT_KIND::PLAYER_SHOT, m_pos, VGet(1.0f, 0.0f, 0.0f), SHOT_SPEED, _soundEffect);
 		m_shotWaitTime = MAX_SHOT_WAIT_TIME;
 	}
 
-	//	“ü—Í‚ª‚È‚¢‚ÍA’x‰„‚ğÁ‚·
+	//	å…¥åŠ›ãŒãªã„æ™‚ã¯ã€é…å»¶ã‚’æ¶ˆã™
 	if (!isInputActiveShot) { m_shotWaitTime = 0.0f; }
 
-	//	‘ØİƒVƒ‡ƒbƒg‚Ìg—pó‹µ
+	//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®ä½¿ç”¨çŠ¶æ³
 	m_stayShotWaitTime--;
 	m_isUseStayShot = (m_stayShotWaitTime <= 0.0f);
 
-	//	ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚ÄA’x‰„‚ª‚È‚¢‚Í
-	//	‘Øİ’e‚ğ¶¬‚·‚é
+	//	ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã¦ã€é…å»¶ãŒãªã„æ™‚ã¯
+	//	æ»åœ¨å¼¾ã‚’ç”Ÿæˆã™ã‚‹
 	const bool isInputActiveStayShot = KEY->Press(KEY_INPUT_L) || KEY->Press(KEY_INPUT_C) || _pad.GetXInputButton(PadInfo::PAD_BUTTON_KIND::BUTTON_B);
 	const bool isActiveStayShot = isInputActiveStayShot && m_stayShotWaitTime <= 0.0f;
 	if (isActiveStayShot)
@@ -267,17 +267,17 @@ void GamePlayer::_Shot(Pad& _pad, ShotManager& _shot, StayShotManager& _stayShot
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•KE‹Zˆ—
+//	@brief	å¿…æ®ºæŠ€å‡¦ç†
 //-----------------------------------------------------------------------------
 void GamePlayer::_SpecialAttack(Pad& _pad, UIGauge& _gaugeUI)
 {
-	//	ƒL[‚ª‰Ÿ‚³‚ê‚Ä‚¢‚ÄAƒQ[ƒW‚ªÅ‘å‚Ì‚Æ‚«‚ÍA•KE”­“®
+	//	ã‚­ãƒ¼ãŒæŠ¼ã•ã‚Œã¦ã„ã¦ã€ã‚²ãƒ¼ã‚¸ãŒæœ€å¤§ã®ã¨ãã¯ã€å¿…æ®ºç™ºå‹•
 	const bool isInputActive = KEY->Press(KEY_INPUT_J) || KEY->Press(KEY_INPUT_Z) || _pad.GetXInputButton(PadInfo::PAD_BUTTON_KIND::BUTTON_X);
 	const bool isActive = isInputActive && _gaugeUI.GetIsGaugeMax() && !PRODUCTION->GetIsSceneProduction();
 	if (isActive)
 	{
-		//	•KE‹Z‚ğ”­“®‚µA
-		//	ƒQ[ƒW‚Ì‰Šú‰»
+		//	å¿…æ®ºæŠ€ã‚’ç™ºå‹•ã—ã€
+		//	ã‚²ãƒ¼ã‚¸ã®åˆæœŸåŒ–
 		PRODUCTION->SetIsSpecialProduction(true);
 		_gaugeUI.ResetGauge();
 		m_isStartLaser = true;
@@ -286,11 +286,11 @@ void GamePlayer::_SpecialAttack(Pad& _pad, UIGauge& _gaugeUI)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŒ[ƒU[
+//	@brief	ãƒ¬ãƒ¼ã‚¶ãƒ¼
 //-----------------------------------------------------------------------------
 void GamePlayer::_Laser()
 {
-	//	ƒŒ[ƒU[ŠJn
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼é–‹å§‹
 	if (m_isStartLaser)
 	{
 		m_laserTime++;
@@ -304,18 +304,18 @@ void GamePlayer::_Laser()
 			m_laserHitRect.m_vertexTop = VGet(m_pos.x, m_pos.y - LASER_SIZE, m_pos.z - LASER_SIZE_DEPTH);
 			m_laserHitRect.m_vertexUnder = VGet(m_pos.x, m_pos.y + LASER_SIZE, m_pos.z + LASER_SIZE_DEPTH);
 
-			//	ƒpƒbƒh‚ÌU“®‹@”\
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½
 			const int vibrationPower = 500;
 			PadInfo::Function::VibrationFunction(PadInfo::PAD_KIND::PAD_1, vibrationPower);
 		}
 		if (isLaser1)
 		{
-			//	ƒpƒbƒh‚ÌU“®‹@”\‚ÌI—¹
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½ã®çµ‚äº†
 			PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 
 			m_laserHitRect.m_vertexUnder.x += LASER_SPEED;
 			
-			//	ƒpƒbƒh‚ÌU“®‹@”\
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½
 			PadInfo::Function::VibrationFunction(PadInfo::PAD_KIND::PAD_1);
 		}
 		if (isReset)
@@ -323,7 +323,7 @@ void GamePlayer::_Laser()
 			m_laserHitRect.m_vertexTop = CommonConstant::ORIGIN;
 			m_laserHitRect.m_vertexUnder = CommonConstant::ORIGIN;
 
-			//	ƒpƒbƒh‚ÌU“®‹@”\‚ÌI—¹
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½ã®çµ‚äº†
 			PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 		}
 		if (isEnd)
@@ -331,18 +331,18 @@ void GamePlayer::_Laser()
 			m_laserTime = 0.0f;
 			m_isStartLaser = false;
 
-			//	ƒpƒbƒh‚ÌU“®‹@”\‚ÌI—¹
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½ã®çµ‚äº†
 			PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	”ÍˆÍŠOˆ—
+//	@brief	ç¯„å›²å¤–å‡¦ç†
 //-----------------------------------------------------------------------------
 void GamePlayer::_OutOfRange()
 {
-	//	‰æ–ÊŠO‚És‚©‚È‚¢‚æ‚¤‚É‚·‚é
+	//	ç”»é¢å¤–ã«è¡Œã‹ãªã„ã‚ˆã†ã«ã™ã‚‹
 	const bool isOverX1 = m_pos.x <= MIN_POS_X;
 	if (isOverX1) { m_pos.x = MIN_POS_X; }
 
@@ -357,21 +357,21 @@ void GamePlayer::_OutOfRange()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ŠJn‚ÌˆÚ“®
+//	@brief	é–‹å§‹æ™‚ã®ç§»å‹•
 //-----------------------------------------------------------------------------
 void GamePlayer::_EmergeMove()
 {
-	//	oŒ»‚Ì‰‰o
+	//	å‡ºç¾æ™‚ã®æ¼”å‡º
 	if (m_isEmerge)
 	{
-		//	ŠÔ‚É‚æ‚é‰‰o‚ÌØ‚è‘Ö‚¦
+		//	æ™‚é–“ã«ã‚ˆã‚‹æ¼”å‡ºã®åˆ‡ã‚Šæ›¿ãˆ
 		m_emergeMoveTaim++;
 		const bool isEmergeMoveStart = m_emergeMoveTaim <= 30.0f;
 		const bool isEmergeMove1 = m_emergeMoveTaim >= 30.0f && m_emergeMoveTaim <= 45.0f;
 		const bool isEmergeMove2 = m_emergeMoveTaim >= 45.0f && m_emergeMoveTaim <= 70.0f;
 		const bool isEmergeMoveEnd = m_emergeMoveTaim >= 70.0f;
 		
-		//	ŠJnŠJn
+		//	é–‹å§‹é–‹å§‹
 		if (isEmergeMoveStart)
 		{
 			m_angle = VGet(0.0f, 1.4f, 0.0f);
@@ -379,32 +379,32 @@ void GamePlayer::_EmergeMove()
 			m_offDraw = false;
 		}
 
-		//	ŠJnˆÚ“®‚P
+		//	é–‹å§‹ç§»å‹•ï¼‘
 		if (isEmergeMove1)
 		{
-			//	æi
+			//	å…ˆé€²
 			m_dir = VGet(1.0f, 0.0f, 0.0f);
 			VECTOR moving = MoveHelper::AskMoveAmount(m_dir, EMERGE_MOVE_SPEED);
 			m_pos = VAdd(m_pos, moving);
 
-			//	‰ñ“]ˆ—
+			//	å›è»¢å‡¦ç†
 			m_angle.x++;
 			m_angle.z++;
 		}
 
-		//	ŠJnˆÚ“®‚Q
+		//	é–‹å§‹ç§»å‹•ï¼’
 		if (isEmergeMove2)
 		{
-			//	ŠJnˆÊ’u‚Ü‚ÅüŒ`•ÛŠÇ‚ÅˆÚ“®
+			//	é–‹å§‹ä½ç½®ã¾ã§ç·šå½¢ä¿ç®¡ã§ç§»å‹•
 			float lerpSpeed = 0.1f;
 			m_pos = CommonFunction::Lerp(m_pos, START_POS, lerpSpeed);
 
-			//	‰ñ“]ˆ—
+			//	å›è»¢å‡¦ç†
 			m_angle.x++;
 			m_angle.z++;
 		}
 
-		//	ŠJn‚Ì‰Šú‰»
+		//	é–‹å§‹æ™‚ã®åˆæœŸåŒ–
 		if(isEmergeMoveEnd)
 		{
 			m_dir = CommonConstant::ORIGIN;
@@ -418,19 +418,19 @@ void GamePlayer::_EmergeMove()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+//	@brief	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void GamePlayer::_UpdateHitPoint()
 {
-	//	“–‚½‚è”»’è—p‚Ì’†SÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ä¸­å¿ƒåº§æ¨™ã®æ›´æ–°
 	m_hitCircle.m_centerPoint = VGet(m_pos.x - CENTER_CORRECTION, m_pos.y, m_pos.z);
 
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°
 	m_hitRect.m_vertexTop = VGet(m_pos.x + RECT_CORRECTION.x - CENTER_CORRECTION, m_pos.y + RECT_CORRECTION.y, m_pos.z + RECT_CORRECTION.z);
 	m_hitRect.m_vertexUnder = VGet(m_pos.x - RECT_CORRECTION.x - CENTER_CORRECTION, m_pos.y - RECT_CORRECTION.y, m_pos.z - RECT_CORRECTION.z);
 
-	//	ƒAƒCƒeƒ€—p‚Ì“–‚½‚è”»’èÀ•W‚ÌXV
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV
+	//	ã‚¢ã‚¤ãƒ†ãƒ ç”¨ã®å½“ãŸã‚Šåˆ¤å®šåº§æ¨™ã®æ›´æ–°
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°
 	m_itemHitRect.m_vertexTop = VSub(m_pos, ITEM_RECT_CORRECTION);
 	m_itemHitRect.m_vertexUnder = VAdd(m_pos, ITEM_RECT_CORRECTION);
 	m_itemHitRect.m_vertexTop.x -= CENTER_CORRECTION;
@@ -438,17 +438,17 @@ void GamePlayer::_UpdateHitPoint()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŒ[ƒU[ƒGƒtƒFƒNƒg
+//	@brief	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 //-----------------------------------------------------------------------------
 void GamePlayer::_LaseEffect(SoundEffect& _soundEffect)
 {
-	//	ƒŒ[ƒU[ŠJn
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼é–‹å§‹
 	if (m_isStartLaser)
 	{
 		const bool isLaseStart = m_effectLaser->GetPlayTime() == 0.0f;
 		const bool isLaseStop = m_effectLaser->GetPlayTime() == 360.0f;
 
-		//	ƒŒ[ƒU[ƒGƒtƒFƒNƒg‚ÌŠJn
+		//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹
 		if (isLaseStart)
 		{
 			m_effectLaser->SetPos(VGet(m_pos.x + CENTER_CORRECTION, m_pos.y, m_pos.z));
@@ -459,7 +459,7 @@ void GamePlayer::_LaseEffect(SoundEffect& _soundEffect)
 			_soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_PLAYER_LASER);
 		}
 
-		//	ƒŒ[ƒU[ƒGƒtƒFƒNƒg‚ÌI—¹
+		//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†
 		if (isLaseStop)
 		{
 			m_effectLaser->OnEndEffect();
@@ -472,17 +472,17 @@ void GamePlayer::_LaseEffect(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒqƒbƒgƒGƒtƒFƒNƒg
+//	@brief	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 //-----------------------------------------------------------------------------
 void GamePlayer::_OnHitEffect(SoundEffect& _soundEffect)
 {
-	//	ƒ_ƒ[ƒW‚ª“ü‚Á‚½‚Æ‚«
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒå…¥ã£ãŸã¨ã
 	if (m_isDamage)
 	{
 		const bool isHitStart = m_effectHit->GetPlayTime() == 0.0f;
 		const bool isHitEnd = m_effectHit->GetPlayTime() == 100.0f;
 
-		//	ƒGƒtƒFƒNƒg‚ÌŠJnˆ—
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹å‡¦ç†
 		if(isHitStart) 
 		{
 			m_effectHit->SetPos(VGet(m_pos.x - CENTER_CORRECTION, m_pos.y, m_pos.z));
@@ -491,32 +491,32 @@ void GamePlayer::_OnHitEffect(SoundEffect& _soundEffect)
 			_soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_HIT);
 		}
 
-		//	ƒGƒtƒFƒNƒg‚ÌI—¹ˆ—
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†å‡¦ç†
 		if (isHitEnd)
 		{
 			m_effectHit->OnEndEffect();
 			return;
 		}
 
-		//	ƒGƒtƒFƒNƒg‚ÌXV
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ›´æ–°
 		m_effectHit->AddPlayTime();
 		m_effectHit->Update();
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	”š”­ƒGƒtƒFƒNƒg
+//	@brief	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 //-----------------------------------------------------------------------------
 void GamePlayer::_OnEffectExplosion(SoundEffect& _soundEffect)
 {
-	//	ƒ_ƒ[ƒW‚ª“ü‚Á‚½‚Æ‚«
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒå…¥ã£ãŸã¨ã
 	if (m_isDamage)
 	{
 		const bool isExplosionStart = m_effectExplosion->GetPlayTime() == 0.0f;
 		const bool isExplosion1 = m_effectExplosion->GetPlayTime() == 50.0f;
 		const bool isExplosionEnd = m_effectExplosion->GetPlayTime() == 100.0f;
 
-		//	”š”­ƒGƒtƒFƒNƒg‚ÌŠJn
+		//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹
 		if (isExplosionStart)
 		{
 			m_effectExplosion->SetPos(m_pos);
@@ -524,22 +524,22 @@ void GamePlayer::_OnEffectExplosion(SoundEffect& _soundEffect)
 			m_effectExplosion->SetScale(VGet(2.0f, 2.0f, 2.0f));
 			m_effectExplosion->OnPlayEffect();
 
-			//	ƒpƒbƒh‚ÌU“®‹@”\
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½
 			PadInfo::Function::VibrationFunction(PadInfo::PAD_KIND::PAD_1);
 		}
 
-		//	ƒvƒŒƒCƒ„[ƒ‚ƒfƒ‹‚Ì”ñ•\¦‚Æ
-		//	SE‚ÌÄ¶
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ¢ãƒ‡ãƒ«ã®éè¡¨ç¤ºã¨
+		//	SEã®å†ç”Ÿ
 		if (isExplosion1) 
 		{
 			m_offDraw = true;
 			_soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_EXPLOSION);
 
-			//	ƒpƒbƒh‚ÌU“®‹@”\‚ÌI—¹
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½ã®çµ‚äº†
 			PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 		}
 
-		//	”š”­ƒGƒtƒFƒNƒg‚ÌI—¹
+		//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†
 		if (isExplosionEnd)
 		{
 			m_effectExplosion->OnEndEffect();
@@ -550,24 +550,24 @@ void GamePlayer::_OnEffectExplosion(SoundEffect& _soundEffect)
 			return;
 		}
 		
-		//	ƒGƒtƒFƒNƒg‚ÌXV
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ›´æ–°
 		m_effectExplosion->AddPlayTime();
 		m_effectExplosion->Update();
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘¬“xƒAƒbƒvƒGƒtƒFƒNƒg
+//	@brief	é€Ÿåº¦ã‚¢ãƒƒãƒ—ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 //-----------------------------------------------------------------------------
 void GamePlayer::_OnEffectSpeedUp(SoundEffect& _soundEffect)
 {
-	//	ƒV[ƒ“‰‰o
+	//	ã‚·ãƒ¼ãƒ³æ¼”å‡ºæ™‚
 	if (m_isSceneProduction)
 	{
 		const bool isSpeedUpStart = m_effectSpeedUp->GetPlayTime() == 0.0f;
 		const bool isSpeedUpEnd = m_effectSpeedUp->GetPlayTime() == 120.0f;
 
-		//	ƒGƒtƒFƒNƒg‚ÌŠJnˆ—
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹å‡¦ç†
 		if (isSpeedUpStart)
 		{
 			const float effectPosX = -50.0f;
@@ -578,34 +578,34 @@ void GamePlayer::_OnEffectSpeedUp(SoundEffect& _soundEffect)
 			_soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_WIND);
 		}
 
-		//	ƒGƒtƒFƒNƒg‚ÌI—¹ˆ—
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†å‡¦ç†
 		if (isSpeedUpEnd)
 		{
 			m_effectSpeedUp->OnEndEffect();
 			return;
 		}
 
-		//	ƒGƒtƒFƒNƒg‚ÌXV
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ›´æ–°
 		m_effectSpeedUp->AddPlayTime();
 		m_effectSpeedUp->Update();
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒAƒCƒeƒ€æ“¾‚ÌƒGƒtƒFƒNƒg
+//	@brief	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—æ™‚ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 //-----------------------------------------------------------------------------
 void GamePlayer::_OnEffectGetItem()
 {
-	//	ƒAƒCƒeƒ€æ“¾
+	//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—æ™‚
 	if (m_isStartEffectGetItem)
 	{
 		const bool isGetItemStart = m_effectGetItem->GetPlayTime() == 0.0f;
 		const bool isGetItemEnd = m_effectGetItem->GetPlayTime() == 110.0f;
 		
-		//	í‚ÉƒvƒŒƒCƒ„[‚ğ’Ç‚¤
+		//	å¸¸ã«ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’è¿½ã†
 		m_effectGetItem->SetPos(VGet(m_pos.x - CENTER_CORRECTION, m_pos.y, m_pos.z));
 		
-		//	ƒGƒtƒFƒNƒg‚ÌŠJnˆ—
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹å‡¦ç†
 		if (isGetItemStart)
 		{
 			m_effectGetItem->SetScale(VGet(7.0f, 5.0f, 7.0f));
@@ -613,7 +613,7 @@ void GamePlayer::_OnEffectGetItem()
 			m_effectGetItem->OnPlayEffect();
 		}
 
-		//	ƒGƒtƒFƒNƒg‚ÌI—¹ˆ—
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†å‡¦ç†
 		if (isGetItemEnd)
 		{
 			m_effectGetItem->OnEndEffect();
@@ -621,43 +621,43 @@ void GamePlayer::_OnEffectGetItem()
 			return;
 		}
 
-		//	ƒGƒtƒFƒNƒg‚ÌXV
+		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ›´æ–°
 		m_effectGetItem->AddPlayTime();
 		m_effectGetItem->Update();
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	–³“GŠÔ‚ÌŒv‘ª
+//	@brief	ç„¡æ•µæ™‚é–“ã®è¨ˆæ¸¬
 //-----------------------------------------------------------------------------
 void GamePlayer::_MeasuringInvincibleTime()
 {
-	//	–³“Gó‘Ô‚Ì‚Æ‚«
+	//	ç„¡æ•µçŠ¶æ…‹ã®ã¨ã
 	const bool isInvincible = m_isInvincible && !m_isEmerge;
 	if (isInvincible)
 	{
-		//	–³“GŠÔ‚ÌŒv‘ª‚µA
-		//	Å‘å‚É‚È‚Á‚½‚çA–³“G‚ğ‰ğœ‚·‚é
+		//	ç„¡æ•µæ™‚é–“ã®è¨ˆæ¸¬ã—ã€
+		//	æœ€å¤§ã«ãªã£ãŸã‚‰ã€ç„¡æ•µã‚’è§£é™¤ã™ã‚‹
 		m_invincibleTime++;
 		const bool isMaxInvincibleTime = m_invincibleTime >= MAX_INVINCIBLE_TIME_1;
 		if (isMaxInvincibleTime)
 		{
-			//	–³“Gó‘Ô‚ğ‰ğœ‚·‚é
+			//	ç„¡æ•µçŠ¶æ…‹ã‚’è§£é™¤ã™ã‚‹
 			m_invincibleTime = 0.0f;
 			m_isInvincible = false;
 		}
 	}
 
-	//	ƒŒ[ƒU[g—pŒã‚Ì–³“Gˆ—
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ä½¿ç”¨å¾Œã®ç„¡æ•µå‡¦ç†
 	if (m_isInvincibleAfterLaser)
 	{
-		//	–³“GŠÔ‚ÌŒv‘ª‚µA
-		//	Å‘å‚É‚È‚Á‚½‚çA–³“G‚ğ‰ğœ‚·‚é
+		//	ç„¡æ•µæ™‚é–“ã®è¨ˆæ¸¬ã—ã€
+		//	æœ€å¤§ã«ãªã£ãŸã‚‰ã€ç„¡æ•µã‚’è§£é™¤ã™ã‚‹
 		m_invincibleTime++;
 		const bool isMaxInvincibleTime = m_invincibleTime >= MAX_INVINCIBLE_TIME_2;
 		if (isMaxInvincibleTime)
 		{
-			//	–³“Gó‘Ô‚ğ‰ğœ‚·‚é
+			//	ç„¡æ•µçŠ¶æ…‹ã‚’è§£é™¤ã™ã‚‹
 			m_invincibleTime = 0.0f;
 			m_isInvincibleAfterLaser = false;
 		}
@@ -665,11 +665,11 @@ void GamePlayer::_MeasuringInvincibleTime()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void GamePlayer::_FinalRelease()
 {
-	//	ƒGƒtƒFƒNƒg‚Ìíœ
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å‰Šé™¤
 	CommonSafe::Delete(m_effectLaser);
 	CommonSafe::Delete(m_effectHit);
 	CommonSafe::Delete(m_effectExplosion);

@@ -1,13 +1,13 @@
-
+﻿
 //=============================================================================
 //	@file	LastBoss.cpp
-//	@brief	�ŏI�{�X
-//	@autor	���m ���
+//	@brief	最終ボス
+//	@autor	相知 拓弥
 //	@date	2018/12/21
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	�C���N���[�h
+//	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "LastBoss.h"
 #include "Common.h"
@@ -20,61 +20,61 @@
 #include "Pad.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	�ÓI�萔
+//	@brief	静的定数
 //-----------------------------------------------------------------------------
-const VECTOR	LastBoss::EMERGE_POS = VGet(206.0f, 50.0f, 0.0f);						//	�o�����̍��W
-const VECTOR	LastBoss::EMERGE_RIGHT_ARM_POS = VGet(60.0f, 150.0f, 0.0f);				//	�o�����̉E�A�[���̍��W
-const VECTOR	LastBoss::EMERGE_LEFT_ARM_POS = VGet(60.0f, -150.0f, 0.0f);				//	�o�����̍��A�[���̍��W
-const VECTOR	LastBoss::RELATIVE_CORE_POS = VGet(-9.5f, 5.0f, 0.0f);					//	�R�A�̑��΍��W
-const VECTOR	LastBoss::RELATIVE_SIDE_BARREL_POS = VGet(-10.0f, 8.0f, 0.0f);			//	�T�C�h�o�����̑��΍��W
-const VECTOR	LastBoss::RELATIVE_ARM_POS = VGet(0.9f, 28.0f, 0.0f);					//	�A�[���̑��΍��p
-const VECTOR	LastBoss::OPEN_RELATIVE_CORE_POS = VGet(-9.5f, 8.0f, 0.0f);				//	�R�A�̑��΍��W
-const VECTOR	LastBoss::OPEN_RELATIVE_SIDE_BARREL_POS = VGet(-10.0f, 20.0f, 0.0f);	//	�T�C�h�o�����̑��΍��W
-const VECTOR	LastBoss::OPEN_RELATIVE_ARM_POS = VGet(0.9f, 35.0f, 0.0f);				//	�A�[���̑��΍��p
-const VECTOR	LastBoss::START_POS = VGet(60.0f, 50.0f, 0.0f);							//	�J�n���̍��W
-const VECTOR	LastBoss::MOVE_PATTERN_1 = VGet(60.0f, 90.0f, 0.0f);					//	�s���p�^�[���P
-const VECTOR	LastBoss::MOVE_PATTERN_2 = VGet(60.0f, 55.0f, 0.0f);					//	�s���p�^�[���Q
-const VECTOR	LastBoss::MOVE_PATTERN_3 = VGet(60.0f, 20.0f, 0.0f);					//	�s���p�^�[���R
-const VECTOR	LastBoss::MOVE_PATTERN_4 = VGet(40.0f, 55.0f, 0.0f);					//	�s���p�^�[���S
-const VECTOR	LastBoss::MOVE_PATTERN_5 = VGet(40.0f, 20.0f, 0.0f);					//	�s���p�^�[���T
-const VECTOR	LastBoss::MOVE_PATTERN_6 = VGet(40.0f, 90.0f, 0.0f);					//	�s���p�^�[���U
-const VECTOR	LastBoss::SHOT_START_POS_CORRECTION_1 = VGet(14.0f, 12.0f, 0.0f);		//	�V���b�g�J�n�ʒu���W�̕␳
-const VECTOR	LastBoss::SHOT_START_POS_CORRECTION_2 = VGet(21.5f, 6.5f, 0.0f);		//	�V���b�g�J�n�ʒu���W�̕␳
-const VECTOR	LastBoss::SHOT_START_POS_CORRECTION_3 = VGet(35.0f, 1.0f, 0.0f);		//	�V���b�g�J�n�ʒu���W�̕␳
-const float		LastBoss::SHOT_SPEED = 1.5f;											//	�V���b�g�̑��x
-const float		LastBoss::MAX_START_WAIT_TIME = 35.0f;									//	�V���b�g�̊J�n���̒x������
-const float		LastBoss::MAX_WAIT_TIME = 100.0f;										//	�V���b�g�̒x������
-const float		LastBoss::LASER_LENGTH = -200.0f;										//	���[�U�[�̒���
-const VECTOR	LastBoss::ADJUSTMENT_BODY_POS = VGet(15.0f, 0.0f, 0.0f);				//	�����蔻�蒲���p�̃|�W�V���� �{�f�B�[
-const VECTOR	LastBoss::ADJUSTMENT_SIDE_BARREL_POS = VGet(-10.0f, 1.0f, 0.0f);		//	�����蔻�蒲���p�̃|�W�V���� �T�C�h�o����
-const VECTOR	LastBoss::ADJUSTMENT_ARM_CIRCLE_POS = VGet(-15.0f, 2.0f, 0.0f);			//	�����蔻�蒲���p�̃|�W�V���� �A�[��
-const VECTOR	LastBoss::ADJUSTMENT_ARM_RECT_POS = VGet(18.0f, 8.0f, 5.0f);			//	�����蔻�蒲���p�̃|�W�V���� �A�[��
-const VECTOR	LastBoss::ADJUSTMENT_LASER_POS = VGet(-25.0f, 4.0f, 5.0f);				//	�����蔻�蒲���p�̃|�C���g ���[�U�[
-const VECTOR	LastBoss::ADJUSTMENT_CENTER_BARRE_POS = VGet(30.0f, 2.0f, 5.0f);		//	�����蔻�蒲���p�̃|�C���g �Z���^�[�o����
-const VECTOR	LastBoss::ARM_CORRECTION = VGet(10.0f, 3.0f, 0.0f);						//	�����蔻��p�̕␳ �A�[��
-const VECTOR	LastBoss::CENTER_BARRE_CORRECTION = VGet(10.0f, 0.0f, 0.0f);			//	�����蔻��p�̕␳ �Z���^�[�o����
-const float		LastBoss::LASER_EFFECT_CORRECTION = -28.0f;								//	�G�t�F�N�g�̕␳ ���[�U�[
-const float		LastBoss::ROCKET_EFFECT_CORRECTION = 25.0f;								//	�G�t�F�N�g�̕␳ ���P�b�g
-const float		LastBoss::HIT_BODY_RADIUS = 15.0f;										//	�����蔻��p�̔��a �{�f�B�[
-const float		LastBoss::HIT_SIDE_BARREL_RADIUS = 7.0f;								//	�����蔻��p�̔��a �T�C�h�o����
-const float		LastBoss::HIT_CORE_RADIUS = 3.0f;										//	�����蔻��p�̔��a �R�A
-const float		LastBoss::HIT_ARM_RADIUS = 10.0f;										//	�����蔻��p�̔��a �A�[��
-const int		LastBoss::MAX_SIDE_BARREL_LIFE = 40;									//	���C�t�̍ő� �T�C�h�o����
-const int		LastBoss::MAX_CORE_LIFE = 30;											//	���C�t�̍ő� �R�A
-const VECTOR	LastBoss::BOSS_RADIUS = VGet(20.0f, 15.0f, 0.0f);						//	�{�X�̔��a
-const int		LastBoss::LIFE_ZERO = 0;												//	���C�t�Ȃ�
+const VECTOR	LastBoss::EMERGE_POS = VGet(206.0f, 50.0f, 0.0f);						//	出現時の座標
+const VECTOR	LastBoss::EMERGE_RIGHT_ARM_POS = VGet(60.0f, 150.0f, 0.0f);				//	出現時の右アームの座標
+const VECTOR	LastBoss::EMERGE_LEFT_ARM_POS = VGet(60.0f, -150.0f, 0.0f);				//	出現時の左アームの座標
+const VECTOR	LastBoss::RELATIVE_CORE_POS = VGet(-9.5f, 5.0f, 0.0f);					//	コアの相対座標
+const VECTOR	LastBoss::RELATIVE_SIDE_BARREL_POS = VGet(-10.0f, 8.0f, 0.0f);			//	サイドバレルの相対座標
+const VECTOR	LastBoss::RELATIVE_ARM_POS = VGet(0.9f, 28.0f, 0.0f);					//	アームの相対座用
+const VECTOR	LastBoss::OPEN_RELATIVE_CORE_POS = VGet(-9.5f, 8.0f, 0.0f);				//	コアの相対座標
+const VECTOR	LastBoss::OPEN_RELATIVE_SIDE_BARREL_POS = VGet(-10.0f, 20.0f, 0.0f);	//	サイドバレルの相対座標
+const VECTOR	LastBoss::OPEN_RELATIVE_ARM_POS = VGet(0.9f, 35.0f, 0.0f);				//	アームの相対座用
+const VECTOR	LastBoss::START_POS = VGet(60.0f, 50.0f, 0.0f);							//	開始時の座標
+const VECTOR	LastBoss::MOVE_PATTERN_1 = VGet(60.0f, 90.0f, 0.0f);					//	行動パターン１
+const VECTOR	LastBoss::MOVE_PATTERN_2 = VGet(60.0f, 55.0f, 0.0f);					//	行動パターン２
+const VECTOR	LastBoss::MOVE_PATTERN_3 = VGet(60.0f, 20.0f, 0.0f);					//	行動パターン３
+const VECTOR	LastBoss::MOVE_PATTERN_4 = VGet(40.0f, 55.0f, 0.0f);					//	行動パターン４
+const VECTOR	LastBoss::MOVE_PATTERN_5 = VGet(40.0f, 20.0f, 0.0f);					//	行動パターン５
+const VECTOR	LastBoss::MOVE_PATTERN_6 = VGet(40.0f, 90.0f, 0.0f);					//	行動パターン６
+const VECTOR	LastBoss::SHOT_START_POS_CORRECTION_1 = VGet(14.0f, 12.0f, 0.0f);		//	ショット開始位置座標の補正
+const VECTOR	LastBoss::SHOT_START_POS_CORRECTION_2 = VGet(21.5f, 6.5f, 0.0f);		//	ショット開始位置座標の補正
+const VECTOR	LastBoss::SHOT_START_POS_CORRECTION_3 = VGet(35.0f, 1.0f, 0.0f);		//	ショット開始位置座標の補正
+const float		LastBoss::SHOT_SPEED = 1.5f;											//	ショットの速度
+const float		LastBoss::MAX_START_WAIT_TIME = 35.0f;									//	ショットの開始時の遅延時間
+const float		LastBoss::MAX_WAIT_TIME = 100.0f;										//	ショットの遅延時間
+const float		LastBoss::LASER_LENGTH = -200.0f;										//	レーザーの長さ
+const VECTOR	LastBoss::ADJUSTMENT_BODY_POS = VGet(15.0f, 0.0f, 0.0f);				//	当たり判定調整用のポジション ボディー
+const VECTOR	LastBoss::ADJUSTMENT_SIDE_BARREL_POS = VGet(-10.0f, 1.0f, 0.0f);		//	当たり判定調整用のポジション サイドバレル
+const VECTOR	LastBoss::ADJUSTMENT_ARM_CIRCLE_POS = VGet(-15.0f, 2.0f, 0.0f);			//	当たり判定調整用のポジション アーム
+const VECTOR	LastBoss::ADJUSTMENT_ARM_RECT_POS = VGet(18.0f, 8.0f, 5.0f);			//	当たり判定調整用のポジション アーム
+const VECTOR	LastBoss::ADJUSTMENT_LASER_POS = VGet(-25.0f, 4.0f, 5.0f);				//	当たり判定調整用のポイント レーザー
+const VECTOR	LastBoss::ADJUSTMENT_CENTER_BARRE_POS = VGet(30.0f, 2.0f, 5.0f);		//	当たり判定調整用のポイント センターバレル
+const VECTOR	LastBoss::ARM_CORRECTION = VGet(10.0f, 3.0f, 0.0f);						//	当たり判定用の補正 アーム
+const VECTOR	LastBoss::CENTER_BARRE_CORRECTION = VGet(10.0f, 0.0f, 0.0f);			//	当たり判定用の補正 センターバレル
+const float		LastBoss::LASER_EFFECT_CORRECTION = -28.0f;								//	エフェクトの補正 レーザー
+const float		LastBoss::ROCKET_EFFECT_CORRECTION = 25.0f;								//	エフェクトの補正 ロケット
+const float		LastBoss::HIT_BODY_RADIUS = 15.0f;										//	当たり判定用の半径 ボディー
+const float		LastBoss::HIT_SIDE_BARREL_RADIUS = 7.0f;								//	当たり判定用の半径 サイドバレル
+const float		LastBoss::HIT_CORE_RADIUS = 3.0f;										//	当たり判定用の半径 コア
+const float		LastBoss::HIT_ARM_RADIUS = 10.0f;										//	当たり判定用の半径 アーム
+const int		LastBoss::MAX_SIDE_BARREL_LIFE = 40;									//	ライフの最大 サイドバレル
+const int		LastBoss::MAX_CORE_LIFE = 30;											//	ライフの最大 コア
+const VECTOR	LastBoss::BOSS_RADIUS = VGet(20.0f, 15.0f, 0.0f);						//	ボスの半径
+const int		LastBoss::LIFE_ZERO = 0;												//	ライフなし
 
 //-----------------------------------------------------------------------------
-//	@brief	�R���X�g���N�^
+//	@brief	コンストラクタ
 //-----------------------------------------------------------------------------
 LastBoss::LastBoss(const int _bodyModelHandle, const int _sideBarrelModelHandle, const int _armModelHandle, const int _coreModelHandle)
 {
-	//	�e�ϐ���������
+	//	各変数を初期化
 	m_pos = CommonConstant::ORIGIN;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
 
-	//	���f���̕���
+	//	モデルの複製
 	m_modelHandle = MV1DuplicateModel(_bodyModelHandle);
 	CommonDebug::Assert((m_modelHandle <= -1), " [ LastBoss.cpp ] : error : model loading failed.");
 
@@ -87,12 +87,12 @@ LastBoss::LastBoss(const int _bodyModelHandle, const int _sideBarrelModelHandle,
 		CommonDebug::Assert((m_bossPartsArm[i].m_modelHandle <= -1), " [ LastBoss.cpp ] : error : model loading failed.");
 		CommonDebug::Assert((m_bossPartsCore[i].m_modelHandle <= -1), " [ LastBoss.cpp ] : error : model loading failed.");
 
-		//	�܂��ǂ����w���Ă��Ȃ��̂ŁANULL�ŏ�����
+		//	まだどこも指していないので、NULLで初期化
 		m_effectLaser[i] = NULL;
 		m_effectInjection[i] = NULL;
 	}
 
-	//	�܂��ǂ����w���Ă��Ȃ��̂ŁANULL�ŏ�����
+	//	まだどこも指していないので、NULLで初期化
 	m_effectHit = NULL;
 
 	for (int i = 0; i < CommonConstant::MAX_BOSS_EXPLOSION_NUM; i++)
@@ -104,20 +104,20 @@ LastBoss::LastBoss(const int _bodyModelHandle, const int _sideBarrelModelHandle,
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�f�X�g���N�^
+//	@brief	デストラクタ
 //-----------------------------------------------------------------------------
 LastBoss::~LastBoss()
 {
-	//	�ŏI�I�ȉ������
+	//	最終的な解放処理
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�쐬����
+//	@brief	作成処理
 //-----------------------------------------------------------------------------
 void LastBoss::Create()
 {
-	//	�G�t�F�N�g�̓ǂݍ���
+	//	エフェクトの読み込み
 	m_effectHit = new EffekseerEmitter("Data/Effect/Hit/Hit.efk");
 	m_effectHit->OnEndEffect();
 
@@ -140,11 +140,11 @@ void LastBoss::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�������
+//	@brief	解放処理
 //-----------------------------------------------------------------------------
 void LastBoss::Release()
 {
-	//	���f���̃A�����[�h
+	//	モデルのアンロード
 	MV1DeleteModel(m_modelHandle);
 
 	for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)
@@ -154,7 +154,7 @@ void LastBoss::Release()
 		MV1DeleteModel(m_bossPartsCore[i].m_modelHandle);
 	}
 
-	//	�G�t�F�N�g�̍폜
+	//	エフェクトの削除
 	CommonSafe::Delete(m_effectHit);
 
 	for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)
@@ -172,11 +172,11 @@ void LastBoss::Release()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	��������
+//	@brief	初期処理
 //-----------------------------------------------------------------------------
 void LastBoss::Initialize()
 {
-	//	�e�ϐ���������Ԃɐݒ�
+	//	各変数を初期状態に設定
 	m_pos = EMERGE_POS;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
@@ -201,13 +201,13 @@ void LastBoss::Initialize()
 	m_isOffDraw = false;
 	m_isAllDestruction = false;
 
-	//	���C�t�ɉ��������f���̐F
-	m_lifeNormalColorFYellow = CommonFunction::GetColor(0.0f, 0.0f, 0.8f, 1.0f);	//	�F
-	m_lifeNormalColorFBlack = CommonFunction::GetColor(0.4f, 0.4f, 0.4f, 1.0f);		//	�O���[
-	m_lifeMiddleColorF = CommonFunction::GetColor(1.0f, 1.0f, 0.0f, 1.0f);			//	���F
-	m_lifeDangerColorF = CommonFunction::GetColor(1.0f, 0.0f, 0.8f, 1.0f);			//	��
+	//	ライフに応じたモデルの色
+	m_lifeNormalColorFYellow = CommonFunction::GetColor(0.0f, 0.0f, 0.8f, 1.0f);	//	青色
+	m_lifeNormalColorFBlack = CommonFunction::GetColor(0.4f, 0.4f, 0.4f, 1.0f);		//	グレー
+	m_lifeMiddleColorF = CommonFunction::GetColor(1.0f, 1.0f, 0.0f, 1.0f);			//	黄色
+	m_lifeDangerColorF = CommonFunction::GetColor(1.0f, 0.0f, 0.8f, 1.0f);			//	赤
 
-	//	�F�̊��蓖��
+	//	色の割り当て
 	MV1SetDifColorScale(m_modelHandle, m_lifeNormalColorFBlack.m_color);
 
 	for (int i = 0; i < EXPLOSION_EFFECT_KIND::EXPLOSION_EFFECT_NUM; i++)
@@ -215,136 +215,136 @@ void LastBoss::Initialize()
 		m_isUsedEffectExplosion[i] = false;
 	}
 
-	//	�p�[�c�̏�����
+	//	パーツの初期化
 	for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)
 	{
-		//	�R�A�̏�����
+		//	コアの初期化
 		_InitializeBossParts(m_bossPartsCore[i], (BOSS_PARTS_INFO)i, HIT_CORE_RADIUS, MAX_CORE_LIFE);
 
-		//	�T�C�h�o�����̏�����
+		//	サイドバレルの初期化
 		_InitializeBossParts(m_bossPartsSideBarrel[i], (BOSS_PARTS_INFO)i, HIT_SIDE_BARREL_RADIUS, MAX_SIDE_BARREL_LIFE );
 
-		//	�A�[���̏�����
+		//	アームの初期化
 		_InitializeBossParts(m_bossPartsArm[i], (BOSS_PARTS_INFO)i, HIT_ARM_RADIUS);
 		
-		//	�F�̊��蓖��
+		//	色の割り当て
 		MV1SetDifColorScale(m_bossPartsArm[i].m_modelHandle, m_lifeNormalColorFBlack.m_color);
 
-		//	���[�U�[�̓����蔻��̏�����
+		//	レーザーの当たり判定の初期化
 		m_laserHitRect[i].m_vertexTop = CommonConstant::ORIGIN;
 		m_laserHitRect[i].m_vertexUnder = CommonConstant::ORIGIN;
 
-		//	�R�A�̓����蔻��̏�����
+		//	コアの当たり判定の初期化
 		m_coreHitRect[i].m_vertexTop = CommonConstant::ORIGIN;
 		m_coreHitRect[i].m_vertexUnder = CommonConstant::ORIGIN;
 
-		//	�T�C�h�o�����̓����蔻��̏�����
+		//	サイドバレルの当たり判定の初期化
 		m_sideBarrelHitRect[i].m_vertexTop = CommonConstant::ORIGIN;
 		m_sideBarrelHitRect[i].m_vertexUnder = CommonConstant::ORIGIN;
 	}
 
-	//	�p�x�����蓖�Ă�
+	//	角度を割り当てる
 	MV1SetRotationXYZ(m_modelHandle, m_angle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�X�V����
+//	@brief	更新処理
 //-----------------------------------------------------------------------------
 void LastBoss::Update(ShotManager& _shot, SoundEffect& _soundEffect)
 {
-	//	�K�E�Z�̂Ƃ��͍X�V���Ȃ�
+	//	必殺技のときは更新しない
 	const bool isNotSpecialProduction = !PRODUCTION->GetIsSpecialProduction();
 	if (isNotSpecialProduction)
 	{
-		//	�o�����̉��o
+		//	出現時の演出
 		_EmergeMove();
 
-		//	�J�n���Ă��āA
-		//	����ł��Ȃ��Ƃ�
+		//	開始していて、
+		//	死んでいないとき
 		const bool isActive = m_isStarted && (m_isLeftCoreAlive || m_isRightCoreAlive);
 		if (isActive)
 		{
-			//	�R�A�̏��
+			//	コアの状態
 			_PartsSituation();
 
-			//	���΍��W�̐ݒ�
+			//	相対座標の設定
 			_AllocationRelativeCoordinates();
 
 			const bool isNotSpecialProduction = !PRODUCTION->GetIsSpecialProduction();
 			if (isNotSpecialProduction)
 			{
-				//	�ړ�����
+				//	移動処理
 				_Move();
 
-				//	�ˌ�����
+				//	射撃処理
 				_Shot(_shot);
 			}
 
-			//	���P�b�g����
+			//	ロケット処理
 			_Rocket();
 
-			//	���[�U�[����
+			//	レーザー処理
 			_Laser();
 		}
 
-		//	���f���Ƀ|�W�V���������蓖�Ă�
+		//	モデルにポジションを割り当てる
 		MV1SetPosition(m_modelHandle, m_pos);
 
-		//	���f���Ɋp�x�����蓖�Ă�
+		//	モデルに角度を割り当てる
 		MV1SetRotationXYZ(m_modelHandle, m_angle);
 
-		//	�p�[�c�̃��f���Ƀ|�W�V�����Ɗp�x�����蓖�Ă�
+		//	パーツのモデルにポジションと角度を割り当てる
 		for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)
 		{
-			//	�|�W�V�����̊��蓖��
-			MV1SetPosition(m_bossPartsCore[i].m_modelHandle, m_bossPartsCore[i].m_pos);					//	�R�A
-			MV1SetPosition(m_bossPartsSideBarrel[i].m_modelHandle, m_bossPartsSideBarrel[i].m_pos);		//	�T�C�h�o����
-			MV1SetPosition(m_bossPartsArm[i].m_modelHandle, m_bossPartsArm[i].m_pos);					//	�A�[��
+			//	ポジションの割り当て
+			MV1SetPosition(m_bossPartsCore[i].m_modelHandle, m_bossPartsCore[i].m_pos);					//	コア
+			MV1SetPosition(m_bossPartsSideBarrel[i].m_modelHandle, m_bossPartsSideBarrel[i].m_pos);		//	サイドバレル
+			MV1SetPosition(m_bossPartsArm[i].m_modelHandle, m_bossPartsArm[i].m_pos);					//	アーム
 
-			//	�p�x�̊��蓖��
-			MV1SetRotationXYZ(m_bossPartsCore[i].m_modelHandle, m_bossPartsCore[i].m_angle);				//	�R�A
-			MV1SetRotationXYZ(m_bossPartsSideBarrel[i].m_modelHandle, m_bossPartsSideBarrel[i].m_angle);	//	�T�C�h�o����
-			MV1SetRotationXYZ(m_bossPartsArm[i].m_modelHandle, m_bossPartsArm[i].m_angle);					//	�A�[��
+			//	角度の割り当て
+			MV1SetRotationXYZ(m_bossPartsCore[i].m_modelHandle, m_bossPartsCore[i].m_angle);				//	コア
+			MV1SetRotationXYZ(m_bossPartsSideBarrel[i].m_modelHandle, m_bossPartsSideBarrel[i].m_angle);	//	サイドバレル
+			MV1SetRotationXYZ(m_bossPartsArm[i].m_modelHandle, m_bossPartsArm[i].m_angle);					//	アーム
 
-			//	���[�U�[�G�t�F�N�g
+			//	レーザーエフェクト
 			_OnEffectLaser((*m_effectLaser[i]), _soundEffect, m_bossPartsArm[i].m_pos, (BOSS_PARTS_INFO)i);
 
-			//	���P�b�g�G�t�F�N�g
+			//	ロケットエフェクト
 			_OnEffectRocket((*m_effectInjection[i]), _soundEffect, m_bossPartsArm[i].m_pos, (BOSS_PARTS_INFO)i);
 
-			//	���f���̐F�ύX
+			//	モデルの色変更
 			_ChangeModelColor(m_bossPartsCore[i].m_modelHandle, m_bossPartsCore[i].m_life, MAX_CORE_LIFE, m_lifeNormalColorFYellow);
 			_ChangeModelColor(m_bossPartsSideBarrel[i].m_modelHandle, m_bossPartsSideBarrel[i].m_life, MAX_SIDE_BARREL_LIFE, m_lifeNormalColorFBlack);
 		}
 
-		//	�����G�t�F�N�g
+		//	爆発エフェクト
 		_OnEffectExplosion(_soundEffect);
 
-		//	�����蔻��̍X�V
+		//	当たり判定の更新
 		_UpdateHitJudgment();
 	}
 
-	//	�p�[�c�̃��f���Ƀ|�W�V�����Ɗp�x�����蓖�Ă�
+	//	パーツのモデルにポジションと角度を割り当てる
 	for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)
 	{
-		//	�q�b�g�G�t�F�N�g
+		//	ヒットエフェクト
 		_OnHitEffect(m_bossPartsCore[i], _soundEffect, m_bossPartsCore[i].m_pos);
 		_OnHitEffect(m_bossPartsSideBarrel[i], _soundEffect, m_bossPartsSideBarrel[i].m_pos);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�`�揈��
+//	@brief	描画処理
 //-----------------------------------------------------------------------------
 void LastBoss::Draw()
 {
 	const bool isActive = m_isStart && !m_isOffDraw;
 	if (isActive)
 	{
-		//	���f���̕`��
+		//	モデルの描画
 		MV1DrawModel(m_modelHandle);
 
-		//	�A�[���̕`��
+		//	アームの描画
 		if (m_isLeftCoreAlive)
 		{
 			MV1DrawModel(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_modelHandle);
@@ -354,7 +354,7 @@ void LastBoss::Draw()
 			MV1DrawModel(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_modelHandle);
 		}
 
-		//	�p�[�c�̃��f���̓_�ŕ`��
+		//	パーツのモデルの点滅描画
 		if (m_isLeftCoreAlive) { _FlashingDraw(m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_LEFT]); }
 		if (m_isRightCoreAlive) { _FlashingDraw(m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT]); }
 		if (m_isLeftSideBarrelAlive) { _FlashingDraw(m_bossPartsSideBarrel[BOSS_PARTS_INFO::BOSS_PARTS_LEFT]); }
@@ -363,7 +363,7 @@ void LastBoss::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�R�A�̃_���[�W����
+//	@brief	コアのダメージ判定
 //-----------------------------------------------------------------------------
 void LastBoss::OnHitCoreDamage(const int _num)
 {
@@ -376,7 +376,7 @@ void LastBoss::OnHitCoreDamage(const int _num)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�T�C�h�o�����̃_���[�W����
+//	@brief	サイドバレルのダメージ判定
 //-----------------------------------------------------------------------------
 void LastBoss::OnHitSideBarrelDamage(const int _num)
 {
@@ -389,7 +389,7 @@ void LastBoss::OnHitSideBarrelDamage(const int _num)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�R�A�̃_���[�W����
+//	@brief	コアのダメージ判定
 //-----------------------------------------------------------------------------
 void LastBoss::OnHitCoreDamage(const int _num, const int _damage)
 {
@@ -402,7 +402,7 @@ void LastBoss::OnHitCoreDamage(const int _num, const int _damage)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�T�C�h�o�����̃_���[�W����
+//	@brief	サイドバレルのダメージ判定
 //-----------------------------------------------------------------------------
 void LastBoss::OnHitSideBarrelDamage(const int _num, const int _damage)
 {
@@ -415,21 +415,21 @@ void LastBoss::OnHitSideBarrelDamage(const int _num, const int _damage)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�j���
+//	@brief	破壊状況
 //-----------------------------------------------------------------------------
 void LastBoss::DestructionSituation()
 {
-	//	�R�A�����ׂĔj�󂵂�
+	//	コアをすべて破壊した
 	const bool isAllDestruction = !m_isLeftCoreAlive && !m_isRightCoreAlive;
 	if (isAllDestruction) { m_isAllDestruction = true; m_isAppearance = false; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�p�[�c�̓����蔻��p�̉~�`�� getter
+//	@brief	パーツの当たり判定用の円形の getter
 //-----------------------------------------------------------------------------
 const Circle& LastBoss::GetCircle(const BOSS_PARTS_KIND _partsNum, const int _num) const
 {
-	//	�����蔻��̎擾
+	//	当たり判定の取得
 	switch (_partsNum)
 	{
 	case BOSS_PARTS_KIND::BOSS_PARTS_KIND_BODY:
@@ -453,7 +453,7 @@ const Circle& LastBoss::GetCircle(const BOSS_PARTS_KIND _partsNum, const int _nu
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����蔻��p�̃A�[���̒����`�́@getter
+//	@brief	当たり判定用のアームの長方形の　getter
 //-----------------------------------------------------------------------------
 const Rect& LastBoss::GetArmRect(const int _num) const
 {
@@ -461,7 +461,7 @@ const Rect& LastBoss::GetArmRect(const int _num) const
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����蔻��p�̃R�A�̒����`�́@getter
+//	@brief	当たり判定用のコアの長方形の　getter
 //-----------------------------------------------------------------------------
 const Rect& LastBoss::GetCoreRect(const int _num) const
 {
@@ -469,7 +469,7 @@ const Rect& LastBoss::GetCoreRect(const int _num) const
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����蔻��p�̃T�C�h�o�����̒����`�́@getter
+//	@brief	当たり判定用のサイドバレルの長方形の　getter
 //-----------------------------------------------------------------------------
 const Rect& LastBoss::GetSideBarrelRect(const int _num) const
 {
@@ -477,7 +477,7 @@ const Rect& LastBoss::GetSideBarrelRect(const int _num) const
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����蔻��p�̃��[�U�[�̒����`�́@getter
+//	@brief	当たり判定用のレーザーの長方形の　getter
 //-----------------------------------------------------------------------------
 const Rect& LastBoss::GetLaserRect(const int _num) const
 {
@@ -485,37 +485,37 @@ const Rect& LastBoss::GetLaserRect(const int _num) const
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�p�[�c�̏�����
+//	@brief	パーツの初期化
 //-----------------------------------------------------------------------------
 void LastBoss::_InitializeBossParts(BossParts& _bossParts, const BOSS_PARTS_INFO _bossPartsInfo, const float _hitRadius, const int _liffe)
 {
-	//	�p�[�c�̏�����
-	_bossParts.m_pos = EMERGE_POS;											//	�|�W�V����
-	_bossParts.m_dir = CommonConstant::ORIGIN;								//	����
-	_bossParts.m_size = VGet(1.0f, 1.0f, 1.0f);								//	�T�C�Y
-	_bossParts.m_angle = CommonConstant::ORIGIN;							//	�p�x
-	_bossParts.m_life = _liffe;												//	���C�t
-	_bossParts.m_hitCircle.m_radius = _hitRadius;							//	�����蔻��̔��a
-	_bossParts.m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;			//	�����蔻��̒��S���W
+	//	パーツの初期化
+	_bossParts.m_pos = EMERGE_POS;											//	ポジション
+	_bossParts.m_dir = CommonConstant::ORIGIN;								//	向き
+	_bossParts.m_size = VGet(1.0f, 1.0f, 1.0f);								//	サイズ
+	_bossParts.m_angle = CommonConstant::ORIGIN;							//	角度
+	_bossParts.m_life = _liffe;												//	ライフ
+	_bossParts.m_hitCircle.m_radius = _hitRadius;							//	当たり判定の半径
+	_bossParts.m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;			//	当たり判定の中心座標
 	_bossParts.m_isDamage = false;
 
-	//	�p�[�c�̈ʒu�����Ȃ�p�x�𔽓]����
+	//	パーツの位置が左なら角度を反転する
 	const bool isLeft = _bossPartsInfo == BOSS_PARTS_INFO::BOSS_PARTS_LEFT;
 	if (isLeft) { _bossParts.m_angle.x = CommonConstant::PI; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�J�n���̈ړ�
+//	@brief	開始時の移動
 //-----------------------------------------------------------------------------
 void LastBoss::_EmergeMove()
 {
-	//	�o�����̉��o
+	//	出現時の演出
 	if (m_isEmerge)
 	{
-		//	�o��
+		//	登場
 		m_isAppearance = true;
 
-		//	�o�����̉��o
+		//	出現時の演出
 		m_emergeMoveTaim++;
 		const bool isEmergeMoveStart = m_emergeMoveTaim <= 5.0f;
 		const bool isEmergeMove1 = m_emergeMoveTaim >= 5.0f && m_emergeMoveTaim <= 150.0f;
@@ -523,24 +523,24 @@ void LastBoss::_EmergeMove()
 		const bool isEmergeMove3 = m_emergeMoveTaim >= 210.0f && m_emergeMoveTaim <= 320.0f;
 		const bool isEmergeMoveEnd = m_emergeMoveTaim == 320.0f;
 
-		//	���o�J�n
+		//	演出開始
 		if (isEmergeMoveStart) 
 		{
 			m_pos = EMERGE_POS; 
-			m_bossPartsArm[(int)BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_pos = EMERGE_RIGHT_ARM_POS;	//	�E�A�[��
-			m_bossPartsArm[(int)BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_pos = EMERGE_LEFT_ARM_POS;		//	���A�[��
+			m_bossPartsArm[(int)BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_pos = EMERGE_RIGHT_ARM_POS;	//	右アーム
+			m_bossPartsArm[(int)BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_pos = EMERGE_LEFT_ARM_POS;		//	左アーム
 		}
 
-		//	�{�̂̏o��
+		//	本体の出現
 		if (isEmergeMove1)
 		{
-			//	�O�i
+			//	前進
 			m_dir = VGet(-1.0f, 0.0f, 0.0f);
 			VECTOR moving = MoveHelper::AskMoveAmount(m_dir, m_moveSpeed);
 			m_pos = VAdd(m_pos, moving);
 		}
 
-		//	�E�A�[���̏o��
+		//	右アームの出現
 		if (isEmergeMove2) 
 		{
 			const float lerpSpeed = 0.1f;
@@ -550,7 +550,7 @@ void LastBoss::_EmergeMove()
 			m_bossPartsArm[(int)BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_pos = pos;
 		}
 
-		//	���A�[���̏o��
+		//	左アームの出現
 		if (isEmergeMove3)
 		{
 			const float lerpSpeed = 0.1f;
@@ -560,7 +560,7 @@ void LastBoss::_EmergeMove()
 			m_bossPartsArm[(int)BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_pos = pos;
 		}
 
-		//	���o�I��
+		//	演出終了
 		if (isEmergeMoveEnd)
 		{
 			m_pos = START_POS;
@@ -569,7 +569,7 @@ void LastBoss::_EmergeMove()
 
 			for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)
 			{
-				//	�A�[���̏�����
+				//	アームの初期化
 				m_bossPartsArm[i].m_pos = _AskRelativeCoordinates(m_pos, RELATIVE_ARM_POS, (BOSS_PARTS_INFO)i);
 			}
 
@@ -577,17 +577,17 @@ void LastBoss::_EmergeMove()
 			m_isEmerge = false;
 		}
 
-		//	���΍��W�̐ݒ�
+		//	相対座標の設定
 		for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)
 		{
-			m_bossPartsCore[i].m_pos = _AskRelativeCoordinates(m_pos, RELATIVE_CORE_POS, (BOSS_PARTS_INFO)i);					//	�R�A
-			m_bossPartsSideBarrel[i].m_pos = _AskRelativeCoordinates(m_pos, RELATIVE_SIDE_BARREL_POS, (BOSS_PARTS_INFO)i);		//	�T�C�h�o����
+			m_bossPartsCore[i].m_pos = _AskRelativeCoordinates(m_pos, RELATIVE_CORE_POS, (BOSS_PARTS_INFO)i);					//	コア
+			m_bossPartsSideBarrel[i].m_pos = _AskRelativeCoordinates(m_pos, RELATIVE_SIDE_BARREL_POS, (BOSS_PARTS_INFO)i);		//	サイドバレル
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�ړ�����
+//	@brief	移動処理
 //-----------------------------------------------------------------------------
 void LastBoss::_Move()
 {
@@ -614,7 +614,7 @@ void LastBoss::_Move()
 	const bool isMovePattern18= m_behaviorTime >= 3600.0f && m_behaviorTime <= 3700.0f;
 	if (m_behaviorTime >= 3800.0f) { m_behaviorTime = 0.0f;	m_behaviorKind = BEHAVIOR_KIND::BEHAVIOR_NONE; }
 
-	//	���[�v���g�����ړ���
+	//	ラープを使った移動処
 	_LerpMove(isMovePattern1, MOVE_PATTERN_3, 0.05f);
 	_LerpMove(isMovePattern2, MOVE_PATTERN_2, 0.05f);
 	_LerpMove(isMovePattern3, MOVE_PATTERN_1, 0.05f);
@@ -633,7 +633,7 @@ void LastBoss::_Move()
 	_LerpMove(isMovePattern17, MOVE_PATTERN_1, 0.05f);
 	_LerpMove(isMovePattern18, MOVE_PATTERN_2, 0.05f);
 
-	//	���[�v���g��Ȃ��ړ�����
+	//	ラープを使わない移動処理
 	if (isMovePattern9)
 	{
 		m_pos = VAdd(m_pos, VGet(0.0f, 0.6f, 0.0f));
@@ -665,12 +665,12 @@ void LastBoss::_Move()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�ˌ�����
+//	@brief	射撃処理
 //-----------------------------------------------------------------------------
 void LastBoss::_Shot(ShotManager& _shot)
 {
-	//	�s�����Ԃ͈͓̔��ŁA�V���b�g�x�����Ȃ��Ȃ�����A
-	//	�ˌ�����������
+	//	行動時間の範囲内で、ショット遅延がなくなったら、
+	//	射撃処理をする
 	const bool isShot1 = (m_behaviorTime == 110.0f) || (m_behaviorTime == 120.0f) || (m_behaviorTime == 130.0f);
 	const bool isShot2 = (m_behaviorTime == 310.0f) || (m_behaviorTime == 320.0f) || (m_behaviorTime == 330.0f);
 	const bool isShot3 = (m_behaviorTime == 510.0f) || (m_behaviorTime == 520.0f) || (m_behaviorTime == 530.0f);
@@ -691,18 +691,18 @@ void LastBoss::_Shot(ShotManager& _shot)
 							  isShot8 || isShot9 || isShot10 || isShot11 || isShot12 || isShot13 || isShot14;
 	if (isActiveShot)
 	{
-		//	��Ԃ����P�b�g�̂Ƃ��͖���
+		//	状態がロケットのときは無視
 		const bool isIgnore = m_behaviorKind == BEHAVIOR_KIND::BEHAVIOR_ROCKET;
 		if (!isIgnore)
 		{
-			//	��Ԃ��V���b�g�ɂ���
+			//	状態をショットにする
 			m_behaviorKind = BEHAVIOR_KIND::BEHAVIOR_SHOT;
 		}
 
 		const VECTOR shotDir = VGet(-1.0f, 0.0f, 0.0f);
 
-		//	�E�o�����������Ă���Ȃ�A
-		//	�e�𐶐�����
+		//	右バレルが生きているなら、
+		//	弾を生成する
 		const bool isRightBarrelAlive = m_bossPartsSideBarrel[(int)BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_life > LIFE_ZERO;
 		if (isRightBarrelAlive)
 		{
@@ -713,8 +713,8 @@ void LastBoss::_Shot(ShotManager& _shot)
 			_shot.RegisterOnList(_shot.SHOT_KIND::ENEMY_SHOT, shotPos2, shotDir, SHOT_SPEED);
 		}
 
-		//	���o�����������Ă���Ȃ�A
-		//	�e�𐶐�����
+		//	左バレルが生きているなら、
+		//	弾を生成する
 		const bool isLeftBarrelAlive = m_bossPartsSideBarrel[(int)BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_life > LIFE_ZERO;
 		if (isLeftBarrelAlive)
 		{
@@ -725,7 +725,7 @@ void LastBoss::_Shot(ShotManager& _shot)
 			_shot.RegisterOnList(_shot.SHOT_KIND::ENEMY_SHOT, shotPos4, shotDir, SHOT_SPEED);
 		}
 
-		//	�Z���^�[�o����
+		//	センターバレル
 		const VECTOR shotPos5 = VGet(m_pos.x - SHOT_START_POS_CORRECTION_3.x, m_pos.y + SHOT_START_POS_CORRECTION_3.y, m_pos.z);
 		_shot.RegisterOnList(_shot.SHOT_KIND::ENEMY_SHOT, shotPos5, shotDir, SHOT_SPEED);
 
@@ -735,7 +735,7 @@ void LastBoss::_Shot(ShotManager& _shot)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���P�b�g����
+//	@brief	ロケット処理
 //-----------------------------------------------------------------------------
 void LastBoss::_Rocket()
 {
@@ -753,29 +753,29 @@ void LastBoss::_Rocket()
 
 		if (isRocketStart)
 		{
-			//	��Ԃ����b�N�I���ɂ���
+			//	状態をロックオンにする
 			m_behaviorKind = BEHAVIOR_KIND::BEHAVIOR_ROCKET;
 
-			//	�R�A�������Ă���Ȃ�A�A�[�����J��
+			//	コアが生きているなら、アームを開く
 			if (m_isLeftCoreAlive) { _LerpRelativeCoordinates(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_LEFT], BOSS_PARTS_INFO::BOSS_PARTS_LEFT, OPEN_RELATIVE_ARM_POS); }
 			if (m_isRightCoreAlive) { _LerpRelativeCoordinates(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT], BOSS_PARTS_INFO::BOSS_PARTS_RIGHT, OPEN_RELATIVE_ARM_POS); }
 
-			//	�p�b�h�̐U���@�\
+			//	パッドの振動機能
 			const int vibrationPower = 500;
 			PadInfo::Function::VibrationFunction(PadInfo::PAD_KIND::PAD_1, vibrationPower);
 		}
 		if (isRocket1)
 		{
-			//	�p�b�h�̐U���@�\�̏I��
+			//	パッドの振動機能の終了
 			PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 			
-			//	�ړ�����
+			//	移動処理
 			const float speed = 5.0f;
 			VECTOR velocity = VScale(VGet(-1.0f, 0.0f, 0.0f), speed);
 			if (m_isLeftCoreAlive) { m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_pos = VAdd(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_pos, velocity); }
 			if (m_isRightCoreAlive) { m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_pos = VAdd(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_pos, velocity); }
 
-			//	�p�b�h�̐U���@�\
+			//	パッドの振動機能
 			PadInfo::Function::VibrationFunction(PadInfo::PAD_KIND::PAD_1);
 		}
 		if (isRocket2)
@@ -785,16 +785,16 @@ void LastBoss::_Rocket()
 		}
 		if (isRocket3)
 		{
-			//	�{�X�ɂ�������
+			//	ボスにくっつける
 			_LerpRelativeCoordinates(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_LEFT], BOSS_PARTS_INFO::BOSS_PARTS_LEFT, RELATIVE_ARM_POS);
 			_LerpRelativeCoordinates(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT], BOSS_PARTS_INFO::BOSS_PARTS_RIGHT, RELATIVE_ARM_POS);
 
-			//	�p�b�h�̐U���@�\�̏I��
+			//	パッドの振動機能の終了
 			PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 		}
 		if (isRocketEnd)
 		{
-			//	������
+			//	初期化
 			m_rocketTime = 0.0f;
 			m_behaviorKind = BEHAVIOR_KIND::BEHAVIOR_NONE;
 			m_isStartRocket = false;
@@ -803,7 +803,7 @@ void LastBoss::_Rocket()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���[�U�[����
+//	@brief	レーザー処理
 //-----------------------------------------------------------------------------
 void LastBoss::_Laser()
 {
@@ -823,40 +823,40 @@ void LastBoss::_Laser()
 
 		if (isLaserStart)
 		{
-			//	��Ԃ����[�U�[�ɂ���
+			//	状態をレーザーにする
 			m_behaviorKind = BEHAVIOR_KIND::BEHAVIOR_LASER;
 			m_laser.m_vertexTop = CommonConstant::ORIGIN;
 			m_laser.m_vertexUnder = CommonConstant::ORIGIN;
 
-			//	�R�A�������Ă���Ȃ�A�A�[������]
+			//	コアが生きているなら、アームを回転
 			if (m_isLeftCoreAlive) { _ArmRota(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_LEFT], CommonConstant::PI); }
 			if (m_isRightCoreAlive) { _ArmRota(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT], CommonConstant::PI); }
 
-			//	�p�b�h�̐U���@�\
+			//	パッドの振動機能
 			const int vibrationPower = 500;
 			PadInfo::Function::VibrationFunction(PadInfo::PAD_KIND::PAD_1, vibrationPower);
 		}
 		if (isLaser1)
 		{
-			//	�p�b�h�̐U���@�\�̏I��
+			//	パッドの振動機能の終了
 			PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 
 			m_laser.m_vertexTop.x = LASER_LENGTH;
 
-			//	�p�b�h�̐U���@�\
+			//	パッドの振動機能
 			PadInfo::Function::VibrationFunction(PadInfo::PAD_KIND::PAD_1);
 		}
 		if (isLaser2)
 		{
 			m_laser.m_vertexTop = CommonConstant::ORIGIN;
 
-			//	�p�b�h�̐U���@�\�̏I��
+			//	パッドの振動機能の終了
 			PadInfo::Function::EndVibrationFunction(PadInfo::PAD_KIND::PAD_1);
 
 		}
 		if (isLaser3)
 		{
-			//	�A�[������]
+			//	アームを回転
 			_ArmRota(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_LEFT], 0.0f);
 			_ArmRota(m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT], 0.0f);
 		}
@@ -870,21 +870,21 @@ void LastBoss::_Laser()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�p�[�c�̏�
+//	@brief	パーツの状況
 //-----------------------------------------------------------------------------
 void LastBoss::_PartsSituation()
 {
-	//	�R�A�������Ă���Ԃ́Atrue
+	//	コアが生きている間は、true
 	m_isLeftCoreAlive = m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_life > LIFE_ZERO;
 	m_isRightCoreAlive = m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_life > LIFE_ZERO;
 
-	//	�T�C�h�o�����������Ă���Ԃ́Atrue
+	//	サイドバレルが生きている間は、true
 	m_isLeftSideBarrelAlive = m_bossPartsSideBarrel[BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_life > LIFE_ZERO;
 	m_isRightSideBarrelAlive = m_bossPartsSideBarrel[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_life > LIFE_ZERO;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�A�[���̉�]
+//	@brief	アームの回転
 //-----------------------------------------------------------------------------
 void LastBoss::_ArmRota(BossParts& _bossParts, const float _targetAngle)
 {
@@ -895,7 +895,7 @@ void LastBoss::_ArmRota(BossParts& _bossParts, const float _targetAngle)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���[�v���g�������΍��W
+//	@brief	ラープを使った相対座標
 //-----------------------------------------------------------------------------
 void LastBoss::_LerpRelativeCoordinates(BossParts& _bossParts, const BOSS_PARTS_INFO _bossInfo, const VECTOR _target)
 {
@@ -907,7 +907,7 @@ void LastBoss::_LerpRelativeCoordinates(BossParts& _bossParts, const BOSS_PARTS_
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���`�ۊǂ��g�����ړ�����
+//	@brief	線形保管を使った移動処理
 //-----------------------------------------------------------------------------
 void LastBoss::_LerpMove(bool _isConditions, VECTOR _targetPos, float _lerpSpeed)
 {
@@ -915,11 +915,11 @@ void LastBoss::_LerpMove(bool _isConditions, VECTOR _targetPos, float _lerpSpeed
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�q�b�g�G�t�F�N�g
+//	@brief	ヒットエフェクト
 //-----------------------------------------------------------------------------
 void LastBoss::_OnHitEffect(BossParts& _bossParts, SoundEffect& _soundEffect, const VECTOR _pos)
 {
-	//	�_���[�W���������Ƃ�
+	//	ダメージが入ったとき
 	if (_bossParts.m_isDamage)
 	{
 		const bool isHitStart = m_effectHit->GetPlayTime() == 0.0f;
@@ -950,7 +950,7 @@ void LastBoss::_OnHitEffect(BossParts& _bossParts, SoundEffect& _soundEffect, co
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����G�t�F�N�g
+//	@brief	爆発エフェクト
 //-----------------------------------------------------------------------------
 void LastBoss::_OnEffectExplosion(SoundEffect& _soundEffect)
 {
@@ -970,7 +970,7 @@ void LastBoss::_OnEffectExplosion(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����G�t�F�N�g���
+//	@brief	爆発エフェクト一つ分
 //-----------------------------------------------------------------------------
 void LastBoss::_OneEffectExplosion(const bool _isConditions, EffekseerEmitter& _effect, SoundEffect& _soundEffect, const VECTOR _pos, bool& _isUsedFlag)
 {
@@ -980,10 +980,10 @@ void LastBoss::_OneEffectExplosion(const bool _isConditions, EffekseerEmitter& _
 		const bool isExplosion1 = _effect.GetPlayTime() == 50.0f;
 		const bool isExplosionEnd = _effect.GetPlayTime() == 100.0f;
 
-		//	�|�W�V�����͏�ɒǂ�
+		//	ポジションは常に追う
 		_effect.SetPos(_pos);
 
-		//	�����G�t�F�N�g�̊J�n
+		//	爆発エフェクトの開始
 		if (isExplosionStart)
 		{
 			_effect.SetPlaySpeed(3.0f);
@@ -996,7 +996,7 @@ void LastBoss::_OneEffectExplosion(const bool _isConditions, EffekseerEmitter& _
 			_soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_EXPLOSION);
 		}
 
-		//	�����G�t�F�N�g�̏I��
+		//	爆発エフェクトの終了
 		if (isExplosionEnd)
 		{
 			_effect.OnEndEffect();
@@ -1010,7 +1010,7 @@ void LastBoss::_OneEffectExplosion(const bool _isConditions, EffekseerEmitter& _
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�ŏI�����G�t�F�N�g
+//	@brief	最終爆発エフェクト
 //-----------------------------------------------------------------------------
 void LastBoss::_LastEffectExplosion(const bool _isConditions, SoundEffect& _soundEffect)
 {
@@ -1019,29 +1019,29 @@ void LastBoss::_LastEffectExplosion(const bool _isConditions, SoundEffect& _soun
 		const bool isRandamExplosion = m_effectLastExplosion->GetPlayTime() < 150.0f;
 		if (isRandamExplosion)
 		{
-			//	�����ŃG�t�F�N�g���o��������
+			//	乱数でエフェクトを出現させる
 			const bool isActive = CommonFunction::GetRand(0, 5) == 0;
 			if (isActive)
 			{
 				for (int i = 0; i < CommonConstant::MAX_BOSS_EXPLOSION_NUM; i++)
 				{
-					//	�܂��Đ����Ă��Ȃ����
+					//	まだ再生していなければ
 					const bool isNotPlay = !m_effectExplosion[i]->GetIsStartEffect();
 					if (isNotPlay) { m_effectExplosion[i]->SetIsStartEffect(true); break; }
 				}
 			}
 
-			//	�����_���Ȉʒu�ɔ��j�G�t�F�N�g���o��
+			//	ランダムな位置に爆破エフェクトを出す
 			for (int i = 0; i < CommonConstant::MAX_BOSS_EXPLOSION_NUM; i++)
 			{
 				_RandamEffectExplosion((*m_effectExplosion[i]), _soundEffect);
 			}
 		}
 
-		//	�ŏI�I�Ȕ����G�t�F�N�g
+		//	最終的な爆発エフェクト
 		m_effectLastExplosion->SetPos(m_pos);
 
-		//	�ŏI�I�Ȕ��������G�t�F�N�g�̊J�n
+		//	最終的な爆発爆発エフェクトの開始
 		const bool isLastExplosionStart = m_effectLastExplosion->GetPlayTime() == 150.0f;
 		if (isLastExplosionStart)
 		{
@@ -1053,11 +1053,11 @@ void LastBoss::_LastEffectExplosion(const bool _isConditions, SoundEffect& _soun
 		const bool isLastExplosion1 = m_effectLastExplosion->GetPlayTime() == 230.0f;
 		if (isLastExplosion1) { _soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_EXPLOSION); }
 
-		//	�ŏI�I�Ȕ��������G�t�F�N�g�̏I��
+		//	最終的な爆発爆発エフェクトの終了
 		const bool isLastExplosion2 = m_effectLastExplosion->GetPlayTime() == 250.0f;
 		if(isLastExplosion2) { m_isOffDraw = true; }
 
-		//	�N���A���̉��o�J�n
+		//	クリア時の演出開始
 		const bool isClear = m_effectLastExplosion->GetPlayTime() == 300.0f;
 		if (isClear) { PRODUCTION->SetIsClearProduction(true); }
 
@@ -1067,7 +1067,7 @@ void LastBoss::_LastEffectExplosion(const bool _isConditions, SoundEffect& _soun
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����_�������G�t�F�N�g
+//	@brief	ランダム爆発エフェクト
 //-----------------------------------------------------------------------------
 void LastBoss::_RandamEffectExplosion(EffekseerEmitter& _effect, SoundEffect& _soundEffect)
 {
@@ -1096,7 +1096,7 @@ void LastBoss::_RandamEffectExplosion(EffekseerEmitter& _effect, SoundEffect& _s
 
 		if (isExplosion) { _soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_EXPLOSION); }
 
-		//	�����G�t�F�N�g�̏I��
+		//	爆発エフェクトの終了
 		if (isExplosionEnd)
 		{
 			_effect.OnEndEffect();
@@ -1109,32 +1109,32 @@ void LastBoss::_RandamEffectExplosion(EffekseerEmitter& _effect, SoundEffect& _s
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���[�U�[�G�t�F�N�g
+//	@brief	レーザーエフェクト
 //-----------------------------------------------------------------------------
 void LastBoss::_OnEffectLaser(EffekseerEmitter& _effect, SoundEffect& _soundEffect, const VECTOR _startPos, const BOSS_PARTS_INFO _partsInfo)
 {
-	//	���[�U�[�G�t�F�N�g
+	//	レーザーエフェクト
 	if(m_isStartLaser)
 	{
-		//	�G�t�F�N�g�̎���
+		//	エフェクトの時間
 		static const float startTime = 0.0f;
 		static const float endTime = 400.0f;
 
-		//	���̃R�A���j�󂳂ꂽ
+		//	左のコアが破壊された
 		const bool isLeftCoreAlive = !m_isLeftCoreAlive && _partsInfo == BOSS_PARTS_INFO::BOSS_PARTS_LEFT;
 		if (isLeftCoreAlive) { _effect.SetPlayTime(endTime); }
 
-		//	�E�̃R�A���j�󂳂ꂽ
+		//	右のコアが破壊された
 		const bool isRightCoreAlive = !m_isRightCoreAlive && _partsInfo == BOSS_PARTS_INFO::BOSS_PARTS_RIGHT;
 		if (isRightCoreAlive) { _effect.SetPlayTime(endTime); }
 
 		const bool isLaserStart = _effect.GetPlayTime() == startTime;
 		const bool isLaserEnd = _effect.GetPlayTime() == 400.0f;
 		
-		//	�|�W�V�����̍X�V
+		//	ポジションの更新
 		_effect.SetPos(VGet(_startPos.x + LASER_EFFECT_CORRECTION, _startPos.y, _startPos.z));
 
-		//	���[�U�[�G�t�F�N�g�̊J�n
+		//	レーザーエフェクトの開始
 		if (isLaserStart)
 		{
 			_effect.SetPlaySpeed(1.2f);
@@ -1144,7 +1144,7 @@ void LastBoss::_OnEffectLaser(EffekseerEmitter& _effect, SoundEffect& _soundEffe
 			_soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_ENEMY_LASER);
 		}
 
-		//	���[�U�[�G�t�F�N�g�̏I��
+		//	レーザーエフェクトの終了
 		if (isLaserEnd)
 		{
 			_effect.OnEndEffect();
@@ -1157,37 +1157,37 @@ void LastBoss::_OnEffectLaser(EffekseerEmitter& _effect, SoundEffect& _soundEffe
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���P�b�g�G�t�F�N�g
+//	@brief	ロケットエフェクト
 //-----------------------------------------------------------------------------
 void LastBoss::_OnEffectRocket(EffekseerEmitter& _effect, SoundEffect& _soundEffect, const VECTOR _startPos, const BOSS_PARTS_INFO _partsInfo)
 {
-	//	�G�t�F�N�g�̊J�n
+	//	エフェクトの開始
 	const bool isRocketActive = m_behaviorTime == 1000.0f;
 	if (isRocketActive) { _effect.SetIsStartEffect(true); }
 
 	const bool isStart = _effect.GetIsStartEffect();
 	if (isStart)
 	{
-		//	�G�t�F�N�g�̎���
+		//	エフェクトの時間
 		static const float startTime = 100.0f;
 		static const float endTime = 300.0f;
 
-		//	���̃R�A���j�󂳂ꂽ
+		//	左のコアが破壊された
 		const bool isLeftCoreAlive = !m_isLeftCoreAlive && _partsInfo == BOSS_PARTS_INFO::BOSS_PARTS_LEFT;
 		if (isLeftCoreAlive) { _effect.SetPlayTime(endTime); }
 
-		//	�E�̃R�A���j�󂳂ꂽ
+		//	右のコアが破壊された
 		const bool isRightCoreAlive = !m_isRightCoreAlive && _partsInfo == BOSS_PARTS_INFO::BOSS_PARTS_RIGHT;
 		if (isRightCoreAlive) { _effect.SetPlayTime(endTime); }
 
-		//	�G�t�F�N�g�̊J�n
+		//	エフェクトの開始
 		const bool isRocketStart = _effect.GetPlayTime() == startTime;
 		const bool isRocketEnd = _effect.GetPlayTime() == endTime;
 
-		//	�|�W�V�����̍X�V
+		//	ポジションの更新
 		_effect.SetPos(VGet(_startPos.x + ROCKET_EFFECT_CORRECTION, _startPos.y, _startPos.z));
 
-		//	���[�U�[�G�t�F�N�g�̊J�n
+		//	レーザーエフェクトの開始
 		if (isRocketStart)
 		{
 			_effect.SetScale(VGet(5.0f, 5.0f, 5.0f));
@@ -1195,7 +1195,7 @@ void LastBoss::_OnEffectRocket(EffekseerEmitter& _effect, SoundEffect& _soundEff
 			_soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_ROCKET);
 		}
 
-		//	���[�U�[�G�t�F�N�g�̏I��
+		//	レーザーエフェクトの終了
 		if (isRocketEnd)
 		{
 			_effect.OnEndEffect();
@@ -1208,38 +1208,38 @@ void LastBoss::_OnEffectRocket(EffekseerEmitter& _effect, SoundEffect& _soundEff
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����蔻��p�̓_�̍X�V
+//	@brief	当たり判定用の点の更新
 //-----------------------------------------------------------------------------
 void LastBoss::_UpdateHitJudgment()
 {
-	//	�A�[���̓����蔻��p�̍X�V
+	//	アームの当たり判定用の更新
 	_UpdateHitArm();
 
-	//	�R�A�̓����蔻��p�̍X�V
+	//	コアの当たり判定用の更新
 	_UpdateHitCore();
 
-	//	�T�C�h�o�����̓����蔻��p�̍X�V
+	//	サイドバレルの当たり判定用の更新
 	_UpdateHitSideBarrel();
 
-	//	���[�U�[�̓����蔻��p�̍X�V
+	//	レーザーの当たり判定用の更新
 	_UpdateHitLaser();
 
-	//	�{�f�B�[�̓����蔻��p�̍X�V
+	//	ボディーの当たり判定用の更新
 	_UpdateHitBody();
 
-	//	�Z���^�[�o�����̓����蔻��p�̍X�V
+	//	センターバレルの当たり判定用の更新
 	_UpdateHitCenterBarrel();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�A�[���̓����蔻��p�̍X�V
+//	@brief	アームの当たり判定用の更新
 //-----------------------------------------------------------------------------
 void LastBoss::_UpdateHitArm()
 {
 	const int left = BOSS_PARTS_INFO::BOSS_PARTS_LEFT;
 	const int right = BOSS_PARTS_INFO::BOSS_PARTS_RIGHT;
 
-	//	���A�[���̉~�̓_�̍X�V
+	//	左アームの円の点の更新
 	m_bossPartsArm[left].m_hitCircle.m_centerPoint =
 	VGet(
 			m_bossPartsArm[left].m_pos.x + ADJUSTMENT_ARM_CIRCLE_POS.x,
@@ -1247,10 +1247,10 @@ void LastBoss::_UpdateHitArm()
 			m_bossPartsArm[left].m_pos.z
 		);
 
-	//	���A�[���̉~�̃T�C�Y�̍X�V
+	//	左アームの円のサイズの更新
 	m_bossPartsArm[left].m_hitCircle.m_radius = HIT_ARM_RADIUS;
 
-	//	�E�A�[���̉~�̓_�̍X�V
+	//	右アームの円の点の更新
 	m_bossPartsArm[right].m_hitCircle.m_centerPoint =
 	VGet(
 		m_bossPartsArm[right].m_pos.x + ADJUSTMENT_ARM_CIRCLE_POS.x,
@@ -1258,13 +1258,13 @@ void LastBoss::_UpdateHitArm()
 		m_bossPartsArm[right].m_pos.z
 	);
 
-	//	���A�[���̉~�̃T�C�Y�̍X�V
+	//	左アームの円のサイズの更新
 	m_bossPartsArm[right].m_hitCircle.m_radius = HIT_ARM_RADIUS;
 
 
 //-----------------------------------------------------------------------------//
 
-	//	���A�[���̒����`�̒��_�P�̍X�V
+	//	左アームの長方形の頂点１の更新
 	m_bossPartsArm[left].m_hitRect.m_vertexTop =
 	VGet(
 		m_bossPartsArm[left].m_pos.x - ADJUSTMENT_ARM_RECT_POS.x + ARM_CORRECTION.x,
@@ -1272,7 +1272,7 @@ void LastBoss::_UpdateHitArm()
 		m_bossPartsArm[left].m_pos.z - ADJUSTMENT_ARM_RECT_POS.z
 	);
 
-	//	���A�[���̒����`�̒��_�Q�̍X�V
+	//	左アームの長方形の頂点２の更新
 	m_bossPartsArm[left].m_hitRect.m_vertexUnder =
 	VGet(
 		m_bossPartsArm[left].m_pos.x + ADJUSTMENT_ARM_RECT_POS.x + ARM_CORRECTION.x,
@@ -1280,7 +1280,7 @@ void LastBoss::_UpdateHitArm()
 		m_bossPartsArm[left].m_pos.z + ADJUSTMENT_ARM_RECT_POS.z
 	);
 
-	//	�E�A�[���̒����`�̒��_�P�̍X�V
+	//	右アームの長方形の頂点１の更新
 	m_bossPartsArm[right].m_hitRect.m_vertexTop =
 	VGet(
 		m_bossPartsArm[right].m_pos.x - ADJUSTMENT_ARM_RECT_POS.x + ARM_CORRECTION.x,
@@ -1288,7 +1288,7 @@ void LastBoss::_UpdateHitArm()
 		m_bossPartsArm[right].m_pos.z - ADJUSTMENT_ARM_RECT_POS.z
 	);
 
-	//	�E�A�[���̒����`�̒��_�Q�̍X�V
+	//	右アームの長方形の頂点２の更新
 	m_bossPartsArm[right].m_hitRect.m_vertexUnder =
 	VGet(
 		m_bossPartsArm[right].m_pos.x + ADJUSTMENT_ARM_RECT_POS.x + ARM_CORRECTION.x,
@@ -1299,29 +1299,29 @@ void LastBoss::_UpdateHitArm()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�R�A�̓����蔻��p�̍X�V
+//	@brief	コアの当たり判定用の更新
 //-----------------------------------------------------------------------------
 void LastBoss::_UpdateHitCore()
 {
 	const int left = BOSS_PARTS_INFO::BOSS_PARTS_LEFT;
 	const int right = BOSS_PARTS_INFO::BOSS_PARTS_RIGHT;
 
-	//	���R�A�̉~�̓_�̍X�V
+	//	左コアの円の点の更新
 	m_bossPartsCore[left].m_hitCircle.m_centerPoint = m_bossPartsCore[left].m_pos;
 
-	//	���R�A�̉~�̃T�C�Y�̍X�V
+	//	左コアの円のサイズの更新
 	m_bossPartsCore[left].m_hitCircle.m_radius = HIT_CORE_RADIUS;
 
-	//	�E�R�A�̉~�̓_�̍X�V
+	//	右コアの円の点の更新
 	m_bossPartsCore[right].m_hitCircle.m_centerPoint = m_bossPartsCore[right].m_pos;
 
-	//	���R�A�̉~�̃T�C�Y�̍X�V
+	//	左コアの円のサイズの更新
 	m_bossPartsCore[right].m_hitCircle.m_radius = HIT_CORE_RADIUS;
 
 
 //-----------------------------------------------------------------------------//
 
-	//	���R�A�̒����`�̒��_�P�̍X�V
+	//	左コアの長方形の頂点１の更新
 	m_coreHitRect[left].m_vertexTop =
 	VGet(
 		m_bossPartsSideBarrel[left].m_pos.x + HIT_CORE_RADIUS,
@@ -1329,7 +1329,7 @@ void LastBoss::_UpdateHitCore()
 		m_bossPartsSideBarrel[left].m_pos.z + HIT_CORE_RADIUS
 	);
 
-	//	���R�A�̒����`�̒��_�Q�̍X�V
+	//	左コアの長方形の頂点２の更新
 	m_coreHitRect[left].m_vertexUnder = 
 	VGet(
 		m_bossPartsSideBarrel[left].m_pos.x - HIT_CORE_RADIUS,
@@ -1337,7 +1337,7 @@ void LastBoss::_UpdateHitCore()
 		m_bossPartsSideBarrel[left].m_pos.z - HIT_CORE_RADIUS
 	);
 
-	//	�E�R�A�̒����`�̒��_�P�̍X�V
+	//	右コアの長方形の頂点１の更新
 	m_coreHitRect[right].m_vertexTop = 
 	VGet(
 		m_bossPartsSideBarrel[right].m_pos.x + HIT_CORE_RADIUS,
@@ -1345,7 +1345,7 @@ void LastBoss::_UpdateHitCore()
 		m_bossPartsSideBarrel[right].m_pos.z + HIT_CORE_RADIUS
 	);
 
-	//	�E�R�A�̒����`�̒��_�Q�̍X�V
+	//	右コアの長方形の頂点２の更新
 	m_coreHitRect[right].m_vertexUnder = 
 	VGet(
 		m_bossPartsSideBarrel[right].m_pos.x - HIT_CORE_RADIUS,
@@ -1355,14 +1355,14 @@ void LastBoss::_UpdateHitCore()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�T�C�h�o�����̓����蔻��p�̍X�V
+//	@brief	サイドバレルの当たり判定用の更新
 //-----------------------------------------------------------------------------
 void LastBoss::_UpdateHitSideBarrel()
 {
 	const int left = BOSS_PARTS_INFO::BOSS_PARTS_LEFT;
 	const int right = BOSS_PARTS_INFO::BOSS_PARTS_RIGHT;
 
-	//	���T�C�h�o�����̉~�̓_�̍X�V
+	//	左サイドバレルの円の点の更新
 	m_bossPartsSideBarrel[left].m_hitCircle.m_centerPoint =
 	VGet(
 		m_bossPartsSideBarrel[left].m_pos.x + ADJUSTMENT_SIDE_BARREL_POS.x,
@@ -1370,10 +1370,10 @@ void LastBoss::_UpdateHitSideBarrel()
 		m_bossPartsSideBarrel[left].m_pos.z
 	);
 
-	//	���T�C�h�o�����̉~�̃T�C�Y�̍X�V
+	//	左サイドバレルの円のサイズの更新
 	m_bossPartsSideBarrel[left].m_hitCircle.m_radius = HIT_SIDE_BARREL_RADIUS;
 
-	//	�E�T�C�h�o�����̉~�̓_�̍X�V
+	//	右サイドバレルの円の点の更新
 	m_bossPartsSideBarrel[right].m_hitCircle.m_centerPoint =
 	VGet(
 		m_bossPartsSideBarrel[right].m_pos.x + ADJUSTMENT_SIDE_BARREL_POS.x,
@@ -1381,12 +1381,12 @@ void LastBoss::_UpdateHitSideBarrel()
 		m_bossPartsSideBarrel[right].m_pos.z
 	);
 
-	//	���T�C�h�o�����̉~�̃T�C�Y�̍X�V
+	//	左サイドバレルの円のサイズの更新
 	m_bossPartsSideBarrel[right].m_hitCircle.m_radius = HIT_SIDE_BARREL_RADIUS;
 
 //-----------------------------------------------------------------------------//
 
-	//	���T�C�h�o�����̒����`�̒��_�P�̍X�V
+	//	左サイドバレルの長方形の頂点１の更新
 	m_sideBarrelHitRect[left].m_vertexTop =
 	VGet(
 		m_bossPartsSideBarrel[left].m_pos.x + ADJUSTMENT_SIDE_BARREL_POS.x + HIT_SIDE_BARREL_RADIUS,
@@ -1394,7 +1394,7 @@ void LastBoss::_UpdateHitSideBarrel()
 		m_bossPartsSideBarrel[left].m_pos.z + HIT_SIDE_BARREL_RADIUS
 	);
 
-	//	���T�C�h�o�����̒����`�̒��_�Q�̍X�V
+	//	左サイドバレルの長方形の頂点２の更新
 	m_sideBarrelHitRect[left].m_vertexUnder = 
 	VGet(
 		m_bossPartsSideBarrel[left].m_pos.x + ADJUSTMENT_SIDE_BARREL_POS.x - HIT_SIDE_BARREL_RADIUS,
@@ -1402,7 +1402,7 @@ void LastBoss::_UpdateHitSideBarrel()
 		m_bossPartsSideBarrel[left].m_pos.z - HIT_SIDE_BARREL_RADIUS
 	);
 
-	//	�E�T�C�h�o�����̒����`�̒��_�P�̍X�V
+	//	右サイドバレルの長方形の頂点１の更新
 	m_sideBarrelHitRect[right].m_vertexTop = 
 	VGet(
 		m_bossPartsSideBarrel[right].m_pos.x + ADJUSTMENT_SIDE_BARREL_POS.x + HIT_SIDE_BARREL_RADIUS,
@@ -1410,7 +1410,7 @@ void LastBoss::_UpdateHitSideBarrel()
 		m_bossPartsSideBarrel[right].m_pos.z + HIT_SIDE_BARREL_RADIUS
 	);
 
-	//	�E�T�C�h�o�����̒����`�̒��_�Q�̍X�V
+	//	右サイドバレルの長方形の頂点２の更新
 	m_sideBarrelHitRect[right].m_vertexUnder = 
 	VGet(
 		m_bossPartsSideBarrel[right].m_pos.x + ADJUSTMENT_SIDE_BARREL_POS.x - HIT_SIDE_BARREL_RADIUS,
@@ -1420,14 +1420,14 @@ void LastBoss::_UpdateHitSideBarrel()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���[�U�[�̓����蔻��p�̍X�V
+//	@brief	レーザーの当たり判定用の更新
 //-----------------------------------------------------------------------------
 void LastBoss::_UpdateHitLaser()
 {
 	const int left = BOSS_PARTS_INFO::BOSS_PARTS_LEFT;
 	const int right = BOSS_PARTS_INFO::BOSS_PARTS_RIGHT;
 
-	//	�����[�U�[�̒����`�̒��_�P�̍X�V
+	//	左レーザーの長方形の頂点１の更新
 	m_laserHitRect[left].m_vertexTop =
 	VGet(
 		m_bossPartsArm[left].m_pos.x + ADJUSTMENT_LASER_POS.x + m_laser.m_vertexTop.x,
@@ -1435,7 +1435,7 @@ void LastBoss::_UpdateHitLaser()
 		m_bossPartsArm[left].m_pos.z - ADJUSTMENT_LASER_POS.z
 	);
 
-	//	�����[�U�[�̒����`�̒��_�Q�̍X�V
+	//	左レーザーの長方形の頂点２の更新
 	m_laserHitRect[left].m_vertexUnder =
 	VGet(
 		m_bossPartsArm[left].m_pos.x + ADJUSTMENT_LASER_POS.x + m_laser.m_vertexUnder.x,
@@ -1443,7 +1443,7 @@ void LastBoss::_UpdateHitLaser()
 		m_bossPartsArm[left].m_pos.z + ADJUSTMENT_LASER_POS.z
 	);
 
-	//	�E���[�U�[�̒����`�̒��_�P�̍X�V
+	//	右レーザーの長方形の頂点１の更新
 	m_laserHitRect[right].m_vertexTop =
 	VGet(
 		m_bossPartsArm[right].m_pos.x + ADJUSTMENT_LASER_POS.x + m_laser.m_vertexTop.x,
@@ -1451,7 +1451,7 @@ void LastBoss::_UpdateHitLaser()
 		m_bossPartsArm[right].m_pos.z - ADJUSTMENT_LASER_POS.z
 	);
 
-	//	�E���[�U�[�̒����`�̒��_�Q�̍X�V
+	//	右レーザーの長方形の頂点２の更新
 	m_laserHitRect[right].m_vertexUnder =
 	VGet(
 		m_bossPartsArm[right].m_pos.x + ADJUSTMENT_LASER_POS.x + m_laser.m_vertexUnder.x,
@@ -1461,23 +1461,23 @@ void LastBoss::_UpdateHitLaser()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief		�{�f�B�[�̓����蔻��p�̍X�V
+//	@brief		ボディーの当たり判定用の更新
 //-----------------------------------------------------------------------------
 void LastBoss::_UpdateHitBody()
 {
-	//	�{�f�B�[�̉~�̓_�̍X�V
+	//	ボディーの円の点の更新
 	m_hitCircle.m_centerPoint = VGet(m_pos.x + ADJUSTMENT_BODY_POS.x, m_pos.y, m_pos.z);
 	
-	//	�{�f�B�[�̉~�̃T�C�Y�̍X�V
+	//	ボディーの円のサイズの更新
 	m_hitCircle.m_radius = HIT_BODY_RADIUS;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�Z���^�[�o�����̓����蔻��p�̍X�V
+//	@brief	センターバレルの当たり判定用の更新
 //-----------------------------------------------------------------------------
 void LastBoss::_UpdateHitCenterBarrel()
 {
-	//	�Z���^�[�o�����̒����`�̒��_�P�̍X�V
+	//	センターバレルの長方形の頂点１の更新
 	m_centerBarrel.m_vertexTop =
 	VGet(
 		m_pos.x - ADJUSTMENT_CENTER_BARRE_POS.x - CENTER_BARRE_CORRECTION.x,
@@ -1485,7 +1485,7 @@ void LastBoss::_UpdateHitCenterBarrel()
 		m_pos.z - ADJUSTMENT_CENTER_BARRE_POS.z
 	);
 
-	//	�Z���^�[�o�����̒����`�̒��_�Q�̍X�V
+	//	センターバレルの長方形の頂点２の更新
 	m_centerBarrel.m_vertexUnder =
 	VGet(
 		m_pos.x + ADJUSTMENT_CENTER_BARRE_POS.x - CENTER_BARRE_CORRECTION.x,
@@ -1495,17 +1495,17 @@ void LastBoss::_UpdateHitCenterBarrel()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���΍��W�����蓖�Ă�
+//	@brief	相対座標を割り当てる
 //-----------------------------------------------------------------------------
 void LastBoss::_AllocationRelativeCoordinates()
 {
-	//	�E�o�����������Ă���Ȃ�A
-	//	�{�X�ɂ�������
+	//	右バレルが生きているなら、
+	//	ボスにくっつける
 	if (m_isRightSideBarrelAlive) { m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_pos = _AskRelativeCoordinates(m_pos, RELATIVE_CORE_POS, BOSS_PARTS_INFO::BOSS_PARTS_RIGHT); }
 	else { m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_RIGHT].m_pos = _AskRelativeCoordinates(m_pos, OPEN_RELATIVE_CORE_POS, BOSS_PARTS_INFO::BOSS_PARTS_RIGHT); }
 
-	//	���o�����������Ă���Ȃ�A
-	//	�{�X�ɂ�������
+	//	左バレルが生きているなら、
+	//	ボスにくっつける
 	if (m_isLeftSideBarrelAlive) { m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_pos = _AskRelativeCoordinates(m_pos, RELATIVE_CORE_POS, BOSS_PARTS_INFO::BOSS_PARTS_LEFT); }
 	else { m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_LEFT].m_pos = _AskRelativeCoordinates(m_pos, OPEN_RELATIVE_CORE_POS, BOSS_PARTS_INFO::BOSS_PARTS_LEFT); }
 
@@ -1521,7 +1521,7 @@ void LastBoss::_AllocationRelativeCoordinates()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���΍��W�����蓖�Ă�
+//	@brief	相対座標を割り当てる
 //-----------------------------------------------------------------------------
 VECTOR LastBoss::_AskRelativeCoordinates(const VECTOR _basePos, const VECTOR _relativePos, const BOSS_PARTS_INFO _bossPartsInfo)
 {
@@ -1529,7 +1529,7 @@ VECTOR LastBoss::_AskRelativeCoordinates(const VECTOR _basePos, const VECTOR _re
 
 	tmpPos = VAdd(_basePos, _relativePos);
 
-	//	�p�[�c�̈ʒu�����Ȃ炙���̂ݔ��]����
+	//	パーツの位置が左ならｙ軸のみ反転する
 	const bool isLeft = _bossPartsInfo == BOSS_PARTS_INFO::BOSS_PARTS_LEFT;
 	if (isLeft) { tmpPos.y = _basePos.y - _relativePos.y; }
 
@@ -1537,40 +1537,40 @@ VECTOR LastBoss::_AskRelativeCoordinates(const VECTOR _basePos, const VECTOR _re
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	���f���̐F��ύX����
+//	@brief	モデルの色を変更する
 //-----------------------------------------------------------------------------
 void LastBoss::_ChangeModelColor(const int _modelHandle, const int _life, const int _maxLife, const ColorF _normalColor)
 {
 	const int midleLife = _maxLife / 2;
 	const int dangerLife = _maxLife / 5;
 
-	//	���C�t�͒��Ԃ��傫���̂ŁA
-	//	���f���̐F�̓f�t�H���g�F
+	//	ライフは中間より大きいので、
+	//	モデルの色はデフォルト色
 	const bool isNormalColor = _life > midleLife;
 	if(isNormalColor) { MV1SetDifColorScale(_modelHandle, _normalColor.m_color); }
 
-	//	���C�t�͒��ԂȂ̂ŁA
-	//	���f���̐F�����F�ɕϊ�
+	//	ライフは中間なので、
+	//	モデルの色を黄色に変換
 	const bool isLifeMidle = _life > dangerLife && _life <= midleLife;
 	if (isLifeMidle) { MV1SetDifColorScale(_modelHandle, m_lifeMiddleColorF.m_color); }
 
-	//	���C�t�͒��ԂȂ̂ŁA
-	//	���f���̐F��ԐF�ɕϊ�
+	//	ライフは中間なので、
+	//	モデルの色を赤色に変換
 	const bool isLifeDanger = _life > LIFE_ZERO && _life <= dangerLife;
 	if (isLifeDanger) { MV1SetDifColorScale(_modelHandle, m_lifeDangerColorF.m_color); }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�_�ŕ`�揈��
+//	@brief	点滅描画処理
 //-----------------------------------------------------------------------------
 void LastBoss::_FlashingDraw(BossParts& _bossParts)
 {
-	//	�_���[�W���������Ƃ�
+	//	ダメージが入ったとき
 	if (_bossParts.m_isDamage)
 	{
 		m_flashingTime++;
 
-		//	�_��
+		//	点滅
 		const bool isDraw = (m_flashingTime >= 0.0f && m_flashingTime <= 3.0f) ||
 			(m_flashingTime >= 6.0f && m_flashingTime <= 9.0f) ||
 			(m_flashingTime >= 12.0f && m_flashingTime <= 15.0f);
@@ -1586,11 +1586,11 @@ void LastBoss::_FlashingDraw(BossParts& _bossParts)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�ŏI�I�ȉ������
+//	@brief	最終的な解放処理
 //-----------------------------------------------------------------------------
 void LastBoss::_FinalRelease()
 {
-	//	���f���̃A�����[�h
+	//	モデルのアンロード
 	MV1DeleteModel(m_modelHandle);
 
 	for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)
@@ -1600,7 +1600,7 @@ void LastBoss::_FinalRelease()
 		MV1DeleteModel(m_bossPartsCore[i].m_modelHandle);
 	}
 
-	//	�G�t�F�N�g�̍폜
+	//	エフェクトの削除
 	CommonSafe::Delete(m_effectHit);
 
 	for (int i = 0; i < BOSS_PARTS_INFO::BOSS_PARTS_NUM; i++)

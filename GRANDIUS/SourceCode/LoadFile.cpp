@@ -1,19 +1,19 @@
-
+ï»¿
 //=============================================================================
 //	@file	LoadFile.cpp
-//	@brief	ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@_date	2018/10/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "LoadFile.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 LoadFile::LoadFile()
 {
@@ -21,51 +21,51 @@ LoadFile::LoadFile()
 	{
 		for (int j = 0; j < CommonConstant::MAX_CSV_NUM; j++)
 		{
-			//	“ñŸŒ³”z—ñ‚Ì‰Šú‰»
+			//	äºŒæ¬¡å…ƒé…åˆ—ã®åˆæœŸåŒ–
 			m_twoDimensionsData[i][j] = 0;
 		}
 
-		//	”z—ñ‚Ì‰Šú‰»
+		//	é…åˆ—ã®åˆæœŸåŒ–
 		m_data[i] = 0;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 LoadFile::~LoadFile()
 {
-	// ˆ—‚È‚µ
+	// å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	CSVƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+//	@brief	CSVãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::LoadCsvTwoDimensionsFile(const char* _fileName)
 {
-	//	ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	std::ifstream ifs(_fileName);
-	if (!ifs) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!ifs) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	—ñ‚ğ•Û‘¶‚·‚é
+	//	åˆ—ã‚’ä¿å­˜ã™ã‚‹
 	std::string line;
 
-	//	s‚ğ•Û‘¶‚·‚é
+	//	è¡Œã‚’ä¿å­˜ã™ã‚‹
 	int row = 0;
 
-	//	ƒtƒ@ƒCƒ‹‚ÌÅŒã‚Ü‚Åƒ‹[ƒv
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¾Œã¾ã§ãƒ«ãƒ¼ãƒ—
 	while (getline(ifs, line))
 	{
-		//	ƒJƒ“ƒ}‹æØ‚è‚Å“Ç‚İ‚Ş
+		//	ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã§èª­ã¿è¾¼ã‚€
 		std::vector<std::string> strvec = _Split(line, ',');
 
-		//	—ñ‚ÌÅŒã‚Ü‚Åƒ‹[ƒv
+		//	åˆ—ã®æœ€å¾Œã¾ã§ãƒ«ãƒ¼ãƒ—
 		for (int col = 0; col < (int)strvec.size(); col++)
 		{
 			m_twoDimensionsData[row][col] = stoi(strvec.at(col));
 		}
 
-		//	s‚ğ‘‚â‚·
+		//	è¡Œã‚’å¢—ã‚„ã™
 		row++;
 	}
 
@@ -73,24 +73,24 @@ bool LoadFile::LoadCsvTwoDimensionsFile(const char* _fileName)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+//	@brief	ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::LoadCsvFile(const char* _fileName)
 {
-	//	ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	std::ifstream ifs(_fileName);
-	if (!ifs) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!ifs) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	—ñ‚ğ•Û‘¶‚·‚é
+	//	åˆ—ã‚’ä¿å­˜ã™ã‚‹
 	std::string line;
 
-	//	ƒtƒ@ƒCƒ‹‚ÌÅŒã‚Ü‚Åƒ‹[ƒv
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã®æœ€å¾Œã¾ã§ãƒ«ãƒ¼ãƒ—
 	while (getline(ifs, line))
 	{
-		//	ƒJƒ“ƒ}‹æØ‚è‚Å“Ç‚İ‚Ş
+		//	ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã§èª­ã¿è¾¼ã‚€
 		std::vector<std::string> strvec = _Split(line, ',');
 
-		//	—ñ‚ÌÅŒã‚Ü‚Åƒ‹[ƒv
+		//	åˆ—ã®æœ€å¾Œã¾ã§ãƒ«ãƒ¼ãƒ—
 		for (int row = 0; row < (int)strvec.size(); row++)
 		{
 			m_data[row] = stoi(strvec.at(row));
@@ -101,7 +101,7 @@ bool LoadFile::LoadCsvFile(const char* _fileName)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“à—e‚Ìæ“¾
+//	@brief	å†…å®¹ã®å–å¾—
 //-----------------------------------------------------------------------------
 int LoadFile::GetCsvFile(const int _row, const int _col)
 {
@@ -109,7 +109,7 @@ int LoadFile::GetCsvFile(const int _row, const int _col)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“à—e‚Ìæ“¾
+//	@brief	å†…å®¹ã®å–å¾—
 //-----------------------------------------------------------------------------
 int LoadFile::GetCsvFile(const int _row)
 {
@@ -117,46 +117,46 @@ int LoadFile::GetCsvFile(const int _row)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	CSVƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ
+//	@brief	CSVãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::WritingCsvFile(const char* _fileName, const float _writingVal)
 {
-	//	ƒtƒ@ƒCƒ‹‚É’Ç‰Á‚Å‘‚«‚Ş
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã«è¿½åŠ ã§æ›¸ãè¾¼ã‚€
 	std::ofstream fout(_fileName);
-	if (!fout) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!fout) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	ƒJƒ“ƒ}‹æØ‚è‚Å‘‚«‚Ş
+	//	ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã§æ›¸ãè¾¼ã‚€
 	fout << _writingVal << "," << std::flush;
 	return true;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	CSVƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ
+//	@brief	CSVãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::WritingCsvFile(const char* _fileName, const int _writingVal)
 {
-	//	ƒtƒ@ƒCƒ‹‚É’Ç‰Á‚Å‘‚«‚Ş
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã«è¿½åŠ ã§æ›¸ãè¾¼ã‚€
 	std::ofstream fout(_fileName);
-	if (!fout) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!fout) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	ƒJƒ“ƒ}‹æØ‚è‚Å‘‚«‚Ş
+	//	ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã§æ›¸ãè¾¼ã‚€
 	fout << _writingVal << "," << std::flush;
 	return true;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	CSVƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ
+//	@brief	CSVãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::WritingCsvFile(const char* _fileName, const int _size, int* _writingVal)
 {
-	//	ƒtƒ@ƒCƒ‹‚É’Ç‰Á‚Å‘‚«‚Ş
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã«è¿½åŠ ã§æ›¸ãè¾¼ã‚€
 	std::ofstream fout(_fileName);
-	if (!fout) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!fout) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	‘‚«‚İ
+	//	æ›¸ãè¾¼ã¿
 	for (int i = 0; i < _size; i++)
 	{
-		//	ƒJƒ“ƒ}‹æØ‚è‚Å‘‚«‚Ş
+		//	ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã§æ›¸ãè¾¼ã‚€
 		fout << _writingVal[i] << "," << std::flush;
 	}
 
@@ -164,23 +164,23 @@ bool LoadFile::WritingCsvFile(const char* _fileName, const int _size, int* _writ
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆês“Ç‚İ‚İ
+//	@brief	ä¸€è¡Œèª­ã¿è¾¼ã¿
 //-----------------------------------------------------------------------------
 std::vector<std::string> LoadFile::_Split(std::string& _input, char _split)
 {
-	//	—ñ‚Ì•Û‘¶
+	//	åˆ—ã®ä¿å­˜
 	std::istringstream stream(_input);
 
-	//	ˆê•¶š‚¸‚Â•Û‘¶
+	//	ä¸€æ–‡å­—ãšã¤ä¿å­˜
 	std::string field;
 
-	//	•¶š•Û‘¶
+	//	æ–‡å­—ä¿å­˜
 	std::vector<std::string> result;
 
-	//	•¶š‚ğÅŒã‚Ü‚Å“Ç‚İ‚Ş
+	//	æ–‡å­—ã‚’æœ€å¾Œã¾ã§èª­ã¿è¾¼ã‚€
 	while (getline(stream, field, _split))
 	{
-		//	•¶š‚ğŒã‚ë‚É’Ç‰Á‚µ‚Ä‚¢‚­
+		//	æ–‡å­—ã‚’å¾Œã‚ã«è¿½åŠ ã—ã¦ã„ã
 		result.push_back(field);
 	}
 
@@ -188,22 +188,22 @@ std::vector<std::string> LoadFile::_Split(std::string& _input, char _split)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘‚«‚İ
+//	@brief	æ›¸ãè¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::_Load(const char* _fileName, std::vector<std::string>& _strvec, int* _date)
 {
-	//	ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	std::ifstream ifs(_fileName);
-	if (!ifs) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!ifs) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	—ñ‚ğ•Û‘¶‚·‚é
+	//	åˆ—ã‚’ä¿å­˜ã™ã‚‹
 	std::string line;
 
-	//	ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 	getline(ifs, line);
 	_strvec = _Split(line, ',');
 
-	//	ÅŒã‚Ü‚Åƒ‹[ƒv
+	//	æœ€å¾Œã¾ã§ãƒ«ãƒ¼ãƒ—
 	for (int i = 0; i < (int)_strvec.size(); i++)
 	{
 		_date[i] = std::stoi(_strvec.at(i));
@@ -213,22 +213,22 @@ bool LoadFile::_Load(const char* _fileName, std::vector<std::string>& _strvec, i
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘‚«‚İ
+//	@brief	æ›¸ãè¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::_Load(const char* _fileName, std::vector<std::string>& _strvec, float* _date)
 {
-	//	ƒtƒ@ƒCƒ‹‚ğŠJ‚­
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã‚’é–‹ã
 	std::ifstream ifs(_fileName);
-	if (!ifs) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!ifs) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	—ñ‚ğ•Û‘¶‚·‚é
+	//	åˆ—ã‚’ä¿å­˜ã™ã‚‹
 	std::string line;
 
-	//	ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 	getline(ifs, line);
 	_strvec = _Split(line, ',');
 
-	//	ÅŒã‚Ü‚Åƒ‹[ƒv
+	//	æœ€å¾Œã¾ã§ãƒ«ãƒ¼ãƒ—
 	for (int i = 0; i < (int)_strvec.size(); i++)
 	{
 		if (i > 10) { break; }
@@ -240,18 +240,18 @@ bool LoadFile::_Load(const char* _fileName, std::vector<std::string>& _strvec, f
 
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ\[ƒg
+//	@brief	ã‚½ãƒ¼ãƒˆ
 //-----------------------------------------------------------------------------
 void LoadFile::_Sort(std::vector<std::string>& _strvec, const float _writingVal, int* _date)
 {
-	//	‘‚«‚ñ‚Å‚ ‚éƒf[ƒ^‚Æ¡‰ñ‚Ìƒf[ƒ^‚Ì”äŠr
+	//	æ›¸ãè¾¼ã‚“ã§ã‚ã‚‹ãƒ‡ãƒ¼ã‚¿ã¨ä»Šå›ã®ãƒ‡ãƒ¼ã‚¿ã®æ¯”è¼ƒ
 	int val = (int)_writingVal;
 	for (int i = 0; i < (int)_strvec.size(); i++)
 	{
-		//	“¾“_‚ª‚È‚¢‚Æ‚«‚ÍAˆ—‚µ‚È‚¢
+		//	å¾—ç‚¹ãŒãªã„ã¨ãã¯ã€å‡¦ç†ã—ãªã„
 		if (val <= 0.0f) { break; }
 
-		//	ƒf[ƒ^‚Ì“ü‚ê‘Ö‚¦
+		//	ãƒ‡ãƒ¼ã‚¿ã®å…¥ã‚Œæ›¿ãˆ
 		if (val >= _date[i])
 		{
 			int tmp = _date[i];
@@ -262,18 +262,18 @@ void LoadFile::_Sort(std::vector<std::string>& _strvec, const float _writingVal,
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ\[ƒg
+//	@brief	ã‚½ãƒ¼ãƒˆ
 //-----------------------------------------------------------------------------
 void LoadFile::_Sort(std::vector<std::string>& _strvec, const float _writingVal, float* _date)
 {
-	//	‘‚«‚ñ‚Å‚ ‚éƒf[ƒ^‚Æ¡‰ñ‚Ìƒf[ƒ^‚Ì”äŠr
+	//	æ›¸ãè¾¼ã‚“ã§ã‚ã‚‹ãƒ‡ãƒ¼ã‚¿ã¨ä»Šå›ã®ãƒ‡ãƒ¼ã‚¿ã®æ¯”è¼ƒ
 	float val = _writingVal;
 	for (int i = 0; i < (int)_strvec.size(); i++)
 	{
-		//	“¾“_‚ª‚È‚¢‚Æ‚«‚ÍAˆ—‚µ‚È‚¢
+		//	å¾—ç‚¹ãŒãªã„ã¨ãã¯ã€å‡¦ç†ã—ãªã„
 		if (val <= 0.0f) { break; }
 
-		//	ƒf[ƒ^‚Ì“ü‚ê‘Ö‚¦
+		//	ãƒ‡ãƒ¼ã‚¿ã®å…¥ã‚Œæ›¿ãˆ
 		if (val >= _date[i])
 		{
 			float tmp = _date[i];
@@ -284,18 +284,18 @@ void LoadFile::_Sort(std::vector<std::string>& _strvec, const float _writingVal,
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘‚«‚İ
+//	@brief	æ›¸ãè¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::_ToWrite(const char* _fileName, std::vector<std::string>& _strvec, int* _date)
 {
-	//	ƒtƒ@ƒCƒ‹‚É’Ç‰Á‚Å‘‚«‚Ş
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã«è¿½åŠ ã§æ›¸ãè¾¼ã‚€
 	std::ofstream fout(_fileName);
-	if (!fout) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!fout) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	‘‚«‚İ
+	//	æ›¸ãè¾¼ã¿
 	for (int i = 0; i < (int)_strvec.size(); i++)
 	{
-		//	ƒJƒ“ƒ}‹æØ‚è‚Å‘‚«‚Ş
+		//	ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã§æ›¸ãè¾¼ã‚€
 		fout << _date[i] << "," << std::flush;
 	}
 
@@ -303,18 +303,18 @@ bool LoadFile::_ToWrite(const char* _fileName, std::vector<std::string>& _strvec
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘‚«‚İ
+//	@brief	æ›¸ãè¾¼ã¿
 //-----------------------------------------------------------------------------
 bool LoadFile::_ToWrite(const char * _fileName, std::vector<std::string>& _strvec, float* _date)
 {
-	//	ƒtƒ@ƒCƒ‹‚É’Ç‰Á‚Å‘‚«‚Ş
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã«è¿½åŠ ã§æ›¸ãè¾¼ã‚€
 	std::ofstream fout(_fileName);
-	if (!fout) { CommonDebug::Log("ƒtƒ@ƒCƒ‹‚ªŠJ‚¯‚Ü‚¹‚ñ"); return false; }
+	if (!fout) { CommonDebug::Log("ãƒ•ã‚¡ã‚¤ãƒ«ãŒé–‹ã‘ã¾ã›ã‚“"); return false; }
 
-	//	‘‚«‚İ
+	//	æ›¸ãè¾¼ã¿
 	for (int i = 0; i < (int)_strvec.size(); i++)
 	{
-		//	ƒJƒ“ƒ}‹æØ‚è‚Å‘‚«‚Ş
+		//	ã‚«ãƒ³ãƒåŒºåˆ‡ã‚Šã§æ›¸ãè¾¼ã‚€
 		fout << _date[i] << "," << std::flush;
 	}
 

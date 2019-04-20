@@ -1,125 +1,125 @@
-
+ï»¿
 //=============================================================================
 //	@file	ShotManager.h
-//	@brief	ƒVƒ‡ƒbƒgƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/12
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 #include <list>
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class Shot;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒVƒ‡ƒbƒgƒ}ƒl[ƒWƒƒ[
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
 //-----------------------------------------------------------------------------
 class ShotManager final
 {
 public:
 
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-	//	ƒVƒ‡ƒbƒg‚Ìí—Ş
+	//	ã‚·ãƒ§ãƒƒãƒˆã®ç¨®é¡
 	enum SHOT_KIND
 	{
 		PLAYER_SHOT,
 		ENEMY_SHOT,
 	};
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	ShotManager();
 	~ShotManager();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create();
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update();
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
-	//	ƒŠƒXƒg‚É“o˜^
+	//	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 	void RegisterOnList(const SHOT_KIND _shotKind, const VECTOR _startPos, const VECTOR _startDir, const float _speed, SoundEffect& _soundEffect);
 
-	//	ƒŠƒXƒg‚É“o˜^
+	//	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 	void RegisterOnList(const SHOT_KIND _shotKind, const VECTOR _startPos, const VECTOR _startDir, const float _speed);
 
-	//	ƒŠƒXƒg‚©‚çíœ
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 	void RemoveFromList(const SHOT_KIND _shotKind, const Shot* _shotPtr);
 
 //==================== getter =====================//
 
-	//	g—pƒŠƒXƒg‚ÌƒTƒCƒY‚Ì getter
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã®ã‚µã‚¤ã‚ºã® getter
 	const int GetListSize(const SHOT_KIND _shotKind) const;
 
-	//	ƒVƒ‡ƒbƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ì getter
+	//	ã‚·ãƒ§ãƒƒãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿ã® getter
 	Shot* GetShotPtr(const SHOT_KIND _shotKind, const int _num);
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	Shot* _GetShotPtr(std::list<Shot*>& _useList, const int _num);
 	
-	//	ƒŠƒXƒg‚Ì“o˜^
+	//	ãƒªã‚¹ãƒˆã®ç™»éŒ²
 	void _RegisterOnList(std::list<Shot*>& _useList, std::list<Shot*>& _unusedList, const VECTOR _startPos, const VECTOR _startDir, const float _speed, SoundEffect& _soundEffect);
 
-	//	ƒŠƒXƒg‚Ì“o˜^
+	//	ãƒªã‚¹ãƒˆã®ç™»éŒ²
 	void _RegisterOnList(std::list<Shot*>& _useList, std::list<Shot*>& _unusedList, const VECTOR _startPos, const VECTOR _startDir, const float _speed);
 
-	//	ƒŠƒXƒg‚ÌXV
+	//	ãƒªã‚¹ãƒˆã®æ›´æ–°
 	void _UpdateList(const SHOT_KIND _shotKind);
 	void _UpdateList(std::list<Shot*>& _useList);
 
-	//	ƒŠƒXƒg‚Ì•`‰æ
+	//	ãƒªã‚¹ãƒˆã®æç”»
 	void _DrawList(const SHOT_KIND _shotKind);
 	void _DrawList(std::list<Shot*>& _useList);
 
-	//	ƒŠƒXƒg‚©‚çíœ
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 	void _RemoveFromList(const SHOT_KIND _shotKind);
 	void _RemoveFromList(std::list<Shot*>& _useList, std::list<Shot*>& _unusedList);
 	void _RemoveFromList(std::list<Shot*>& _useList, std::list<Shot*>& _unusedList, const Shot* _shotPtr);
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	Shot*						m_pPlayerShot[CommonConstant::MAX_SHOT_NUM];	//	ƒVƒ‡ƒbƒg
-	Shot*						m_pEnemyShot[CommonConstant::MAX_SHOT_NUM];		//	ƒVƒ‡ƒbƒg
-	std::list<Shot*>			m_usePlayerShotList;							//	ƒvƒŒƒCƒ„[—p‚Ìg—pƒVƒ‡ƒbƒgƒŠƒXƒg
-	std::list<Shot*>			m_useEnemyShotList;								//	ƒGƒlƒ~[—p‚Ìg—pƒVƒ‡ƒbƒgƒŠƒXƒg
-	std::list<Shot*>			m_unusedPlayerShotList;							//	–¢g—pƒVƒ‡ƒbƒgƒŠƒXƒg
-	std::list<Shot*>			m_unusedEnemyShotList;							//	–¢g—pƒVƒ‡ƒbƒgƒŠƒXƒg
-	int							m_sourceEnemyShotModelHandle;					//	‘å–{‚ÌƒGƒlƒ~[’e‚Ìƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
-	int							m_sourcePlayerShotModelHandle;					//	‘å–{‚ÌƒvƒŒƒCƒ„[’e‚Ìƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
+	Shot*						m_pPlayerShot[CommonConstant::MAX_SHOT_NUM];	//	ã‚·ãƒ§ãƒƒãƒˆ
+	Shot*						m_pEnemyShot[CommonConstant::MAX_SHOT_NUM];		//	ã‚·ãƒ§ãƒƒãƒˆ
+	std::list<Shot*>			m_usePlayerShotList;							//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç”¨ã®ä½¿ç”¨ã‚·ãƒ§ãƒƒãƒˆãƒªã‚¹ãƒˆ
+	std::list<Shot*>			m_useEnemyShotList;								//	ã‚¨ãƒãƒŸãƒ¼ç”¨ã®ä½¿ç”¨ã‚·ãƒ§ãƒƒãƒˆãƒªã‚¹ãƒˆ
+	std::list<Shot*>			m_unusedPlayerShotList;							//	æœªä½¿ç”¨ã‚·ãƒ§ãƒƒãƒˆãƒªã‚¹ãƒˆ
+	std::list<Shot*>			m_unusedEnemyShotList;							//	æœªä½¿ç”¨ã‚·ãƒ§ãƒƒãƒˆãƒªã‚¹ãƒˆ
+	int							m_sourceEnemyShotModelHandle;					//	å¤§æœ¬ã®ã‚¨ãƒãƒŸãƒ¼å¼¾ã®ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«
+	int							m_sourcePlayerShotModelHandle;					//	å¤§æœ¬ã®ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¼¾ã®ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float MAX_X_POS;		//	XÀ•W‚ÌÅ‘å
-	static const float MIN_X_POS;		//	XÀ•W‚ÌÅ¬
-	static const float MAX_Y_POS;		//	YÀ•W‚ÌÅ‘å
-	static const float MIN_Y_POS;		//	YÀ•W‚ÌÅ¬
+	static const float MAX_X_POS;		//	Xåº§æ¨™ã®æœ€å¤§
+	static const float MIN_X_POS;		//	Xåº§æ¨™ã®æœ€å°
+	static const float MAX_Y_POS;		//	Yåº§æ¨™ã®æœ€å¤§
+	static const float MIN_Y_POS;		//	Yåº§æ¨™ã®æœ€å°
 
 };

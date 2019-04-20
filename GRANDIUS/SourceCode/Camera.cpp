@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	Camera.cpp
-//	@brief	ƒJƒƒ‰
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚«ãƒ¡ãƒ©
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/29
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Camera.h"
 #include "Common.h"
@@ -15,26 +15,26 @@
 #include "PlayerBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float Camera::V_ANGLE_SPEED_MOUSE = 0.08f;		// ‚’¼Šp“x‚Ì‰ñ“]‘¬“x
-const float Camera::H_ANGLE_SPEED_MOUSE = 0.08f;		// …•½Šp“x‚Ì‰ñ“]‘¬“x
-const float Camera::V_ANGLE_SPEED_PAD = 1.2f;			// ‚’¼Šp“x‚Ì‰ñ“]‘¬“x
-const float Camera::H_ANGLE_SPEED_PAD = 1.5f;			// …•½Šp“x‚Ì‰ñ“]‘¬“x
-const int	Camera::MAX_H_ANGLE = 10;					// ‚’¼Šp“x‚ÌÅ‘å
-const int	Camera::MIN_H_ANGLE = -10;					// ‚’¼Šp“x‚ÌÅ¬
-const int	Camera::MAX_V_ANGLE = 20;					// …•½Šp“x‚ÌÅ‘å
-const int	Camera::MIN_V_ANGLE = -20;					// …•½Šp“x‚ÌÅ¬
-const float Camera::LERP_SPEED = 0.5f;					//	üŒ`•ÛŠÇ‚Ì‘¬“x
-const float Camera::HEIGHT_LENGTH = 60.0f;				//	‚‚³‚Ì’·‚³
-const float Camera::DEPTH_LENGTH = 100.0f;				//	‰œs‚«‚Ì’·‚³
+const float Camera::V_ANGLE_SPEED_MOUSE = 0.08f;		// å‚ç›´è§’åº¦ã®å›è»¢é€Ÿåº¦
+const float Camera::H_ANGLE_SPEED_MOUSE = 0.08f;		// æ°´å¹³è§’åº¦ã®å›è»¢é€Ÿåº¦
+const float Camera::V_ANGLE_SPEED_PAD = 1.2f;			// å‚ç›´è§’åº¦ã®å›è»¢é€Ÿåº¦
+const float Camera::H_ANGLE_SPEED_PAD = 1.5f;			// æ°´å¹³è§’åº¦ã®å›è»¢é€Ÿåº¦
+const int	Camera::MAX_H_ANGLE = 10;					// å‚ç›´è§’åº¦ã®æœ€å¤§
+const int	Camera::MIN_H_ANGLE = -10;					// å‚ç›´è§’åº¦ã®æœ€å°
+const int	Camera::MAX_V_ANGLE = 20;					// æ°´å¹³è§’åº¦ã®æœ€å¤§
+const int	Camera::MIN_V_ANGLE = -20;					// æ°´å¹³è§’åº¦ã®æœ€å°
+const float Camera::LERP_SPEED = 0.5f;					//	ç·šå½¢ä¿ç®¡ã®é€Ÿåº¦
+const float Camera::HEIGHT_LENGTH = 60.0f;				//	é«˜ã•ã®é•·ã•
+const float Camera::DEPTH_LENGTH = 100.0f;				//	å¥¥è¡Œãã®é•·ã•
 
 //-----------------------------------------------------------------------------
-// @brief  ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+// @brief  ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Camera::Camera()
 {
-	// ‰œs0.1f`1000.0f‚Ü‚Å‚ğƒJƒƒ‰‚Ì•`‰æ”ÍˆÍ‚Æ‚·‚é
+	// å¥¥è¡Œ0.1fï½1000.0fã¾ã§ã‚’ã‚«ãƒ¡ãƒ©ã®æç”»ç¯„å›²ã¨ã™ã‚‹
 	SetCameraNearFar(1.0f, 10000.0f);
 
 	m_pos = CommonConstant::ORIGIN;
@@ -48,19 +48,19 @@ Camera::Camera()
 }
 
 //-----------------------------------------------------------------------------
-// @brief  ƒfƒXƒgƒ‰ƒNƒ^
+// @brief  ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Camera::~Camera()
 {
-	// ˆ—‚È‚µ
+	// å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-// @brief	ƒ^ƒCƒgƒ‹—p‚Ì‰Šúˆ—
+// @brief	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void Camera::InitializeForTitle()
 {
-	//	ƒ^ƒCƒgƒ‹—p‚Ì‰Šú‰»
+	//	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®åˆæœŸåŒ–
 	m_pos = CommonConstant::ORIGIN;
 	m_lookAtPos = CommonConstant::ORIGIN;
 
@@ -71,7 +71,7 @@ void Camera::InitializeForTitle()
 }
 
 //-----------------------------------------------------------------------------
-// @brief	‰Šúˆ—
+// @brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void Camera::Initialize()
 {
@@ -86,113 +86,113 @@ void Camera::Initialize()
 }
 
 //-----------------------------------------------------------------------------
-// @brief	ƒ^ƒCƒgƒ‹—p‚ÌXVˆ—
+// @brief	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Camera::UpdateForTitle(PlayerManager& _playerManager)
 {
 	if (!m_isProduction)
 	{
-		//	ƒ^ƒCƒgƒ‹—p‚Ì’‹“_‚Ìİ’è
+		//	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®æ³¨è¦–ç‚¹ã®è¨­å®š
 		_SetGazingPointForTitle(_playerManager);
 
-		//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+		//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 		VECTOR tmpPos = _PosAccordingToAngle();
 
-		//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+		//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 		VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-		//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+		//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 		m_pos = CommonFunction::Lerp(m_pos, target, LERP_SPEED);
 	}
 
-	//	ƒ^ƒCƒgƒ‹—p‚Ì‰‰o
+	//	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®æ¼”å‡º
 	_ProductionForTitle(_playerManager);
 
-	// ƒJƒƒ‰‚Ìİ’è‚É”½‰f‚·‚é
+	// ã‚«ãƒ¡ãƒ©ã®è¨­å®šã«åæ˜ ã™ã‚‹
 	SetCameraPositionAndTarget_UpVecY(m_pos, m_lookAtPos);
 }
 
 //-----------------------------------------------------------------------------
-// @brief	ƒŠƒUƒ‹ƒg—p‚ÌXVˆ—
+// @brief	ãƒªã‚¶ãƒ«ãƒˆç”¨ã®æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Camera::UpdateForResult(PlayerManager & _playerManager)
 {
-	//	’‹“_‚Ìİ’è
+	//	æ³¨è¦–ç‚¹ã®è¨­å®š
 	_SetGazingPoint();
 
-	//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+	//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 	VECTOR tmpPos = _PosAccordingToAngle();
 
-	//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+	//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 	VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-	//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+	//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 	m_pos = CommonFunction::Lerp(m_pos, target, LERP_SPEED);
 
-	// ƒJƒƒ‰‚Ìİ’è‚É”½‰f‚·‚é
+	// ã‚«ãƒ¡ãƒ©ã®è¨­å®šã«åæ˜ ã™ã‚‹
 	SetCameraPositionAndTarget_UpVecY(m_pos, m_lookAtPos);
 }
 
 //-----------------------------------------------------------------------------
-// @brief	XVˆ—
+// @brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Camera::Update(PlayerManager& _playerManager)
 {
 	if (!m_isProduction)
 	{
-		//	’‹“_‚Ìİ’è
+		//	æ³¨è¦–ç‚¹ã®è¨­å®š
 		_SetGazingPoint();
 
-		//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+		//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 		VECTOR tmpPos = _PosAccordingToAngle();
 
-		//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+		//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 		VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-		//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+		//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 		m_pos = CommonFunction::Lerp(m_pos, target, LERP_SPEED);
 	}
 
-	//	ƒJƒƒ‰‰‰o
+	//	ã‚«ãƒ¡ãƒ©æ¼”å‡º
 	_Production(_playerManager);
 
-	// ƒJƒƒ‰‚Ìİ’è‚É”½‰f‚·‚é
+	// ã‚«ãƒ¡ãƒ©ã®è¨­å®šã«åæ˜ ã™ã‚‹
 	SetCameraPositionAndTarget_UpVecY(m_pos, m_lookAtPos);
 }
 
 //-----------------------------------------------------------------------------
-// @brief	ƒ^ƒCƒgƒ‹—p‚Ì‰‰o
+// @brief	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®æ¼”å‡º
 //-----------------------------------------------------------------------------
 void Camera::_ProductionForTitle(PlayerManager& _playerManager)
 {
 	if (PRODUCTION->GetIsTitleProduction())
 	{
-		//	‰‰oŠJn
+		//	æ¼”å‡ºé–‹å§‹
 		m_isProduction = true;
 	}
 }
 
 //-----------------------------------------------------------------------------
-// @brief	‰‰o
+// @brief	æ¼”å‡º
 //-----------------------------------------------------------------------------
 void Camera::_Production(PlayerManager& _playerManager)
 {
-	//	ƒV[ƒ“‰‰o
+	//	ã‚·ãƒ¼ãƒ³æ¼”å‡º
 	_SceneProduction(_playerManager);
 
-	//	•KE‰‰o
+	//	å¿…æ®ºæ¼”å‡º
 	_SpecialProduction(_playerManager);
 
-	//	ƒNƒŠƒA‰‰o
+	//	ã‚¯ãƒªã‚¢æ¼”å‡º
 	_ClearProduction(_playerManager);
 }
 
 //-----------------------------------------------------------------------------
-// @brief	ƒV[ƒ“‰‰o
+// @brief	ã‚·ãƒ¼ãƒ³æ¼”å‡º
 //-----------------------------------------------------------------------------
 void Camera::_SceneProduction(PlayerManager& _playerManager)
 {
-	//	ƒV[ƒ“•ÏX
+	//	ã‚·ãƒ¼ãƒ³å¤‰æ›´
 	if (PRODUCTION->GetIsSceneProduction())
 	{
 		m_productionTime++;
@@ -210,41 +210,41 @@ void Camera::_SceneProduction(PlayerManager& _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒvƒŒƒCƒ„[‚ÍˆÚ“®’â~
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯ç§»å‹•åœæ­¢
 				player->SetIsStopMove(true);
 				player->SetAngle(VGet(0.0f, 1.4f, 0.0f));
 
-				//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğ‚ğ‰ŠúˆÊ’u‚É‚µ‚ÄA
-				//	‰‰o‚ğ‚·‚é
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’ã‚’åˆæœŸä½ç½®ã«ã—ã¦ã€
+				//	æ¼”å‡ºã‚’ã™ã‚‹
 				VECTOR playerPos = player->GetPos();
 				const float playerLerpSpeed = 0.05f;
 				playerPos = CommonFunction::Lerp(playerPos, player->GetStartPos(), playerLerpSpeed);
 				player->SetPos(playerPos);
 
-				//	‰‰oŠJn
+				//	æ¼”å‡ºé–‹å§‹
 				m_isProduction = true;
 
-				//	“_–Å‚µ‚Ä‚¢‚éê‡A
-				//	•Ï‚È‚Ì‚ÅA“_–Å‚ğÁ‚·
+				//	ç‚¹æ»…ã—ã¦ã„ã‚‹å ´åˆã€
+				//	å¤‰ãªã®ã§ã€ç‚¹æ»…ã‚’æ¶ˆã™
 				player->SetIsInvincible(false);
 
-				//	ƒJƒƒ‰‚Ì‰ñ“]
+				//	ã‚«ãƒ¡ãƒ©ã®å›è»¢
 				const float angleSpeed = 0.2f;
 				m_verticalAngle += angleSpeed;
 
-				//	’‹“_‚ğ‹‚ß‚é
+				//	æ³¨è¦–ç‚¹ã‚’æ±‚ã‚ã‚‹
 				const float cameraLerpSpeed = 0.8f;
 				m_lookAtPos = CommonFunction::Lerp(m_lookAtPos, player->GetPos(), cameraLerpSpeed);
 				m_lookAtPos.y = player->GetPos().y;
 				m_lookAtPos.z = 0.0f;
 
-				//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+				//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 				VECTOR tmpPos = _PosAccordingToAngle();
 
-				//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+				//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 				VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-				//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+				//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 				m_pos = CommonFunction::Lerp(m_pos, target, cameraLerpSpeed);
 			}
 		}
@@ -253,23 +253,23 @@ void Camera::_SceneProduction(PlayerManager& _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒJƒƒ‰‚Ì‰ñ“]
+				//	ã‚«ãƒ¡ãƒ©ã®å›è»¢
 				const float angleSpeed = 3.0f;
 				m_horizontalAngle -= angleSpeed;
 
-				//	’‹“_‚ğ‹‚ß‚é
+				//	æ³¨è¦–ç‚¹ã‚’æ±‚ã‚ã‚‹
 				const float lerpSpeed = 0.2f;
 				m_lookAtPos = CommonFunction::Lerp(m_lookAtPos, player->GetPos(), lerpSpeed);
 				m_lookAtPos.y = player->GetPos().y;
 				m_lookAtPos.z = 0.0f;
 
-				//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+				//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 				VECTOR tmpPos = _PosAccordingToAngle();
 
-				//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+				//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 				VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-				//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+				//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 				m_pos = CommonFunction::Lerp(m_pos, target, lerpSpeed);
 			}
 		}
@@ -278,27 +278,27 @@ void Camera::_SceneProduction(PlayerManager& _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒvƒŒƒCƒ„[‚Ì‰‰oŠJn
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ¼”å‡ºé–‹å§‹
 				player->SetIsSceneProduction(true);
 			}
 		}
 		if (isProduction4)
 		{
-			//	’‹“_‚Ìİ’è
+			//	æ³¨è¦–ç‚¹ã®è¨­å®š
 			_SetGazingPoint();
 
-			//	Šp“x‚Ì‰Šú‰»
+			//	è§’åº¦ã®åˆæœŸåŒ–
 			const float angleSpeed = 0.64f;
 			m_verticalAngle -= angleSpeed;
 			m_horizontalAngle--;
 
-			//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+			//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 			VECTOR tmpPos = _PosAccordingToAngle();
 
-			//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+			//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 			VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-			//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+			//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 			const float lerpSpeed = 0.2f;
 			m_pos = CommonFunction::Lerp(m_pos, target, lerpSpeed);
 
@@ -308,16 +308,16 @@ void Camera::_SceneProduction(PlayerManager& _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒvƒŒƒCƒ„[‚ÍˆÚ“®‰Â”\
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯ç§»å‹•å¯èƒ½
 				player->SetIsStopMove(false);
 
-				//	ƒvƒŒƒCƒ„[‚Ì‰‰oI—¹
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ¼”å‡ºçµ‚äº†
 				player->SetIsSceneProduction(false);
 
-				//	ƒvƒŒƒCƒ„[‚Ì“oê
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ç™»å ´
 				player->SetIsEmerge(true);
 
-				//	‰‰oI—¹
+				//	æ¼”å‡ºçµ‚äº†
 				m_isProduction = false;
 				m_productionTime = 0.0f;
 				m_verticalAngle = 0.0f;
@@ -329,11 +329,11 @@ void Camera::_SceneProduction(PlayerManager& _playerManager)
 }
 
 //-----------------------------------------------------------------------------
-// @brief	•KE‰‰o
+// @brief	å¿…æ®ºæ¼”å‡º
 //-----------------------------------------------------------------------------
 void Camera::_SpecialProduction(PlayerManager& _playerManager)
 {
-	//	•KE
+	//	å¿…æ®ºæ™‚
 	if (PRODUCTION->GetIsSpecialProduction())
 	{
 		m_productionTime++;
@@ -346,38 +346,38 @@ void Camera::_SpecialProduction(PlayerManager& _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒvƒŒƒCƒ„[‚ÍˆÚ“®’â~
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯ç§»å‹•åœæ­¢
 				player->SetIsStopMove(true);
 				player->SetAngle(VGet(0.0f, 1.4f, 0.0f));
 
-				//	ƒJƒƒ‰‚ÌŠp“x‚ğ•ÏX
+				//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’å¤‰æ›´
 				const float horizontalAngleSpeed = 2.0f;
 				const float verticalAngleSpeed = 1.0f;
 				m_horizontalAngle -= horizontalAngleSpeed;
 				m_verticalAngle += verticalAngleSpeed;
 
-				//	’‹“_‚ğ‹‚ß‚é
+				//	æ³¨è¦–ç‚¹ã‚’æ±‚ã‚ã‚‹
 				VECTOR adjustment = VGet(60.0f, 10.0f, 0.0f);
 				VECTOR targetPos = player->GetPos();
 				targetPos.x += adjustment.x;
 				targetPos.y -= adjustment.y;
 				m_lookAtPos = targetPos;
 
-				//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+				//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 				VECTOR tmpPos = _PosAccordingToAngle();
 
-				//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+				//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 				VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-				//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+				//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 				const float lerpSpeed = 0.2f;
 				m_pos = CommonFunction::Lerp(m_pos, target, lerpSpeed);
 
-				//	“_–Å‚µ‚Ä‚¢‚éê‡A
-				//	•Ï‚È‚Ì‚ÅA“_–Å‚ğÁ‚·
+				//	ç‚¹æ»…ã—ã¦ã„ã‚‹å ´åˆã€
+				//	å¤‰ãªã®ã§ã€ç‚¹æ»…ã‚’æ¶ˆã™
 				player->SetIsInvincible(false);
 
-				//	‰‰oŠJn
+				//	æ¼”å‡ºé–‹å§‹
 				m_isProduction = true;
 			};
 
@@ -387,26 +387,26 @@ void Camera::_SpecialProduction(PlayerManager& _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒJƒƒ‰‚ÌŠp“x‚ğ•ÏX‚·‚é
+				//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’å¤‰æ›´ã™ã‚‹
 				const float horizontalAngleSpeed = 2.0f;
 				const float verticalAngleSpeed = 1.0f;
 				m_horizontalAngle += horizontalAngleSpeed;
 				m_verticalAngle -= verticalAngleSpeed;
 
-				//	’‹“_‚ğ‹‚ß‚é
+				//	æ³¨è¦–ç‚¹ã‚’æ±‚ã‚ã‚‹
 				VECTOR adjustment = VGet(60.0f, 10.0f, 0.0f);
 				VECTOR targetPos = player->GetPos();
 				targetPos.x += adjustment.x;
 				targetPos.y -= adjustment.y;
 				m_lookAtPos = targetPos;
 
-				//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+				//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 				VECTOR tmpPos = _PosAccordingToAngle();
 
-				//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+				//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 				VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-				//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+				//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 				const float lerpSpeed = 0.2f;
 				m_pos = CommonFunction::Lerp(m_pos, target, lerpSpeed);
 			};
@@ -416,12 +416,12 @@ void Camera::_SpecialProduction(PlayerManager& _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒvƒŒƒCƒ„[‚ğˆÚ“®‰Â”\‚É‚µA
-				//	­‚µ‚¾‚¯–³“G‚É‚·‚é
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç§»å‹•å¯èƒ½ã«ã—ã€
+				//	å°‘ã—ã ã‘ç„¡æ•µã«ã™ã‚‹
 				player->SetIsStopMove(false);
 				player->SetIsInvincibleAfterLaser(true);
 
-				//	‰‰oI—¹
+				//	æ¼”å‡ºçµ‚äº†
 				m_isProduction = false;
 				m_productionTime = 0.0f;
 				PRODUCTION->ResetSpecialProduction();
@@ -431,11 +431,11 @@ void Camera::_SpecialProduction(PlayerManager& _playerManager)
 }
 
 //-----------------------------------------------------------------------------
-// @brief	ƒNƒŠƒA‰‰o
+// @brief	ã‚¯ãƒªã‚¢æ¼”å‡º
 //-----------------------------------------------------------------------------
 void Camera::_ClearProduction(PlayerManager & _playerManager)
 {
-	//	ƒNƒŠƒA
+	//	ã‚¯ãƒªã‚¢æ™‚
 	if (PRODUCTION->GetIsClearProduction())
 	{
 		m_productionTime++;
@@ -448,22 +448,22 @@ void Camera::_ClearProduction(PlayerManager & _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒvƒŒƒCƒ„[‚ÍˆÚ“®’â~
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¯ç§»å‹•åœæ­¢
 				player->SetIsStopMove(true);
 				player->SetAngle(VGet(0.0f, 1.4f, 0.0f));
 
-				//	ƒvƒŒƒCƒ„[‚ğ‰æ–Ê‚Ì’†S‚ÖˆÚ“®
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚’ç”»é¢ã®ä¸­å¿ƒã¸ç§»å‹•
 				const float lerpSpeed = 0.1f;
 				const VECTOR screenCenter = VGet(0.0f, 55.0f, 0.0f);
 				VECTOR playerPos = player->GetPos();
 				playerPos = CommonFunction::Lerp(playerPos, screenCenter, lerpSpeed);
 				player->SetPos(playerPos);
 
-				//	‰‰oŠJn
+				//	æ¼”å‡ºé–‹å§‹
 				m_isProduction = true;
 
-				//	“_–Å‚µ‚Ä‚¢‚éê‡A
-				//	•Ï‚È‚Ì‚ÅA“_–Å‚ğÁ‚·
+				//	ç‚¹æ»…ã—ã¦ã„ã‚‹å ´åˆã€
+				//	å¤‰ãªã®ã§ã€ç‚¹æ»…ã‚’æ¶ˆã™
 				player->SetIsInvincible(false);
 			}
 		}
@@ -472,21 +472,21 @@ void Camera::_ClearProduction(PlayerManager & _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒJƒƒ‰‚ÌŠp“x‚ğ•ÏX
+				//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’å¤‰æ›´
 				const float horizontalAngleSpeed = 4.0f;
 				m_horizontalAngle += horizontalAngleSpeed;
 
-				//	’‹“_‚ğ‹‚ß‚é
+				//	æ³¨è¦–ç‚¹ã‚’æ±‚ã‚ã‚‹
 				VECTOR targetPos = player->GetPos();
 				m_lookAtPos = targetPos;
 
-				//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+				//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 				VECTOR tmpPos = _PosAccordingToAngle();
 
-				//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+				//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 				VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-				//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+				//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 				const float lerpSpeed = 0.2f;
 				m_pos = CommonFunction::Lerp(m_pos, target, lerpSpeed);
 			}
@@ -496,7 +496,7 @@ void Camera::_ClearProduction(PlayerManager & _playerManager)
 			PlayerBase* player = _playerManager.GetPlayerPtr();
 			if (player)
 			{
-				//	ƒvƒŒƒCƒ„[‚Ì‰‰oŠJn
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ¼”å‡ºé–‹å§‹
 				player->SetIsClearProduction(true);
 			}
 		}
@@ -504,34 +504,34 @@ void Camera::_ClearProduction(PlayerManager & _playerManager)
 }
 
 //-----------------------------------------------------------------------------
-// @brief	ƒ^ƒCƒgƒ‹—p‚Ì’‹“_‚Ìİ’è
+// @brief	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®æ³¨è¦–ç‚¹ã®è¨­å®š
 //-----------------------------------------------------------------------------
 void Camera::_SetGazingPointForTitle(PlayerManager& _playerManager)
 {
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 	if (player)
 	{
-		//	’‹“_‚ğ‹‚ß‚é
+		//	æ³¨è¦–ç‚¹ã‚’æ±‚ã‚ã‚‹
 		m_lookAtPos = VGet(60.0f, 42.0f, 16.0f);
 
-		//	ƒJƒƒ‰‚ÌŠp“x‚ğ”½‰f‚µ‚½ˆÊ’u‚ğ‹‚ß‚é
+		//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®ã‚’æ±‚ã‚ã‚‹
 		VECTOR tmpPos = _PosAccordingToAngle();
 
-		//	‹‚ß‚½À•W‚É’‹“_‚ÌˆÊ’u‚ğ‰ÁZ‚µ‚½‚à‚Ì‚ªƒJƒƒ‰‚ÌˆÊ’u
+		//	æ±‚ã‚ãŸåº§æ¨™ã«æ³¨è¦–ç‚¹ã®ä½ç½®ã‚’åŠ ç®—ã—ãŸã‚‚ã®ãŒã‚«ãƒ¡ãƒ©ã®ä½ç½®
 		VECTOR target = VAdd(tmpPos, m_lookAtPos);
 
-		//	üŒ`•ÛŠÇ‚ğg‚¢’Ç‚¤
+		//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã„è¿½ã†
 		const float lerpSpeed = 0.2f;
 		m_pos = CommonFunction::Lerp(m_pos, target, lerpSpeed);
 	}
 }
 
 //-----------------------------------------------------------------------------
-// @brief	’‹“_‚Ìæ“¾
+// @brief	æ³¨è¦–ç‚¹ã®å–å¾—
 //-----------------------------------------------------------------------------
 void Camera::_SetGazingPoint()
 {
-	//	‰œs‚«‚Ì‚İ’Ç‚¤
+	//	å¥¥è¡Œãã®ã¿è¿½ã†
 	VECTOR lookAtPos = CommonConstant::ORIGIN;
 	lookAtPos.y = HEIGHT_LENGTH;
 
@@ -539,22 +539,22 @@ void Camera::_SetGazingPoint()
 }
 
 //-----------------------------------------------------------------------------
-// @brief	Šp“x‚É‰‚¶‚½ˆÊ’u
+// @brief	è§’åº¦ã«å¿œã˜ãŸä½ç½®
 //-----------------------------------------------------------------------------
 VECTOR Camera::_PosAccordingToAngle()
 {
-	// ƒJƒƒ‰‚ÌˆÊ’u‚Ì’²®
+	// ã‚«ãƒ¡ãƒ©ã®ä½ç½®ã®èª¿æ•´
 	VECTOR tmpPos1;
 	VECTOR tmpPos2;
 
-	// ‚’¼Šp“x‚ğ”½‰f‚µ‚½ˆÊ’u
+	// å‚ç›´è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®
 	float m_sinParam = sinf(CommonFunction::DegToRad(m_verticalAngle));
 	float m_cosParam = cosf(CommonFunction::DegToRad(m_verticalAngle));
 	tmpPos1.x = 0.0f;
 	tmpPos1.y = m_sinParam * DEPTH_LENGTH;
 	tmpPos1.z = -m_cosParam * DEPTH_LENGTH;
 
-	// …•½Šp“x‚ğ”½‰f‚µ‚½ˆÊ’u
+	// æ°´å¹³è§’åº¦ã‚’åæ˜ ã—ãŸä½ç½®
 	m_sinParam = sinf(CommonFunction::DegToRad(m_horizontalAngle));
 	m_cosParam = cosf(CommonFunction::DegToRad(m_horizontalAngle));
 	tmpPos2.x = m_cosParam * tmpPos1.x - m_sinParam * tmpPos1.z;

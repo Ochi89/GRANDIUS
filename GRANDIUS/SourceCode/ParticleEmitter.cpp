@@ -1,59 +1,59 @@
-
+ï»¿
 //=============================================================================
 //	@file	ParticleEmitter.cpp
-//	@brief	ƒp[ƒeƒBƒNƒ‹‚Ì¶¬
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®ç”Ÿæˆ
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/10/3
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "ParticleEmitter.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 ParticleEmitter::ParticleEmitter(const int _spriteHandle, const int _size)
 {
-	//	‰æ‘œ‚ÌƒRƒs[
+	//	ç”»åƒã®ã‚³ãƒ”ãƒ¼
 	m_spriteHandle = _spriteHandle;
 	CommonDebug::Assert((m_spriteHandle <= -1), "[ ParticleEmitter.cpp ] : error : model loading failed.");
 
-	m_activeTime = 0.0f;			//	•`‰æŠÔ
-	m_maxActiveTime = 0.0f;			//	Å‘åŠÔ
+	m_activeTime = 0.0f;			//	æç”»æ™‚é–“
+	m_maxActiveTime = 0.0f;			//	æœ€å¤§æ™‚é–“
 
-	//	ƒpƒ‰ƒ[ƒ^‚Ì¤•i‹A‰»
+	//	ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®å•†å“å¸°åŒ–
 	SetParameters(PARAMETER_KIND::MIN_PARAMETER, CommonConstant::ORIGIN, CommonConstant::ORIGIN, 0.0f, 0.0f, 0.0f);
 	SetParameters(PARAMETER_KIND::MAX_PARAMETER, CommonConstant::ORIGIN, CommonConstant::ORIGIN, 0.0f, 0.0f, 0.0f);
 	m_isEndParticle = false;
-	m_red = 255.0f;					//	Ô
-	m_green = 255.0f;				//	Â
-	m_blue = 255.0f;				//	—Î
+	m_red = 255.0f;					//	èµ¤
+	m_green = 255.0f;				//	é’
+	m_blue = 255.0f;				//	ç·‘
 
-	//	ƒTƒCƒY•ª‚Ì¶¬
+	//	ã‚µã‚¤ã‚ºåˆ†ã®ç”Ÿæˆ
 	m_pParticles = new Particle[_size];
 
-	//	ƒp[ƒeƒBƒNƒ‹”‚Ì•Û‘¶
+	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«æ•°ã®ä¿å­˜
 	m_particleNum = _size;
 }
 
 //-----------------------------------------------------------------------------
-// @brief  ƒfƒXƒgƒ‰ƒNƒ^
+// @brief  ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 ParticleEmitter::~ParticleEmitter()
 {
-	//	‰æ‘œ‚ÌƒAƒ“ƒ[ƒh
+	//	ç”»åƒã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_spriteHandle);
 }
 
 //-----------------------------------------------------------------------------
-// @brief  ‰Šú‰»
+// @brief  åˆæœŸåŒ–
 //-----------------------------------------------------------------------------
 void ParticleEmitter::Initialize()
 {
-	//	‰Šú‰»
+	//	åˆæœŸåŒ–
 	for (int i = 0; i < m_particleNum; i++)
 	{
 		m_pParticles[i].m_pos = CommonConstant::ORIGIN;
@@ -70,21 +70,21 @@ void ParticleEmitter::Initialize()
 }
 
 //-----------------------------------------------------------------------------
-// @brief  XV
+// @brief  æ›´æ–°
 //-----------------------------------------------------------------------------
 void ParticleEmitter::Update()
 {
-	//	Šˆ“®ŠÔ“à‚È‚ç
+	//	æ´»å‹•æ™‚é–“å†…ãªã‚‰
 	const bool isNotActive = m_activeTime >= m_maxActiveTime;
 	if (isNotActive)
 	{
-		//	I—¹ˆ—
+		//	çµ‚äº†å‡¦ç†
 		End();
 
 		for (int i = 0; i < m_particleNum; i++)
 		{
-			//	‚Ç‚ê‚©ˆê‚Â‚Å‚àÀs’†‚È‚ç
-			//	I—¹‚µ‚È‚¢
+			//	ã©ã‚Œã‹ä¸€ã¤ã§ã‚‚å®Ÿè¡Œä¸­ãªã‚‰
+			//	çµ‚äº†ã—ãªã„
 			if (m_pParticles[i].m_isActive == true) { return; }
 			m_isEndParticle = true;
 		}
@@ -92,25 +92,25 @@ void ParticleEmitter::Update()
 		return;
 	}
 
-	//	ƒp[ƒeƒBƒNƒ‹‚Ìì¬ˆ—
+	//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®ä½œæˆå‡¦ç†
 	_Create();
 
 	for (int i = 0; i < m_particleNum; i++)
 	{
-		//	ƒp[ƒeƒBƒNƒ‹‚Ìó‘Ô‚ªƒAƒNƒeƒBƒu‚È‚ç
+		//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®çŠ¶æ…‹ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚‰
 		if (m_pParticles[i].m_isActive)
 		{
-			//	ˆÚ“®
+			//	ç§»å‹•
 			VECTOR velocity = VScale(m_pParticles[i].m_dir, m_pParticles[i].m_speed);
 			m_pParticles[i].m_pos = VAdd(m_pParticles[i].m_pos, velocity);
 
-			//	ƒTƒCƒY•ÏX
+			//	ã‚µã‚¤ã‚ºå¤‰æ›´
 			m_pParticles[i].m_size -= 0.05f;
 
-			//	õ–½‚ğ‚Ö‚ç‚·
+			//	å¯¿å‘½ã‚’ã¸ã‚‰ã™
 			m_pParticles[i].m_life--;
 
-			//	õ–½‚ª‚È‚­‚È‚Á‚½‚çAƒp[ƒeƒBƒNƒ‹‚Ìíœ
+			//	å¯¿å‘½ãŒãªããªã£ãŸã‚‰ã€ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®å‰Šé™¤
 			if (m_pParticles[i].m_life <= 0) { m_pParticles[i].m_isActive = false; }
 
 		}
@@ -120,57 +120,57 @@ void ParticleEmitter::Update()
 }
 
 //-----------------------------------------------------------------------------
-// @brief  Œ»İ‚Ìo‚Ä‚¢‚é‚Ì‚İƒGƒtƒFƒNƒg‚ğXV‚·‚é
+// @brief  ç¾åœ¨ã®å‡ºã¦ã„ã‚‹ã®ã¿ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’æ›´æ–°ã™ã‚‹
 //-----------------------------------------------------------------------------
 void ParticleEmitter::End()
 {
-	//	•`‰æ‚µ‚È‚¢‚æ‚¤‚É‚·‚é
+	//	æç”»ã—ãªã„ã‚ˆã†ã«ã™ã‚‹
 	for (int i = 0; i < m_particleNum; i++)
 	{
-		//	ƒp[ƒeƒBƒNƒ‹‚Ìó‘Ô‚ªƒAƒNƒeƒBƒu‚È‚ç
+		//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®çŠ¶æ…‹ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚‰
 		if (m_pParticles[i].m_isActive)
 		{
-			//	ˆÚ“®
+			//	ç§»å‹•
 			VECTOR velocity = VScale(m_pParticles[i].m_dir, m_pParticles[i].m_speed);
 			m_pParticles[i].m_pos = VAdd(m_pParticles[i].m_pos, velocity);
 
-			//	ƒTƒCƒY•ÏX
+			//	ã‚µã‚¤ã‚ºå¤‰æ›´
 			m_pParticles[i].m_size -= 0.05f;
 
-			//	õ–½‚ğ‚Ö‚ç‚·
+			//	å¯¿å‘½ã‚’ã¸ã‚‰ã™
 			m_pParticles[i].m_life--;
 
-			//	õ–½‚ª‚È‚­‚È‚Á‚½‚çAƒp[ƒeƒBƒNƒ‹‚Ìíœ
+			//	å¯¿å‘½ãŒãªããªã£ãŸã‚‰ã€ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®å‰Šé™¤
 			if (m_pParticles[i].m_life <= 0) { m_pParticles[i].m_isActive = false; }
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-// @brief  •`‰æ
+// @brief  æç”»
 //-----------------------------------------------------------------------------
 void ParticleEmitter::Draw()
 {
-	//	Zƒoƒbƒtƒ@‚ğg—p‚·‚éİ’è‚É•ÏX
+	//	Zãƒãƒƒãƒ•ã‚¡ã‚’ä½¿ç”¨ã™ã‚‹è¨­å®šã«å¤‰æ›´
 	SetUseZBufferFlag(TRUE);
 
-	//	Zƒoƒbƒtƒ@‚Ö‚Ì‘‚«‚İ‚Ís‚í‚È‚¢
+	//	Zãƒãƒƒãƒ•ã‚¡ã¸ã®æ›¸ãè¾¼ã¿ã¯è¡Œã‚ãªã„
 	SetWriteZBufferFlag(FALSE);
 
 	for (int i = 0; i < m_particleNum; i++)
 	{
-		//	•`‰æŒõ“x‚à•W€İ’è‚É‚·‚é
+		//	æç”»å…‰åº¦ã‚‚æ¨™æº–è¨­å®šã«ã™ã‚‹
 		SetDrawBright((int)m_pParticles[i].m_red, (int)m_pParticles[i].m_green, (int)m_pParticles[i].m_blue);
 	}
 
 	for (int i = 0; i < m_particleNum; i++)
 	{
-		//	ƒp[ƒeƒBƒNƒ‹‚Ìó‘Ô‚ªƒAƒNƒeƒBƒu‚È‚ç
+		//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®çŠ¶æ…‹ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚‰
 		if (m_pParticles[i].m_isActive)
 		{
 			if (m_pParticles[i].m_alpha <= 0.0f) { continue; }
 
-			//	Œ¸ZƒuƒŒƒ“ƒh‚Åƒp[ƒeƒBƒNƒ‹‚Ì•`‰æ
+			//	æ¸›ç®—ãƒ–ãƒ¬ãƒ³ãƒ‰ã§ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æç”»
 			SetDrawBlendMode(DX_BLENDMODE_SUB, (int)(m_pParticles[i].m_alpha * 255.0f));
 			DrawBillboard3D(m_pParticles[i].m_pos, 0.5f, 0.5f, m_pParticles[i].m_size * m_pParticles[i].m_alpha, 0.0f, m_spriteHandle, TRUE);
 		}
@@ -178,38 +178,38 @@ void ParticleEmitter::Draw()
 
 	for (int i = 0; i < m_particleNum; i++)
 	{
-		//	ƒp[ƒeƒBƒNƒ‹‚Ìó‘Ô‚ªƒAƒNƒeƒBƒu‚È‚ç
+		//	ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®çŠ¶æ…‹ãŒã‚¢ã‚¯ãƒ†ã‚£ãƒ–ãªã‚‰
 		if (m_pParticles[i].m_isActive)
 		{
 			if (m_pParticles[i].m_alpha <= 0.0f) { continue; }
 
-			//	‰ÁZƒuƒŒƒ“ƒh‚Åƒp[ƒeƒBƒNƒ‹‚Ì•`‰æ
+			//	åŠ ç®—ãƒ–ãƒ¬ãƒ³ãƒ‰ã§ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®æç”»
 			SetDrawBlendMode(DX_BLENDMODE_ADD_X4, (int)(m_pParticles[i].m_alpha * 255.0f));
 			DrawBillboard3D(m_pParticles[i].m_pos, 0.5f, 0.5f, m_pParticles[i].m_size * m_pParticles[i].m_alpha, 0.0f, m_spriteHandle, TRUE);
 		}
 	}
 
-	//	ƒuƒŒƒ“ƒhƒ‚[ƒh‚ğ•W€İ’è‚É‚·‚é
+	//	ãƒ–ãƒ¬ãƒ³ãƒ‰ãƒ¢ãƒ¼ãƒ‰ã‚’æ¨™æº–è¨­å®šã«ã™ã‚‹
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
 
-	//	•`‰æŒõ“x‚à•W€İ’è‚É‚·‚é
+	//	æç”»å…‰åº¦ã‚‚æ¨™æº–è¨­å®šã«ã™ã‚‹
 	SetDrawBright(255, 255, 255);
 
-	//	Zƒoƒbƒtƒ@‚ğg—p‚µ‚È‚¢İ’è‚É•ÏX
+	//	Zãƒãƒƒãƒ•ã‚¡ã‚’ä½¿ç”¨ã—ãªã„è¨­å®šã«å¤‰æ›´
 	SetUseZBufferFlag(FALSE);
 }
 
 //-----------------------------------------------------------------------------
-// @brief  íœ
+// @brief  å‰Šé™¤
 //-----------------------------------------------------------------------------
 void ParticleEmitter::Release()
 {
-	//  ÅI“I‚È‰ğ•úˆ—
+	//  æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-// @brief  ƒpƒ‰ƒ[ƒ^‚Ìİ’è
+// @brief  ãƒ‘ãƒ©ãƒ¡ãƒ¼ã‚¿ã®è¨­å®š
 //-----------------------------------------------------------------------------
 void ParticleEmitter::SetParameters(const PARAMETER_KIND _paramKind, const VECTOR _pos, const VECTOR _dir, const float _speed, const float _size, const float _life)
 {
@@ -234,49 +234,49 @@ void ParticleEmitter::SetParameters(const PARAMETER_KIND _paramKind, const VECTO
 }
 
 //-----------------------------------------------------------------------------
-// @brief  ƒp[ƒeƒBƒNƒ‹‚Ìì¬ˆ—
+// @brief  ãƒ‘ãƒ¼ãƒ†ã‚£ã‚¯ãƒ«ã®ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void ParticleEmitter::_Create()
 {
-	//	ì¬
+	//	ä½œæˆ
 	for (int i = 0; i < m_particleNum; i++)
 	{
 		if (!m_pParticles[i].m_isActive)
 		{
-			//	ƒ|ƒWƒVƒ‡ƒ“
+			//	ãƒã‚¸ã‚·ãƒ§ãƒ³
 			m_pParticles[i].m_pos = CommonFunction::GetRand(m_minParam.m_pos, m_maxParam.m_pos);
 
-			//	Œü‚«
+			//	å‘ã
 			m_pParticles[i].m_dir = CommonFunction::GetRand(m_minParam.m_dir, m_maxParam.m_dir);
 
-			//	‘¬“x
+			//	é€Ÿåº¦
 			m_pParticles[i].m_speed = CommonFunction::GetRand(m_minParam.m_speed, m_maxParam.m_speed);
 
-			//	ƒTƒCƒY
+			//	ã‚µã‚¤ã‚º
 			m_pParticles[i].m_size = CommonFunction::GetRand(m_minParam.m_size, m_maxParam.m_size);
 
-			//	ƒ‰ƒCƒt
+			//	ãƒ©ã‚¤ãƒ•
 			m_pParticles[i].m_life = CommonFunction::GetRand(m_minParam.m_life, m_maxParam.m_life);
 
-			//	F‚Ìİ’è
+			//	è‰²ã®è¨­å®š
 			m_pParticles[i].m_red = m_red;
 			m_pParticles[i].m_green = m_green;
 			m_pParticles[i].m_blue = m_blue;
 
-			//	•s“§–¾“x
+			//	ä¸é€æ˜åº¦
 			m_pParticles[i].m_alpha = 1.0f;
 
-			//	ƒAƒNƒeƒBƒu‚©
+			//	ã‚¢ã‚¯ãƒ†ã‚£ãƒ–ã‹
 			m_pParticles[i].m_isActive = true;
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-// @brief  ÅI“I‚È‰ğ•úˆ—
+// @brief  æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void ParticleEmitter::_FinalRelease()
 {
-	//	‰æ‘œƒnƒ“ƒhƒ‹‚Ì‰ğ•ú
+	//	ç”»åƒãƒãƒ³ãƒ‰ãƒ«ã®è§£æ”¾
 	DeleteGraph(m_spriteHandle);
 }

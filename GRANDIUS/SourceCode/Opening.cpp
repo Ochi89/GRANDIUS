@@ -1,31 +1,31 @@
-
+ï»¿
 //=============================================================================
 //	@file	Opening.h
-//	@brief	ƒI[ƒvƒjƒ“ƒO
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/18
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Opening.h"
 #include "Pad.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const int		Opening::MIN_ALPHA = 0;				//	ƒAƒ‹ƒtƒ@’l‚ÌÅ¬
-const int		Opening::MAX_ALPHA = 255;			//	ƒAƒ‹ƒtƒ@’l‚ÌÅ‘å
-const int		Opening::ALPHA_DEFAULT_SPEED = 3;	//	ƒAƒ‹ƒtƒ@’l‚ÌƒfƒtƒHƒ‹ƒg‘¬“x
-const int		Opening::ALPHA_ACCELE_SPEED = 9;	//	ƒAƒ‹ƒtƒ@’l‚ÌƒAƒNƒZƒ‹‘¬“x
+const int		Opening::MIN_ALPHA = 0;				//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å°
+const int		Opening::MAX_ALPHA = 255;			//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å¤§
+const int		Opening::ALPHA_DEFAULT_SPEED = 3;	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆé€Ÿåº¦
+const int		Opening::ALPHA_ACCELE_SPEED = 9;	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®ã‚¢ã‚¯ã‚»ãƒ«é€Ÿåº¦
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Opening::Opening()
 {
-	//	ƒI[ƒvƒjƒ“ƒO‚Ì“Ç‚Ýž‚Ý
+	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®èª­ã¿è¾¼ã¿
 	_LoadUI(m_OpeningUI1, "Data/Sprite/Opening/Opening01.png");
 	_LoadUI(m_OpeningUI2, "Data/Sprite/Opening/Opening02.png");
 	_LoadUI(m_OpeningUI3, "Data/Sprite/Opening/Opening03.png");
@@ -33,7 +33,7 @@ Opening::Opening()
 	_LoadUI(m_OpeningUI5, "Data/Sprite/Opening/Opening05.png");
 	_LoadUI(m_OpeningUI6, "Data/Sprite/Opening/Opening06.png");
 
-	//	”wŒi‚ÌÝ’è
+	//	èƒŒæ™¯ã®è¨­å®š
 	m_backGroundRect.m_vertexTop = VGet(0.0f, 0.0f, 0.0f);
 	m_backGroundRect.m_vertexUnder = VGet((float)CommonConstant::WINDOW_WIDTH, (float)CommonConstant::WINDOW_HEIGHT, 0.0f);
 	m_backGroundColor.m_red = 0;
@@ -41,7 +41,7 @@ Opening::Opening()
 	m_backGroundColor.m_blue = 0;
 	m_backGroundColor.m_color = CommonFunction::GetColor(m_backGroundColor);
 
-	//	‚»‚Ì‚Ù‚©‚Ì‰Šú‰»
+	//	ãã®ã»ã‹ã®åˆæœŸåŒ–
 	m_openingCount = OPENING_KIND::OPENING_NONE;
 	m_alpha = MIN_ALPHA;
 	m_isChangeAlpha = false;
@@ -50,42 +50,42 @@ Opening::Opening()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Opening::~Opening()
 {
-	//	ÅI“I‚È‰ð•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Opening::Update(Pad& _pad)
 {
-	//	ƒI[ƒvƒjƒ“ƒO‚ªI—¹‚µ‚Ä‚¢‚È‚¢‚Æ‚«
+	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ãŒçµ‚äº†ã—ã¦ã„ãªã„ã¨ã
 	if (!m_isEndOpening)
 	{
-		//	ƒAƒ‹ƒtƒ@’l‚Ì•ÏX
+		//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®å¤‰æ›´
 		_ChangeAlpha();
 
-		//	ƒAƒ‹ƒtƒ@’l‚Ì‰Á‘¬
+		//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®åŠ é€Ÿ
 		_AcceleAlpha(_pad);
 
-		//	ƒI[ƒvƒjƒ“ƒO‚ÌƒXƒLƒbƒv
+		//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®ã‚¹ã‚­ãƒƒãƒ—
 		_OpeningSkip(_pad);
 
-		//	ƒI[ƒvƒjƒ“ƒO‚ÌI—¹
+		//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®çµ‚äº†
 		_EndOpening();
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void Opening::Draw()
 {
-	//	”wŒi‚Ì•`‰æ
+	//	èƒŒæ™¯ã®æç”»
 	DrawBox(
 		(int)m_backGroundRect.m_vertexTop.x, 
 		(int)m_backGroundRect.m_vertexTop.y, 
@@ -95,7 +95,7 @@ void Opening::Draw()
 		TRUE
 	);
 
-	//	ƒI[ƒvƒjƒ“ƒO‚Ì•`‰æ
+	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®æç”»
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);
 	switch (m_openingCount)
 	{
@@ -127,7 +127,7 @@ void Opening::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	UI‚Ì“Ç‚Ýž‚Ý
+//	@brief	UIã®èª­ã¿è¾¼ã¿
 //-----------------------------------------------------------------------------
 void Opening::_LoadUI(UI& _ui, const char* _fileName)
 {
@@ -137,7 +137,7 @@ void Opening::_LoadUI(UI& _ui, const char* _fileName)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	UI‚Ì•`‰æ
+//	@brief	UIã®æç”»
 //-----------------------------------------------------------------------------
 void Opening::_DrawUI(UI _ui)
 {
@@ -145,7 +145,7 @@ void Opening::_DrawUI(UI _ui)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒAƒ‹ƒtƒ@’l‚Ì•ÏX
+//	@brief	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®å¤‰æ›´
 //-----------------------------------------------------------------------------
 void Opening::_ChangeAlpha()
 {
@@ -157,11 +157,11 @@ void Opening::_ChangeAlpha()
 		m_isStart = true;
 	}
 
-	//	ƒAƒ‹ƒtƒ@’l‚Ì‰ÁŽZŒ¸ŽZ‚ÌØ‚è‘Ö‚¦
+	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®åŠ ç®—æ¸›ç®—ã®åˆ‡ã‚Šæ›¿ãˆ
 	if (m_isChangeAlpha) { m_alpha -= m_alphaSpeed; }
 	else { m_alpha += m_alphaSpeed; }
 
-	//	Å‘åÅ¬ˆ—
+	//	æœ€å¤§æœ€å°å‡¦ç†
 	const bool isMaxVal = m_alpha >= MAX_ALPHA;
 	const bool isMinVal = m_alpha <= MIN_ALPHA;
 	if (isMaxVal) { m_alpha = MAX_ALPHA; m_isChangeAlpha = true; }
@@ -169,7 +169,7 @@ void Opening::_ChangeAlpha()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒAƒ‹ƒtƒ@’l‚Ì‰Á‘¬
+//	@brief	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®åŠ é€Ÿ
 //-----------------------------------------------------------------------------
 void Opening::_AcceleAlpha(Pad& _pad)
 {
@@ -182,7 +182,7 @@ void Opening::_AcceleAlpha(Pad& _pad)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒI[ƒvƒjƒ“ƒO‚ÌƒXƒLƒbƒv
+//	@brief	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®ã‚¹ã‚­ãƒƒãƒ—
 //-----------------------------------------------------------------------------
 void Opening::_OpeningSkip(Pad& _pad)
 {
@@ -194,7 +194,7 @@ void Opening::_OpeningSkip(Pad& _pad)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	I—¹ˆ—
+//	@brief	çµ‚äº†å‡¦ç†
 //-----------------------------------------------------------------------------
 void Opening::_EndOpening()
 {
@@ -206,11 +206,11 @@ void Opening::_EndOpening()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ð•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void Opening::_FinalRelease()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_OpeningUI1.m_spriteHendle);
 	DeleteGraph(m_OpeningUI2.m_spriteHendle);
 	DeleteGraph(m_OpeningUI3.m_spriteHendle);

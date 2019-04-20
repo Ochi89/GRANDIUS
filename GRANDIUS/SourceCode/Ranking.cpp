@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	Ranking.cpp
-//	@brief	ƒ‰ƒ“ƒLƒ“ƒO
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ©ãƒ³ã‚­ãƒ³ã‚°
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/3
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Ranking.h"
 #include "LoadFile.h"
@@ -16,23 +16,23 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const int			Ranking::TEXT_START = 29;						//	ƒeƒLƒXƒg‚Ì‰ŠúˆÊ’u
-const int			Ranking::TEXT_INTERVAL = 91;					//	Ÿ‚Ü‚Å‚ÌŠÔŠu
-const int			Ranking::AFTER_RANK = -1;						//	ƒ‰ƒ“ƒNŠO
-const float			Ranking::MAX_PRODUCTION_TIME = 120.0f;			//	‰‰oŠÔ‚ÌÅ‘å
-const float			Ranking::MAX_WAITTIME = 60.0f;					//	’x‰„ŠÔ‚ÌÅ‘å
-const float			Ranking::LIFE_BONUS_SCORE = 50000.0f;			//	ƒ‰ƒCƒtƒ{[ƒiƒX
-const float			Ranking::DESTRUCTION_BONUS_SCORE = 5000.0f;		//	“¢”°”ƒ{[ƒiƒX
-const float			Ranking::MAX_SCENE_CHANGE_TIME = 3600.0f;		//	ƒV[ƒ“Ø‚è‘Ö‚¦ŠÔ‚ÌÅ‘å
+const int			Ranking::TEXT_START = 29;						//	ãƒ†ã‚­ã‚¹ãƒˆã®åˆæœŸä½ç½®
+const int			Ranking::TEXT_INTERVAL = 91;					//	æ¬¡ã¾ã§ã®é–“éš”
+const int			Ranking::AFTER_RANK = -1;						//	ãƒ©ãƒ³ã‚¯å¤–
+const float			Ranking::MAX_PRODUCTION_TIME = 120.0f;			//	æ¼”å‡ºæ™‚é–“ã®æœ€å¤§
+const float			Ranking::MAX_WAITTIME = 60.0f;					//	é…å»¶æ™‚é–“ã®æœ€å¤§
+const float			Ranking::LIFE_BONUS_SCORE = 50000.0f;			//	ãƒ©ã‚¤ãƒ•ãƒœãƒ¼ãƒŠã‚¹
+const float			Ranking::DESTRUCTION_BONUS_SCORE = 5000.0f;		//	è¨ä¼æ•°ãƒœãƒ¼ãƒŠã‚¹
+const float			Ranking::MAX_SCENE_CHANGE_TIME = 3600.0f;		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆæ™‚é–“ã®æœ€å¤§
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Ranking::Ranking()
 {
-	//	“à—e‚Ì‰Šú‰»
+	//	å†…å®¹ã®åˆæœŸåŒ–
 	for (int i = 0; i < CommonConstant::MAX_RANKING_NUM; i++)
 	{
 		m_score[i] = 0;
@@ -60,78 +60,78 @@ Ranking::Ranking()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Ranking::~Ranking()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_bonusUI.m_spriteHendle);
 	DeleteGraph(m_rankingUI.m_spriteHendle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void Ranking::Initialize()
 {
-	//	“Ç‚İ‚İ
+	//	èª­ã¿è¾¼ã¿
 	_Load();
 
-	//	ƒNƒŠƒA‚µ‚Ä‚¢‚é‚Æ‚«A
-	//	ƒ{[ƒiƒX‚ğ‚Â‚¯‚é
+	//	ã‚¯ãƒªã‚¢ã—ã¦ã„ã‚‹ã¨ãã€
+	//	ãƒœãƒ¼ãƒŠã‚¹ã‚’ã¤ã‘ã‚‹
 	const bool isClear = HAND_OVER_RESULT->GetIsClear();
 	if (isClear) { m_isLifeBonusScore = true; }
 	else { m_isRankingStart = true; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Ranking::Update(Pad& _pad, SoundEffect& _soundEffect)
 {
-	//	ƒ‰ƒCƒtƒ{[ƒiƒX
+	//	ãƒ©ã‚¤ãƒ•ãƒœãƒ¼ãƒŠã‚¹
 	_LifeBonus(_pad, _soundEffect);
 
-	//	“¢”°”ƒ{[ƒiƒX
+	//	è¨ä¼æ•°ãƒœãƒ¼ãƒŠã‚¹
 	_DestructionBonus(_pad, _soundEffect);
 
-	//	ƒ‰ƒ“ƒLƒ“ƒO
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°
 	_Ranking(_soundEffect);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void Ranking::Draw()
 {
-	//	ƒ‰ƒCƒtƒ{[ƒiƒX
+	//	ãƒ©ã‚¤ãƒ•ãƒœãƒ¼ãƒŠã‚¹
 	if (m_isLifeBonusScore)
 	{
 		FONT->Draw(700, 400, m_thisTimeScoreText);
 		FONT->Draw(700, 500, m_bonusScoreText);
 	}
 
-	//	“¢”°ƒ{[ƒiƒX
+	//	è¨ä¼ãƒœãƒ¼ãƒŠã‚¹
 	if (m_isDestructionBonusScore)
 	{
 		FONT->Draw(700, 400, m_thisTimeScoreText);
 		FONT->Draw(700, 500, m_bonusScoreText);
 	}
 
-	//	ƒ{[ƒiƒX
+	//	ãƒœãƒ¼ãƒŠã‚¹æ™‚
 	const bool isBonus = m_isLifeBonusScore || m_isDestructionBonusScore;
 	if (isBonus) { DrawGraph((int)m_bonusUI.m_pos.x, (int)m_bonusUI.m_pos.y, m_bonusUI.m_spriteHendle, TRUE); }
 
-	//	ƒ‰ƒ“ƒLƒ“ƒO
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°
 	if (m_isRankingStart)
 	{
-		//	ƒXƒRƒA‚Ì•\¦
+		//	ã‚¹ã‚³ã‚¢ã®è¡¨ç¤º
 		for (int i = 0; i < CommonConstant::MAX_RANKING_NUM; i++)
 		{
 			_FlashingDraw(i, m_rank);
 		}
 
-		//	ƒ‰ƒ“ƒNŠO‚Ì•\¦
+		//	ãƒ©ãƒ³ã‚¯å¤–ã®è¡¨ç¤º
 		_AfterRankFlashingDraw();
 
 		DrawGraph((int)m_rankingUI.m_pos.x, (int)m_rankingUI.m_pos.y, m_rankingUI.m_spriteHendle, TRUE);
@@ -139,7 +139,7 @@ void Ranking::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ‰ƒCƒtƒ{[ƒiƒX
+//	@brief	ãƒ©ã‚¤ãƒ•ãƒœãƒ¼ãƒŠã‚¹
 //-----------------------------------------------------------------------------
 void Ranking::_LifeBonus(Pad& _pad, SoundEffect& _soundEffect)
 {
@@ -152,19 +152,19 @@ void Ranking::_LifeBonus(Pad& _pad, SoundEffect& _soundEffect)
 
 		if (isBonusStart)
 		{
-			//	ƒ{[ƒiƒX’l‚ğ‹‚ß‚é
+			//	ãƒœãƒ¼ãƒŠã‚¹å€¤ã‚’æ±‚ã‚ã‚‹
 			m_lifeBonusScoreVal = LIFE_BONUS_SCORE * HAND_OVER_RESULT->GetLife();
 			SCORE->AddScore(m_lifeBonusScoreVal);
 		}
 
-		//	SE‚ÌÄ¶
+		//	SEã®å†ç”Ÿ
 		if (isBonusSE)
 		{
 			const bool isSE = m_lifeBonusScoreVal > 0.0f;
 			if (isSE) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_SCORE_UP); }
 		}
 
-		//	ƒ{[ƒiƒX‚Ì‰ÁZ
+		//	ãƒœãƒ¼ãƒŠã‚¹ã®åŠ ç®—
 		if (isAddBonus)
 		{
 			SCORE->Update();
@@ -173,7 +173,7 @@ void Ranking::_LifeBonus(Pad& _pad, SoundEffect& _soundEffect)
 			m_lifeBonusScoreVal = CommonFunction::Lerp(m_lifeBonusScoreVal, 0.0f, lerpSpeed, ignore);
 		}
 
-		//	“¢”°”ƒ{[ƒiƒX‚ÖˆÚs‚·‚é
+		//	è¨ä¼æ•°ãƒœãƒ¼ãƒŠã‚¹ã¸ç§»è¡Œã™ã‚‹
 		if (isBonusEnd)
 		{
 			const bool isActive = m_waitTime++ >= MAX_WAITTIME;
@@ -189,7 +189,7 @@ void Ranking::_LifeBonus(Pad& _pad, SoundEffect& _soundEffect)
 
 		m_productionTime++;
 
-		//	‰‰o‚ÌƒXƒLƒbƒv
+		//	æ¼”å‡ºã®ã‚¹ã‚­ãƒƒãƒ—
 		const bool isKeyActive = KEY->Push(KEY_INPUT_RETURN) || KEY->Push(KEY_INPUT_SPACE) || KEY->Push(KEY_INPUT_X) || KEY->Push(KEY_INPUT_K) || KEY->Push(KEY_INPUT_A);
 		const bool isNextActive = isKeyActive || _pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A);
 		if (isNextActive)
@@ -201,7 +201,7 @@ void Ranking::_LifeBonus(Pad& _pad, SoundEffect& _soundEffect)
 			m_productionTime = 0.0f;
 			m_waitTime = 0.0f;
 
-			//	SE‚ÌÄ¶
+			//	SEã®å†ç”Ÿ
 			_soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_DECISION);
 		}
 
@@ -212,7 +212,7 @@ void Ranking::_LifeBonus(Pad& _pad, SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“¢”°”ƒ{[ƒiƒX
+//	@brief	è¨ä¼æ•°ãƒœãƒ¼ãƒŠã‚¹
 //-----------------------------------------------------------------------------
 void Ranking::_DestructionBonus(Pad& _pad, SoundEffect& _soundEffect)
 {
@@ -225,19 +225,19 @@ void Ranking::_DestructionBonus(Pad& _pad, SoundEffect& _soundEffect)
 
 		if (isBonusStart)
 		{
-			//	ƒ{[ƒiƒX’l‚ğ‹‚ß‚é
+			//	ãƒœãƒ¼ãƒŠã‚¹å€¤ã‚’æ±‚ã‚ã‚‹
 			m_DestructionBonusScoreVal = DESTRUCTION_BONUS_SCORE * HAND_OVER_RESULT->GetDestructionNum();
 			SCORE->AddScore(m_DestructionBonusScoreVal);
 		}
 
 		if (isBonusSE)
 		{
-			//	SE‚ÌÄ¶
+			//	SEã®å†ç”Ÿ
 			const bool isSE = m_DestructionBonusScoreVal > 0.0f;
 			if (isSE) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_SCORE_UP); }
 		}
 
-		//	ƒ{[ƒiƒX‚Ì‰ÁZ
+		//	ãƒœãƒ¼ãƒŠã‚¹ã®åŠ ç®—
 		if (isAddBonus)
 		{
 			SCORE->Update();
@@ -247,7 +247,7 @@ void Ranking::_DestructionBonus(Pad& _pad, SoundEffect& _soundEffect)
 			m_DestructionBonusScoreVal = CommonFunction::Lerp(m_DestructionBonusScoreVal, 0.0f, lerpSpeed, ignore);
 		}
 
-		//	ƒ‰ƒ“ƒLƒ“ƒO‚ÖˆÚs‚·‚é
+		//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã¸ç§»è¡Œã™ã‚‹
 		if (isBonusEnd)
 		{
 			const bool isActive = m_waitTime++ >= MAX_WAITTIME;
@@ -263,7 +263,7 @@ void Ranking::_DestructionBonus(Pad& _pad, SoundEffect& _soundEffect)
 
 		m_productionTime++;
 
-		//	‰‰o‚ÌƒXƒLƒbƒv
+		//	æ¼”å‡ºã®ã‚¹ã‚­ãƒƒãƒ—
 		const bool isKeyActive = KEY->Push(KEY_INPUT_RETURN) || KEY->Push(KEY_INPUT_SPACE) || KEY->Push(KEY_INPUT_X) || KEY->Push(KEY_INPUT_K) || KEY->Push(KEY_INPUT_A);
 		const bool isNextActive = isKeyActive || _pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A);
 		if (isNextActive)
@@ -275,7 +275,7 @@ void Ranking::_DestructionBonus(Pad& _pad, SoundEffect& _soundEffect)
 			m_productionTime = 0.0f;
 			m_waitTime = 0.0f;
 
-			//	SE‚ÌÄ¶
+			//	SEã®å†ç”Ÿ
 			_soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_DECISION);
 		}
 
@@ -285,7 +285,7 @@ void Ranking::_DestructionBonus(Pad& _pad, SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ‰ƒ“ƒLƒ“ƒO
+//	@brief	ãƒ©ãƒ³ã‚­ãƒ³ã‚°
 //-----------------------------------------------------------------------------
 void Ranking::_Ranking(SoundEffect& _soundEffect)
 {
@@ -294,36 +294,36 @@ void Ranking::_Ranking(SoundEffect& _soundEffect)
 		const bool isRankingStart = m_productionTime == 0.0f;
 		if (isRankingStart)
 		{
-			//	ƒ\[ƒg
+			//	ã‚½ãƒ¼ãƒˆ
 			_Sort();
 
-			//	‘‚«‚İ
+			//	æ›¸ãè¾¼ã¿
 			_Writing();
 
 			m_productionTime++;
 		}
 
-		//	”’l‚ğ•¶š‚É‚·‚é
+		//	æ•°å€¤ã‚’æ–‡å­—ã«ã™ã‚‹
 		for (int i = 0; i < CommonConstant::MAX_RANKING_NUM; i++)
 		{
 			sprintf(m_scoreText[i], "%010d", (int)m_score[i]);
 		}
 
-		//	ƒV[ƒ“Ø‚è‘Ö‚¦
+		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆ
 		m_sceneChangeTime++;
 		m_isSceneChange = m_sceneChangeTime >= MAX_SCENE_CHANGE_TIME;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“Ç‚İ‚İ
+//	@brief	èª­ã¿è¾¼ã¿
 //-----------------------------------------------------------------------------
 void Ranking::_Load()
 {
-	//	ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 	LOAD_FILE->LoadCsvFile("Data/CSV/Score.csv");
 
-	//	“à—e‚Ìæ“¾
+	//	å†…å®¹ã®å–å¾—
 	for (int i = 0; i < CommonConstant::MAX_RANKING_NUM; i++)
 	{
 		m_score[i] = LOAD_FILE->GetCsvFile(i);
@@ -331,25 +331,25 @@ void Ranking::_Load()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ\[ƒg
+//	@brief	ã‚½ãƒ¼ãƒˆ
 //-----------------------------------------------------------------------------
 void Ranking::_Sort()
 {
-	//	¡‰ñ‚ÌƒXƒRƒA‚ÆA¡‚Ü‚Å‚ÌƒXƒRƒA‚Ì”äŠr
+	//	ä»Šå›ã®ã‚¹ã‚³ã‚¢ã¨ã€ä»Šã¾ã§ã®ã‚¹ã‚³ã‚¢ã®æ¯”è¼ƒ
 	for (int i = 0; i < CommonConstant::MAX_RANKING_NUM; i++)
 	{
-		//	ƒXƒRƒA‚ªƒ‰ƒ“ƒLƒ“ƒO“àƒXƒRƒA‚æ‚è‘å‚«‚¢
+		//	ã‚¹ã‚³ã‚¢ãŒãƒ©ãƒ³ã‚­ãƒ³ã‚°å†…ã‚¹ã‚³ã‚¢ã‚ˆã‚Šå¤§ãã„æ™‚
 		const bool isActive = m_score[i] <= SCORE->GetScore();
 		if (isActive)
 		{
-			//	‚»‚Ì’n“_‚É‘ã“ü‚·‚é
+			//	ãã®åœ°ç‚¹ã«ä»£å…¥ã™ã‚‹
 			int tmp1 = m_score[i];
 			m_score[i] = SCORE->GetScore();
 
-			//	‡ˆÊ
+			//	é †ä½
 			m_rank = i;
 
-			//	‚»‚êˆÈ~‚ğAˆê‚Â‚¸‚Â‚¸‚ç‚·
+			//	ãã‚Œä»¥é™ã‚’ã€ä¸€ã¤ãšã¤ãšã‚‰ã™
 			for (int j = (i + 1); j < CommonConstant::MAX_RANKING_NUM; j++)
 			{
 				int tmp2 = m_score[j];
@@ -357,29 +357,29 @@ void Ranking::_Sort()
 				tmp1 = tmp2;
 			}
 
-			//	ƒXƒRƒA‚Ì‘}“ü‚ÍI‚í‚Á‚½‚Ì‚ÅA
-			//	ƒ‹[ƒv‚©‚ç”²‚¯‚é
+			//	ã‚¹ã‚³ã‚¢ã®æŒ¿å…¥ã¯çµ‚ã‚ã£ãŸã®ã§ã€
+			//	ãƒ«ãƒ¼ãƒ—ã‹ã‚‰æŠœã‘ã‚‹
 			return;
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘‚«‚İ
+//	@brief	æ›¸ãè¾¼ã¿
 //-----------------------------------------------------------------------------
 void Ranking::_Writing()
 {
-	//	‘‚«‚İ
+	//	æ›¸ãè¾¼ã¿
 	LOAD_FILE->WritingCsvFile("Data/CSV/Score.csv", CommonConstant::MAX_RANKING_NUM, m_score);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“_–Å•`‰æ
+//	@brief	ç‚¹æ»…æç”»
 //-----------------------------------------------------------------------------
 void Ranking::_FlashingDraw(const int _num, const int _rank)
 {
 	
-	//	“_–Å•`‰æ
+	//	ç‚¹æ»…æç”»
 	const bool isFlashing = _num == _rank;
 	if (isFlashing)
 	{
@@ -393,16 +393,16 @@ void Ranking::_FlashingDraw(const int _num, const int _rank)
 		return;
 	}
 
-	//	“_–Å‚È‚µ•`‰æ
+	//	ç‚¹æ»…ãªã—æç”»
 	FONT->Draw(782, TEXT_START + (TEXT_INTERVAL * _num), m_scoreText[_num]);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ‰ƒ“ƒNŠO‚Ì“_–Å•`‰æ
+//	@brief	ãƒ©ãƒ³ã‚¯å¤–ã®ç‚¹æ»…æç”»
 //-----------------------------------------------------------------------------
 void Ranking::_AfterRankFlashingDraw()
 {
-	//	“_–Å•`‰æ
+	//	ç‚¹æ»…æç”»
 	const bool isAfterRank = m_rank == AFTER_RANK;
 	if (isAfterRank)
 	{

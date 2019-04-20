@@ -1,40 +1,40 @@
-
+ï»¿
 //=============================================================================
 //	@file	Menu.cpp
-//	@brief	ƒƒjƒ…[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/8
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Menu.h"
 #include "Pad.h"
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const int		Menu::MAX_MODE = 2;										//	Å‘å
-const int		Menu::MIN_MODE = 0;										//	Å¬
-const VECTOR	Menu::SELECT_CORRECTION = VGet(25.0f, 15.0f, 0.0f);		//	‘I‘ğˆÊ’u‚Ì’²®
-const float		Menu::MAX_FLAME = 900.0f;								//	Å‘åƒtƒŒ[ƒ€
-const float		Menu::MIN_FLAME = 200.0f;								//	Å¬ƒtƒŒ[ƒ€
-const float		Menu::MAX_WAIT_TIME = 10.0f;							//	’x‰„
-const float		Menu::FONT_SIZE = 10.0f;								//	•¶šƒTƒCƒY
-const float		Menu::SELECT_POS_1 = 390.0f;							//	‘I‘ğƒtƒŒ[ƒ€‚ÌˆÊ’u‚P
-const float		Menu::SELECT_POS_2 = 540.0f;							//	‘I‘ğƒtƒŒ[ƒ€‚ÌˆÊ’u‚Q
-const float		Menu::SELECT_POS_3 = 690.0f;							//	‘I‘ğƒtƒŒ[ƒ€‚ÌˆÊ’u‚R
-const float		Menu::SELECT_SCALE_SPEED = 0.002f;						//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦‚Ì‘¬“x
-const float		Menu::MIN_SELECT_SCALE = 1.0f;							//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦‚ÌÅ¬
-const float		Menu::MAX_SELECT_SCALE = 1.05f;							//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦‚ÌÅ‘å
-const float		Menu::MAX_COUNTDOWN_TIME = 60.0f;						//	ƒJƒEƒ“ƒgƒ_ƒEƒ“ŠÔ‚ÌÅ‘å
-const int		Menu::MAX_COUNTDOWN = 2;								//	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÌÅ‘å
-const float		Menu::COUNTDOWN_SCALE_SPEED = 0.02f;					//	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÌŠg‘å—¦‚Ì‘¬“x
+const int		Menu::MAX_MODE = 2;										//	æœ€å¤§
+const int		Menu::MIN_MODE = 0;										//	æœ€å°
+const VECTOR	Menu::SELECT_CORRECTION = VGet(25.0f, 15.0f, 0.0f);		//	é¸æŠä½ç½®ã®èª¿æ•´
+const float		Menu::MAX_FLAME = 900.0f;								//	æœ€å¤§ãƒ•ãƒ¬ãƒ¼ãƒ 
+const float		Menu::MIN_FLAME = 200.0f;								//	æœ€å°ãƒ•ãƒ¬ãƒ¼ãƒ 
+const float		Menu::MAX_WAIT_TIME = 10.0f;							//	é…å»¶
+const float		Menu::FONT_SIZE = 10.0f;								//	æ–‡å­—ã‚µã‚¤ã‚º
+const float		Menu::SELECT_POS_1 = 390.0f;							//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½ç½®ï¼‘
+const float		Menu::SELECT_POS_2 = 540.0f;							//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½ç½®ï¼’
+const float		Menu::SELECT_POS_3 = 690.0f;							//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½ç½®ï¼“
+const float		Menu::SELECT_SCALE_SPEED = 0.002f;						//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡ã®é€Ÿåº¦
+const float		Menu::MIN_SELECT_SCALE = 1.0f;							//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡ã®æœ€å°
+const float		Menu::MAX_SELECT_SCALE = 1.05f;							//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡ã®æœ€å¤§
+const float		Menu::MAX_COUNTDOWN_TIME = 60.0f;						//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³æ™‚é–“ã®æœ€å¤§
+const int		Menu::MAX_COUNTDOWN = 2;								//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®æœ€å¤§
+const float		Menu::COUNTDOWN_SCALE_SPEED = 0.02f;					//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®æ‹¡å¤§ç‡ã®é€Ÿåº¦
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Menu::Menu()
 {
@@ -51,12 +51,12 @@ Menu::Menu()
 	m_isSkipUpdate = false;
 	m_isCountdownStart = false;
 
-	//	ãƒtƒŒ[ƒ€
+	//	ä¸Šãƒ•ãƒ¬ãƒ¼ãƒ 
 	m_topFlame.m_spriteHendle = LoadGraph("Data/Sprite/Menu/Flame.png");
 	CommonDebug::Assert((m_topFlame.m_spriteHendle <= -1), " [ Menu.cpp ] : error : sprite loading failed.");
 	m_topFlame.m_pos = VGet(400.0f, 200.0f, 0.0f);
 
-	//	‰ºƒtƒŒ[ƒ€
+	//	ä¸‹ãƒ•ãƒ¬ãƒ¼ãƒ 
 	m_underFlame.m_spriteHendle = LoadGraph("Data/Sprite/Menu/Flame.png");
 	CommonDebug::Assert((m_underFlame.m_spriteHendle <= -1), " [ Menu.cpp ] : error : sprite loading failed.");
 	m_underFlame.m_pos = VGet(400.0f, 200.0f, 0.0f);
@@ -64,7 +64,7 @@ Menu::Menu()
 	m_menuFlame.m_vertexTop = VGet(450.0f, 200.0f, 0.0f);
 	m_menuFlame.m_vertexUnder = VGet(1500.0f, 200.0f, 0.0f);
 
-	//	ƒ‚[ƒhUI
+	//	ãƒ¢ãƒ¼ãƒ‰UI
 	m_mode[MODE::MODE_OPERATION].m_spriteHendle = LoadGraph("Data/Sprite/Menu/Operation.png");
 	m_mode[MODE::MODE_TITLE].m_spriteHendle = LoadGraph("Data/Sprite/Menu/Title.png");
 	m_mode[MODE::MODE_BACK].m_spriteHendle = LoadGraph("Data/Sprite/Menu/Close.png");
@@ -75,18 +75,18 @@ Menu::Menu()
 	m_mode[MODE::MODE_TITLE].m_pos = VGet(600.0f, 500.0f, 0.0f);
 	m_mode[MODE::MODE_BACK].m_pos = VGet(600.0f, 650.0f, 0.0f);
 
-	//	‘I‘ğ
+	//	é¸æŠ
 	m_select.m_spriteHendle = LoadGraph("Data/Sprite/Menu/Select.png");
 	CommonDebug::Assert((m_select.m_spriteHendle <= -1), " [ Menu.cpp ] : error : sprite loading failed.");
 	m_select.m_pos = VGet(950.0f, 390.0, 0.0f);
 	m_select.m_scale = MAX_SELECT_SCALE;
 
-	//	à–¾
+	//	èª¬æ˜
 	m_operation.m_spriteHendle = LoadGraph("Data/Sprite/Menu/Pad.png");
 	CommonDebug::Assert((m_operation.m_spriteHendle <= -1), " [ Menu.cpp ] : error : sprite loading failed.");
 	m_operation.m_pos = VGet(450.0f, -50.0f, 0.0f);
 
-	//	ƒJƒEƒ“ƒgƒ_ƒEƒ“
+	//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³
 	m_countdownUI[COUNTDOWN::COUNTDOWN_1].m_spriteHendle = LoadGraph("Data/Sprite/Menu/Countdown1.png");
 	m_countdownUI[COUNTDOWN::COUNTDOWN_2].m_spriteHendle = LoadGraph("Data/Sprite/Menu/Countdown2.png");
 	m_countdownUI[COUNTDOWN::COUNTDOWN_3].m_spriteHendle = LoadGraph("Data/Sprite/Menu/Countdown3.png");
@@ -103,20 +103,20 @@ Menu::Menu()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Menu::~Menu()
 {
-	//	ÅI“I‚È‰ğ•ú
+	//	æœ€çµ‚çš„ãªè§£æ”¾
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void Menu::Initialize()
 {
-	//	‰Šú‰»
+	//	åˆæœŸåŒ–
 	m_modeNumber = (int)MODE::MODE_OPERATION;
 	m_countdown = -1;
 	m_watiTime = 0.0f;
@@ -130,7 +130,7 @@ void Menu::Initialize()
 	m_isSkipUpdate = false;
 	m_isCountdownStart = false;
 
-	//	‰ŠúˆÊ’u‚É–ß‚·
+	//	åˆæœŸä½ç½®ã«æˆ»ã™
 	m_topFlame.m_pos = VGet(400.0f, 200.0f, 0.0f);
 	m_underFlame.m_pos = VGet(400.0f, 200.0f, 0.0f);
 	m_menuFlame.m_vertexTop = VGet(450.0f, 200.0f, 0.0f);
@@ -151,42 +151,42 @@ void Menu::Initialize()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Menu::Update(Pad& _pad, SoundEffect& _soundEffect)
 {
-	//	‰‰o’†‚Å‚È‚¢‚Æ‚«
+	//	æ¼”å‡ºä¸­ã§ãªã„ã¨ã
 	const bool isNotProduction = !PRODUCTION->GetIsClearProduction() && !PRODUCTION->GetIsSceneProduction() && !PRODUCTION->GetIsSpecialProduction();
 	if (isNotProduction)
 	{
-		//	ƒƒjƒ…[‚ÌŠJ•Â
+		//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®é–‹é–‰
 		_MenuOpeningAndClosing(_pad, _soundEffect);
 
-		//	ƒ‚[ƒhØ‘Ö
+		//	ãƒ¢ãƒ¼ãƒ‰åˆ‡æ›¿
 		_ChangeMode(_pad, _soundEffect);
 
-		//	‘I‘ğˆÊ’u‚ÌØ‚è‘Ö‚¦
+		//	é¸æŠä½ç½®ã®åˆ‡ã‚Šæ›¿ãˆ
 		_ChangeSelectPos();
 
-		//	ƒ‚[ƒh
+		//	ãƒ¢ãƒ¼ãƒ‰
 		_Mode(_pad, _soundEffect);
 
-		//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦‚Ì•ÏX
+		//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡ã®å¤‰æ›´
 		_ChangeSelectScale();
 
-		//	ƒJƒEƒ“ƒgƒ_ƒEƒ“
+		//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³
 		_Countdown(_soundEffect);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void Menu::Draw()
 {
 	if (m_isMenuDraw)
 	{
-		//	”¼“§–¾•\¦
+		//	åŠé€æ˜è¡¨ç¤º
 		const int blendVal = 128;
 		SetDrawBlendMode(DX_BLENDMODE_ALPHA, blendVal);
 		DrawBox(
@@ -200,36 +200,36 @@ void Menu::Draw()
 		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
 
-	//	ƒƒjƒ…[
+	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼
 	_MenuDraw();
 
-	//	‘€ìà–¾
+	//	æ“ä½œèª¬æ˜
 	_OperationDraw();
 
 	if (m_isMenuDraw)
 	{
-		//	ƒtƒŒ[ƒ€‚Ì•`‰æ
+		//	ãƒ•ãƒ¬ãƒ¼ãƒ ã®æç”»
 		DrawGraph((int)m_topFlame.m_pos.x, (int)m_topFlame.m_pos.y, m_topFlame.m_spriteHendle, TRUE);
 		DrawGraph((int)m_underFlame.m_pos.x, (int)m_underFlame.m_pos.y, m_underFlame.m_spriteHendle, TRUE);
 	}
 
-	//	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚Ì•`‰æ
+	//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®æç”»
 	_CountdownDraw();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒƒjƒ…[‚ÌŠJ•Â
+//	@brief	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®é–‹é–‰
 //-----------------------------------------------------------------------------
 void Menu::_MenuOpeningAndClosing(Pad& _pad, SoundEffect& _soundEffect)
 {
-	//	ƒƒjƒ…[‚ÌƒIƒ“ƒIƒtØ‚è‘Ö‚¦
+	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®ã‚ªãƒ³ã‚ªãƒ•åˆ‡ã‚Šæ›¿ãˆ
 	const bool isKeyActive = KEY->Push(KEY_INPUT_R) || KEY->Push(KEY_INPUT_V);
 	const bool isButtonActive = (isKeyActive || _pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_START)) && !m_isCountdownStart;
 	if (isButtonActive)
 	{
 		m_isMenuState = !m_isMenuState;
 
-		//	SE‚ÌÄ¶
+		//	SEã®å†ç”Ÿ
 		if (m_isMenuState) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_OPEN); }
 		else { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_CLOSE); }
 	}
@@ -239,13 +239,13 @@ void Menu::_MenuOpeningAndClosing(Pad& _pad, SoundEffect& _soundEffect)
 	{
 		m_isMenuDraw = true;
 
-		//	‰º‚ÖˆÚ“®
+		//	ä¸‹ã¸ç§»å‹•
 		const VECTOR tmpDir = VGet(0.0f, 1.0f, 0.0f);
 		const float tmpSpeed = 80.0f;
 		VECTOR velocity = VScale(tmpDir, tmpSpeed);
 		m_underFlame.m_pos = VAdd(m_underFlame.m_pos, velocity);
 
-		//	Å‘å
+		//	æœ€å¤§
 		const bool isMaxVal = m_underFlame.m_pos.y >= MAX_FLAME;
 		if (isMaxVal)
 		{
@@ -258,28 +258,28 @@ void Menu::_MenuOpeningAndClosing(Pad& _pad, SoundEffect& _soundEffect)
 
 		}
 
-		//	‘Š‘ÎÀ•W
+		//	ç›¸å¯¾åº§æ¨™
 		m_menuFlame.m_vertexUnder.y = m_underFlame.m_pos.y;
 	}
 
 	const bool isClose = !m_isMenuState;
 	if (isClose)
 	{
-		//	ã‚ÖˆÚ“®
+		//	ä¸Šã¸ç§»å‹•
 		const VECTOR tmpDir = VGet(0.0f, -1.0f, 0.0f);
 		const float tmpSpeed = 80.0f;
 		VECTOR velocity = VScale(tmpDir, tmpSpeed);
 		m_underFlame.m_pos = VAdd(m_underFlame.m_pos, velocity);
 
-		//	Å¬
+		//	æœ€å°
 		const bool isMinVal = m_underFlame.m_pos.y <= MIN_FLAME;
 		if (isMinVal) { m_underFlame.m_pos.y = MIN_FLAME; m_isMenu = false; m_isMenuDraw = false; }
 
-		//	‘Š‘ÎÀ•W
+		//	ç›¸å¯¾åº§æ¨™
 		m_menuFlame.m_vertexUnder.y = m_underFlame.m_pos.y;
 	}
 
-	//	ƒƒjƒ…[‚ªƒIƒt‚Ì‚Æ‚«‚Í‰Šú‰»
+	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãŒã‚ªãƒ•ã®ã¨ãã¯åˆæœŸåŒ–
 	if (!m_isMenu)
 	{
 		m_modeNumber = (int)MODE::MODE_OPERATION;
@@ -293,26 +293,26 @@ void Menu::_MenuOpeningAndClosing(Pad& _pad, SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ‚[ƒh‚ÌØ‚è‘Ö‚¦
+//	@brief	ãƒ¢ãƒ¼ãƒ‰ã®åˆ‡ã‚Šæ›¿ãˆ
 //-----------------------------------------------------------------------------
 void Menu::_ChangeMode(Pad& _pad, SoundEffect& _soundEffect)
 {
-	//	ƒƒjƒ…[’†‚Å‘€ìà–¾ˆÈŠO‚Ì‚Æ‚«
+	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ä¸­ã§æ“ä½œèª¬æ˜ä»¥å¤–ã®ã¨ã
 	const bool isActive = m_isMenu && !m_isOperation;
 	if (isActive)
 	{
-		//	ƒ‚[ƒhØ‘Ö
+		//	ãƒ¢ãƒ¼ãƒ‰åˆ‡æ›¿
 		m_watiTime--;
 		const bool isUp = (_pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_UP, PadInfo::STICK_DEAD_ZONE) || KEY->Press(KEY_INPUT_W) || KEY->Press(KEY_INPUT_UP)) && m_watiTime <= 0.0f;
 		const bool isDown = (_pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_DOWN, PadInfo::STICK_DEAD_ZONE) || KEY->Press(KEY_INPUT_S) || KEY->Press(KEY_INPUT_DOWN)) && m_watiTime <= 0.0f;
 		if (isUp) { m_modeNumber--; m_watiTime = MAX_WAIT_TIME; }
 		if (isDown) { m_modeNumber++; m_watiTime = MAX_WAIT_TIME; }
 
-		//	SE‚ÌÄ¶
+		//	SEã®å†ç”Ÿ
 		const bool isOnSe = isUp || isDown;
 		if (isOnSe) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_CURSOR); }
 
-		//	Å‘åÅ¬
+		//	æœ€å¤§æœ€å°
 		const bool isMinVal = m_modeNumber < MIN_MODE;
 		const bool isMaxVal = m_modeNumber > MAX_MODE;
 		if (isMinVal) { m_modeNumber = MAX_MODE; }
@@ -321,23 +321,23 @@ void Menu::_ChangeMode(Pad& _pad, SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘I‘ğˆÊ’u‚Ì•ÏX
+//	@brief	é¸æŠä½ç½®ã®å¤‰æ›´
 //-----------------------------------------------------------------------------
 void Menu::_ChangeSelectPos()
 {
 	switch (m_modeNumber)
 	{
-		//	‘€ìà–¾
+		//	æ“ä½œèª¬æ˜
 	case (int)MODE::MODE_OPERATION:
 		m_select.m_pos.y = SELECT_POS_1;
 		break;
 
-		//	ƒ^ƒCƒgƒ‹‚Ö–ß‚é
+		//	ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹
 	case (int)MODE::MODE_TITLE:
 		m_select.m_pos.y = SELECT_POS_2;
 		break;
 
-		//	ƒQ[ƒ€‚Ö–ß‚é
+		//	ã‚²ãƒ¼ãƒ ã¸æˆ»ã‚‹
 	case (int)MODE::MODE_BACK:
 		m_select.m_pos.y = SELECT_POS_3;
 		break;
@@ -345,11 +345,11 @@ void Menu::_ChangeSelectPos()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ‚[ƒh
+//	@brief	ãƒ¢ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 void Menu::_Mode(Pad& _pad, SoundEffect& _soundEffect)
 {
-	//	Œˆ’è
+	//	æ±ºå®š
 	const bool isKeyActive = KEY->Push(KEY_INPUT_RETURN) || KEY->Push(KEY_INPUT_SPACE) || KEY->Push(KEY_INPUT_X) || KEY->Push(KEY_INPUT_K);
 	const bool isButtonActive = isKeyActive || _pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A);
 	const bool isDecision = isButtonActive && m_isMenu;
@@ -357,23 +357,23 @@ void Menu::_Mode(Pad& _pad, SoundEffect& _soundEffect)
 	{
 		switch (m_modeNumber)
 		{
-			//	‘€ìà–¾
+			//	æ“ä½œèª¬æ˜
 		case (int)MODE::MODE_OPERATION:
 			m_isOperation = !m_isOperation;
 
-			//	SE‚ÌÄ¶
+			//	SEã®å†ç”Ÿ
 			if (m_isOperation) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_DECISION); }
 			else { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_BACK); }
 
 			break;
 
-			//	ƒ^ƒCƒgƒ‹‚Ö–ß‚é
+			//	ã‚¿ã‚¤ãƒˆãƒ«ã¸æˆ»ã‚‹
 		case (int)MODE::MODE_TITLE:
 			m_isGoToTitle = true;
 			_soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_DECISION);
 			break;
 
-			//	ƒQ[ƒ€‚Ö–ß‚é
+			//	ã‚²ãƒ¼ãƒ ã¸æˆ»ã‚‹
 		case (int)MODE::MODE_BACK:
 			m_watiTime = 0.0f;
 			m_isMenuState = false;
@@ -388,15 +388,15 @@ void Menu::_Mode(Pad& _pad, SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦
+//	@brief	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡
 //-----------------------------------------------------------------------------
 void Menu::_ChangeSelectScale()
 {
-	//	Šg‘å—¦‚Ì•ÏX
+	//	æ‹¡å¤§ç‡ã®å¤‰æ›´
 	if (m_isSelectScaleState) { m_select.m_scale -= SELECT_SCALE_SPEED; }
 	else { m_select.m_scale += SELECT_SCALE_SPEED; }
 
-	//	Å‘åÅ¬
+	//	æœ€å¤§æœ€å°
 	const bool isMinVal = m_select.m_scale <= MIN_SELECT_SCALE;
 	const bool isMaxVal = m_select.m_scale >= MAX_SELECT_SCALE;
 	if (isMinVal) { m_select.m_scale = MIN_SELECT_SCALE; m_isSelectScaleState = false; }
@@ -404,7 +404,7 @@ void Menu::_ChangeSelectScale()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒJƒEƒ“ƒgƒ_ƒEƒ“
+//	@brief	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³
 //-----------------------------------------------------------------------------
 void Menu::_Countdown(SoundEffect& _soundEffect)
 {
@@ -415,15 +415,15 @@ void Menu::_Countdown(SoundEffect& _soundEffect)
 		const bool isSE = m_countdownTime == 1.0f;
 		if (isSE) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_COUNTDOWN); m_isCountdownStart = true; }
 
-		//	ƒJƒEƒ“ƒgƒ_ƒEƒ“ŠÔ
+		//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³æ™‚é–“
 		m_countdownTime++;
 		const bool isMaxVal = m_countdownTime >= MAX_COUNTDOWN_TIME;
 		if (isMaxVal) { m_countdownTime = 0.0f; m_countdown--; }
 
-		//	Šg‘å—¦‚ğ¬‚³‚­‚·‚é
+		//	æ‹¡å¤§ç‡ã‚’å°ã•ãã™ã‚‹
 		m_countdownUI[m_countdown].m_scale -= COUNTDOWN_SCALE_SPEED;
 
-		//	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÌI—¹
+		//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®çµ‚äº†
 		const bool isEndCountdown = m_countdown <= -1;
 		if (isEndCountdown) { m_countdown = -1; m_isSkipUpdate = false; m_isCountdownStart = false; }
 	}
@@ -438,33 +438,33 @@ void Menu::_Countdown(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒƒjƒ…[‚Ì•`‰æ
+//	@brief	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®æç”»
 //-----------------------------------------------------------------------------
 void Menu::_MenuDraw()
 {
 	if (!m_isOperation)
 	{
-		//	‘I‘ğƒtƒŒ[ƒ€
+		//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ 
 		const bool isSelectUI = m_underFlame.m_pos.y >= m_select.m_pos.y + FONT_SIZE;
 		if (isSelectUI) { DrawRotaGraph((int)m_select.m_pos.x, (int)m_select.m_pos.y, (double)m_select.m_scale, 0.0, m_select.m_spriteHendle, TRUE); }
 
-		//	ƒƒjƒ…[‚Ì•\¦
-		//	‘€ì
+		//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®è¡¨ç¤º
+		//	æ“ä½œ
 		const bool isOperationUI = m_underFlame.m_pos.y >= m_mode[MODE::MODE_OPERATION].m_pos.y + FONT_SIZE;
 		if (isOperationUI) { DrawGraph((int)m_mode[MODE::MODE_OPERATION].m_pos.x, (int)m_mode[MODE::MODE_OPERATION].m_pos.y, m_mode[MODE::MODE_OPERATION].m_spriteHendle, TRUE); }
 
-		//	ƒ^ƒCƒgƒ‹‚Ö
+		//	ã‚¿ã‚¤ãƒˆãƒ«ã¸
 		const bool isTitleUI = m_underFlame.m_pos.y >= m_mode[MODE::MODE_TITLE].m_pos.y + FONT_SIZE;
 		if (isTitleUI) { DrawGraph((int)m_mode[MODE::MODE_TITLE].m_pos.x, (int)m_mode[MODE::MODE_TITLE].m_pos.y, m_mode[MODE::MODE_TITLE].m_spriteHendle, TRUE); }
 
-		//	•Â‚¶‚é
+		//	é–‰ã˜ã‚‹
 		const bool isBackUI = m_underFlame.m_pos.y >= m_mode[MODE::MODE_BACK].m_pos.y + FONT_SIZE;
 		if (isBackUI) { DrawGraph((int)m_mode[MODE::MODE_BACK].m_pos.x, (int)m_mode[MODE::MODE_BACK].m_pos.y, m_mode[MODE::MODE_BACK].m_spriteHendle, TRUE); }
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘€ìà–¾‚Ì•`‰æ
+//	@brief	æ“ä½œèª¬æ˜ã®æç”»
 //-----------------------------------------------------------------------------
 void Menu::_OperationDraw()
 {
@@ -472,7 +472,7 @@ void Menu::_OperationDraw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚Ì•`‰æ
+//	@brief	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®æç”»
 //-----------------------------------------------------------------------------
 void Menu::_CountdownDraw()
 {
@@ -484,11 +484,11 @@ void Menu::_CountdownDraw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void Menu::_FinalRelease()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_topFlame.m_spriteHendle);
 	DeleteGraph(m_underFlame.m_spriteHendle);
 	DeleteGraph(m_mode[MODE::MODE_TITLE].m_spriteHendle);

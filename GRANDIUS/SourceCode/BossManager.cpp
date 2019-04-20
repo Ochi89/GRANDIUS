@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	BossManager.cpp
-//	@brief	ƒ{ƒXƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒœã‚¹ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/18
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "BossManager.h"
 #include "MediumBoss.h"
@@ -17,40 +17,40 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float BossManager::OUT_RANGE_MEDIUM_BOSS = -100.0f;			//	’†ƒ{ƒX‚Ì”ÍˆÍŠO
-const float BossManager::OUT_RANGE_LAST_BOSS = -100.0f;				//	ÅIƒ{ƒX‚Ì”ÍˆÍŠO
+const float BossManager::OUT_RANGE_MEDIUM_BOSS = -100.0f;			//	ä¸­ãƒœã‚¹ã®ç¯„å›²å¤–
+const float BossManager::OUT_RANGE_LAST_BOSS = -100.0f;				//	æœ€çµ‚ãƒœã‚¹ã®ç¯„å›²å¤–
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 BossManager::BossManager()
 {
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULL
 	m_mediumBoss.m_pBuf = NULL;
 	m_lastBoss.m_pBuf = NULL;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 BossManager::~BossManager()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void BossManager::Create()
 {
-	//	’†ƒ{ƒX‘å–{‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	//	ä¸­ãƒœã‚¹å¤§æœ¬ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	m_mediumBoss.m_sourceModelHandle = MV1LoadModel("Data/Model/Boss/MediumBoss.mqo");
 	CommonDebug::Assert((m_mediumBoss.m_sourceModelHandle <= -1), " [ BassManager.cpp ] : error : model loading failed.");
 
-	//	ÅIƒ{ƒX‘å–{‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+	//	æœ€çµ‚ãƒœã‚¹å¤§æœ¬ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
 	m_lastBoss.m_sourceModelHandle = MV1LoadModel("Data/Model/Boss/BossBody.mqo");
 	m_lastBoss.m_sideBarrelSourceModelHandle = MV1LoadModel("Data/Model/Boss/BossSideBarrel.mqo");
 	m_lastBoss.m_armSourceModelHandle = MV1LoadModel("Data/Model/Boss/BossArm.mqo");
@@ -60,41 +60,41 @@ void BossManager::Create()
 	CommonDebug::Assert((m_lastBoss.m_armSourceModelHandle <= -1), " [ BassManager.cpp ] : error : model loading failed.");
 	CommonDebug::Assert((m_lastBoss.m_coreSourceModelHandle <= -1), " [ BassManager.cpp ] : error : model loading failed.");
 
-	//	’†ƒ{ƒX‚Ìì¬
+	//	ä¸­ãƒœã‚¹ã®ä½œæˆ
 	m_mediumBoss.m_pBuf = new MediumBoss(m_mediumBoss.m_sourceModelHandle);
 	m_mediumBoss.m_pBuf->Create();
 	m_mediumBoss.m_isEmerge = false;
 
-	//	ÅIƒ{ƒX‚Ìì¬
+	//	æœ€çµ‚ãƒœã‚¹ã®ä½œæˆ
 	m_lastBoss.m_pBuf = new LastBoss(m_lastBoss.m_sourceModelHandle, m_lastBoss.m_sideBarrelSourceModelHandle, m_lastBoss.m_armSourceModelHandle, m_lastBoss.m_coreSourceModelHandle);
 	m_lastBoss.m_pBuf->Create();
 	m_lastBoss.m_isEmerge = false;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void BossManager::Release()
 {
-	//	’†ƒ{ƒX‚Ì‰ğ•ú
+	//	ä¸­ãƒœã‚¹ã®è§£æ”¾
 	CommonSafe::Release(m_mediumBoss.m_pBuf);
 
-	//	ÅIƒ{ƒX‚Ì‰ğ•ú
+	//	æœ€çµ‚ãƒœã‚¹ã®è§£æ”¾
 	CommonSafe::Release(m_lastBoss.m_pBuf);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ’u
+//	@brief	åˆæœŸå‡¦ç½®
 //-----------------------------------------------------------------------------
 void BossManager::Initialize()
 {
-	//	’†ƒ{ƒX‚Ì‰Šú‰»
+	//	ä¸­ãƒœã‚¹ã®åˆæœŸåŒ–
 	if (m_mediumBoss.m_pBuf)
 	{
 		m_mediumBoss.m_pBuf->Initialize();
 	}
 
-	//	ÅIƒ{ƒX‚Ì‰Šú‰»
+	//	æœ€çµ‚ãƒœã‚¹ã®åˆæœŸåŒ–
 	if (m_lastBoss.m_pBuf)
 	{
 		m_lastBoss.m_pBuf->Initialize();
@@ -102,31 +102,31 @@ void BossManager::Initialize()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void BossManager::Update(ShotManager& _shot, SoundEffect& _soundEffect)
 {
 	const bool isNotClear = !PRODUCTION->GetIsClearProduction();
 	if (isNotClear)
 	{
-		//	’†ƒ{ƒX‚ÌXV
+		//	ä¸­ãƒœã‚¹ã®æ›´æ–°
 		if (m_mediumBoss.m_pBuf)
 		{
 			m_mediumBoss.m_pBuf->SetIsEmerge(m_mediumBoss.m_isEmerge);
 			m_mediumBoss.m_pBuf->Update(_shot, _soundEffect);
 
-			//	€‚ñ‚¾‚çAƒƒ‚ƒŠ‚ğ‰ğ•ú‚·‚é
+			//	æ­»ã‚“ã ã‚‰ã€ãƒ¡ãƒ¢ãƒªã‚’è§£æ”¾ã™ã‚‹
 			const bool isDead = m_mediumBoss.m_pBuf->GetIsDeleate() || m_mediumBoss.m_pBuf->GetPos().x <= OUT_RANGE_MEDIUM_BOSS;
 			if (isDead) { CommonSafe::Release(m_mediumBoss.m_pBuf); }
 		}
 
-		//	ÅIƒ{ƒX‚ÌXV
+		//	æœ€çµ‚ãƒœã‚¹ã®æ›´æ–°
 		if (m_lastBoss.m_pBuf)
 		{
 			m_lastBoss.m_pBuf->SetIsEmerge(m_lastBoss.m_isEmerge);
 			m_lastBoss.m_pBuf->Update(_shot, _soundEffect);
 
-			//	€‚ñ‚¾‚çAƒƒ‚ƒŠ‚ğ‰ğ•ú‚·‚é
+			//	æ­»ã‚“ã ã‚‰ã€ãƒ¡ãƒ¢ãƒªã‚’è§£æ”¾ã™ã‚‹
 			const bool isDead = !m_lastBoss.m_pBuf->GetIsAlive() || m_lastBoss.m_pBuf->GetPos().x <= OUT_RANGE_LAST_BOSS;
 			if (isDead) { CommonSafe::Release(m_lastBoss.m_pBuf); }
 		}
@@ -134,17 +134,17 @@ void BossManager::Update(ShotManager& _shot, SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void BossManager::Draw()
 {
-	//	’†ƒ{ƒX‚Ì•`‰æ
+	//	ä¸­ãƒœã‚¹ã®æç”»
 	if (m_mediumBoss.m_pBuf)
 	{
 		m_mediumBoss.m_pBuf->Draw();
 	}
 
-	//	ÅIƒ{ƒX‚Ì•`‰æ
+	//	æœ€çµ‚ãƒœã‚¹ã®æç”»
 	if (m_lastBoss.m_pBuf)
 	{
 		m_lastBoss.m_pBuf->Draw();
@@ -152,13 +152,13 @@ void BossManager::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void BossManager::_FinalRelease()
 {
-	//	’†ƒ{ƒX‚Ì‰ğ•ú
+	//	ä¸­ãƒœã‚¹ã®è§£æ”¾
 	CommonSafe::Release(m_mediumBoss.m_pBuf);
 
-	//	ÅIƒ{ƒX‚Ì‰ğ•ú
+	//	æœ€çµ‚ãƒœã‚¹ã®è§£æ”¾
 	CommonSafe::Release(m_lastBoss.m_pBuf);
 }

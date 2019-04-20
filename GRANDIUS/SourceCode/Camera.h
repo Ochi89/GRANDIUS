@@ -1,107 +1,107 @@
-
+ï»¿
 //=============================================================================
 //	@file	Camera.h
-//	@brief	ƒJƒƒ‰
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚«ãƒ¡ãƒ©
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/29
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class PlayerManager;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒJƒƒ‰ƒNƒ‰ƒX
+//	@brief	ã‚«ãƒ¡ãƒ©ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Camera final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Camera();
 	~Camera();
 
-	//	ƒ^ƒCƒgƒ‹—p‚Ì‰Šúˆ—
+	//	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®åˆæœŸå‡¦ç†
 	void InitializeForTitle();
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 
-	//	ƒ^ƒCƒgƒ‹—p‚ÌXVˆ—
+	//	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®æ›´æ–°å‡¦ç†
 	void UpdateForTitle(PlayerManager& _playerManager);
 
-	//	ƒŠƒUƒ‹ƒg—p‚ÌXVˆ—
+	//	ãƒªã‚¶ãƒ«ãƒˆç”¨ã®æ›´æ–°å‡¦ç†
 	void UpdateForResult(PlayerManager& _playerManager);
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(PlayerManager& _playerManager);
 
 //==================== getter =====================//
 
-	//	…•½Šp“x‚Ì getter
+	//	æ°´å¹³è§’åº¦ã® getter
 	const float& GetHorizontalAngle() const { return m_horizontalAngle; }
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒ^ƒCƒgƒ‹—p‚Ì‰‰o
+	//	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®æ¼”å‡º
 	void _ProductionForTitle(PlayerManager& _playerManager);
 
-	//	‰‰o
+	//	æ¼”å‡º
 	void _Production(PlayerManager& _playerManager);
 
-	//	ƒV[ƒ“‰‰o
+	//	ã‚·ãƒ¼ãƒ³æ¼”å‡º
 	void _SceneProduction(PlayerManager& _playerManager);
 
-	//	•KE‰‰o
+	//	å¿…æ®ºæ¼”å‡º
 	void _SpecialProduction(PlayerManager& _playerManager);
 
-	//	ƒNƒŠƒA‰‰o
+	//	ã‚¯ãƒªã‚¢æ¼”å‡º
 	void _ClearProduction(PlayerManager& _playerManager);
 
-	//	ƒ^ƒCƒgƒ‹—p‚Ì’‹“_‚Ìİ’è
+	//	ã‚¿ã‚¤ãƒˆãƒ«ç”¨ã®æ³¨è¦–ç‚¹ã®è¨­å®š
 	void _SetGazingPointForTitle(PlayerManager& _playerManager);
 
-	//	’‹“_‚Ìİ’è
+	//	æ³¨è¦–ç‚¹ã®è¨­å®š
 	void _SetGazingPoint();
 
-	//	ƒJƒƒ‰‚ÌŠp“x‚É‚æ‚éƒ|ƒWƒVƒ‡ƒ“‚Ì•ÏX
+	//	ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã«ã‚ˆã‚‹ãƒã‚¸ã‚·ãƒ§ãƒ³ã®å¤‰æ›´
 	VECTOR _PosAccordingToAngle();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	VECTOR		m_pos;					//	ƒ|ƒWƒVƒ‡ƒ“
-	VECTOR		m_lookAtPos;			//	’‹“_
-	float		m_verticalAngle;		//	‚’¼Šp“x
-	float		m_horizontalAngle;		//	…•½Šp“x
-	float		m_productionTime;		//	‰‰oŠÔ
-	bool		m_isProduction;			//	‰‰oƒtƒ‰ƒO
+	VECTOR		m_pos;					//	ãƒã‚¸ã‚·ãƒ§ãƒ³
+	VECTOR		m_lookAtPos;			//	æ³¨è¦–ç‚¹
+	float		m_verticalAngle;		//	å‚ç›´è§’åº¦
+	float		m_horizontalAngle;		//	æ°´å¹³è§’åº¦
+	float		m_productionTime;		//	æ¼”å‡ºæ™‚é–“
+	bool		m_isProduction;			//	æ¼”å‡ºãƒ•ãƒ©ã‚°
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float		V_ANGLE_SPEED_MOUSE;	// ‚’¼Šp“x‚Ì‰ñ“]‘¬“x
-	static const float		H_ANGLE_SPEED_MOUSE;	// …•½Šp“x‚Ì‰ñ“]‘¬“x
-	static const float		V_ANGLE_SPEED_PAD;		// ‚’¼Šp“x‚Ì‰ñ“]‘¬“x
-	static const float		H_ANGLE_SPEED_PAD;		// …•½Šp“x‚Ì‰ñ“]‘¬“x
-	static const int		MAX_H_ANGLE;			// ‚’¼Šp“x‚ÌÅ‘å
-	static const int		MIN_H_ANGLE;			// ‚’¼Šp“x‚ÌÅ¬
-	static const int		MAX_V_ANGLE;			// …•½Šp“x‚ÌÅ‘å
-	static const int		MIN_V_ANGLE;			// …•½Šp“x‚ÌÅ¬
-	static const float		LERP_SPEED;				//	üŒ`•ÛŠÇ‚Ì‘¬“x
-	static const float		HEIGHT_LENGTH;			//	‚‚³‚Ì’·‚³
-	static const float		DEPTH_LENGTH;			//	‰œs‚«‚Ì’·‚³
+	static const float		V_ANGLE_SPEED_MOUSE;	// å‚ç›´è§’åº¦ã®å›è»¢é€Ÿåº¦
+	static const float		H_ANGLE_SPEED_MOUSE;	// æ°´å¹³è§’åº¦ã®å›è»¢é€Ÿåº¦
+	static const float		V_ANGLE_SPEED_PAD;		// å‚ç›´è§’åº¦ã®å›è»¢é€Ÿåº¦
+	static const float		H_ANGLE_SPEED_PAD;		// æ°´å¹³è§’åº¦ã®å›è»¢é€Ÿåº¦
+	static const int		MAX_H_ANGLE;			// å‚ç›´è§’åº¦ã®æœ€å¤§
+	static const int		MIN_H_ANGLE;			// å‚ç›´è§’åº¦ã®æœ€å°
+	static const int		MAX_V_ANGLE;			// æ°´å¹³è§’åº¦ã®æœ€å¤§
+	static const int		MIN_V_ANGLE;			// æ°´å¹³è§’åº¦ã®æœ€å°
+	static const float		LERP_SPEED;				//	ç·šå½¢ä¿ç®¡ã®é€Ÿåº¦
+	static const float		HEIGHT_LENGTH;			//	é«˜ã•ã®é•·ã•
+	static const float		DEPTH_LENGTH;			//	å¥¥è¡Œãã®é•·ã•
 };

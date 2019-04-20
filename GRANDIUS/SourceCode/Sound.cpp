@@ -1,27 +1,27 @@
-
+ï»¿
 //=============================================================================
 //	@file	Sound.h
-//	@brief	ƒTƒEƒ“ƒhƒx[ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰ãƒ™ãƒ¼ã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/04
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Sound.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const int Sound::NO_SOUND = 0;	//	‰¹–³‚µ
+const int Sound::NO_SOUND = 0;	//	éŸ³ç„¡ã—
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Sound::Sound(const char* _soundName)
 {
-	//	ƒTƒEƒ“ƒh‚Ì“Ç‚İ‚İ
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®èª­ã¿è¾¼ã¿
 	m_soundHandle = LoadSoundMem(_soundName);
 	CommonDebug::Assert((m_soundHandle <= -1), " [ Sound.cpp ] : error : sound loading failed.");
 	m_isUsedStatus = false;
@@ -31,11 +31,11 @@ Sound::Sound(const char* _soundName)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Sound::Sound(const char* _soundName, const char* _nextSoundName)
 {
-	//	ƒTƒEƒ“ƒh‚Ì“Ç‚İ‚İ
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®èª­ã¿è¾¼ã¿
 	m_soundHandle = LoadSoundMem(_soundName);
 	m_nextSoundHandle = LoadSoundMem(_nextSoundName);
 	CommonDebug::Assert((m_soundHandle <= -1), " [ Sound.cpp ] : error : sound loading failed.");
@@ -47,11 +47,11 @@ Sound::Sound(const char* _soundName, const char* _nextSoundName)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Sound::Sound(const int _soundHandle)
 {
-	//	ƒTƒEƒ“ƒh‚Ì“Ç‚İ‚İ
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®èª­ã¿è¾¼ã¿
 	m_soundHandle = _soundHandle;
 	CommonDebug::Assert((m_soundHandle <= -1), " [ Sound.cpp ] : error : sound loading failed.");
 	m_isUsedStatus = false;
@@ -61,16 +61,16 @@ Sound::Sound(const int _soundHandle)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Sound::~Sound()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void Sound::Initialize()
 {
@@ -81,22 +81,22 @@ void Sound::Initialize()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Sound::Update()
 {
-	//	Ä¶‚µ‚Ä‚¢‚È‚¢‚Æ‚«
+	//	å†ç”Ÿã—ã¦ã„ãªã„ã¨ã
 	const bool isEndSound = CheckSoundMem(m_soundHandle) == NO_SOUND;
 	if (isEndSound) { m_isDelete = true; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	Ä¶ˆ—
+//	@brief	å†ç”Ÿå‡¦ç†
 //-----------------------------------------------------------------------------
 void Sound::OnPlay(const int _playType)
 {
-	//	Ä¶’†‚Å‚Í‚È‚¢‚Æ‚«‚ÍA
-	//	Ä¶‚·‚é
+	//	å†ç”Ÿä¸­ã§ã¯ãªã„ã¨ãã¯ã€
+	//	å†ç”Ÿã™ã‚‹
 	if (!m_isUsedStatus)
 	{
 		PlaySoundMem(m_soundHandle, _playType);
@@ -105,17 +105,17 @@ void Sound::OnPlay(const int _playType)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒTƒEƒ“ƒh‚ÌØ‚è‘Ö‚¦
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰ã®åˆ‡ã‚Šæ›¿ãˆ
 //-----------------------------------------------------------------------------
 void Sound::ChangeSound(const int _nextPlayType, const float _nextSoundWaitTime)
 {
 	if (m_isChangeSound)
 	{
-		//	‘O‚ÌƒTƒEƒ“ƒh‚Ì’â~
+		//	å‰ã®ã‚µã‚¦ãƒ³ãƒ‰ã®åœæ­¢
 		StopSoundMem(m_soundHandle);
 		m_isUsedStatus = false;
 
-		//	Ÿ‚ÌƒTƒEƒ“ƒh‚ÌŠJn
+		//	æ¬¡ã®ã‚µã‚¦ãƒ³ãƒ‰ã®é–‹å§‹
 		const bool isActive = !m_isUsedStatus && m_nextWaitTime++ >= _nextSoundWaitTime;
 		if (isActive)
 		{
@@ -127,11 +127,11 @@ void Sound::ChangeSound(const int _nextPlayType, const float _nextSoundWaitTime)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void Sound::_FinalRelease()
 {
-	//	ƒTƒEƒ“ƒh‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteSoundMem(m_soundHandle);
 	DeleteSoundMem(m_nextSoundHandle);
 }

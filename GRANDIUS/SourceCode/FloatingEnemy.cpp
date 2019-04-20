@@ -1,13 +1,13 @@
-
+﻿
 //=============================================================================
 //	@file	FloatingEnemy.cpp
-//	@brief	���V�G�l�~�[
-//	@autor	���m ���
+//	@brief	浮遊エネミー
+//	@autor	相知 拓弥
 //	@date	2018/11/16
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	�C���N���[�h
+//	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "FloatingEnemy.h"
 #include "Common.h"
@@ -18,53 +18,53 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	�ÓI�萔
+//	@brief	静的定数
 //-----------------------------------------------------------------------------
-const float FloatingEnemy::ADD_RADIAN_SPEED = 0.1f;	//	���W�A���p�̉��Z���x
+const float FloatingEnemy::ADD_RADIAN_SPEED = 0.1f;	//	ラジアン角の加算速度
 
 //-----------------------------------------------------------------------------
-//	@brief	�R���X�g���N�^
+//	@brief	コンストラクタ
 //-----------------------------------------------------------------------------
 FloatingEnemy::FloatingEnemy(const int _modelHandle)
 	: EnemyBase(_modelHandle)
 {
-	//	�e�ϐ���������
+	//	各変数を初期化
 	m_pos = CommonConstant::ORIGIN;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�f�X�g���N�^
+//	@brief	デストラクタ
 //-----------------------------------------------------------------------------
 FloatingEnemy::~FloatingEnemy()
 {
-	//	�ŏI�I�ȉ������
+	//	最終的な解放処理
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�쐬����
+//	@brief	作成処理
 //-----------------------------------------------------------------------------
 void FloatingEnemy::Create()
 {
-	// �����Ȃ�
+	// 処理なし
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�������
+//	@brief	解放処理
 //-----------------------------------------------------------------------------
 void FloatingEnemy::Release()
 {
-	// �����Ȃ�
+	// 処理なし
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	��������
+//	@brief	初期処理
 //-----------------------------------------------------------------------------
 void FloatingEnemy::Initialize()
 {
-	//	�e�ϐ���������Ԃɐݒ�
+	//	各変数を初期状態に設定
 	m_pos = VGet(0.0f, 50.0f, 0.0f);
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = VGet(0.0f, 5.0f, 0.0f);
@@ -81,93 +81,93 @@ void FloatingEnemy::Initialize()
 	m_isOffDraw = false;
 	m_isDeleate = false;
 
-	//	�����蔻��p�̍\���̂̏�����
+	//	当たり判定用の構造体の初期化
 	m_hitCircle.m_radius = HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
-	//	�p�x�����蓖�Ă�
+	//	角度を割り当てる
 	MV1SetRotationXYZ(m_modelHandle, m_angle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�X�V����
+//	@brief	更新処理
 //-----------------------------------------------------------------------------
 void FloatingEnemy::Update(PlayerManager& _playerManager, ShotManager& _shotManager, SoundEffect& _soundEffect)
 {
-	//	�q�b�g���Ă��Ȃ��Ƃ����A
-	//	�K�E�Z�ȊO�̂Ƃ�
+	//	ヒットしていないときか、
+	//	必殺技以外のとき
 	const bool isActive = !m_isHit && !PRODUCTION->GetIsSpecialProduction();
 	if (isActive)
 	{
-		//	�����̐؂�ւ�
+		//	向きの切り替え
 		_ChangeDir();
 
-		//	�ړ�����
+		//	移動処理
 		VECTOR moving = MoveHelper::AskMoveAmount(m_dir, m_moveSpeed);
 
-		//	�V���b�g���g�p����
+		//	ショットを使用する
 		if (m_isUseShot)
 		{
-			//	�V���b�g�̓o�^
+			//	ショットの登録
 			_ShotEntry(_playerManager, _shotManager);
 		}
 
-		//	�|�W�V�����̍X�V
+		//	ポジションの更新
 		m_pos = VAdd(m_pos, moving);
 
-		//	���f���Ƀ|�W�V���������蓖�Ă�
+		//	モデルにポジションを割り当てる
 		MV1SetPosition(m_modelHandle, m_pos);
 
-		//	���f���Ɋp�x�����蓖�Ă�
+		//	モデルに角度を割り当てる
 		MV1SetRotationXYZ(m_modelHandle, m_angle);
 	}
 
-	//	���f���̐F�̊��蓖��
+	//	モデルの色の割り当て
 	_ChangeColor();
 
-	//	�����G�t�F�N�g
+	//	爆発エフェクト
 	_OnEffectExplosion(_soundEffect);
 
-	//	�����蔻�肪�����̂ŁA
-	//	���f���Ƀ|�W�V���������蓖�Ă���ɁA
-	//	�����蔻��p�̍��W�̍X�V����
+	//	当たり判定がずれるので、
+	//	モデルにポジションを割り当てた後に、
+	//	当たり判定用の座標の更新する
 	_UpdateHitPoint();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����̐؂�ւ�
+//	@brief	向きの切り替え
 //-----------------------------------------------------------------------------
 void FloatingEnemy::_ChangeDir()
 {
-	//	���W�A���p�̉��Z
+	//	ラジアン角の加算
 	m_radian += ADD_RADIAN_SPEED;
 
-	//	���������߂�
+	//	向きを求める
 	m_dir.x = -1.0f;
-	m_dir.y = sinf(m_radian);		//	sin�J�[�u���g���A���V����悤�ȃJ�[�u
+	m_dir.y = sinf(m_radian);		//	sinカーブを使い、浮遊するようなカーブ
 
-	//	���K��
+	//	正規化
 	if (VSquareSize(m_dir) != 0) { m_dir = VNorm(m_dir); }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����蔻��p�̓_�̍X�V
+//	@brief	当たり判定用の点の更新
 //-----------------------------------------------------------------------------
 void FloatingEnemy::_UpdateHitPoint()
 {
-	//	�����蔻��p�̒��S���W�̍X�V
+	//	当たり判定用の中心座標の更新
 	m_hitCircle.m_centerPoint = VGet(m_pos.x, m_pos.y - CENTER_CORRECTION, m_pos.z);
 
-	//	�����蔻��p�̍��W�̍X�V
+	//	当たり判定用の座標の更新
 	m_hitRect.m_vertexTop = VGet(m_pos.x + RECT_CORRECTION.x, m_pos.y + RECT_CORRECTION.y, m_pos.z + RECT_CORRECTION.z);
 	m_hitRect.m_vertexUnder = VGet(m_pos.x - RECT_CORRECTION.x, m_pos.y - RECT_CORRECTION.y, m_pos.z - RECT_CORRECTION.z);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�ŏI�I�ȉ������
+//	@brief	最終的な解放処理
 //-----------------------------------------------------------------------------
 void FloatingEnemy::_FinalRelease()
 {
-	// �����Ȃ�
+	// 処理なし
 }
 

@@ -1,106 +1,106 @@
-
+ï»¿
 //=============================================================================
 //	@file	Item.h
-//	@brief	ƒAƒCƒeƒ€‚Ğ‚Æ‚Â•ª‚Ìˆ—
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¢ã‚¤ãƒ†ãƒ ã²ã¨ã¤åˆ†ã®å‡¦ç†
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct Circle;
 struct Rect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒAƒCƒeƒ€ƒNƒ‰ƒX
+//	@brief	ã‚¢ã‚¤ãƒ†ãƒ ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Item final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Item(const int _modelHandle1, const int _modelHandle2, const int _modelHandle3);
 	~Item();
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update();
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
 //==================== setter =====================//
 
-	//	ŠJnˆÊ’u‚Ì setter
+	//	é–‹å§‹ä½ç½®ã® setter
 	void SetStartPos(const VECTOR _set) { m_pos = VGet(_set.x, _set.y, 0.0f); }
 
-	//	ˆê“x‚Ì‚İ‚Ì setter
+	//	ä¸€åº¦ã®ã¿ã® setter
 	void SetIsOneTime(const bool _set) { m_isOneTime = _set; }
 
 //==================== getter =====================//
 
-	//	ƒ|ƒWƒVƒ‡ƒ“‚Ì getter
+	//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã® getter
 	const VECTOR& GetPos() const { return m_pos; }
 
-	//	ˆê“x‚Ì‚İ‚Ì getter
+	//	ä¸€åº¦ã®ã¿ã® getter
 	const bool& GetIsOneTime() const { return m_isOneTime; }
 
-	//	“–‚½‚è”»’è—p‚Ì‰~Œ`‚Ì getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††å½¢ã® getter
 	const Circle& GetCircle() const { return m_hitCircle; }
 
-	//	“–‚½‚è”»’è—p‚Ì’·•ûŒ`‚Ì@setter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢ã®ã€€setter
 	const Rect& GetRect() const { return m_hitRect; };
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	void _Move();
 
-	//	‰ñ“]ˆ—
+	//	å›è»¢å‡¦ç†
 	void _Rotation();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int			m_modelHandle1;		//	ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
-	int			m_modelHandle2;		//	ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
-	int			m_modelHandle3;		//	ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
-	VECTOR		m_pos;				//	ˆÊ’u
-	VECTOR		m_dir;				//	Œü‚«
-	bool		m_isOneTime;		//	ˆê“x‚Ì‚İˆ—
-	float		m_radian;			//	Šp“x
-	VECTOR		m_angle1;			//	Šp“x‚P
-	VECTOR		m_angle2;			//	Šp“x‚Q
+	int			m_modelHandle1;		//	ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«
+	int			m_modelHandle2;		//	ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«
+	int			m_modelHandle3;		//	ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«
+	VECTOR		m_pos;				//	ä½ç½®
+	VECTOR		m_dir;				//	å‘ã
+	bool		m_isOneTime;		//	ä¸€åº¦ã®ã¿å‡¦ç†
+	float		m_radian;			//	è§’åº¦
+	VECTOR		m_angle1;			//	è§’åº¦ï¼‘
+	VECTOR		m_angle2;			//	è§’åº¦ï¼’
 
-	Circle		m_hitCircle;		//	“–‚½‚è”»’è—p‚Ì‰~Œ`‚Ì\‘¢‘Ì
-	Rect		m_hitRect;			//	“–‚½‚è”»’è—p‚Ì’·•ûŒ`‚Ì\‘¢‘Ì
+	Circle		m_hitCircle;		//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††å½¢ã®æ§‹é€ ä½“
+	Rect		m_hitRect;			//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢ã®æ§‹é€ ä½“
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const VECTOR		RECT_CORRECTION;	//	À•W‚Ì•â³
-	static const float		MOVE_SPEED;			//	ˆÚ“®‘¬“x
-	static const float		HIT_RADIUS;			//	“–‚½‚è”»’è—p‚Ì”¼Œa
-	static const float		ANGLE_SPEED_1;		//	‰ñ“]‘¬“x‚P
-	static const float		ANGLE_SPEED_2;		//	‰ñ“]‘¬“x‚Q
+	static const VECTOR		RECT_CORRECTION;	//	åº§æ¨™ã®è£œæ­£
+	static const float		MOVE_SPEED;			//	ç§»å‹•é€Ÿåº¦
+	static const float		HIT_RADIUS;			//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+	static const float		ANGLE_SPEED_1;		//	å›è»¢é€Ÿåº¦ï¼‘
+	static const float		ANGLE_SPEED_2;		//	å›è»¢é€Ÿåº¦ï¼’
 
 };

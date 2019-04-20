@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	HitChecker.cpp
-//	@brief	ƒqƒbƒgƒ`ƒFƒbƒJ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ’ãƒƒãƒˆãƒã‚§ãƒƒã‚«ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/13
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "HitChecker.h"
 #include "Common.h"
@@ -30,64 +30,64 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float HitChecker::ACTIVE_LENGHT = 15.0f;			//	“–‚½‚è”»’è—LŒø‹——£
+const float HitChecker::ACTIVE_LENGHT = 15.0f;			//	å½“ãŸã‚Šåˆ¤å®šæœ‰åŠ¹è·é›¢
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToEnemy(PlayerManager& _playerManager, EnemyManager& _enemyManager, ItemManager& _itemManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
 	for (int i = 0; i < _enemyManager.GetListSize(); i++)
 	{
-		//	ƒGƒlƒ~[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚¨ãƒãƒŸãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		EnemyBase* enemy = _enemyManager.GetEnemyPtr(i);
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (player && enemy)
 		{
-			//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
-			//	true ‚Ì‚Æ‚«‚Ì‚İA“–‚½‚è”»’è‚ÌŒvZ‚ğs‚¤
+			//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
+			//	true ã®ã¨ãã®ã¿ã€å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—ã‚’è¡Œã†
 			const bool isActive = _AskObjectLenght(player->GetPos(), enemy->GetPos());
 			if (isActive)
 			{
-				//	‚Ü‚¾ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚È‚¢‚Æ‚«A
-				//	“–‚½‚è”»’è‚ğó‚¯æ‚é
+				//	ã¾ã ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã„ãªã„ã¨ãã€
+				//	å½“ãŸã‚Šåˆ¤å®šã‚’å—ã‘å–ã‚‹
 				const bool isNotInvincible = !player->GetIsInvincible() && !player->GetIsInvincibleAfterLaser();
 				const bool isNotDamage = isNotInvincible && !player->GetIsDamage() && !enemy->GetIsHIt();
 				if (isNotDamage)
 				{
-					//	“–‚½‚è”»’è
+					//	å½“ãŸã‚Šåˆ¤å®š
 					const bool isHit = _CircleHitCheck(player->GetCircle(), enemy->GetCircle());
 					if (isHit)
 					{
-						//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-						//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+						//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+						//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 
-						//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+						//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 						player->OnHitDamage();
 						player->SetIsDamage(true);
 
-						//	‘à—ñ‚©‚çíœ
+						//	éšŠåˆ—ã‹ã‚‰å‰Šé™¤
 						const int formationID = enemy->GetFormationID();
 						_enemyManager.SubEnemyCount(formationID);
 
-						//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚Æ‚«‚©A
-						//	‘à—ñ‚ğ‚·‚×‚Ä“|‚µ‚½‚çA
-						//	ƒAƒCƒeƒ€‚ğ¶¬
+						//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã¨ãã‹ã€
+						//	éšŠåˆ—ã‚’ã™ã¹ã¦å€’ã—ãŸã‚‰ã€
+						//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆ
 						const bool isHavingItems = enemy->GetIsHavingItems();
 						const bool isEnemyExistence = _enemyManager.GetIsEnemyExistence(formationID);
 						const bool isSetItem = ((formationID != 0) && !isEnemyExistence) || isHavingItems;
 						if (isSetItem) { _itemManager.RegisterOnList(enemy->GetPos()); }
 
-						//	ƒGƒlƒ~[‚É‚àƒqƒbƒg‚µ‚½
+						//	ã‚¨ãƒãƒŸãƒ¼ã«ã‚‚ãƒ’ãƒƒãƒˆã—ãŸ
 						enemy->SetIsHit(true);
 
-						//	ƒXƒRƒA‚Ì‰ÁZ
+						//	ã‚¹ã‚³ã‚¢ã®åŠ ç®—
 						SCORE->AddScore(SCORE->ADD_SCORE::ADD_SCORE_ENEMY);
 					}
 				}
@@ -97,38 +97,38 @@ void HitChecker::PlayerToEnemy(PlayerManager& _playerManager, EnemyManager& _ene
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToMediumBoss(PlayerManager& _playerManager, BossManager& _bossManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
-	//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	MediumBoss* mediumBoss = _bossManager.GetMediumBoss();
 
-	//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+	//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 	if (player && mediumBoss)
 	{
-		//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
-		//	true ‚Ì‚Æ‚«‚Ì‚İA“–‚½‚è”»’è‚ÌŒvZ‚ğs‚¤
+		//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
+		//	true ã®ã¨ãã®ã¿ã€å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—ã‚’è¡Œã†
 		const bool isActive = _AskObjectLenght(player->GetPos(), mediumBoss->GetPos());
 		if (isActive)
 		{
-			//	‚Ü‚¾ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚È‚¢‚Æ‚«A
-			//	“–‚½‚è”»’è‚ğó‚¯æ‚é
+			//	ã¾ã ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã„ãªã„ã¨ãã€
+			//	å½“ãŸã‚Šåˆ¤å®šã‚’å—ã‘å–ã‚‹
 			const bool isNotInvincible = !player->GetIsInvincible() && !player->GetIsInvincibleAfterLaser();
 			const bool isNotDamage = isNotInvincible && !player->GetIsDamage();
 			if (isNotDamage)
 			{
-				//	“–‚½‚è”»’è
+				//	å½“ãŸã‚Šåˆ¤å®š
 				const bool isHit = _CircleHitCheck(player->GetCircle(), mediumBoss->GetCircle());
 				if (isHit)
 				{
-					//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-					//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+					//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+					//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 
-					//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+					//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 					player->OnHitDamage();
 					player->SetIsDamage(true);
 				}
@@ -138,29 +138,29 @@ void HitChecker::PlayerToMediumBoss(PlayerManager& _playerManager, BossManager& 
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToLastBoss(PlayerManager& _playerManager, BossManager& _bossManager)
 {
 	static const int right = 0;
 	static const int left = 1;
 
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
-	//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	LastBoss* lastBoss = _bossManager.GetLastBossPtr();
 
-	//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+	//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 	if (player && lastBoss)
 	{
-		//	‚Ü‚¾ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚È‚¢‚Æ‚«A
-		//	“–‚½‚è”»’è‚ğó‚¯æ‚é
+		//	ã¾ã ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã„ãªã„ã¨ãã€
+		//	å½“ãŸã‚Šåˆ¤å®šã‚’å—ã‘å–ã‚‹
 		const bool isNotInvincible = !player->GetIsInvincible() && !player->GetIsInvincibleAfterLaser();
 		const bool isNotDamage = isNotInvincible && !player->GetIsDamage();
 		if (isNotDamage)
 		{
-			//	“–‚½‚è”»’è
+			//	å½“ãŸã‚Šåˆ¤å®š
 			const bool isCoreActive = lastBoss->GetIsRightCoreAlive() || lastBoss->GetIsRightCoreAlive();
 			const bool isHitBody = _CircleHitCheck(player->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_BODY)) && isCoreActive;
 			const bool isHitArmRight = _CircleHitCheck(player->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_ARM, right)) && lastBoss->GetIsRightCoreAlive();
@@ -173,7 +173,7 @@ void HitChecker::PlayerToLastBoss(PlayerManager& _playerManager, BossManager& _b
 			const bool isHitOnly = isHitBody || isHitArmRight || isHitArmLeft || isHitArmBodyRight || isHitArmBodyLeft || isHitLaserRight || isHitLaserLeft || isHitCenterBarrel;
 			if (isHitOnly)
 			{
-				//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 				player->OnHitDamage();
 				player->SetIsDamage(true);
 			}
@@ -181,10 +181,10 @@ void HitChecker::PlayerToLastBoss(PlayerManager& _playerManager, BossManager& _b
 			const bool isHitCoreRight = _CircleHitCheck(player->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_CORE, right)) && lastBoss->GetIsRightCoreAlive();
 			if (isHitCoreRight)
 			{
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitCoreDamage(right);
 
-				//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 				player->OnHitDamage();
 				player->SetIsDamage(true);
 			}
@@ -192,10 +192,10 @@ void HitChecker::PlayerToLastBoss(PlayerManager& _playerManager, BossManager& _b
 			const bool isHitCoreLeft = _CircleHitCheck(player->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_CORE, left)) && lastBoss->GetIsLeftCoreAlive();
 			if (isHitCoreLeft)
 			{
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitCoreDamage(left);
 
-				//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 				player->OnHitDamage();
 				player->SetIsDamage(true);
 			}
@@ -203,10 +203,10 @@ void HitChecker::PlayerToLastBoss(PlayerManager& _playerManager, BossManager& _b
 			const bool isHitSideBarrelRight = _CircleHitCheck(player->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_SIDE_BARREL, right)) && lastBoss->GetIsRightSideBarrelAlive();
 			if (isHitSideBarrelRight)
 			{
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitSideBarrelDamage(right);
 
-				//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 				player->OnHitDamage();
 				player->SetIsDamage(true);
 			}
@@ -214,18 +214,18 @@ void HitChecker::PlayerToLastBoss(PlayerManager& _playerManager, BossManager& _b
 			const bool isHitSideBarrelLeft = _CircleHitCheck(player->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_SIDE_BARREL, left)) && lastBoss->GetIsLeftSideBarrelAlive();
 			if (isHitSideBarrelLeft)
 			{
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitSideBarrelDamage(left);
 
-				//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 				player->OnHitDamage();
 				player->SetIsDamage(true);
 			}
 
-			//	ƒ{ƒX‚Ì”j‰óó‹µ
+			//	ãƒœã‚¹ã®ç ´å£ŠçŠ¶æ³
 			lastBoss->DestructionSituation();
 
-			//	‚·‚×‚Ä”j‰ó
+			//	ã™ã¹ã¦ç ´å£Š
 			const bool isAllDestruction = lastBoss->GetIsAllDestruction();
 			if (isAllDestruction) { _playerManager.SetIsClear(true); }
 		}
@@ -233,44 +233,44 @@ void HitChecker::PlayerToLastBoss(PlayerManager& _playerManager, BossManager& _b
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì’e‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å¼¾ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToEnemyShot(PlayerManager& _playerManager, ShotManager& _shotManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
 	for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::ENEMY_SHOT); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::ENEMY_SHOT, i);
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (player && shot)
 		{
-			//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
-			//	true ‚Ì‚Æ‚«‚Ì‚İA“–‚½‚è”»’è‚ÌŒvZ‚ğs‚¤
+			//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
+			//	true ã®ã¨ãã®ã¿ã€å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—ã‚’è¡Œã†
 			const bool isActive = _AskObjectLenght(player->GetPos(), shot->GetPos());
 			if (isActive)
 			{
-				//	‚Ü‚¾ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚È‚¢‚Æ‚«A
-				//	“–‚½‚è”»’è‚ğó‚¯æ‚é
+				//	ã¾ã ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã„ãªã„ã¨ãã€
+				//	å½“ãŸã‚Šåˆ¤å®šã‚’å—ã‘å–ã‚‹
 				const bool isNotInvincible = !player->GetIsInvincible() && !player->GetIsInvincibleAfterLaser();
 				const bool isNotDamage = isNotInvincible && !player->GetIsDamage();
 				if (isNotDamage)
 				{
-					//	“–‚½‚è”»’è
+					//	å½“ãŸã‚Šåˆ¤å®š
 					const bool isHit = _CircleHitCheck(player->GetCircle(), shot->GetCircle());
 					if (isHit)
 					{
-						//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-						//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+						//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+						//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 
-						//	ƒvƒŒƒCƒ„[‚Ìc‹@‚ğŒ¸‚ç‚·
+						//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ®‹æ©Ÿã‚’æ¸›ã‚‰ã™
 						player->OnHitDamage();
 						player->SetIsDamage(true);
 
-						//	ƒGƒlƒ~[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+						//	ã‚¨ãƒãƒŸãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 						_shotManager.RemoveFromList(ShotManager::SHOT_KIND::ENEMY_SHOT, shot);
 					}
 				}
@@ -280,64 +280,64 @@ void HitChecker::PlayerToEnemyShot(PlayerManager& _playerManager, ShotManager& _
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Ì’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerShotToEnemy(ShotManager& _shotManager, EnemyManager& _enemyManager, ItemManager& _itemManager, UIGauge& _gaugeUI)
 {
 	for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::PLAYER_SHOT); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::PLAYER_SHOT, i);
 
 		for (int j = 0; j < _enemyManager.GetListSize(); j++)
 		{
-			//	ƒGƒlƒ~[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+			//	ã‚¨ãƒãƒŸãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 			EnemyBase* enemy = _enemyManager.GetEnemyPtr(j);
 
-			//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+			//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 			if (shot && enemy)
 			{
-				//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
-				//	true ‚Ì‚Æ‚«‚Ì‚İA“–‚½‚è”»’è‚ÌŒvZ‚ğs‚¤
+				//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
+				//	true ã®ã¨ãã®ã¿ã€å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—ã‚’è¡Œã†
 				const bool isActive = _AskObjectLenght(shot->GetPos(), enemy->GetPos());
 				if (isActive)
 				{
-					//	ƒGƒlƒ~[‚ªƒqƒbƒg‚µ‚Ä‚¢‚È‚¢‚Æ‚«
+					//	ã‚¨ãƒãƒŸãƒ¼ãŒãƒ’ãƒƒãƒˆã—ã¦ã„ãªã„ã¨ã
 					const bool isNotDamage = !enemy->GetIsHIt();
 					if (isNotDamage)
 					{
 
-						//	“–‚½‚è”»’è
+						//	å½“ãŸã‚Šåˆ¤å®š
 						const bool isHit = _CircleHitCheck(shot->GetCircle(), enemy->GetCircle());
 						if (isHit)
 						{
-							//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-							//	ƒGƒlƒ~[‚ÆƒvƒŒƒCƒ„[‚Ì’e‚ğA
-							//	ƒŠƒXƒg‚©‚çíœ‚·‚é
+							//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+							//	ã‚¨ãƒãƒŸãƒ¼ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ã€
+							//	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 
-							//	ƒGƒlƒ~[‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
-							//	‘à—ñ‚©‚çíœ
+							//	ã‚¨ãƒãƒŸãƒ¼ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
+							//	éšŠåˆ—ã‹ã‚‰å‰Šé™¤
 							const int formationID = enemy->GetFormationID();
 							_enemyManager.SubEnemyCount(formationID);
 
-							//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚Æ‚«‚©A
-							//	‘à—ñ‚ğ‚·‚×‚Ä“|‚µ‚½‚çA
-							//	ƒAƒCƒeƒ€‚ğ¶¬
+							//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã¨ãã‹ã€
+							//	éšŠåˆ—ã‚’ã™ã¹ã¦å€’ã—ãŸã‚‰ã€
+							//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆ
 							const bool isHavingItems = enemy->GetIsHavingItems();
 							const bool isEnemyExistence = _enemyManager.GetIsEnemyExistence(formationID);
 							const bool isSetItem = ((formationID != 0) && !isEnemyExistence) || isHavingItems;
 							if (isSetItem) { _itemManager.RegisterOnList(enemy->GetPos()); }
 
-							//	ƒGƒlƒ~[‚É‚àƒqƒbƒg‚µ‚½
+							//	ã‚¨ãƒãƒŸãƒ¼ã«ã‚‚ãƒ’ãƒƒãƒˆã—ãŸ
 							enemy->SetIsHit(true);
 
-							//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+							//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 							_shotManager.RemoveFromList(ShotManager::SHOT_KIND::PLAYER_SHOT, shot);
 
-							//	ƒQ[ƒW‚Ì‰ÁZ
+							//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 							_gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::ENEMY);
 
-							//	ƒXƒRƒA‚Ì‰ÁZ
+							//	ã‚¹ã‚³ã‚¢ã®åŠ ç®—
 							SCORE->AddScore(SCORE->ADD_SCORE::ADD_SCORE_ENEMY);
 						}
 					}
@@ -348,47 +348,47 @@ void HitChecker::PlayerShotToEnemy(ShotManager& _shotManager, EnemyManager& _ene
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Ì’e‚Æƒ{ƒX‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerShotToMediumBoss(ShotManager& _shotManager, BossManager& _bossManager, UIGauge& _gaugeUI)
 {
 	for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::PLAYER_SHOT); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::PLAYER_SHOT, i);
 
-		//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		MediumBoss* mediumBoss = _bossManager.GetMediumBoss();
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (shot && mediumBoss)
 		{
-			//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
-			//	true ‚Ì‚Æ‚«‚Ì‚İA“–‚½‚è”»’è‚ÌŒvZ‚ğs‚¤
+			//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
+			//	true ã®ã¨ãã®ã¿ã€å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—ã‚’è¡Œã†
 			const bool isActive = _AskObjectLenght(shot->GetPos(), mediumBoss->GetPos());
 			if (isActive)
 			{
-				//	“–‚½‚è”»’è
+				//	å½“ãŸã‚Šåˆ¤å®š
 				const bool isHit = _CircleHitCheck(shot->GetCircle(), mediumBoss->GetCircle());
 				if (isHit)
 				{
-					//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-					//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚µA
-					//	ƒ{ƒX‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+					//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+					//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã—ã€
+					//	ãƒœã‚¹ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 
-					//	ƒ{ƒX‚ªƒ_ƒ[ƒW‚ğó‚¯‚½ê‡A
-					//	˜A‘±‚µ‚Ä“ü‚ç‚È‚¢‚æ‚¤‚É§ŒÀ
+					//	ãƒœã‚¹ãŒãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸå ´åˆã€
+					//	é€£ç¶šã—ã¦å…¥ã‚‰ãªã„ã‚ˆã†ã«åˆ¶é™
 					if (!mediumBoss->GetIsDamage())
 					{
-						//	ƒ{ƒX‚Éƒ_ƒ[ƒW‚ğ—^‚¦A
-						//	ƒ{ƒX‚ğ“_–Å‚³‚¹‚é
+						//	ãƒœã‚¹ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã€
+						//	ãƒœã‚¹ã‚’ç‚¹æ»…ã•ã›ã‚‹
 						mediumBoss->OnHitDamage();
 					}
 
-					//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+					//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 					_shotManager.RemoveFromList(ShotManager::SHOT_KIND::PLAYER_SHOT, shot);
 
-					//	ƒQ[ƒW‚Ì‰ÁZ
+					//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 					const bool isDamageMoment = !mediumBoss->GetIsDamage();
 					if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 				}
@@ -399,7 +399,7 @@ void HitChecker::PlayerShotToMediumBoss(ShotManager& _shotManager, BossManager& 
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerShotToLastBoss(PlayerManager& _playerManager, ShotManager& _shotManager, BossManager& _bossManager, UIGauge& _gaugeUI)
 {
@@ -408,16 +408,16 @@ void HitChecker::PlayerShotToLastBoss(PlayerManager& _playerManager, ShotManager
 
 	for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::PLAYER_SHOT); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::PLAYER_SHOT, i);
 
-		//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		LastBoss* lastBoss = _bossManager.GetLastBossPtr();
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (shot && lastBoss)
 		{
-			//	“–‚½‚è”»’è
+			//	å½“ãŸã‚Šåˆ¤å®š
 			const bool isCoreActive = lastBoss->GetIsRightCoreAlive() || lastBoss->GetIsRightCoreAlive();
 			const bool isHitBody = _CircleHitCheck(shot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_BODY)) && isCoreActive;
 			const bool isHitArmRight = _CircleHitCheck(shot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_ARM, right)) && lastBoss->GetIsRightCoreAlive();
@@ -426,70 +426,70 @@ void HitChecker::PlayerShotToLastBoss(PlayerManager& _playerManager, ShotManager
 			const bool isHitOnly = isHitBody || isHitArmRight || isHitArmLeft || isHitCenterBarrel;
 			if (isHitOnly)
 			{
-				//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 				_shotManager.RemoveFromList(ShotManager::SHOT_KIND::PLAYER_SHOT, shot);
 			}
 
 			const bool isHitCoreRight = _CircleHitCheck(shot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_CORE, right)) && lastBoss->GetIsRightCoreAlive();
 			if (isHitCoreRight)
 			{
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				const bool isDamageMoment = !lastBoss->GetIsCoreDamage(right);
 				if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitCoreDamage(right);
 
-				//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 				_shotManager.RemoveFromList(ShotManager::SHOT_KIND::PLAYER_SHOT, shot);
 			}
 
 			const bool isHitCoreLeft = _CircleHitCheck(shot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_CORE, left)) && lastBoss->GetIsLeftCoreAlive();
 			if (isHitCoreLeft)
 			{
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				const bool isDamageMoment = !lastBoss->GetIsCoreDamage(left);
 				if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitCoreDamage(left);
 
-				//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 				_shotManager.RemoveFromList(ShotManager::SHOT_KIND::PLAYER_SHOT, shot);
 			}
 
 			const bool isHitSideBarrelRight = _CircleHitCheck(shot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_SIDE_BARREL, right)) && lastBoss->GetIsRightSideBarrelAlive();
 			if (isHitSideBarrelRight)
 			{
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				const bool isDamageMoment = !lastBoss->GetIsSideBarrelDamage(right);
 				if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitSideBarrelDamage(right);
 
-				//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 				_shotManager.RemoveFromList(ShotManager::SHOT_KIND::PLAYER_SHOT, shot);
 			}
 
 			const bool isHitSideBarrelLeft = _CircleHitCheck(shot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_SIDE_BARREL, left)) && lastBoss->GetIsLeftSideBarrelAlive();
 			if (isHitSideBarrelLeft)
 			{
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				const bool isDamageMoment = !lastBoss->GetIsSideBarrelDamage(left);
 				if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitSideBarrelDamage(left);
 
-				//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 				_shotManager.RemoveFromList(ShotManager::SHOT_KIND::PLAYER_SHOT, shot);
 			}
 
-			//	ƒ{ƒX‚Ì”j‰óó‹µ
+			//	ãƒœã‚¹ã®ç ´å£ŠçŠ¶æ³
 			lastBoss->DestructionSituation();
 
-			//	‚·‚×‚Ä”j‰ó
+			//	ã™ã¹ã¦ç ´å£Š
 			const bool isAllDestruction = lastBoss->GetIsAllDestruction();
 			if (isAllDestruction) { _playerManager.SetIsClear(true); }
 		}
@@ -497,64 +497,64 @@ void HitChecker::PlayerShotToLastBoss(PlayerManager& _playerManager, ShotManager
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerStayShotToEnemy(StayShotManager& _stayShotManager, EnemyManager& _enemyManager, ItemManager& _itemManager, UIGauge& _gaugeUI)
 {
 	for (int i = 0; i < _stayShotManager.GetListSize(); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		StayShot* stayShot = _stayShotManager.GetStayShotPtr(i);
 
 		for (int j = 0; j < _enemyManager.GetListSize(); j++)
 		{
-			//	ƒGƒlƒ~[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+			//	ã‚¨ãƒãƒŸãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 			EnemyBase* enemy = _enemyManager.GetEnemyPtr(j);
 
-			//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+			//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 			if (stayShot && enemy)
 			{
-				//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
-				//	true ‚Ì‚Æ‚«‚Ì‚İA“–‚½‚è”»’è‚ÌŒvZ‚ğs‚¤
+				//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
+				//	true ã®ã¨ãã®ã¿ã€å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—ã‚’è¡Œã†
 				const bool isActive = _AskObjectLenght(stayShot->GetPos(), enemy->GetPos());
 				if (isActive)
 				{
-					//	ƒGƒlƒ~[‚ªƒqƒbƒg‚µ‚Ä‚¢‚È‚¢‚Æ‚«
+					//	ã‚¨ãƒãƒŸãƒ¼ãŒãƒ’ãƒƒãƒˆã—ã¦ã„ãªã„ã¨ã
 					const bool isNotDamage = !enemy->GetIsHIt();
 					if (isNotDamage)
 					{
-						//	“–‚½‚è”»’è
+						//	å½“ãŸã‚Šåˆ¤å®š
 						const bool isHit = _CircleHitCheck(stayShot->GetCircle(), enemy->GetCircle());
 						if (isHit)
 						{
-							//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-							//	ƒGƒlƒ~[‚ÆƒvƒŒƒCƒ„[‚Ì’e‚ğA
-							//	ƒŠƒXƒg‚©‚çíœ‚·‚é
+							//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+							//	ã‚¨ãƒãƒŸãƒ¼ã¨ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ã€
+							//	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 
-							//	ƒGƒlƒ~[‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
-							//	‘à—ñ‚©‚çíœ
+							//	ã‚¨ãƒãƒŸãƒ¼ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
+							//	éšŠåˆ—ã‹ã‚‰å‰Šé™¤
 							const int formationID = enemy->GetFormationID();
 							_enemyManager.SubEnemyCount(formationID);
 
-							//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚Æ‚«‚©A
-							//	‘à—ñ‚ğ‚·‚×‚Ä“|‚µ‚½‚çA
-							//	ƒAƒCƒeƒ€‚ğ¶¬
+							//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã¨ãã‹ã€
+							//	éšŠåˆ—ã‚’ã™ã¹ã¦å€’ã—ãŸã‚‰ã€
+							//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆ
 							const bool isHavingItems = enemy->GetIsHavingItems();
 							const bool isEnemyExistence = _enemyManager.GetIsEnemyExistence(formationID);
 							const bool isSetItem = ((formationID != 0) && !isEnemyExistence) || isHavingItems;
 							if (isSetItem) { _itemManager.RegisterOnList(enemy->GetPos()); }
 
-							//	ƒGƒlƒ~[‚É‚àƒqƒbƒg‚µ‚½
+							//	ã‚¨ãƒãƒŸãƒ¼ã«ã‚‚ãƒ’ãƒƒãƒˆã—ãŸ
 							enemy->SetIsHit(true);
 
-							//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-							//	ƒVƒ‡ƒbƒg‚Ìƒ‚[ƒh‚ğ•ÏX
+							//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+							//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰æ›´
 							stayShot->SetIsChangeStay(true);
 
-							//	ƒQ[ƒW‚Ì‰ÁZ
+							//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 							_gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::ENEMY);
 
-							//	ƒXƒRƒA‚Ì‰ÁZ
+							//	ã‚¹ã‚³ã‚¢ã®åŠ ç®—
 							SCORE->AddScore(SCORE->ADD_SCORE::ADD_SCORE_ENEMY);
 						}
 					}
@@ -565,48 +565,48 @@ void HitChecker::PlayerStayShotToEnemy(StayShotManager& _stayShotManager, EnemyM
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‘Øİ’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerStayShotToMediumBoss(StayShotManager& _stayShotManager, BossManager& _bossManager, UIGauge& _gaugeUI)
 {
 	for (int i = 0; i < _stayShotManager.GetListSize(); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		StayShot* stayShot = _stayShotManager.GetStayShotPtr(i);
 
-		//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		MediumBoss* mediumBoss = _bossManager.GetMediumBoss();
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (stayShot && mediumBoss)
 		{
-			//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
-			//	true ‚Ì‚Æ‚«‚Ì‚İA“–‚½‚è”»’è‚ÌŒvZ‚ğs‚¤
+			//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
+			//	true ã®ã¨ãã®ã¿ã€å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—ã‚’è¡Œã†
 			const bool isActive = _AskObjectLenght(stayShot->GetPos(), mediumBoss->GetPos());
 			if (isActive)
 			{
-				//	“–‚½‚è”»’è
+				//	å½“ãŸã‚Šåˆ¤å®š
 				const bool isHit = _CircleHitCheck(stayShot->GetCircle(), mediumBoss->GetCircle());
 				if (isHit)
 				{
-					//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-					//	ƒvƒŒƒCƒ„[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚µA
-					//	ƒ{ƒX‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+					//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+					//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã—ã€
+					//	ãƒœã‚¹ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 
-					//	ƒ{ƒX‚ªƒ_ƒ[ƒW‚ğó‚¯‚½ê‡A
-					//	˜A‘±‚µ‚Ä“ü‚ç‚È‚¢‚æ‚¤‚É§ŒÀ
+					//	ãƒœã‚¹ãŒãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ãŸå ´åˆã€
+					//	é€£ç¶šã—ã¦å…¥ã‚‰ãªã„ã‚ˆã†ã«åˆ¶é™
 					if (!mediumBoss->GetIsDamage())
 					{
-						//	ƒ{ƒX‚Éƒ_ƒ[ƒW‚ğ—^‚¦A
-						//	ƒ{ƒX‚ğ“_–Å‚³‚¹‚é
+						//	ãƒœã‚¹ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã€
+						//	ãƒœã‚¹ã‚’ç‚¹æ»…ã•ã›ã‚‹
 						mediumBoss->OnHitDamage();
 					}
 
-					//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-					//	ƒVƒ‡ƒbƒg‚Ìƒ‚[ƒh‚ğ•ÏX
+					//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+					//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰æ›´
 					stayShot->SetIsChangeStay(true);
 
-					//	ƒQ[ƒW‚Ì‰ÁZ
+					//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 					const bool isDamageMoment = !mediumBoss->GetIsDamage();
 					if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 				}
@@ -617,7 +617,7 @@ void HitChecker::PlayerStayShotToMediumBoss(StayShotManager& _stayShotManager, B
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerStayShotToLastBoss(PlayerManager& _playerManager, StayShotManager& _stayShotManager, BossManager& _bossManager, UIGauge& _gaugeUI)
 {
@@ -626,16 +626,16 @@ void HitChecker::PlayerStayShotToLastBoss(PlayerManager& _playerManager, StaySho
 
 	for (int i = 0; i < _stayShotManager.GetListSize(); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		StayShot* stayShot = _stayShotManager.GetStayShotPtr(i);
 
-		//	ÅIƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	æœ€çµ‚ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		LastBoss* lastBoss = _bossManager.GetLastBossPtr();
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (stayShot && lastBoss)
 		{
-			//	“–‚½‚è”»’è
+			//	å½“ãŸã‚Šåˆ¤å®š
 			const bool isCoreActive = lastBoss->GetIsRightCoreAlive() || lastBoss->GetIsRightCoreAlive();
 			const bool isHitBody = _CircleHitCheck(stayShot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_BODY)) && isCoreActive;
 			const bool isHitArmRight = _CircleHitCheck(stayShot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_ARM, right)) && lastBoss->GetIsRightCoreAlive();
@@ -644,53 +644,53 @@ void HitChecker::PlayerStayShotToLastBoss(PlayerManager& _playerManager, StaySho
 			const bool isHitOnly = isHitBody || isHitArmRight || isHitArmLeft || isHitCenterBarrel;
 			if (isHitOnly)
 			{
-				//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-				//	ƒVƒ‡ƒbƒg‚Ìƒ‚[ƒh‚ğ•ÏX
+				//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+				//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰æ›´
 				stayShot->SetIsChangeStay(true);
 			}
 
 			const bool isHitCoreRight = _CircleHitCheck(stayShot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_CORE, right)) && lastBoss->GetIsRightCoreAlive();
 			if (isHitCoreRight)
 			{
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				const bool isDamageMoment = !lastBoss->GetIsCoreDamage(right);
 				if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitCoreDamage(right);
 
-				//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-				//	ƒVƒ‡ƒbƒg‚Ìƒ‚[ƒh‚ğ•ÏX
+				//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+				//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰æ›´
 				stayShot->SetIsChangeStay(true);
 			}
 
 			const bool isHitCoreLeft = _CircleHitCheck(stayShot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_CORE, left)) && lastBoss->GetIsLeftCoreAlive();
 			if (isHitCoreLeft)
 			{
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				const bool isDamageMoment = !lastBoss->GetIsCoreDamage(left);
 				if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitCoreDamage(left);
 
-				//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-				//	ƒVƒ‡ƒbƒg‚Ìƒ‚[ƒh‚ğ•ÏX
+				//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+				//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰æ›´
 				stayShot->SetIsChangeStay(true);
 			}
 
 			const bool isHitSideBarrelRight = _CircleHitCheck(stayShot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_SIDE_BARREL, right)) && lastBoss->GetIsRightSideBarrelAlive();
 			if (isHitSideBarrelRight)
 			{
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				const bool isDamageMoment = !lastBoss->GetIsSideBarrelDamage(right);
 				if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitSideBarrelDamage(right);
 
-				//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-				//	ƒVƒ‡ƒbƒg‚Ìƒ‚[ƒh‚ğ•ÏX
+				//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+				//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰æ›´
 				stayShot->SetIsChangeStay(true);
 
 			}
@@ -698,22 +698,22 @@ void HitChecker::PlayerStayShotToLastBoss(PlayerManager& _playerManager, StaySho
 			const bool isHitSideBarrelLeft = _CircleHitCheck(stayShot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_SIDE_BARREL, left)) && lastBoss->GetIsLeftSideBarrelAlive();
 			if (isHitSideBarrelLeft)
 			{
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				const bool isDamageMoment = !lastBoss->GetIsSideBarrelDamage(left);
 				if (isDamageMoment) { _gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::BOSS); }
 
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitSideBarrelDamage(left);
 
-				//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-				//	ƒVƒ‡ƒbƒg‚Ìƒ‚[ƒh‚ğ•ÏX
+				//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+				//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒ¢ãƒ¼ãƒ‰ã‚’å¤‰æ›´
 				stayShot->SetIsChangeStay(true);
 			}
 
-			//	ƒ{ƒX‚Ì”j‰óó‹µ
+			//	ãƒœã‚¹ã®ç ´å£ŠçŠ¶æ³
 			lastBoss->DestructionSituation();
 
-			//	‚·‚×‚Ä”j‰ó
+			//	ã™ã¹ã¦ç ´å£Š
 			const bool isAllDestruction = lastBoss->GetIsAllDestruction();
 			if (isAllDestruction) { _playerManager.SetIsClear(true); }
 		}
@@ -721,49 +721,49 @@ void HitChecker::PlayerStayShotToLastBoss(PlayerManager& _playerManager, StaySho
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚ÆƒAƒCƒeƒ€‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¢ã‚¤ãƒ†ãƒ ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToItem(PlayerManager& _playerManager, ItemManager& _itemManager, SoundEffect& _soundEffect, UIGauge& _gaugeUI)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
 	for (int i = 0; i < _itemManager.GetListSize(); i++)
 	{
-		//	ƒAƒCƒeƒ€‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Item* item = _itemManager.GetItemPtr(i);
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (player && item)
 		{
-			//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
-			//	true ‚Ì‚Æ‚«‚Ì‚İA“–‚½‚è”»’è‚ÌŒvZ‚ğs‚¤
+			//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
+			//	true ã®ã¨ãã®ã¿ã€å½“ãŸã‚Šåˆ¤å®šã®è¨ˆç®—ã‚’è¡Œã†
 			const bool isActive = _AskObjectLenght(player->GetPos(), item->GetPos());
 			if (isActive)
 			{
-				//	“–‚½‚è”»’è
+				//	å½“ãŸã‚Šåˆ¤å®š
 				const bool isHit = _BoxHitCheck(player->GetItemHitRect(), item->GetRect());
 				if (isHit)
 				{
-					//	ƒqƒbƒg‚µ‚½‚Ì‚ÅA
-					//	ƒAƒCƒeƒ€ƒJƒEƒ“ƒ^‚ğ‘‚â‚µA
-					//	ƒAƒCƒeƒ€‚ÍƒŠƒXƒg‚©‚çíœ‚·‚é
+					//	ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€
+					//	ã‚¢ã‚¤ãƒ†ãƒ ã‚«ã‚¦ãƒ³ã‚¿ã‚’å¢—ã‚„ã—ã€
+					//	ã‚¢ã‚¤ãƒ†ãƒ ã¯ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 
-					//	ƒAƒCƒeƒ€æ“¾ƒGƒtƒFƒNƒg‚ªŠJn‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚Í
-					//	ƒGƒtƒFƒNƒg‚ğÄ¶‚·‚é
+					//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãŒé–‹å§‹ã—ã¦ã„ãªã„ã¨ãã¯
+					//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’å†ç”Ÿã™ã‚‹
 					const bool isNotStartEffect = !player->GetIsStartEffectGetItem();
 					if(isNotStartEffect) { player->SetIsStartEffectGetItem(true); }
 
-					//	ƒAƒCƒeƒ€‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+					//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 					_itemManager.RemoveFromList(item);
 
 					//	SE
 					_soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_ITEM);
 
-					//	ƒQ[ƒW‚Ì‰ÁZ
+					//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 					_gaugeUI.AddGauge(_gaugeUI.ADD_GAUGE_KIND::ITEM);
 
-					//	ƒXƒRƒA‚Ì‰ÁZ
+					//	ã‚¹ã‚³ã‚¢ã®åŠ ç®—
 					SCORE->AddScore(SCORE->ADD_SCORE::ADD_SCORE_ITEM);
 				}
 			}
@@ -772,73 +772,73 @@ void HitChecker::PlayerToItem(PlayerManager& _playerManager, ItemManager& _itemM
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Ì•KE‹Z‚Æ‚·‚×‚Ä‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¿…æ®ºæŠ€ã¨ã™ã¹ã¦ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerSpecialAttackToAllObject(PlayerManager& _playerManager, EnemyManager& _enemyManager, BossManager& _bossManager, ShotManager& _shotManager, ItemManager& _itemManager)
 {
-	//	•KE‹Z‚Ì‚Æ‚«
+	//	å¿…æ®ºæŠ€ã®ã¨ã
 	const bool isSpecialProductionHitActive = PRODUCTION->GetIsSpecialProduction();
 	if (isSpecialProductionHitActive)
 	{
-		//	ƒvƒŒƒCƒ„[‚Ìæ“¾
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å–å¾—
 		PlayerBase* player = _playerManager.GetPlayerPtr();
 
 		const int size = _enemyManager.GetListSize();
 		for (int i = 0; i < size; i++)
 		{
-			//	ƒGƒlƒ~[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+			//	ã‚¨ãƒãƒŸãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 			EnemyBase* enemy = _enemyManager.GetEnemyPtr(i);
 			if (player && enemy)
 			{
-				//	ƒGƒlƒ~[‚ªƒqƒbƒg‚µ‚Ä‚¢‚È‚¢‚Æ‚«
+				//	ã‚¨ãƒãƒŸãƒ¼ãŒãƒ’ãƒƒãƒˆã—ã¦ã„ãªã„ã¨ã
 				const bool isNotDamage = !enemy->GetIsHIt();
 				if (isNotDamage)
 				{
-					//	“–‚½‚è”»’è
+					//	å½“ãŸã‚Šåˆ¤å®š
 					const bool isHit = _BoxHitCheck(player->GetLaserHitRect(), enemy->GetRect());
 					if (isHit)
 					{
-						//	‘à—ñ‚©‚çíœ
+						//	éšŠåˆ—ã‹ã‚‰å‰Šé™¤
 						const int formationID = enemy->GetFormationID();
 						_enemyManager.SubEnemyCount(formationID);
 
-						//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚Æ‚«‚©A
-						//	‘à—ñ‚ğ‚·‚×‚Ä“|‚µ‚½‚çA
-						//	ƒAƒCƒeƒ€‚ğ¶¬
+						//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã¨ãã‹ã€
+						//	éšŠåˆ—ã‚’ã™ã¹ã¦å€’ã—ãŸã‚‰ã€
+						//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’ç”Ÿæˆ
 						const bool isHavingItems = enemy->GetIsHavingItems();
 						const bool isEnemyExistence = _enemyManager.GetIsEnemyExistence(formationID);
 						const bool isSetItem = ((formationID != 0) && !isEnemyExistence) || isHavingItems;
 						if (isSetItem) { _itemManager.RegisterOnList(enemy->GetPos()); }
 
-						//	ƒGƒlƒ~[‚É‚àƒqƒbƒg‚µ‚½
+						//	ã‚¨ãƒãƒŸãƒ¼ã«ã‚‚ãƒ’ãƒƒãƒˆã—ãŸ
 						enemy->SetIsHit(true);
 
-						//	ƒXƒRƒA‚Ì‰ÁZ
+						//	ã‚¹ã‚³ã‚¢ã®åŠ ç®—
 						SCORE->AddScore(SCORE->ADD_SCORE::ADD_SCORE_ENEMY);
 					}
 				}
 			}
 		}
 
-		//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		MediumBoss* mediumBoss = _bossManager.GetMediumBoss();
 		if (player && mediumBoss)
 		{
-			//	ƒ{ƒX‚ªoŒ»‚µ‚Ä‚¢‚é‚È‚ç
+			//	ãƒœã‚¹ãŒå‡ºç¾ã—ã¦ã„ã‚‹ãªã‚‰
 			const bool isMediumBossEmerge = mediumBoss->GetIsEmerge() || mediumBoss->GetIsStarted();
 			if (isMediumBossEmerge)
 			{
-				//	“–‚½‚è”»’è
+				//	å½“ãŸã‚Šåˆ¤å®š
 				const bool isHit = _BoxHitCheck(player->GetLaserHitRect(), mediumBoss->GetRect());
 				if (isHit)
 				{
-					//	ƒ_ƒ[ƒW‚ğ—^‚¦‚é
+					//	ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 					mediumBoss->OnHitDamage();
 				}
 			}
 		}
 
-		//	ÅIƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	æœ€çµ‚ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		LastBoss* lastBoss = _bossManager.GetLastBossPtr();
 		if (player && lastBoss)
 		{
@@ -848,55 +848,55 @@ void HitChecker::PlayerSpecialAttackToAllObject(PlayerManager& _playerManager, E
 			const bool isHitCoreRight = _BoxHitCheck(player->GetLaserHitRect(), lastBoss->GetCoreRect(right)) && lastBoss->GetIsRightCoreAlive();
 			if (isHitCoreRight)
 			{
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitCoreDamage(right);
 			}
 
 			const bool isHitCoreLeft = _BoxHitCheck(player->GetLaserHitRect(), lastBoss->GetCoreRect(left)) && lastBoss->GetIsLeftCoreAlive();
 			if (isHitCoreLeft)
 			{
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitCoreDamage(left);
 			}
 
 			const bool isHitSideBarrelRight = _BoxHitCheck(player->GetLaserHitRect(), lastBoss->GetSideBarrelRect(right)) && lastBoss->GetIsRightSideBarrelAlive();
 			if (isHitSideBarrelRight)
 			{
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitSideBarrelDamage(right);
 			}
 
 			const bool isHitSideBarrelLeft = _BoxHitCheck(player->GetLaserHitRect(), lastBoss->GetSideBarrelRect(left)) && lastBoss->GetIsLeftSideBarrelAlive();
 			if (isHitSideBarrelLeft)
 			{
-				//	ƒ{ƒX‚Ìƒp[ƒc‚Éƒ_ƒ[ƒW‚ğ—^‚¦‚é
+				//	ãƒœã‚¹ã®ãƒ‘ãƒ¼ãƒ„ã«ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’ä¸ãˆã‚‹
 				lastBoss->OnHitSideBarrelDamage(left);
 			}
 		}
 
-		//	“G‚Ì’e‚ğ‚·‚×‚ÄÁ‚·
+		//	æ•µã®å¼¾ã‚’ã™ã¹ã¦æ¶ˆã™
 		for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::ENEMY_SHOT); i++)
 		{
-			//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+			//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 			Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::ENEMY_SHOT, i);
 
-			//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+			//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 			if (shot)
 			{
-				//	ƒGƒlƒ~[‚Ì’e‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+				//	ã‚¨ãƒãƒŸãƒ¼ã®å¼¾ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 				_shotManager.RemoveFromList(ShotManager::SHOT_KIND::ENEMY_SHOT, shot);
 			}
 		}
 	}
 
-	//	ÅIƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	æœ€çµ‚ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	LastBoss* lastBoss = _bossManager.GetLastBossPtr();
 	if (lastBoss)
 	{
-		//	ƒ{ƒX‚Ì”j‰óó‹µ
+		//	ãƒœã‚¹ã®ç ´å£ŠçŠ¶æ³
 		lastBoss->DestructionSituation();
 
-		//	‚·‚×‚Ä”j‰ó
+		//	ã™ã¹ã¦ç ´å£Š
 		const bool isAllDestruction = lastBoss->GetIsAllDestruction();
 		if (isAllDestruction) { _playerManager.SetIsClear(true); }
 	}
@@ -904,68 +904,68 @@ void HitChecker::PlayerSpecialAttackToAllObject(PlayerManager& _playerManager, E
 
 
 //=============================================================================
-//	@brief	ˆÈ‰ºAƒfƒoƒbƒO—p‚Ì“–‚½‚è”»’è‚Ì•`‰æŠÖ”
+//	@brief	ä»¥ä¸‹ã€ãƒ‡ãƒãƒƒã‚°ç”¨ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»é–¢æ•°
 //=============================================================================
 
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToEnemyOfDraw(PlayerManager& _playerManager, EnemyManager& _enemyManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
 	for (int i = 0; i < _enemyManager.GetListSize(); i++)
 	{
-		//	ƒGƒlƒ~[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚¨ãƒãƒŸãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		EnemyBase* enemy = _enemyManager.GetEnemyPtr(i);
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (player && enemy)
 		{
-			//	“–‚½‚è”»’è‚Ì•`‰æ
+			//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 			_CircleHitCheckOfDraw(player->GetCircle(), enemy->GetCircle());
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToMediumBossOfDraw(PlayerManager& _playerManager, BossManager& _bossManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
-	//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	MediumBoss* mediumBoss = _bossManager.GetMediumBoss();
 
-	//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+	//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 	if (player && mediumBoss)
 	{
-		//	“–‚½‚è”»’è‚Ì•`‰æ
+		//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 		_CircleHitCheckOfDraw(player->GetCircle(), mediumBoss->GetCircle());
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToLastBossOfDraw(PlayerManager& _playerManager, BossManager& _bossManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
-	//	ÅIƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	æœ€çµ‚ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	LastBoss* lastBoss = _bossManager.GetLastBossPtr();
 
-	//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+	//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 	if (player && lastBoss)
 	{
 		if (lastBoss->GetIsAppearance())
 		{
-			//	“–‚½‚è”»’è‚Ì•`‰æ
+			//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 			_BoxHitCheckOfDraw(player->GetRect(), lastBoss->GetCenterBarrelRect());
 			_CircleHitCheckOfDraw(player->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_BODY));
 
@@ -997,46 +997,46 @@ void HitChecker::PlayerToLastBossOfDraw(PlayerManager& _playerManager, BossManag
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì’e‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å¼¾ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToEnemyShotOfDraw(PlayerManager& _playerManager, ShotManager& _shotManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
 	for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::ENEMY_SHOT); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::ENEMY_SHOT, i);
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (player && shot)
 		{
-			//	“–‚½‚è”»’è‚Ì•`‰æ
+			//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 			_CircleHitCheckOfDraw(player->GetCircle(), shot->GetCircle());
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Ì’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerShotToEnemyOfDraw(ShotManager& _shotManager, EnemyManager& _enemyManager)
 {
 	for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::PLAYER_SHOT); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::PLAYER_SHOT, i);
 
 		for (int j = 0; j < _enemyManager.GetListSize(); j++)
 		{
-			//	ƒGƒlƒ~[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+			//	ã‚¨ãƒãƒŸãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 			EnemyBase* enemy = _enemyManager.GetEnemyPtr(j);
 
-			//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+			//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 			if (shot && enemy)
 			{
-				//	“–‚½‚è”»’è‚Ì•`‰æ
+				//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 				_CircleHitCheckOfDraw(shot->GetCircle(), enemy->GetCircle());
 			}
 		}
@@ -1044,46 +1044,46 @@ void HitChecker::PlayerShotToEnemyOfDraw(ShotManager& _shotManager, EnemyManager
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Ì’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerShotToMediumBossOfDraw(ShotManager& _shotManager, BossManager& _bossManager)
 {
 	for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::PLAYER_SHOT); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::PLAYER_SHOT, i);
 
-		//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		MediumBoss* mediumBoss = _bossManager.GetMediumBoss();
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (shot && mediumBoss)
 		{
-			//	“–‚½‚è”»’è‚Ì•`‰æ
+			//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 			_CircleHitCheckOfDraw(shot->GetCircle(), mediumBoss->GetCircle());
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Ì’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerShotToLastBossOfDraw(ShotManager& _shotManager, BossManager& _bossManager)
 {
 	for (int i = 0; i < _shotManager.GetListSize(ShotManager::SHOT_KIND::PLAYER_SHOT); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Shot* shot = _shotManager.GetShotPtr(ShotManager::SHOT_KIND::PLAYER_SHOT, i);
 
-		//	ÅIƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	æœ€çµ‚ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		LastBoss* lastBoss = _bossManager.GetLastBossPtr();
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (shot && lastBoss)
 		{
 			if (lastBoss->GetIsAppearance())
 			{
-				//	“–‚½‚è”»’è‚Ì•`‰æ
+				//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 				DrawCube3D(shot->GetRect().m_vertexTop, shot->GetRect().m_vertexUnder, 5, GetColor(255, 255, 255), false);
 				_CircleHitCheckOfDraw(shot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_BODY));
 
@@ -1116,24 +1116,24 @@ void HitChecker::PlayerShotToLastBossOfDraw(ShotManager& _shotManager, BossManag
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerStayShotToEnemyOfDraw(StayShotManager& _stayShotManager, EnemyManager& _enemyManager)
 {
 	for (int i = 0; i < _stayShotManager.GetListSize(); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		StayShot* stayShot = _stayShotManager.GetStayShotPtr(i);
 
 		for (int j = 0; j < _enemyManager.GetListSize(); j++)
 		{
-			//	ƒGƒlƒ~[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+			//	ã‚¨ãƒãƒŸãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 			EnemyBase* enemy = _enemyManager.GetEnemyPtr(j);
 
-			//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+			//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 			if (stayShot && enemy)
 			{
-				//	“–‚½‚è”»’è‚Ì•`‰æ
+				//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 				_CircleHitCheckOfDraw(stayShot->GetCircle(), enemy->GetCircle());
 			}
 		}
@@ -1141,46 +1141,46 @@ void HitChecker::PlayerStayShotToEnemyOfDraw(StayShotManager& _stayShotManager, 
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‘Øİ’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerStayShotToMediumBossOfDraw(StayShotManager& _stayShotManager, BossManager& _bossManager)
 {
 	for (int i = 0; i < _stayShotManager.GetListSize(); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		StayShot* stayShot = _stayShotManager.GetStayShotPtr(i);
 
-		//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		MediumBoss* mediumBoss = _bossManager.GetMediumBoss();
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (stayShot && mediumBoss)
 		{
-			//	“–‚½‚è”»’è‚Ì•`‰æ
+			//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 			_CircleHitCheckOfDraw(stayShot->GetCircle(), mediumBoss->GetCircle());
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerStayShotToLastBossOfDraw(StayShotManager& _stayShotManager, BossManager& _bossManager)
 {
 	for (int i = 0; i < _stayShotManager.GetListSize(); i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		StayShot* stayShot = _stayShotManager.GetStayShotPtr(i);
 
-		//	ÅIƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	æœ€çµ‚ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		LastBoss* lastBoss = _bossManager.GetLastBossPtr();
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (stayShot && lastBoss)
 		{
 			if (lastBoss->GetIsAppearance())
 			{
-				//	“–‚½‚è”»’è‚Ì•`‰æ
+				//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 				DrawCube3D(stayShot->GetRect().m_vertexTop, stayShot->GetRect().m_vertexUnder, 5, GetColor(255, 255, 255), false);
 				_CircleHitCheckOfDraw(stayShot->GetCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_BODY));
 
@@ -1213,56 +1213,56 @@ void HitChecker::PlayerStayShotToLastBossOfDraw(StayShotManager& _stayShotManage
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚ÆƒAƒCƒeƒ€‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¢ã‚¤ãƒ†ãƒ ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerToItemOfDraw(PlayerManager& _playerManager, ItemManager& _item)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
 	for (int i = 0; i < _item.GetListSize(); i++)
 	{
-		//	ƒAƒCƒeƒ€‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		Item* item = _item.GetItemPtr(i);
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (player && item)
 		{
-			//	“–‚½‚è”»’è‚Ì•`‰æ
+			//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 			_BoxHitCheckOfDraw(player->GetItemHitRect(), item->GetRect());
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[‚Ì•KE‹Z‚Æ‚·‚×‚Ä‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¿…æ®ºæŠ€ã¨ã™ã¹ã¦ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::PlayerSpecialAttackToAllObjectOfDraw(PlayerManager& _playerManager, EnemyManager& _enemyManager, BossManager& _bossManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 
 	const int size = _enemyManager.GetListSize();
 	for (int i = 0; i < size; i++)
 	{
-		//	ƒGƒlƒ~[‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ã‚¨ãƒãƒŸãƒ¼ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		EnemyBase* enemy = _enemyManager.GetEnemyPtr(i);
 
-		//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+		//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 		if (player && enemy)
 		{
-			//	“–‚½‚è”»’è‚Ì•`‰æ
+			//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 			_BoxHitCheckOfDraw(player->GetLaserHitRect(), enemy->GetRect());
 		}
 	}
 
-	//	’†ƒ{ƒX‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+	//	ä¸­ãƒœã‚¹ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 	MediumBoss* mediumBoss = _bossManager.GetMediumBoss();
 
-	//	ƒ|ƒCƒ“ƒ^‚ª‘¶İ‚·‚é‚È‚ç
+	//	ãƒã‚¤ãƒ³ã‚¿ãŒå­˜åœ¨ã™ã‚‹ãªã‚‰
 	if (player && mediumBoss)
 	{
-		//	“–‚½‚è”»’è‚Ì•`‰æ
+		//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 		_BoxHitCheckOfDraw(player->GetLaserHitRect(), mediumBoss->GetRect());
 	}
 
@@ -1271,7 +1271,7 @@ void HitChecker::PlayerSpecialAttackToAllObjectOfDraw(PlayerManager& _playerMana
 	{
 		if (lastBoss->GetIsAppearance())
 		{
-			//	“–‚½‚è”»’è‚Ì•`‰æ
+			//	å½“ãŸã‚Šåˆ¤å®šã®æç”»
 			//_CircleHitCheckOfDraw(player->GetLaserCircle(), lastBoss->GetCircle(lastBoss->BOSS_PARTS_KIND::BOSS_PARTS_KIND_BODY));
 
 			if (lastBoss->GetIsLeftCoreAlive())
@@ -1302,73 +1302,73 @@ void HitChecker::PlayerSpecialAttackToAllObjectOfDraw(PlayerManager& _playerMana
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
+//	@brief	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
 //-----------------------------------------------------------------------------
 bool HitChecker::_AskObjectLenght(const VECTOR _pos1, const VECTOR _pos2)
 {
-	//	ƒ^[ƒQƒbƒg‚Ü‚Å‚ÌƒxƒNƒgƒ‹‚ğ‹‚ß‚é
+	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆã¾ã§ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã‚‹
 	VECTOR targetVec = VSub(_pos1, _pos2);
 	float targetLen = VSize(targetVec);
 
-	//	ƒ^[ƒQƒbƒgŠÔ‚Ì‹——£‚ªˆê’è‚æ‚è¬‚³‚­‚È‚Á‚½‚çA
-	//	“–‚½‚è”»’è‚ğs‚¤
+	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆé–“ã®è·é›¢ãŒä¸€å®šã‚ˆã‚Šå°ã•ããªã£ãŸã‚‰ã€
+	//	å½“ãŸã‚Šåˆ¤å®šã‚’è¡Œã†
 	return (targetLen <= ACTIVE_LENGHT);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰~Œ`“¯m‚Ì“–‚½‚è”»’è
+//	@brief	å††å½¢åŒå£«ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 bool HitChecker::_CircleHitCheck(Circle _target1, Circle _target2)
 {
-	//	‹——£‚ÌŒvZ
+	//	è·é›¢ã®è¨ˆç®—
 	VECTOR distance = VSub(_target1.m_centerPoint, _target2.m_centerPoint);
 
-	//	‹——£‚ª”¼Œa‚æ‚è¬‚³‚¢‚Æ‚«‚Í“–‚½‚è
+	//	è·é›¢ãŒåŠå¾„ã‚ˆã‚Šå°ã•ã„ã¨ãã¯å½“ãŸã‚Š
 	if (VSize(distance) < (_target1.m_radius + _target2.m_radius)) { return true; }
 	return false;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‹éŒ`“¯m‚Ì“–‚½‚è”»’è
+//	@brief	çŸ©å½¢åŒå£«ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 bool HitChecker::_BoxHitCheck(Rect _target1, Rect _target2)
 {
-	//	XY²‚Å“–‚½‚è”»’è
+	//	XYè»¸ã§å½“ãŸã‚Šåˆ¤å®š
 	const bool isHitAxisXY = ((_target1.m_vertexTop.x <= _target2.m_vertexUnder.x) &&
 		(_target1.m_vertexTop.y <= _target2.m_vertexUnder.y) &&
 		(_target1.m_vertexUnder.x >= _target2.m_vertexTop.x) &&
 		(_target1.m_vertexUnder.y >= _target2.m_vertexTop.y));
 
-	//	XZ²‚Å“–‚½‚è”»’è
+	//	XZè»¸ã§å½“ãŸã‚Šåˆ¤å®š
 	const bool isHitAxisXZ = ((_target1.m_vertexTop.x <= _target2.m_vertexUnder.x) &&
 		(_target1.m_vertexTop.z <= _target2.m_vertexUnder.z) &&
 		(_target1.m_vertexUnder.x >= _target2.m_vertexTop.x) &&
 		(_target1.m_vertexUnder.z >= _target2.m_vertexTop.z));
 
-	//	’n–Ê‚Æ‚ÌÚG”»’è
+	//	åœ°é¢ã¨ã®æ¥è§¦åˆ¤å®š
 	return  isHitAxisXY && isHitAxisXZ;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰~Œ`“¯m‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	å††å½¢åŒå£«ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::_CircleHitCheckOfDraw(Circle _target1, Circle _target2)
 {
-	//	ƒ^[ƒQƒbƒg‚P‚Ì•`‰æ
+	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼‘ã®æç”»
 	DrawSphere3D(_target1.m_centerPoint, _target1.m_radius, 5, 0x00ffff, 0x00ffff, false);
 
-	//	ƒ^[ƒQƒbƒg‚Q‚Ì•`‰æ
+	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼’ã®æç”»
 	DrawSphere3D(_target2.m_centerPoint, _target2.m_radius, 5, 0x00ffff, 0x00ffff, false);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‹éŒ`“¯m‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+//	@brief	çŸ©å½¢åŒå£«ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 //-----------------------------------------------------------------------------
 void HitChecker::_BoxHitCheckOfDraw(Rect _target1, Rect _target2)
 {
-	//	ƒ^[ƒQƒbƒg‚P‚Ì•`‰æ
+	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼‘ã®æç”»
 	DrawCube3D(_target1.m_vertexTop, _target1.m_vertexUnder, 5, GetColor(255, 255, 255), false);
 
-	//	ƒ^[ƒQƒbƒg‚Q‚Ì•`‰æ
+	//	ã‚¿ãƒ¼ã‚²ãƒƒãƒˆï¼’ã®æç”»
 	DrawCube3D(_target2.m_vertexTop, _target2.m_vertexUnder, 5, GetColor(255, 255, 255), false);
 }

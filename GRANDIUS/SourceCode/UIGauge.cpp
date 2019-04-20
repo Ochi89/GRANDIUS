@@ -1,68 +1,68 @@
-
+ï»¿
 //=============================================================================
 //	@file	UIGauge.cpp
-//	@brief	ƒQ[ƒW
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚²ãƒ¼ã‚¸
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/23
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "UIGauge.h"
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const VECTOR	UIGauge::START_POS = VGet(700.0f, 50.0f, 0.0f);		//	ŠJnˆÊ’u
-const VECTOR	UIGauge::END_POS = VGet(1400.0f, 75.0f, 0.0f);		//	I—¹ˆÊ’u
-const float		UIGauge::FLAME_INTERVAL = 3.0f;						//	ƒtƒŒ[ƒ€ŠÔŠu
-const float		UIGauge::ADD_GAUGE_ENEMY = 8.0f;					//	ƒGƒlƒ~[“¢”°‚Ì‰ÁZ—Ê
-const float		UIGauge::ADD_GAUGE_BOSS = 8.0f;						//	ƒ{ƒX“¢”°‚Ì‰ÁZ—Ê
-const float		UIGauge::ADD_GAUGE_ITEM = 28.0f;					//	ƒAƒCƒeƒ€æ“¾‚Ì‰ÁZ—Ê
-const float		UIGauge::MIN_BUTTON_SCALE = 1.0f;					//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌÅ¬
-const float		UIGauge::MAX_BUTTON_SCALE = 1.2f;					//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌÅ‘å
-const float		UIGauge::BUTTON_SCALE_SPEED = 0.03f;				//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚Ì‘¬“x
-const int		UIGauge::MAX_COLOR = 255;							//	F‚ÌÅ‘å
-const int		UIGauge::MIN_COLOR = 180;							//	F‚ÌÅ¬
-const int		UIGauge::COLOR_SPEED = 5;							//	F‚Ì‘¬“x
+const VECTOR	UIGauge::START_POS = VGet(700.0f, 50.0f, 0.0f);		//	é–‹å§‹ä½ç½®
+const VECTOR	UIGauge::END_POS = VGet(1400.0f, 75.0f, 0.0f);		//	çµ‚äº†ä½ç½®
+const float		UIGauge::FLAME_INTERVAL = 3.0f;						//	ãƒ•ãƒ¬ãƒ¼ãƒ é–“éš”
+const float		UIGauge::ADD_GAUGE_ENEMY = 8.0f;					//	ã‚¨ãƒãƒŸãƒ¼è¨ä¼æ™‚ã®åŠ ç®—é‡
+const float		UIGauge::ADD_GAUGE_BOSS = 8.0f;						//	ãƒœã‚¹è¨ä¼æ™‚ã®åŠ ç®—é‡
+const float		UIGauge::ADD_GAUGE_ITEM = 28.0f;					//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—æ™‚ã®åŠ ç®—é‡
+const float		UIGauge::MIN_BUTTON_SCALE = 1.0f;					//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®æœ€å°
+const float		UIGauge::MAX_BUTTON_SCALE = 1.2f;					//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®æœ€å¤§
+const float		UIGauge::BUTTON_SCALE_SPEED = 0.03f;				//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®é€Ÿåº¦
+const int		UIGauge::MAX_COLOR = 255;							//	è‰²ã®æœ€å¤§
+const int		UIGauge::MIN_COLOR = 180;							//	è‰²ã®æœ€å°
+const int		UIGauge::COLOR_SPEED = 5;							//	è‰²ã®é€Ÿåº¦
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UIGauge::UIGauge()
 {
-	//	ˆ’u‚È‚µ
+	//	å‡¦ç½®ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UIGauge::~UIGauge()
 {
-	//	ÅI“I‚È‰ğ•ú
+	//	æœ€çµ‚çš„ãªè§£æ”¾
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void UIGauge::Create()
 {
-	//	Še•Ï”‚Ì‰Šú‰»
+	//	å„å¤‰æ•°ã®åˆæœŸåŒ–
 	m_gaugeFlame.m_vertexTop = START_POS;
 	m_gaugeFlame.m_vertexUnder = END_POS;
 	m_gauge.m_vertexTop = START_POS;
 	m_gauge.m_vertexUnder = VGet(START_POS.x, END_POS.y, START_POS.z);
 
-	//	ƒtƒŒ[ƒ€F
+	//	ãƒ•ãƒ¬ãƒ¼ãƒ è‰²
 	m_gaugeFlameColor.m_red = 128;
 	m_gaugeFlameColor.m_green = 128;
 	m_gaugeFlameColor.m_blue = 128;
 	m_gaugeFlameColor.m_color = CommonFunction::GetColor(m_gaugeFlameColor);
 
-	//	ƒQ[ƒWF
+	//	ã‚²ãƒ¼ã‚¸è‰²
 	m_gaugeColor.m_red = 255;
 	m_gaugeColor.m_green = 255;
 	m_gaugeColor.m_blue = 255;
@@ -71,7 +71,7 @@ void UIGauge::Create()
 	m_targetGauge = START_POS.x;
 	m_isGaugeMax = false;
 
-	//	ƒ{ƒ^ƒ“UI
+	//	ãƒœã‚¿ãƒ³UI
 	m_buttonUI.m_spriteHendle = LoadGraph("Data/Sprite/Gauge/ButtonX.png");
 	CommonDebug::Assert((m_buttonUI.m_spriteHendle <= -1), " [ UIGauge.cpp ] : error : sprite loading failed.");
 	m_buttonUI.m_pos = VGet(1050.0f, 65.0f, 0.0f);
@@ -80,43 +80,43 @@ void UIGauge::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIGauge::Release()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_buttonUI.m_spriteHendle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIGauge::Update(SoundEffect& _soundEffect)
 {
-	//	ƒQ[ƒW‚Ì‰ÁZ
+	//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 	m_gauge.m_vertexUnder.x = m_targetGauge;
 
-	//	ƒQ[ƒW‚ª‚½‚Ü‚Á‚½‚çA
-	//	ƒJƒEƒ“ƒg‚ğ‰ÁZ‚µAƒQ[ƒW‚ğ‰Šú’l‚É‚·‚é
+	//	ã‚²ãƒ¼ã‚¸ãŒãŸã¾ã£ãŸã‚‰ã€
+	//	ã‚«ã‚¦ãƒ³ãƒˆã‚’åŠ ç®—ã—ã€ã‚²ãƒ¼ã‚¸ã‚’åˆæœŸå€¤ã«ã™ã‚‹
 	const bool isOutRange = m_gauge.m_vertexUnder.x > END_POS.x;
 	if (isOutRange)
 	{
-		//	ƒQ[ƒW‚ª‚½‚Ü‚Á‚½uŠÔ‚Ì‚İSEÄ¶
+		//	ã‚²ãƒ¼ã‚¸ãŒãŸã¾ã£ãŸç¬é–“ã®ã¿SEå†ç”Ÿ
 		const bool isOnSe = !m_isGaugeMax;
 		if (isOnSe) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_GAUGE_MAX); }
 
 		m_isGaugeMax = true;
 
-		//	‘å‚«‚³‚Ì•ÏX
+		//	å¤§ãã•ã®å¤‰æ›´
 		m_gauge.m_vertexTop = VGet(START_POS.x - FLAME_INTERVAL, START_POS.y - FLAME_INTERVAL, START_POS.z);
 		m_gauge.m_vertexUnder = VGet(END_POS.x + FLAME_INTERVAL, END_POS.y + FLAME_INTERVAL, END_POS.z);
 
-		//	F‚Ì•ÏX
+		//	è‰²ã®å¤‰æ›´
 		m_gaugeColor.m_red -= COLOR_SPEED;
 		m_gaugeColor.m_green -= COLOR_SPEED;
 		m_gaugeColor.m_blue -= COLOR_SPEED;
 		
-		//	Å¬ˆ—
+		//	æœ€å°å‡¦ç†
 		const bool isMinColor = m_gaugeColor.m_red <= MIN_COLOR;
 		if(isMinColor)
 		{
@@ -125,36 +125,36 @@ void UIGauge::Update(SoundEffect& _soundEffect)
 			m_gaugeColor.m_blue = MAX_COLOR;
 		}
 
-		//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚Ì•ÏX
+		//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®å¤‰æ›´
 		if(m_isChangeButtonScale) { m_buttonUI.m_scale -= BUTTON_SCALE_SPEED; }
 		else { m_buttonUI.m_scale += BUTTON_SCALE_SPEED; }
 
-		//	Å‘åÅ¬ˆ—
+		//	æœ€å¤§æœ€å°å‡¦ç†
 		const bool isMaxVal = m_buttonUI.m_scale >= MAX_BUTTON_SCALE;
 		const bool isMinVal = m_buttonUI.m_scale <= MIN_BUTTON_SCALE;
 		if (isMaxVal) { m_buttonUI.m_scale = MAX_BUTTON_SCALE; m_isChangeButtonScale = true; }
 		if (isMinVal) { m_buttonUI.m_scale = MIN_BUTTON_SCALE; m_isChangeButtonScale = false; }
 	}
 
-	//	F‚ğ‹‚ß‚é	
+	//	è‰²ã‚’æ±‚ã‚ã‚‹	
 	m_gaugeColor.m_color = CommonFunction::GetColor(m_gaugeColor);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIGauge::Draw()
 {
-	//	ƒQ[ƒW‚Ì•`‰æ
+	//	ã‚²ãƒ¼ã‚¸ã®æç”»
 	DrawBox((int)m_gaugeFlame.m_vertexTop.x, (int)m_gaugeFlame.m_vertexTop.y, (int)m_gaugeFlame.m_vertexUnder.x, (int)m_gaugeFlame.m_vertexUnder.y, m_gaugeFlameColor.m_color, TRUE);
 	DrawBox((int)m_gauge.m_vertexTop.x, (int)m_gauge.m_vertexTop.y, (int)m_gauge.m_vertexUnder.x, (int)m_gauge.m_vertexUnder.y, m_gaugeColor.m_color, TRUE);
 
-	//	ƒ{ƒ^ƒ“‚Ì•`‰æ
+	//	ãƒœã‚¿ãƒ³ã®æç”»
 	if(m_isGaugeMax) { DrawRotaGraph((int)m_buttonUI.m_pos.x, (int)m_buttonUI.m_pos.y, (double)m_buttonUI.m_scale, 0, m_buttonUI.m_spriteHendle, TRUE); }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒQ[ƒW‚Ì‰ÁZ
+//	@brief	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 //-----------------------------------------------------------------------------
 void UIGauge::AddGauge(const ADD_GAUGE_KIND _addGaugeKind)
 {
@@ -176,34 +176,34 @@ void UIGauge::AddGauge(const ADD_GAUGE_KIND _addGaugeKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒQ[ƒW‚Ì‰Šú‰»
+//	@brief	ã‚²ãƒ¼ã‚¸ã®åˆæœŸåŒ–
 //-----------------------------------------------------------------------------
 void UIGauge::ResetGauge()
 {
-	//	‰Šú‰»
+	//	åˆæœŸåŒ–
 	m_targetGauge = START_POS.x;
 	m_isGaugeMax = false;
 
-	//	ˆÊ’u‚Ì‰Šú‰»
+	//	ä½ç½®ã®åˆæœŸåŒ–
 	m_gauge.m_vertexTop = START_POS;
 	m_gauge.m_vertexUnder = VGet(START_POS.x, END_POS.y, START_POS.z);
 
-	//	ƒQ[ƒWF
+	//	ã‚²ãƒ¼ã‚¸è‰²
 	m_gaugeColor.m_red = 255;
 	m_gaugeColor.m_green = 255;
 	m_gaugeColor.m_blue = 255;
 	m_gaugeColor.m_color = CommonFunction::GetColor(m_gaugeColor);
 
-	//	ƒ{ƒ^ƒ“‚ÌƒTƒCƒY
+	//	ãƒœã‚¿ãƒ³ã®ã‚µã‚¤ã‚º
 	m_buttonUI.m_scale = MIN_BUTTON_SCALE;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void UIGauge::_FinalRelease()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_buttonUI.m_spriteHendle);
 }
 

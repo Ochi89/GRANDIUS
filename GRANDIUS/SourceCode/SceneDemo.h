@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	SceneDemo.h
-//	@brief	ƒfƒ‚ƒV[ƒ“
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ‡ãƒ¢ã‚·ãƒ¼ãƒ³
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/13
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "SceneBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class SceneManager;
 class PlayerManager;
@@ -38,65 +38,65 @@ class EffekseerManager;
 class Warning;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ^ƒCƒgƒ‹ƒV[ƒ“”h¶ƒNƒ‰ƒX
+//	@brief	ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³æ´¾ç”Ÿã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class SceneDemo : public SceneBase
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^/ /ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿/ /ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	SceneDemo();
 	~SceneDemo();
 
-    //	ì¬ˆ—
+    //	ä½œæˆå‡¦ç†
     void Create() override;
 
-    //	‰ğ•úˆ—
+    //	è§£æ”¾å‡¦ç†
     void Release() override;
 
-    //	‰Šúˆ—
+    //	åˆæœŸå‡¦ç†
     void Initialize(Pad& _pad, Camera& _camera) override;
 
-    //	XVˆ—
+    //	æ›´æ–°å‡¦ç†
     void Update(Pad& _pad, Camera& _camera, BackGround& _backGround, SoundEffect& _soundEffect, SceneManager* _sceneManager) override;
 
-    //	•`‰æˆ—
+    //	æç”»å‡¦ç†
     void Draw(BackGround& _backGround) override;
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒqƒbƒgƒ`ƒFƒbƒN
+	//	ãƒ’ãƒƒãƒˆãƒã‚§ãƒƒã‚¯
 	void _AllHitChecker(SoundEffect& _soundEffect);
 
-	//	ƒV[ƒ“Ø‚è‘Ö‚¦
+	//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆ
 	void _ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManager* _sceneManager) override;
 
-	//	ÅI“I‚È‰ğ•ú
+	//	æœ€çµ‚çš„ãªè§£æ”¾
 	void _FinalRelease() override;
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-    PlayerManager*		m_pPlayerManager;	    //	ƒvƒŒƒCƒ„[
-	EnemyManager*		m_pEnemyManager;		//	ƒGƒlƒ~[
-	BossManager*		m_pBossManager;			//	ƒ{ƒX
-	ShotManager*		m_pShotManager;			//	ƒVƒ‡ƒbƒg
-	StayShotManager*	m_pStayShotManager;		//	‘ØİƒVƒ‡ƒbƒg
-	ItemManager*		m_pItemManager;			//	ƒAƒCƒeƒ€
-	UILife*				m_pUILife;				//	ƒ‰ƒCƒtUI
-	UIGauge*			m_pUIGauge;				//	ƒQ[ƒWUI
-	UIStayShot*			m_pUIStayShot;			//	ƒXƒeƒCƒVƒ‡ƒbƒgUI
-	UIDemoPlay*			m_pUIDemoPlay;			//	ƒfƒ‚ƒvƒŒƒCUI
-	UIBackPixel*		m_pUIBackPixel;			//	”wŒiƒsƒNƒZƒ‹UI
-	EffekseerManager*	m_pEffekseerManager;	//	ƒGƒtƒFƒNƒg
-	Warning*			m_pWarning;				//	Œx
-	float				m_demoTime;				//	ƒfƒ‚‚ÌŠÔ
+    PlayerManager*		m_pPlayerManager;	    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+	EnemyManager*		m_pEnemyManager;		//	ã‚¨ãƒãƒŸãƒ¼
+	BossManager*		m_pBossManager;			//	ãƒœã‚¹
+	ShotManager*		m_pShotManager;			//	ã‚·ãƒ§ãƒƒãƒˆ
+	StayShotManager*	m_pStayShotManager;		//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆ
+	ItemManager*		m_pItemManager;			//	ã‚¢ã‚¤ãƒ†ãƒ 
+	UILife*				m_pUILife;				//	ãƒ©ã‚¤ãƒ•UI
+	UIGauge*			m_pUIGauge;				//	ã‚²ãƒ¼ã‚¸UI
+	UIStayShot*			m_pUIStayShot;			//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUI
+	UIDemoPlay*			m_pUIDemoPlay;			//	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UI
+	UIBackPixel*		m_pUIBackPixel;			//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UI
+	EffekseerManager*	m_pEffekseerManager;	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	Warning*			m_pWarning;				//	è­¦å‘Š
+	float				m_demoTime;				//	ãƒ‡ãƒ¢ã®æ™‚é–“
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float END_DEMO_TIME;						//	ƒfƒ‚‚ÌI—¹
-	static const float MAX_CHANGE_LOSE_SCENE_WAIT_TIME;		//	ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì’x‰„‚ÌÅ‘å
+	static const float END_DEMO_TIME;						//	ãƒ‡ãƒ¢ã®çµ‚äº†
+	static const float MAX_CHANGE_LOSE_SCENE_WAIT_TIME;		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã®é…å»¶ã®æœ€å¤§
 };

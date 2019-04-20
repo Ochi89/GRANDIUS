@@ -1,23 +1,23 @@
-
+ï»¿
 //=============================================================================
 //	@file	Menu.h
-//	@brief	ƒƒjƒ…[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ¡ãƒ‹ãƒ¥ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/8
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
 class Pad;
 struct Rect;
@@ -25,140 +25,140 @@ struct UI;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒXƒRƒAƒNƒ‰ƒX
+//	@brief	ã‚¹ã‚³ã‚¢ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Menu final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒfƒXƒgƒ‰ƒNƒ^
+	//	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Menu();
 
-	//	¶¬
+	//	ç”Ÿæˆ
 	static Menu* GetInstance()
 	{
 		static Menu s_instance;
 		return &s_instance;
 	}
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 
-	//	XV
+	//	æ›´æ–°
 	void Update(Pad& _pad, SoundEffect& _soundEffect);
 
-	//	•`‰æ
+	//	æç”»
 	void Draw();
 
 //==================== getter =====================//
 
-	//	ƒ^ƒCƒgƒ‹ƒtƒ‰ƒO‚Ì getter
+	//	ã‚¿ã‚¤ãƒˆãƒ«ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsGoToTitle() const { return m_isGoToTitle; }
 
-	//	XVƒXƒLƒbƒvƒtƒ‰ƒO‚Ì getter
+	//	æ›´æ–°ã‚¹ã‚­ãƒƒãƒ—ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsSkipUpdate() const { return m_isSkipUpdate; }
 
 private:
 
-//================== ƒVƒ“ƒOƒ‹ƒgƒ“ ==================//
+//================== ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ ==================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Menu();
 
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-	//	ƒ‚[ƒh
+	//	ãƒ¢ãƒ¼ãƒ‰
 	enum MODE
 	{
-		MODE_OPERATION,		//	‘€ìà–¾
-		MODE_TITLE,			//	ƒ^ƒCƒgƒ‹‚Ö
-		MODE_BACK,			//	–ß‚é
-		MODE_NUM,			//	ƒ‚[ƒh‚Ì”
+		MODE_OPERATION,		//	æ“ä½œèª¬æ˜
+		MODE_TITLE,			//	ã‚¿ã‚¤ãƒˆãƒ«ã¸
+		MODE_BACK,			//	æˆ»ã‚‹
+		MODE_NUM,			//	ãƒ¢ãƒ¼ãƒ‰ã®æ•°
 	};
 
-	//	ƒJƒEƒ“ƒgƒ_ƒEƒ“
+	//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³
 	enum COUNTDOWN
 	{
-		COUNTDOWN_1,		//	‚P
-		COUNTDOWN_2,		//	‚Q
-		COUNTDOWN_3,		//	‚R
-		COUNTDOWN_NUM,		//	”
+		COUNTDOWN_1,		//	ï¼‘
+		COUNTDOWN_2,		//	ï¼’
+		COUNTDOWN_3,		//	ï¼“
+		COUNTDOWN_NUM,		//	æ•°
 	};
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒƒjƒ…[ŠJ•Â
+	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼é–‹é–‰
 	void _MenuOpeningAndClosing(Pad& _pad, SoundEffect& _soundEffect);
 
-	//	ƒ‚[ƒhØ‚è‘Ö‚¦
+	//	ãƒ¢ãƒ¼ãƒ‰åˆ‡ã‚Šæ›¿ãˆ
 	void _ChangeMode(Pad& _pad, SoundEffect& _soundEffect);
 
-	//	‘I‘ğˆÊ’u‚Ì•ÏX
+	//	é¸æŠä½ç½®ã®å¤‰æ›´
 	void _ChangeSelectPos();
 
-	//	ƒ‚[ƒh
+	//	ãƒ¢ãƒ¼ãƒ‰
 	void _Mode(Pad& _pad, SoundEffect& _soundEffect);
 
-	//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦
+	//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡
 	void _ChangeSelectScale();
 
-	//	ƒJƒEƒ“ƒgƒ_ƒEƒ“
+	//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³
 	void _Countdown(SoundEffect& _soundEffect);
 
-	//	ƒƒjƒ…[‚Ì•`‰æ
+	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®æç”»
 	void _MenuDraw();
 
-	//	‘€ìà–¾‚Ì•`‰æ
+	//	æ“ä½œèª¬æ˜ã®æç”»
 	void _OperationDraw();
 
-	//	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚Ì•`‰æ
+	//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®æç”»
 	void _CountdownDraw();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int		m_modeNumber;								//	ƒ‚[ƒh”Ô†
-	int		m_countdown;								//	ƒJƒEƒ“ƒgƒ_ƒEƒ“
-	float	m_watiTime;									//	’x‰„ŠÔ
-	float	m_countdownTime;							//	ƒJƒEƒ“ƒgƒ_ƒEƒ“ŠÔ
-	bool	m_isMenuState;								//	ƒƒjƒ…|‚Ìó‘Ô
-	bool	m_isMenuDraw;								//	ƒƒjƒ…|‚Ì•`‰æ
-	bool	m_isMenu;									//	ƒƒjƒ…|
-	bool	m_isOperation;								//	‘€ìà–¾
-	bool	m_isGoToTitle;								//	ƒ^ƒCƒgƒ‹‚Ö
-	bool	m_isSelectScaleState;						//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦‚Ìó‘Ô
-	bool	m_isSkipUpdate;								//	XV‚ÌƒXƒLƒbƒv
-	bool	m_isCountdownStart;							//	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÌŠJn
-	Rect	m_menuFlame;								//	ƒƒjƒ…[ƒtƒŒ[ƒ€
-	UI		m_topFlame;									//	ãƒtƒŒ[ƒ€UI
-	UI		m_underFlame;								//	‰ºƒtƒŒ[ƒ€UI
-	UI		m_mode[MODE::MODE_NUM];						//	ƒ‚[ƒhUI
-	UI		m_select;									//	‘I‘ğUI
-	UI		m_operation;								//	à–¾UI
-	UI		m_countdownUI[COUNTDOWN::COUNTDOWN_NUM];	//	ƒJƒEƒ“ƒgƒ_ƒEƒ“UI
+	int		m_modeNumber;								//	ãƒ¢ãƒ¼ãƒ‰ç•ªå·
+	int		m_countdown;								//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³
+	float	m_watiTime;									//	é…å»¶æ™‚é–“
+	float	m_countdownTime;							//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³æ™‚é–“
+	bool	m_isMenuState;								//	ãƒ¡ãƒ‹ãƒ¥ï¼ã®çŠ¶æ…‹
+	bool	m_isMenuDraw;								//	ãƒ¡ãƒ‹ãƒ¥ï¼ã®æç”»
+	bool	m_isMenu;									//	ãƒ¡ãƒ‹ãƒ¥ï¼
+	bool	m_isOperation;								//	æ“ä½œèª¬æ˜
+	bool	m_isGoToTitle;								//	ã‚¿ã‚¤ãƒˆãƒ«ã¸
+	bool	m_isSelectScaleState;						//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡ã®çŠ¶æ…‹
+	bool	m_isSkipUpdate;								//	æ›´æ–°ã®ã‚¹ã‚­ãƒƒãƒ—
+	bool	m_isCountdownStart;							//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®é–‹å§‹
+	Rect	m_menuFlame;								//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ãƒ•ãƒ¬ãƒ¼ãƒ 
+	UI		m_topFlame;									//	ä¸Šãƒ•ãƒ¬ãƒ¼ãƒ UI
+	UI		m_underFlame;								//	ä¸‹ãƒ•ãƒ¬ãƒ¼ãƒ UI
+	UI		m_mode[MODE::MODE_NUM];						//	ãƒ¢ãƒ¼ãƒ‰UI
+	UI		m_select;									//	é¸æŠUI
+	UI		m_operation;								//	èª¬æ˜UI
+	UI		m_countdownUI[COUNTDOWN::COUNTDOWN_NUM];	//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³UI
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const int		MAX_MODE;					//	Å‘å
-	static const int		MIN_MODE;					//	Å¬
-	static const VECTOR		SELECT_CORRECTION;			//	‘I‘ğˆÊ’u‚Ì’²®
-	static const float		MAX_FLAME;					//	Å‘åƒtƒŒ[ƒ€
-	static const float		MIN_FLAME;					//	Å¬ƒtƒŒ[ƒ€
-	static const float		MAX_WAIT_TIME;				//	’x‰„
-	static const float		FONT_SIZE;					//	•¶šƒTƒCƒY
-	static const float		SELECT_POS_1;				//	‘I‘ğƒtƒŒ[ƒ€‚ÌˆÊ’u‚P
-	static const float		SELECT_POS_2;				//	‘I‘ğƒtƒŒ[ƒ€‚ÌˆÊ’u‚Q
-	static const float		SELECT_POS_3;				//	‘I‘ğƒtƒŒ[ƒ€‚ÌˆÊ’u‚R
-	static const float		SELECT_SCALE_SPEED;			//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦‚Ì‘¬“x
-	static const float		MIN_SELECT_SCALE;			//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦‚ÌÅ¬
-	static const float		MAX_SELECT_SCALE;			//	‘I‘ğƒtƒŒ[ƒ€‚ÌŠg‘å—¦‚ÌÅ‘å
-	static const float		MAX_COUNTDOWN_TIME;			//	ƒJƒEƒ“ƒgƒ_ƒEƒ“ŠÔ‚ÌÅ‘å
-	static const int		MAX_COUNTDOWN;				//	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÌÅ‘å
-	static const float		COUNTDOWN_SCALE_SPEED;		//	ƒJƒEƒ“ƒgƒ_ƒEƒ“‚ÌŠg‘å—¦‚Ì‘¬“x
+	static const int		MAX_MODE;					//	æœ€å¤§
+	static const int		MIN_MODE;					//	æœ€å°
+	static const VECTOR		SELECT_CORRECTION;			//	é¸æŠä½ç½®ã®èª¿æ•´
+	static const float		MAX_FLAME;					//	æœ€å¤§ãƒ•ãƒ¬ãƒ¼ãƒ 
+	static const float		MIN_FLAME;					//	æœ€å°ãƒ•ãƒ¬ãƒ¼ãƒ 
+	static const float		MAX_WAIT_TIME;				//	é…å»¶
+	static const float		FONT_SIZE;					//	æ–‡å­—ã‚µã‚¤ã‚º
+	static const float		SELECT_POS_1;				//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½ç½®ï¼‘
+	static const float		SELECT_POS_2;				//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½ç½®ï¼’
+	static const float		SELECT_POS_3;				//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®ä½ç½®ï¼“
+	static const float		SELECT_SCALE_SPEED;			//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡ã®é€Ÿåº¦
+	static const float		MIN_SELECT_SCALE;			//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡ã®æœ€å°
+	static const float		MAX_SELECT_SCALE;			//	é¸æŠãƒ•ãƒ¬ãƒ¼ãƒ ã®æ‹¡å¤§ç‡ã®æœ€å¤§
+	static const float		MAX_COUNTDOWN_TIME;			//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³æ™‚é–“ã®æœ€å¤§
+	static const int		MAX_COUNTDOWN;				//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®æœ€å¤§
+	static const float		COUNTDOWN_SCALE_SPEED;		//	ã‚«ã‚¦ãƒ³ãƒˆãƒ€ã‚¦ãƒ³ã®æ‹¡å¤§ç‡ã®é€Ÿåº¦
 };
 
 #define MENU Menu::GetInstance()

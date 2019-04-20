@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	StayShot.h
-//	@brief	‘Øİ’e‚Ğ‚Æ‚Â•ª‚Ìˆ—
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	æ»åœ¨å¼¾ã²ã¨ã¤åˆ†ã®å‡¦ç†
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/25
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct Circle;
 struct Rect;
@@ -26,96 +26,96 @@ class EffekseerEmitter;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒXƒeƒCƒVƒ‡ƒbƒgƒNƒ‰ƒX
+//	@brief	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class StayShot final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	StayShot();
 	~StayShot();
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(SoundEffect& _soundEffect);
 
 //==================== setter =====================//
 
-	//	ŠJnˆÊ’u‚Ì setter
+	//	é–‹å§‹ä½ç½®ã® setter
 	void SetStartPos(const VECTOR _set) { m_pos = _set; }
 
-	//	ˆê“x‚Ì‚İ‚Ì setter
+	//	ä¸€åº¦ã®ã¿ã® setter
 	void SetIsOneTime(const bool _set) { m_isOneTime = _set; }
 
-	//	‘Øİ‚ÉØ‚è‘Ö‚¦‚éƒtƒ‰ƒO‚Ì setter
+	//	æ»åœ¨ã«åˆ‡ã‚Šæ›¿ãˆã‚‹ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsChangeStay(const bool _set) { m_isChangeStay = _set; }
 
 //==================== getter =====================//
 
-	//	ƒ|ƒWƒVƒ‡ƒ“‚Ì getter
+	//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã® getter
 	const VECTOR& GetPos() const { return m_pos; }
 
-	//	ˆê“x‚Ì‚İ‚Ì getter
+	//	ä¸€åº¦ã®ã¿ã® getter
 	const bool& GetIsOneTime() const { return m_isOneTime; }
 
-	//	“–‚½‚è”»’è—p‚Ì‰~Œ`‚Ì getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††å½¢ã® getter
 	const Circle& GetCircle() const { return m_hitCircle; }
 
-	//	“–‚½‚è”»’è—p‚Ì’·•ûŒ`‚Ì getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢ã® getter
 	const Rect& GetRect() const { return m_hitRect; }
 
-	//	ƒVƒ‡ƒbƒg‚ÌI—¹‚Ì getter
+	//	ã‚·ãƒ§ãƒƒãƒˆã®çµ‚äº†ã® getter
 	const bool& GetIsShotEnd() const { return m_isShotEnd; }
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	void _Move(SoundEffect& _soundEffect);
 
-	//	‘Øİˆ—
+	//	æ»åœ¨å‡¦ç†
 	void _Stay(SoundEffect& _soundEffect);
 
-	//	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 	void _UpdateHitPoint();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	VECTOR		m_pos;					//	ˆÊ’u
-	bool		m_isOneTime;			//	ˆê“x‚Ì‚İˆ—ƒtƒ‰ƒO
-	bool		m_isChangeStay;			//	ƒ‚[ƒh‚ğ‘Øİ‚ÉØ‚è‘Ö‚¦‚éƒtƒ‰ƒO
-	float		m_stayTime;				//	‘ØİŠÔ
-	bool		m_isShotEnd;			//	ƒVƒ‡ƒbƒg‚ÌI—¹
-	bool		m_isMoveShotSeStart;	//	ˆÚ“®ƒVƒ‡ƒbƒgSEŠJn
-	bool		m_isStayShotSeStart;	//	‘ØİƒVƒ‡ƒbƒgSEŠJn
+	VECTOR		m_pos;					//	ä½ç½®
+	bool		m_isOneTime;			//	ä¸€åº¦ã®ã¿å‡¦ç†ãƒ•ãƒ©ã‚°
+	bool		m_isChangeStay;			//	ãƒ¢ãƒ¼ãƒ‰ã‚’æ»åœ¨ã«åˆ‡ã‚Šæ›¿ãˆã‚‹ãƒ•ãƒ©ã‚°
+	float		m_stayTime;				//	æ»åœ¨æ™‚é–“
+	bool		m_isShotEnd;			//	ã‚·ãƒ§ãƒƒãƒˆã®çµ‚äº†
+	bool		m_isMoveShotSeStart;	//	ç§»å‹•ã‚·ãƒ§ãƒƒãƒˆSEé–‹å§‹
+	bool		m_isStayShotSeStart;	//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆSEé–‹å§‹
 
-	Circle		m_hitCircle;			//	“–‚½‚è”»’è—p‚Ì‰~Œ`
-	Rect		m_hitRect;				//	“–‚½‚è”»’è—p‚Ì’·•ûŒ`
+	Circle		m_hitCircle;			//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††å½¢
+	Rect		m_hitRect;				//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢
 
-	//	ƒGƒtƒFƒNƒgŠÖŒW
-	EffekseerEmitter*	m_effectMove;	//	ˆÚ“®ƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectStay;	//	‘ØİƒGƒtƒFƒNƒg
-	float				m_effectScale;	//	ƒGƒtƒFƒNƒg‚ÌŠg‘å—¦
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆé–¢ä¿‚
+	EffekseerEmitter*	m_effectMove;	//	ç§»å‹•ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectStay;	//	æ»åœ¨ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	float				m_effectScale;	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ‹¡å¤§ç‡
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const VECTOR		MOVE_DIR;			//	ˆÚ“®Œü‚«
-	static const float		MOVE_SPEED;			//	ˆÚ“®‘¬“x
-	static const float		MOVE_HIT_RADIUS;	//	ˆÚ“®’†‚Ì“–‚½‚è”»’è—p‚Ì”¼Œa
-	static const float		STAY_HIT_RADIUS;	//	‘Øİ’†‚Ì“–‚½‚è”»’è—p‚Ì”¼Œa
-	static const float		MIN_HIT_RADIUS;		//	“–‚½‚è”»’è—p‚ÌÅ¬”¼Œa
-	static const float		MAX_STAY_TIME;		//	‘Øİ’†‚ÌŠÔ‚ÌÅ‘å
-	static const float		EFFECT_SCALE;		//	ƒGƒtƒFƒNƒg‚ÌŠg‘å‘¬“x
-	static const float		MAX_X_POS;			//	XÀ•W‚ÌÅ‘å
-	static const VECTOR		ADJUSTMENT_RECT;	//	“–‚½‚è”»’è’²®—p
+	static const VECTOR		MOVE_DIR;			//	ç§»å‹•å‘ã
+	static const float		MOVE_SPEED;			//	ç§»å‹•é€Ÿåº¦
+	static const float		MOVE_HIT_RADIUS;	//	ç§»å‹•ä¸­ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+	static const float		STAY_HIT_RADIUS;	//	æ»åœ¨ä¸­ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+	static const float		MIN_HIT_RADIUS;		//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æœ€å°åŠå¾„
+	static const float		MAX_STAY_TIME;		//	æ»åœ¨ä¸­ã®æ™‚é–“ã®æœ€å¤§
+	static const float		EFFECT_SCALE;		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ‹¡å¤§é€Ÿåº¦
+	static const float		MAX_X_POS;			//	Xåº§æ¨™ã®æœ€å¤§
+	static const VECTOR		ADJUSTMENT_RECT;	//	å½“ãŸã‚Šåˆ¤å®šèª¿æ•´ç”¨
 
 };

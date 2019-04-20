@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	UIGauge.h
-//	@brief	ƒQ[ƒWUI
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚²ãƒ¼ã‚¸UI
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/23
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct Rect;
 struct Color;
@@ -26,15 +26,15 @@ struct UI;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	UIGaugeƒNƒ‰ƒX
+//	@brief	UIGaugeã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class UIGauge final
 {
 public:
 
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-	//	ƒQ[ƒ€‚Ì‰ÁZí—Ş
+	//	ã‚²ãƒ¼ãƒ ã®åŠ ç®—ç¨®é¡
 	enum ADD_GAUGE_KIND
 	{
 		ENEMY,
@@ -42,65 +42,65 @@ public:
 		ITEM,
 	};
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^/ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿/ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	UIGauge();
 	~UIGauge();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create();
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(SoundEffect& _soundEffect);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
-	//	ƒQ[ƒW‚Ì‰ÁZ
+	//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 	void AddGauge(const ADD_GAUGE_KIND _addGaugeKind);
 
-	//	ƒQ[ƒW‚Ì‰Šú‰»
+	//	ã‚²ãƒ¼ã‚¸ã®åˆæœŸåŒ–
 	void ResetGauge();
 
 //==================== getter =====================//
 
-	//	ƒQ[ƒW‚ÌÅ‘åƒtƒ‰ƒO‚Ì@getter
+	//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§ãƒ•ãƒ©ã‚°ã®ã€€getter
 	const bool GetIsGaugeMax() const { return m_isGaugeMax; }
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	UI		m_buttonUI;				//	ƒ{ƒ^ƒ“UI
-	Rect	m_gaugeFlame;			//	ƒQ[ƒW˜g
-	Rect	m_gauge;				//	ƒQ[ƒW
-	Color	m_gaugeFlameColor;		//	ƒQ[ƒW˜g‚ÌF
-	Color	m_gaugeColor;			//	ƒQ[ƒW‚ÌF
-	float	m_targetGauge;			//	ƒQ[ƒW‚Ì–Ú“I’n
-	bool	m_isGaugeMax;			//	ƒQ[ƒW‚ÌÅ‘åƒtƒ‰ƒO
-	bool	m_isChangeButtonScale;	//	ƒ{ƒ^ƒ“ƒTƒCƒYØ‚è‘Ö‚¦
+	UI		m_buttonUI;				//	ãƒœã‚¿ãƒ³UI
+	Rect	m_gaugeFlame;			//	ã‚²ãƒ¼ã‚¸æ 
+	Rect	m_gauge;				//	ã‚²ãƒ¼ã‚¸
+	Color	m_gaugeFlameColor;		//	ã‚²ãƒ¼ã‚¸æ ã®è‰²
+	Color	m_gaugeColor;			//	ã‚²ãƒ¼ã‚¸ã®è‰²
+	float	m_targetGauge;			//	ã‚²ãƒ¼ã‚¸ã®ç›®çš„åœ°
+	bool	m_isGaugeMax;			//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§ãƒ•ãƒ©ã‚°
+	bool	m_isChangeButtonScale;	//	ãƒœã‚¿ãƒ³ã‚µã‚¤ã‚ºåˆ‡ã‚Šæ›¿ãˆ
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const VECTOR		START_POS;			//	ŠJnˆÊ’u
-	static const VECTOR		END_POS;			//	I—¹ˆÊ’u
-	static const float		FLAME_INTERVAL;		//	ƒtƒŒ[ƒ€ŠÔŠu
-	static const float		ADD_GAUGE_ENEMY;	//	ƒGƒlƒ~[“¢”°‚Ì‰ÁZ—Ê
-	static const float		ADD_GAUGE_BOSS;		//	ƒ{ƒX“¢”°‚Ì‰ÁZ—Ê
-	static const float		ADD_GAUGE_ITEM;		//	ƒAƒCƒeƒ€æ“¾‚Ì‰ÁZ—Ê
-	static const float		MIN_BUTTON_SCALE;	//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌÅ¬
-	static const float		MAX_BUTTON_SCALE;	//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌÅ‘å
-	static const float		BUTTON_SCALE_SPEED;	//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚Ì‘¬“x
-	static const int		MAX_COLOR;			//	F‚ÌÅ‘å
-	static const int		MIN_COLOR;			//	F‚ÌÅ¬
-	static const int		COLOR_SPEED;		//	F‚Ì‘¬“x
+	static const VECTOR		START_POS;			//	é–‹å§‹ä½ç½®
+	static const VECTOR		END_POS;			//	çµ‚äº†ä½ç½®
+	static const float		FLAME_INTERVAL;		//	ãƒ•ãƒ¬ãƒ¼ãƒ é–“éš”
+	static const float		ADD_GAUGE_ENEMY;	//	ã‚¨ãƒãƒŸãƒ¼è¨ä¼æ™‚ã®åŠ ç®—é‡
+	static const float		ADD_GAUGE_BOSS;		//	ãƒœã‚¹è¨ä¼æ™‚ã®åŠ ç®—é‡
+	static const float		ADD_GAUGE_ITEM;		//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—æ™‚ã®åŠ ç®—é‡
+	static const float		MIN_BUTTON_SCALE;	//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®æœ€å°
+	static const float		MAX_BUTTON_SCALE;	//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®æœ€å¤§
+	static const float		BUTTON_SCALE_SPEED;	//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®é€Ÿåº¦
+	static const int		MAX_COLOR;			//	è‰²ã®æœ€å¤§
+	static const int		MIN_COLOR;			//	è‰²ã®æœ€å°
+	static const int		COLOR_SPEED;		//	è‰²ã®é€Ÿåº¦
 };

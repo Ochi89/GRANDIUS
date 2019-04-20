@@ -1,59 +1,59 @@
-
+ï»¿
 //=============================================================================
 //	@file	ItemManager.cpp
-//	@brief	ƒAƒCƒeƒ€ƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¢ã‚¤ãƒ†ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/12
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "ItemManager.h"
 #include "Item.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float ItemManager::MIN_X_POS = -110.0f;	//	XÀ•W‚ÌÅ¬
+const float ItemManager::MIN_X_POS = -110.0f;	//	Xåº§æ¨™ã®æœ€å°
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 ItemManager::ItemManager()
 {
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
 	for (int i = 0; i < CommonConstant::MAX_ITEM_NUM; i++)
 	{
 		m_pItem[i] = NULL;
 	}
 
-	//	Še•Ï”‚Ì‰Šú‰»
+	//	å„å¤‰æ•°ã®åˆæœŸåŒ–
 	m_sourceItem1ModelHandle = -1;
 	m_sourceItem2ModelHandle = -1;
 	m_sourceItem3ModelHandle = -1;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 ItemManager::~ItemManager()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void ItemManager::Create()
 {
-	//	‘å–{ƒ‚ƒfƒ‹‚Ìƒ[ƒh
+	//	å¤§æœ¬ãƒ¢ãƒ‡ãƒ«ã®ãƒ­ãƒ¼ãƒ‰
 	m_sourceItem1ModelHandle = MV1LoadModel("Data/Model/Item/Item1.mqo");
 	m_sourceItem2ModelHandle = MV1LoadModel("Data/Model/Item/Item2.mqo");
 	m_sourceItem3ModelHandle = MV1LoadModel("Data/Model/Item/Item3.mqo");
@@ -61,32 +61,32 @@ void ItemManager::Create()
 	CommonDebug::Assert((m_sourceItem2ModelHandle <= -1), " [ Shooter.cpp ] : error : model loading failed.");
 	CommonDebug::Assert((m_sourceItem3ModelHandle <= -1), " [ Shooter.cpp ] : error : model loading failed.");
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	for (int i = 0; i < CommonConstant::MAX_ITEM_NUM; i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìì¬
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ä½œæˆ
 		m_pItem[i] = new Item(m_sourceItem1ModelHandle, m_sourceItem2ModelHandle, m_sourceItem3ModelHandle);
 
-		//	–¢g—pƒŠƒXƒg‚É“o˜^
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		m_unusedList.push_back(m_pItem[i]);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void ItemManager::Release()
 {
-	//	‘å–{ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	å¤§æœ¬ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_sourceItem1ModelHandle);
 	MV1DeleteModel(m_sourceItem2ModelHandle);
 	MV1DeleteModel(m_sourceItem3ModelHandle);
 
-	//	ƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚½‚çíœ
+	//	ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ãŸã‚‰å‰Šé™¤
 	if (!m_unusedList.empty()) { m_unusedList.clear(); }
 	if (!m_useList.empty()) { m_useList.clear(); }
 
-	//	ƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	for (int i = 0; i < CommonConstant::MAX_ITEM_NUM; i++)
 	{
 		CommonSafe::Delete(m_pItem[i]);
@@ -94,24 +94,24 @@ void ItemManager::Release()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void ItemManager::Update()
 {
-	//	•KE‹Z‚Ì‚Æ‚«‚ÍXV‚µ‚È‚¢
+	//	å¿…æ®ºæŠ€ã®ã¨ãã¯æ›´æ–°ã—ãªã„
 	const bool isNotSpecialProduction = !PRODUCTION->GetIsSpecialProduction();
 	if (isNotSpecialProduction)
 	{
-		//	‰ğ•úˆ—
+		//	è§£æ”¾å‡¦ç†
 		_RemoveFromList();
 
-		//	ƒŠƒXƒg‚ÌXV
+		//	ãƒªã‚¹ãƒˆã®æ›´æ–°
 		_UpdateList();
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void ItemManager::Draw()
 {
@@ -119,57 +119,57 @@ void ItemManager::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚É“o˜^
+//	@brief	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 //-----------------------------------------------------------------------------
 void ItemManager::RegisterOnList(const VECTOR _startPos)
 {
-	//	–¢g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_unusedList.empty())
 	{
-		//	–¢g—pƒŠƒXƒg‚Ìæ“ª‚ÌƒCƒeƒŒ[ƒ^[‚ğæ‚é
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã®å…ˆé ­ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ãƒ¼ã‚’å–ã‚‹
 		std::list<Item*>::iterator 	ite;
 		ite = m_unusedList.begin();
 
-		//	‚Ü‚¾Œü‚«‚ğİ’è‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚Íİ’è‚·‚é
+		//	ã¾ã å‘ãã‚’è¨­å®šã—ã¦ã„ãªã„ã¨ãã¯è¨­å®šã™ã‚‹
 		if (!(*ite)->GetIsOneTime())
 		{
-			//	“à—e‚Ì‰Šú‰»
+			//	å†…å®¹ã®åˆæœŸåŒ–
 			(*ite)->SetStartPos(_startPos);
 			(*ite)->SetIsOneTime(true);
 			(*ite)->Update();
 		}
 
-		//	–¢g—pƒŠƒXƒg‚©‚çg—pƒŠƒXƒg‚É“o˜^
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		m_useList.push_back(*ite);
 
-		//	–¢g—pƒŠƒXƒg‚©‚çíœ
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		m_unusedList.remove(*ite);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void ItemManager::RemoveFromList(const Item* _itemPtr)
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Item*>::iterator 	ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	_num ‚Æˆê’v‚µ‚½ƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+			//	_num ã¨ä¸€è‡´ã—ãŸãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
 			const bool isSame = _itemPtr == (*ite);
 			if (isSame)
 			{
-				//	‰Šú‰»‚É‚·‚é
+				//	åˆæœŸåŒ–ã«ã™ã‚‹
 				(*ite)->Initialize();
 
-				//	g—pƒŠƒXƒg‚©‚ç–¢g—pƒŠƒXƒg‚É“o˜^
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰æœªä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 				m_unusedList.push_back(*ite);
 
-				//	g—pƒŠƒXƒg‚©‚çíœ
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 				m_useList.remove(*ite);
 
 				break;
@@ -179,20 +179,20 @@ void ItemManager::RemoveFromList(const Item* _itemPtr)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒAƒCƒeƒ€‚Ìƒ|ƒCƒ“ƒ^‚Ì getter
+//	@brief	ã‚¢ã‚¤ãƒ†ãƒ ã®ãƒã‚¤ãƒ³ã‚¿ã® getter
 //-----------------------------------------------------------------------------
 Item* ItemManager::GetItemPtr(const int _num)
 {
 	int counter = 0;
 
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Item*>::iterator 	ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	_num ‚Æˆê’v‚µ‚½ƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+			//	_num ã¨ä¸€è‡´ã—ãŸãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
 			const bool isSame = counter == _num;
 			if (isSame) { return (*ite); }
 			counter++;
@@ -203,32 +203,32 @@ Item* ItemManager::GetItemPtr(const int _num)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚ÌXV
+//	@brief	ãƒªã‚¹ãƒˆã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void ItemManager::_UpdateList()
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Item*>::iterator 	ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	XVˆ—
+			//	æ›´æ–°å‡¦ç†
 			(*ite)->Update();
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void ItemManager::_DrawList()
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Item*>::iterator 	ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
@@ -238,28 +238,28 @@ void ItemManager::_DrawList()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void ItemManager::_RemoveFromList()
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Item*>::iterator 	ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	”ÍˆÍŠO‚Ì‚Æ‚«‚ÍAíœ‚·‚é
+			//	ç¯„å›²å¤–ã®ã¨ãã¯ã€å‰Šé™¤ã™ã‚‹
 			const bool isActive = (*ite)->GetPos().x <= MIN_X_POS;
 			if (isActive)
 			{
-				//	İ’è‰Â”\‚É‚·‚é
+				//	è¨­å®šå¯èƒ½ã«ã™ã‚‹
 				(*ite)->SetIsOneTime(false);
 
-				//	g—pƒŠƒXƒg‚©‚ç–¢g—pƒŠƒXƒg‚É“o˜^
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰æœªä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 				m_unusedList.push_back(*ite);
 
-				//	g—pƒŠƒXƒg‚©‚çíœ
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 				m_useList.remove(*ite);
 
 				break;
@@ -269,20 +269,20 @@ void ItemManager::_RemoveFromList()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void ItemManager::_FinalRelease()
 {
-	//	‘å–{ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	å¤§æœ¬ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_sourceItem1ModelHandle);
 	MV1DeleteModel(m_sourceItem2ModelHandle);
 	MV1DeleteModel(m_sourceItem3ModelHandle);
 
-	//	ƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚½‚çíœ
+	//	ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ãŸã‚‰å‰Šé™¤
 	if (!m_unusedList.empty()) { m_unusedList.clear(); }
 	if (!m_useList.empty()) { m_useList.clear(); }
 
-	//	ƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	for (int i = 0; i < CommonConstant::MAX_ITEM_NUM; i++)
 	{
 		CommonSafe::Delete(m_pItem[i]);

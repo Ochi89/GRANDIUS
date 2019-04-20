@@ -1,67 +1,67 @@
-
+ï»¿
 //=============================================================================
 //	@file	AngleHelper.h
-//	@brief	Šp“xˆ—
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	è§’åº¦å‡¦ç†
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/15
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class Pad;
 
 //-----------------------------------------------------------------------------
-//	@brief	Šp“xˆ—ƒNƒ‰ƒX
+//	@brief	è§’åº¦å‡¦ç†ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class AngleHelper final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	Šp“x‚ğ‹‚ß‚é
+	//	è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	static void AskAngle(VECTOR& _angle, Pad& _pad);
 
-	//	Šp“x‚ğ‹‚ß‚é
+	//	è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	static void AskAngle(VECTOR& _angle, VECTOR _dir);
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	–Ú“I‚ÌŠp“x‚ğ‹‚ß‚é
+	//	ç›®çš„ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	static VECTOR _GetTargetAngle(VECTOR& _angle, Pad& _pad);
 
-	//	–Ú“I‚ÌŠp“x‚ğ‹‚ß‚é
+	//	ç›®çš„ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	static VECTOR _GetTargetAngle(VECTOR& _angle, VECTOR _dir);
 
-	//	“ü—Í‚É‚æ‚éŠp“x‚Ì•ÏX
+	//	å…¥åŠ›ã«ã‚ˆã‚‹è§’åº¦ã®å¤‰æ›´
 	static void _ChangeTargetAngleByInput(const bool _isState, float& _angle, const float _speed);
 
-	//	–Ú“I‚ÌŠp“x‚ÌÅ‘å‚ÆÅ¬‚Ìİ’è
+	//	ç›®çš„ã®è§’åº¦ã®æœ€å¤§ã¨æœ€å°ã®è¨­å®š
 	static void _SetMaxToMin(float& _angle, const float _maxAngle, const float _minAngle);
 
-	//	“ü—Í‚ª‚È‚¢‚Æ‚«‚ÌŠp“x‚Ì•ÏX
+	//	å…¥åŠ›ãŒãªã„ã¨ãã®è§’åº¦ã®å¤‰æ›´
 	static void _ChangeTargetAngleNoInput(const bool _isState, float& _angle);
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float ADD_ANGLE_SPEED;		//	Šp“x‚Ì‰ÁZ‘¬“x
-	static const float SUB_ANGLE_SPEED;		//	Šp“x‚ÌŒ¸Z‘¬“x
-	static const float LERP_SPEED;			//	üŒ`•ÛŠÇ‚Ì‘¬“x
-	static const float LERP_RETURN_SPEED;	//	üŒ`•ÛŠÇ‚Ì–ß‚é‘¬“x
-	static const float ANGLE_NONE;			//	Šp“x‚Ì‰Šú‰»
-	static const float MAX_ANGLE;			//	‚’¼•ûŒü‚ÌŠp“x‚ÌÅ‘å
-	static const float MIN_ANGLE;			//	‚’¼•ûŒü‚ÌŠp“x‚ÌÅ¬
+	static const float ADD_ANGLE_SPEED;		//	è§’åº¦ã®åŠ ç®—é€Ÿåº¦
+	static const float SUB_ANGLE_SPEED;		//	è§’åº¦ã®æ¸›ç®—é€Ÿåº¦
+	static const float LERP_SPEED;			//	ç·šå½¢ä¿ç®¡ã®é€Ÿåº¦
+	static const float LERP_RETURN_SPEED;	//	ç·šå½¢ä¿ç®¡ã®æˆ»ã‚‹é€Ÿåº¦
+	static const float ANGLE_NONE;			//	è§’åº¦ã®åˆæœŸåŒ–
+	static const float MAX_ANGLE;			//	å‚ç›´æ–¹å‘ã®è§’åº¦ã®æœ€å¤§
+	static const float MIN_ANGLE;			//	å‚ç›´æ–¹å‘ã®è§’åº¦ã®æœ€å°
 };

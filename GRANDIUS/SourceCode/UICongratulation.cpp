@@ -1,48 +1,48 @@
-
+ï»¿
 //=============================================================================
 //	@file	UICongratulation.h
-//	@brief	ƒQ[ƒ€ƒI[ƒo[UI
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼UI
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/30
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "UICongratulation.h"
 #include "PlayerManager.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float		UICongratulation::MAAX_CLEAR_WAIT_TIME = 300.0f;	//	ƒNƒŠƒA‚Ì’x‰„ŠÔ‚ÌÅ‘å
-const int		UICongratulation::MIN_ALPHA = 0;					//	ƒAƒ‹ƒtƒ@’l‚ÌÅ¬
-const int		UICongratulation::MAX_ALPHA = 255;					//	ƒAƒ‹ƒtƒ@’l‚ÌÅ‘å
-const int		UICongratulation::ALPHA_SPEED = 2;					//	ƒAƒ‹ƒtƒ@’l‚Ì‘¬“x
+const float		UICongratulation::MAAX_CLEAR_WAIT_TIME = 300.0f;	//	ã‚¯ãƒªã‚¢æ™‚ã®é…å»¶æ™‚é–“ã®æœ€å¤§
+const int		UICongratulation::MIN_ALPHA = 0;					//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å°
+const int		UICongratulation::MAX_ALPHA = 255;					//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å¤§
+const int		UICongratulation::ALPHA_SPEED = 2;					//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®é€Ÿåº¦
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UICongratulation::UICongratulation()
 {
-	//	ˆ—‚È‚µ
+	//	å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UICongratulation::~UICongratulation()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void UICongratulation::Create()
 {
-	//	ƒNƒŠƒAUI
+	//	ã‚¯ãƒªã‚¢UI
 	m_congratulationUI.m_spriteHendle = LoadGraph("Data/Sprite/Congratulation/Congratulation.png");
 	CommonDebug::Assert((m_congratulationUI.m_spriteHendle <= -1), " [ UICongratulation.cpp ] : error : sprite loading failed.");
 	m_congratulationUI.m_pos = VGet(350.0f, 200.0f, 0.0f);
@@ -52,20 +52,20 @@ void UICongratulation::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void UICongratulation::Release()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_congratulationUI.m_spriteHendle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void UICongratulation::Update(PlayerManager & _playerManager)
 {
-	//	ƒNƒŠƒA‚µ‚½
+	//	ã‚¯ãƒªã‚¢ã—ãŸ
 	const bool isClear = _playerManager.GetIsClear();
 	if (isClear) 
 	{
@@ -74,16 +74,16 @@ void UICongratulation::Update(PlayerManager & _playerManager)
 		if (isActive) { m_isClear = true; }
  	}
 
-	//	ƒAƒ‹ƒtƒ@’l‚Ì‰ÁZ
+	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®åŠ ç®—
 	if (m_isClear) { m_alpha += ALPHA_SPEED; }
 
-	//	Å‘åˆ—
+	//	æœ€å¤§å‡¦ç†
 	const bool isMaxVal = m_alpha >= MAX_ALPHA;
 	if (isMaxVal) { m_alpha = MAX_ALPHA; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void UICongratulation::Draw()
 {
@@ -96,10 +96,10 @@ void UICongratulation::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void UICongratulation::_FinalRelease()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_congratulationUI.m_spriteHendle);
 }

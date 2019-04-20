@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	MediumBoss.h
-//	@brief	ÅIƒ{ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	æœ€çµ‚ãƒœã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/21
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "CharacterBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct Circle;
 struct Rect;
@@ -28,132 +28,132 @@ class EffekseerEmitter;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅIƒ{ƒXƒNƒ‰ƒX
+//	@brief	æœ€çµ‚ãƒœã‚¹ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class LastBoss : public CharacterBase
 {
 public:
 
-//===================== —ñ‹“‘à =====================//
+//===================== åˆ—æŒ™éšŠ =====================//
 
-	//	ƒp[ƒc‚Ìí—Ş
+	//	ãƒ‘ãƒ¼ãƒ„ã®ç¨®é¡
 	enum BOSS_PARTS_KIND
 	{
-		BOSS_PARTS_KIND_BODY,				//	ƒ{ƒfƒB[
-		BOSS_PARTS_KIND_CORE,				//	ƒRƒA
-		BOSS_PARTS_KIND_SIDE_BARREL,		//	ƒTƒCƒhƒoƒŒƒbƒg
-		BOSS_PARTS_KIND_ARM,				//	ƒA[ƒ€
+		BOSS_PARTS_KIND_BODY,				//	ãƒœãƒ‡ã‚£ãƒ¼
+		BOSS_PARTS_KIND_CORE,				//	ã‚³ã‚¢
+		BOSS_PARTS_KIND_SIDE_BARREL,		//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒƒãƒˆ
+		BOSS_PARTS_KIND_ARM,				//	ã‚¢ãƒ¼ãƒ 
 	};
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 	
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	LastBoss(const int _bodyModelHandle, const int _sideBarrelModelHandle, const int _armModelHandle, const int _coreModelHandle);
 	~LastBoss();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create() override final;
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release() override final;
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize() override final;
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(ShotManager& _shot, SoundEffect& _soundEffect);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw() override final;
 
-	//	ƒRƒA‚Ìƒ_ƒ[ƒW”»’è
+	//	ã‚³ã‚¢ã®ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 	void OnHitCoreDamage(const int _num);
 
-	//	ƒRƒA‚Ìƒ_ƒ[ƒW”»’è
+	//	ã‚³ã‚¢ã®ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 	void OnHitCoreDamage(const int _num, const int _damage);
 
-	//	ƒTƒCƒhƒoƒŒƒ‹‚Ìƒ_ƒ[ƒW”»’è
+	//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 	void OnHitSideBarrelDamage(const int _num);
 
-	//	ƒTƒCƒhƒoƒŒƒ‹‚Ìƒ_ƒ[ƒW”»’è
+	//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®š
 	void OnHitSideBarrelDamage(const int _num, const int _damage);
 
-	//	”j‰óó‹µ
+	//	ç ´å£ŠçŠ¶æ³
 	void DestructionSituation();
 
 
 //==================== getter =====================//
 
-	//	ƒ‰ƒCƒt‚Ì getter
+	//	ãƒ©ã‚¤ãƒ•ã® getter
 	const int& GetLife() const { return m_life; }
 
-	//	¶‚«‚Ä‚¢‚é‚©‚Ì getter
+	//	ç”Ÿãã¦ã„ã‚‹ã‹ã® getter
 	const bool GetIsAlive() const { return m_life > 0; }
 
-	//	oŒ»ƒtƒ‰ƒO‚Ì getter
+	//	å‡ºç¾ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsEmerge() const { return m_isEmerge; }
 
-	//	“oêƒtƒ‰ƒO‚Ì getter
+	//	ç™»å ´ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsAppearance() const { return m_isAppearance; }
 
-	//	s“®ŠJnƒtƒ‰ƒO‚Ì getter
+	//	è¡Œå‹•é–‹å§‹ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsStarted() const { return m_isStarted; }
 
-	//	“–‚½‚è”»’è—p‚Ì‰~Œ`‚Ì@getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††å½¢ã®ã€€getter
 	const Circle& GetCircle(const BOSS_PARTS_KIND _partsNum, const int _num = 0) const;
 
-	//	“–‚½‚è”»’è—p‚ÌƒA[ƒ€‚Ì’·•ûŒ`‚Ì@getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ã‚¢ãƒ¼ãƒ ã®é•·æ–¹å½¢ã®ã€€getter
 	const Rect& GetArmRect(const int _num = 0) const;
 
-	//	“–‚½‚è”»’è—p‚ÌƒRƒA‚Ì’·•ûŒ`‚Ì@getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ã‚³ã‚¢ã®é•·æ–¹å½¢ã®ã€€getter
 	const Rect& GetCoreRect(const int _num = 0) const;
 
-	//	“–‚½‚è”»’è—p‚ÌƒTƒCƒhƒoƒŒƒ‹‚Ì’·•ûŒ`‚Ì@getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®é•·æ–¹å½¢ã®ã€€getter
 	const Rect& GetSideBarrelRect(const int _num = 0) const;
 
-	//	“–‚½‚è”»’è—p‚ÌƒŒ[ƒU[‚Ì’·•ûŒ`‚Ì@getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ãƒ¬ãƒ¼ã‚¶ãƒ¼ã®é•·æ–¹å½¢ã®ã€€getter
 	const Rect& GetLaserRect(const int _num = 0) const;
 
-	//	“–‚½‚è”»’è—p‚ÌƒZƒ“ƒ^[ƒoƒŒƒ‹‚Ì’·•ûŒ`‚Ì@getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ã‚»ãƒ³ã‚¿ãƒ¼ãƒãƒ¬ãƒ«ã®é•·æ–¹å½¢ã®ã€€getter
 	const Rect& GetCenterBarrelRect() { return m_centerBarrel; }
 
-	//	‰EƒRƒA‚ª¶‚«‚Ä‚¢‚é‚©‚Ì getter
+	//	å³ã‚³ã‚¢ãŒç”Ÿãã¦ã„ã‚‹ã‹ã® getter
 	const bool& GetIsRightCoreAlive() const { return m_isRightCoreAlive; }
 
-	//	¶ƒRƒA‚ª¶‚«‚Ä‚¢‚é‚©‚Ì getter
+	//	å·¦ã‚³ã‚¢ãŒç”Ÿãã¦ã„ã‚‹ã‹ã® getter
 	const bool& GetIsLeftCoreAlive() const { return m_isLeftCoreAlive; }
 
-	//	‰EƒTƒCƒhƒoƒŒƒ‹‚ª¶‚«‚Ä‚¢‚é‚©‚Ì getter
+	//	å³ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ãŒç”Ÿãã¦ã„ã‚‹ã‹ã® getter
 	const bool& GetIsRightSideBarrelAlive() const { return m_isRightSideBarrelAlive; }
 
-	//	¶ƒTƒCƒhƒoƒŒƒ‹‚ª¶‚«‚Ä‚¢‚é‚©‚Ì getter
+	//	å·¦ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ãŒç”Ÿãã¦ã„ã‚‹ã‹ã® getter
 	const bool& GetIsLeftSideBarrelAlive() const { return m_isLeftSideBarrelAlive; }
 
-	//	‚·‚×‚Ä”j‰ó‚µ‚½‚©‚Ì getter
+	//	ã™ã¹ã¦ç ´å£Šã—ãŸã‹ã® getter
 	const bool& GetIsAllDestruction() const { return m_isAllDestruction; }
 
-	//	ƒRƒA‚Ìƒ_ƒ[ƒW”»’è‚Ì getter
+	//	ã‚³ã‚¢ã®ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šã® getter
 	const bool& GetIsCoreDamage(const int _num) { return m_bossPartsCore[_num].m_isDamage; }
 
-	//	ƒTƒCƒhƒoƒŒƒ‹‚Ìƒ_ƒ[ƒW”»’è‚Ì getter
+	//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®ãƒ€ãƒ¡ãƒ¼ã‚¸åˆ¤å®šã® getter
 	const bool& GetIsSideBarrelDamage(const int _num) { return m_bossPartsSideBarrel[_num].m_isDamage; }
 
-	//	ƒ{ƒX€–Sƒtƒ‰ƒO‚Ì getter
+	//	ãƒœã‚¹æ­»äº¡ãƒ•ãƒ©ã‚°ã® getter
 	const bool GetIsDeath() { return (!m_isLeftCoreAlive && !m_isRightCoreAlive); }
 
 //==================== setter =====================//
 
-	//	oŒ»ƒtƒ‰ƒO‚Ì setter
+	//	å‡ºç¾ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsEmerge(const bool _set) { m_isEmerge = _set; m_isStart = _set; }
 
-	//	ƒ‰ƒCƒt‚Ì setter
+	//	ãƒ©ã‚¤ãƒ•ã® setter
 	void SetLife(const int _set) { m_life = _set; };
 
 private:
 
-//===================== —ñ‹“‘à =====================//
+//===================== åˆ—æŒ™éšŠ =====================//
 
-	//	ƒp[ƒc‚Ìî•ñ
+	//	ãƒ‘ãƒ¼ãƒ„ã®æƒ…å ±
 	enum BOSS_PARTS_INFO
 	{
 		BOSS_PARTS_RIGHT,
@@ -161,221 +161,221 @@ private:
 		BOSS_PARTS_NUM,
 	};
 
-	//	ƒ{ƒX‚Ìs“®í—Ş
+	//	ãƒœã‚¹ã®è¡Œå‹•ç¨®é¡
 	enum BEHAVIOR_KIND
 	{
-		BEHAVIOR_NONE,		//	‚È‚µ
-		BEHAVIOR_SHOT,		//	ƒVƒ‡ƒbƒg
-		BEHAVIOR_ROCKET,	//	ƒƒPƒbƒg
-		BEHAVIOR_LASER		//	ƒŒ[ƒU[
+		BEHAVIOR_NONE,		//	ãªã—
+		BEHAVIOR_SHOT,		//	ã‚·ãƒ§ãƒƒãƒˆ
+		BEHAVIOR_ROCKET,	//	ãƒ­ã‚±ãƒƒãƒˆ
+		BEHAVIOR_LASER		//	ãƒ¬ãƒ¼ã‚¶ãƒ¼
 	};
 
-	//	”š”­ƒGƒtƒFƒNƒg‚Ìí—Ş
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ç¨®é¡
 	enum EXPLOSION_EFFECT_KIND
 	{
-		EXPLOSION_EFFECT_LEFT_BARREL,		//	¶‚ÌƒTƒCƒhƒoƒŒƒ‹
-		EXPLOSION_EFFECT_RIGHT_BARREL,		//	‰E‚ÌƒTƒCƒhƒoƒŒƒ‹
-		EXPLOSION_EFFECT_LEFT_CORE,			//	¶‚ÌƒRƒA
-		EXPLOSION_EFFECT_RIGHT_CORE,		//	‰E‚ÌƒRƒA
-		EXPLOSION_EFFECT_LAST,				//	ÅŒã
-		EXPLOSION_EFFECT_NUM,				//	”
+		EXPLOSION_EFFECT_LEFT_BARREL,		//	å·¦ã®ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«
+		EXPLOSION_EFFECT_RIGHT_BARREL,		//	å³ã®ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«
+		EXPLOSION_EFFECT_LEFT_CORE,			//	å·¦ã®ã‚³ã‚¢
+		EXPLOSION_EFFECT_RIGHT_CORE,		//	å³ã®ã‚³ã‚¢
+		EXPLOSION_EFFECT_LAST,				//	æœ€å¾Œ
+		EXPLOSION_EFFECT_NUM,				//	æ•°
 	};
 
-//===================== \‘¢‘Ì =====================//
+//===================== æ§‹é€ ä½“ =====================//
 
-	//	ƒp[ƒc‚Ì\‘¢‘Ì
+	//	ãƒ‘ãƒ¼ãƒ„ã®æ§‹é€ ä½“
 	struct BossParts
 	{
-		int			m_modelHandle;		//	ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
-		VECTOR		m_pos;				//	ƒ|ƒWƒVƒ‡ƒ“
-		VECTOR		m_dir;				//	ƒfƒBƒŒƒNƒVƒ‡ƒ“
-		VECTOR		m_angle;			//	ƒAƒ“ƒOƒ‹
-		VECTOR		m_size;				//	ƒTƒCƒY
-		int			m_life;				//	ƒ‰ƒCƒt
-		bool		m_isDamage;			//	ƒ_ƒ[ƒWƒtƒ‰ƒO
-		Circle		m_hitCircle;		//	“–‚½‚è”»’è—p‚Ì‰~‚Ì\‘¢‘Ì
-		Rect		m_hitRect;			//	“–‚½‚è”»’è—p‚Ì’·•ûŒ`‚Ì\‘¢‘Ì
+		int			m_modelHandle;		//	ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«
+		VECTOR		m_pos;				//	ãƒã‚¸ã‚·ãƒ§ãƒ³
+		VECTOR		m_dir;				//	ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
+		VECTOR		m_angle;			//	ã‚¢ãƒ³ã‚°ãƒ«
+		VECTOR		m_size;				//	ã‚µã‚¤ã‚º
+		int			m_life;				//	ãƒ©ã‚¤ãƒ•
+		bool		m_isDamage;			//	ãƒ€ãƒ¡ãƒ¼ã‚¸ãƒ•ãƒ©ã‚°
+		Circle		m_hitCircle;		//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††ã®æ§‹é€ ä½“
+		Rect		m_hitRect;			//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢ã®æ§‹é€ ä½“
 	};
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒp[ƒc‚Ì‰Šú‰»
+	//	ãƒ‘ãƒ¼ãƒ„ã®åˆæœŸåŒ–
 	void _InitializeBossParts(BossParts& _bossParts, const BOSS_PARTS_INFO _bossPartsInfo, const float _hitRadius = 0.0f, const int _liffe = 1);
 
-	//	ŠJn‚ÌˆÚ“®
+	//	é–‹å§‹æ™‚ã®ç§»å‹•
 	void _EmergeMove();
 
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	void _Move();
 
-	//	ËŒ‚ˆ—
+	//	å°„æ’ƒå‡¦ç†
 	void _Shot(ShotManager& _shot);
 	
-	//	ƒƒPƒbƒgˆ—
+	//	ãƒ­ã‚±ãƒƒãƒˆå‡¦ç†
 	void _Rocket();
 
-	//	ƒŒ[ƒU[
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼
 	void _Laser();
 
-	//	ƒp[ƒc‚Ìó‹µ
+	//	ãƒ‘ãƒ¼ãƒ„ã®çŠ¶æ³
 	void _PartsSituation();
 
-	//	ƒA[ƒ€‚Ì‰ñ“]
+	//	ã‚¢ãƒ¼ãƒ ã®å›è»¢
 	void _ArmRota(BossParts& _bossParts, const float _targetAngle);
 
-	//	ƒ‰[ƒv‚ğg‚Á‚½‘Š‘ÎÀ•W
+	//	ãƒ©ãƒ¼ãƒ—ã‚’ä½¿ã£ãŸç›¸å¯¾åº§æ¨™
 	void _LerpRelativeCoordinates(BossParts& _bossParts, const BOSS_PARTS_INFO _bossInfo, const VECTOR _target);
 
-	//	üŒ`•ÛŠÇ‚ğg—p‚µ‚½ˆÚ“®
+	//	ç·šå½¢ä¿ç®¡ã‚’ä½¿ç”¨ã—ãŸç§»å‹•
 	void _LerpMove(bool _isConditions, VECTOR _targetPos, float _lerpSpeed);
 
-	//	ƒqƒbƒgƒGƒtƒFƒNƒg
+	//	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnHitEffect(BossParts& _bossParts, SoundEffect& _soundEffect, const VECTOR _pos);
 
-	//	”š”­ƒGƒtƒFƒNƒg
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnEffectExplosion(SoundEffect& _soundEffect);
 
-	//	”š”­ƒGƒtƒFƒNƒgˆê‚Â•ª
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆä¸€ã¤åˆ†
 	void _OneEffectExplosion(const  bool _isConditions, EffekseerEmitter& _effect, SoundEffect& _soundEffect, const VECTOR _pos, bool& _isUsedFlag);
 
-	//	ÅI”š”­ƒGƒtƒFƒNƒg
+	//	æœ€çµ‚çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _LastEffectExplosion(const  bool _isConditions, SoundEffect& _soundEffect);
 
-	//	ƒ‰ƒ“ƒ_ƒ€”š”­ƒGƒtƒFƒNƒg
+	//	ãƒ©ãƒ³ãƒ€ãƒ çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _RandamEffectExplosion(EffekseerEmitter& _effect, SoundEffect& _soundEffect);
 
-	//	ƒŒ[ƒU[ƒGƒtƒFƒNƒg
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnEffectLaser(EffekseerEmitter& _effect, SoundEffect& _soundEffect, const VECTOR _startPos, const BOSS_PARTS_INFO _partsInfo);
 
-	//	ƒƒPƒbƒgƒGƒtƒFƒNƒg
+	//	ãƒ­ã‚±ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnEffectRocket(EffekseerEmitter& _effect, SoundEffect& _soundEffect, const VECTOR _startPos, const BOSS_PARTS_INFO _partsInfo);
 
-	//	“–‚½‚è”»’è—p‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ›´æ–°
 	void _UpdateHitJudgment();
 
-	//	ƒA[ƒ€‚Ì“–‚½‚è”»’è—p‚ÌXV
+	//	ã‚¢ãƒ¼ãƒ ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ›´æ–°
 	void _UpdateHitArm();
 
-	//	ƒRƒA‚Ì“–‚½‚è”»’è—p‚ÌXV
+	//	ã‚³ã‚¢ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ›´æ–°
 	void _UpdateHitCore();
 
-	//	ƒTƒCƒhƒoƒŒƒ‹‚Ì“–‚½‚è”»’è—p‚ÌXV
+	//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ›´æ–°
 	void _UpdateHitSideBarrel();
 
-	//	ƒŒ[ƒU[‚Ì“–‚½‚è”»’è—p‚ÌXV
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ›´æ–°
 	void _UpdateHitLaser();
 
-	//	ƒ{ƒfƒB[‚Ì“–‚½‚è”»’è—p‚ÌXV
+	//	ãƒœãƒ‡ã‚£ãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ›´æ–°
 	void _UpdateHitBody();
 
-	//	ƒZƒ“ƒ^[ƒoƒŒƒ‹‚Ì“–‚½‚è”»’è—p‚ÌXV
+	//	ã‚»ãƒ³ã‚¿ãƒ¼ãƒãƒ¬ãƒ«ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ›´æ–°
 	void _UpdateHitCenterBarrel();
 
-	//	‘Š‘ÎÀ•W‚ğŠ„‚è“–‚Ä‚é
+	//	ç›¸å¯¾åº§æ¨™ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	void _AllocationRelativeCoordinates();
 
-	//	‘Š‘ÎÀ•W‚ğ‹‚ß‚é
+	//	ç›¸å¯¾åº§æ¨™ã‚’æ±‚ã‚ã‚‹
 	VECTOR _AskRelativeCoordinates(const VECTOR _basePos, const VECTOR _relativePos, const BOSS_PARTS_INFO _bossPartsInfo);
 
-	//	ƒ‚ƒfƒ‹‚ÌF‚ğ•ÏX‚·‚é
+	//	ãƒ¢ãƒ‡ãƒ«ã®è‰²ã‚’å¤‰æ›´ã™ã‚‹
 	void _ChangeModelColor(const int _modelHandle, const int _life, const int _maxLife, const ColorF _normalColor);
 
-	//	“_–Å•`‰æˆ—
+	//	ç‚¹æ»…æç”»å‡¦ç†
 	void _FlashingDraw(BossParts& _bossParts);
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease() override final;
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int				m_life;																	//	ƒ‰ƒCƒt
-	float			m_emergeMoveTaim;														//	‰‰oŠÔ
-	float			m_behaviorTime;															//	s“®ŠÔ
-	float			m_rocketTime;															//	ƒƒPƒbƒgŠÔ
-	float			m_laserTime;															//	ƒŒ[ƒU[ŠÔ
-	float			m_moveSpeed;															//	ˆÚ“®‘¬“x
-	bool			m_isEmerge;																//	oŒ»ƒtƒ‰ƒO
-	bool			m_isAppearance;															//	“oêƒtƒ‰ƒO
-	bool			m_isStart;																//	ŠJnƒtƒ‰ƒO
-	bool			m_isStarted;															//	s“®ŠJnƒtƒ‰ƒO
-	bool			m_isRightCoreAlive;														//	‰EƒRƒA‚ª¶‚«‚Ä‚¢‚é
-	bool			m_isLeftCoreAlive;														//	¶ƒRƒA‚ª¶‚«‚Ä‚¢‚é
-	bool			m_isRightSideBarrelAlive;												//	‰EƒTƒCƒhƒoƒŒƒ‹‚ª¶‚«‚Ä‚¢‚é
-	bool			m_isLeftSideBarrelAlive;												//	¶ƒTƒCƒhƒoƒŒƒ‹‚ª¶‚«‚Ä‚¢‚é
-	bool			m_isAllDestruction;														//	‚·‚×‚Ä”j‰ó‚µ‚½
-	float			m_flashingTime;															//	“_–ÅŠÔ
-	bool			m_isUsedEffectExplosion[EXPLOSION_EFFECT_KIND::EXPLOSION_EFFECT_NUM];	//	”š”­ƒGƒtƒFƒNƒg‚Ìg—pó‹µ
-	bool			m_isOffDraw;															//	•`‰æƒIƒt
-	bool			m_isStartRocket;														//	ƒƒPƒbƒg‚ÌŠJn
-	bool			m_isStartLaser;															//	ƒŒ[ƒU[‚ÌŠJn
-	Circle			m_hitCircle;															//	“–‚½‚è”»’è—p‚Ì‰~‚Ì\‘¢‘Ì
-	Rect			m_laser;																//	ƒŒ[ƒU[
-	Rect			m_centerBarrel;															//	ƒZƒ“ƒ^[ƒoƒŒƒ‹
-	Rect			m_laserHitRect[BOSS_PARTS_INFO::BOSS_PARTS_NUM];						//	ƒŒ[ƒU[‚Ì“–‚½‚è”»’è
-	Rect			m_coreHitRect[BOSS_PARTS_INFO::BOSS_PARTS_NUM];							//	ƒRƒA‚Ì“–‚½‚è”»’è
-	Rect			m_sideBarrelHitRect[BOSS_PARTS_INFO::BOSS_PARTS_NUM];					//	ƒTƒCƒhƒoƒŒƒ‹‚Ì“–‚½‚è”»’è
-	BEHAVIOR_KIND	m_behaviorKind;															//	ƒ{ƒX‚Ìs“®í—Ş
+	int				m_life;																	//	ãƒ©ã‚¤ãƒ•
+	float			m_emergeMoveTaim;														//	æ¼”å‡ºæ™‚é–“
+	float			m_behaviorTime;															//	è¡Œå‹•æ™‚é–“
+	float			m_rocketTime;															//	ãƒ­ã‚±ãƒƒãƒˆæ™‚é–“
+	float			m_laserTime;															//	ãƒ¬ãƒ¼ã‚¶ãƒ¼æ™‚é–“
+	float			m_moveSpeed;															//	ç§»å‹•é€Ÿåº¦
+	bool			m_isEmerge;																//	å‡ºç¾ãƒ•ãƒ©ã‚°
+	bool			m_isAppearance;															//	ç™»å ´ãƒ•ãƒ©ã‚°
+	bool			m_isStart;																//	é–‹å§‹ãƒ•ãƒ©ã‚°
+	bool			m_isStarted;															//	è¡Œå‹•é–‹å§‹ãƒ•ãƒ©ã‚°
+	bool			m_isRightCoreAlive;														//	å³ã‚³ã‚¢ãŒç”Ÿãã¦ã„ã‚‹
+	bool			m_isLeftCoreAlive;														//	å·¦ã‚³ã‚¢ãŒç”Ÿãã¦ã„ã‚‹
+	bool			m_isRightSideBarrelAlive;												//	å³ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ãŒç”Ÿãã¦ã„ã‚‹
+	bool			m_isLeftSideBarrelAlive;												//	å·¦ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ãŒç”Ÿãã¦ã„ã‚‹
+	bool			m_isAllDestruction;														//	ã™ã¹ã¦ç ´å£Šã—ãŸ
+	float			m_flashingTime;															//	ç‚¹æ»…æ™‚é–“
+	bool			m_isUsedEffectExplosion[EXPLOSION_EFFECT_KIND::EXPLOSION_EFFECT_NUM];	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ä½¿ç”¨çŠ¶æ³
+	bool			m_isOffDraw;															//	æç”»ã‚ªãƒ•
+	bool			m_isStartRocket;														//	ãƒ­ã‚±ãƒƒãƒˆã®é–‹å§‹
+	bool			m_isStartLaser;															//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã®é–‹å§‹
+	Circle			m_hitCircle;															//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††ã®æ§‹é€ ä½“
+	Rect			m_laser;																//	ãƒ¬ãƒ¼ã‚¶ãƒ¼
+	Rect			m_centerBarrel;															//	ã‚»ãƒ³ã‚¿ãƒ¼ãƒãƒ¬ãƒ«
+	Rect			m_laserHitRect[BOSS_PARTS_INFO::BOSS_PARTS_NUM];						//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
+	Rect			m_coreHitRect[BOSS_PARTS_INFO::BOSS_PARTS_NUM];							//	ã‚³ã‚¢ã®å½“ãŸã‚Šåˆ¤å®š
+	Rect			m_sideBarrelHitRect[BOSS_PARTS_INFO::BOSS_PARTS_NUM];					//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®å½“ãŸã‚Šåˆ¤å®š
+	BEHAVIOR_KIND	m_behaviorKind;															//	ãƒœã‚¹ã®è¡Œå‹•ç¨®é¡
 
-	BossParts		m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_NUM];						//	ƒRƒA
-	BossParts		m_bossPartsSideBarrel[BOSS_PARTS_INFO::BOSS_PARTS_NUM];					//	ƒTƒCƒhƒoƒŒƒ‹
-	BossParts		m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_NUM];						//	ƒA[ƒ€
+	BossParts		m_bossPartsCore[BOSS_PARTS_INFO::BOSS_PARTS_NUM];						//	ã‚³ã‚¢
+	BossParts		m_bossPartsSideBarrel[BOSS_PARTS_INFO::BOSS_PARTS_NUM];					//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«
+	BossParts		m_bossPartsArm[BOSS_PARTS_INFO::BOSS_PARTS_NUM];						//	ã‚¢ãƒ¼ãƒ 
 
-	ColorF			m_lifeNormalColorFYellow;												//	ƒ‰ƒCƒtƒfƒtƒHƒ‹ƒgF ‰©F
-	ColorF			m_lifeNormalColorFBlack;												//	ƒ‰ƒCƒtƒfƒtƒHƒ‹ƒgF •
-	ColorF			m_lifeMiddleColorF;														//	ƒ‰ƒCƒt’†ŠÔF
-	ColorF			m_lifeDangerColorF;														//	ƒ‰ƒCƒtŠëŒ¯F
+	ColorF			m_lifeNormalColorFYellow;												//	ãƒ©ã‚¤ãƒ•ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè‰² é»„è‰²
+	ColorF			m_lifeNormalColorFBlack;												//	ãƒ©ã‚¤ãƒ•ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè‰² é»’
+	ColorF			m_lifeMiddleColorF;														//	ãƒ©ã‚¤ãƒ•ä¸­é–“è‰²
+	ColorF			m_lifeDangerColorF;														//	ãƒ©ã‚¤ãƒ•å±é™ºè‰²
 
-	//	ƒGƒtƒFƒNƒgŠÖŒW
-	EffekseerEmitter*	m_effectHit;												//	ƒqƒbƒgƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectExplosion[CommonConstant::MAX_BOSS_EXPLOSION_NUM];	//	”š”­ƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectLastExplosion;										//	ÅI”š”­ƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectLaser[BOSS_PARTS_INFO::BOSS_PARTS_NUM];				//	ƒŒ[ƒU[ƒGƒtƒFƒNƒg
-	EffekseerEmitter*	m_effectInjection[BOSS_PARTS_INFO::BOSS_PARTS_NUM];			//	•¬ËƒGƒtƒFƒNƒg
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆé–¢ä¿‚
+	EffekseerEmitter*	m_effectHit;												//	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectExplosion[CommonConstant::MAX_BOSS_EXPLOSION_NUM];	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectLastExplosion;										//	æœ€çµ‚çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectLaser[BOSS_PARTS_INFO::BOSS_PARTS_NUM];				//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	EffekseerEmitter*	m_effectInjection[BOSS_PARTS_INFO::BOSS_PARTS_NUM];			//	å™´å°„ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const VECTOR		EMERGE_POS;						//	oŒ»‚ÌÀ•W
-	static const VECTOR		EMERGE_RIGHT_ARM_POS;			//	oŒ»‚Ì‰EƒA[ƒ€‚ÌÀ•W
-	static const VECTOR		EMERGE_LEFT_ARM_POS;			//	oŒ»‚Ì¶ƒA[ƒ€‚ÌÀ•W
-	static const VECTOR		RELATIVE_CORE_POS;				//	ƒRƒA‚Ì‘Š‘ÎÀ•W
-	static const VECTOR		RELATIVE_SIDE_BARREL_POS;		//	ƒTƒCƒhƒoƒŒƒ‹‚Ì‘Š‘ÎÀ•W
-	static const VECTOR		RELATIVE_ARM_POS;				//	ƒA[ƒ€‚Ì‘Š‘ÎÀ—p
-	static const VECTOR		OPEN_RELATIVE_CORE_POS;			//	ƒRƒA‚Ì‘Š‘ÎÀ•W
-	static const VECTOR		OPEN_RELATIVE_SIDE_BARREL_POS;	//	ƒTƒCƒhƒoƒŒƒ‹‚Ì‘Š‘ÎÀ•W
-	static const VECTOR		OPEN_RELATIVE_ARM_POS;			//	ƒA[ƒ€‚Ì‘Š‘ÎÀ—p
-	static const VECTOR		START_POS;						//	ŠJn‚ÌÀ•W
+	static const VECTOR		EMERGE_POS;						//	å‡ºç¾æ™‚ã®åº§æ¨™
+	static const VECTOR		EMERGE_RIGHT_ARM_POS;			//	å‡ºç¾æ™‚ã®å³ã‚¢ãƒ¼ãƒ ã®åº§æ¨™
+	static const VECTOR		EMERGE_LEFT_ARM_POS;			//	å‡ºç¾æ™‚ã®å·¦ã‚¢ãƒ¼ãƒ ã®åº§æ¨™
+	static const VECTOR		RELATIVE_CORE_POS;				//	ã‚³ã‚¢ã®ç›¸å¯¾åº§æ¨™
+	static const VECTOR		RELATIVE_SIDE_BARREL_POS;		//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®ç›¸å¯¾åº§æ¨™
+	static const VECTOR		RELATIVE_ARM_POS;				//	ã‚¢ãƒ¼ãƒ ã®ç›¸å¯¾åº§ç”¨
+	static const VECTOR		OPEN_RELATIVE_CORE_POS;			//	ã‚³ã‚¢ã®ç›¸å¯¾åº§æ¨™
+	static const VECTOR		OPEN_RELATIVE_SIDE_BARREL_POS;	//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®ç›¸å¯¾åº§æ¨™
+	static const VECTOR		OPEN_RELATIVE_ARM_POS;			//	ã‚¢ãƒ¼ãƒ ã®ç›¸å¯¾åº§ç”¨
+	static const VECTOR		START_POS;						//	é–‹å§‹æ™‚ã®åº§æ¨™
 
-	static const VECTOR		MOVE_PATTERN_1;					//	s“®ƒpƒ^[ƒ“‚P
-	static const VECTOR		MOVE_PATTERN_2;					//	s“®ƒpƒ^[ƒ“‚Q
-	static const VECTOR		MOVE_PATTERN_3;					//	s“®ƒpƒ^[ƒ“‚R
-	static const VECTOR		MOVE_PATTERN_4;					//	s“®ƒpƒ^[ƒ“‚S
-	static const VECTOR		MOVE_PATTERN_5;					//	s“®ƒpƒ^[ƒ“‚T
-	static const VECTOR		MOVE_PATTERN_6;					//	s“®ƒpƒ^[ƒ“‚U
+	static const VECTOR		MOVE_PATTERN_1;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼‘
+	static const VECTOR		MOVE_PATTERN_2;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼’
+	static const VECTOR		MOVE_PATTERN_3;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼“
+	static const VECTOR		MOVE_PATTERN_4;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼”
+	static const VECTOR		MOVE_PATTERN_5;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼•
+	static const VECTOR		MOVE_PATTERN_6;					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼–
 
-	static const VECTOR		SHOT_START_POS_CORRECTION_1;	//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-	static const VECTOR		SHOT_START_POS_CORRECTION_2;	//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-	static const VECTOR		SHOT_START_POS_CORRECTION_3;	//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-	static const float		SHOT_SPEED;						//	ƒVƒ‡ƒbƒg‘¬“x
-	static const float		MAX_START_WAIT_TIME;			//	ƒVƒ‡ƒbƒg‚ÌŠJn‚Ì’x‰„ŠÔ
-	static const float		MAX_WAIT_TIME;					//	ƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-	static const float		LASER_LENGTH;					//	ƒŒ[ƒU[‚Ì’·‚³
+	static const VECTOR		SHOT_START_POS_CORRECTION_1;	//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+	static const VECTOR		SHOT_START_POS_CORRECTION_2;	//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+	static const VECTOR		SHOT_START_POS_CORRECTION_3;	//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+	static const float		SHOT_SPEED;						//	ã‚·ãƒ§ãƒƒãƒˆé€Ÿåº¦
+	static const float		MAX_START_WAIT_TIME;			//	ã‚·ãƒ§ãƒƒãƒˆã®é–‹å§‹æ™‚ã®é…å»¶æ™‚é–“
+	static const float		MAX_WAIT_TIME;					//	ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+	static const float		LASER_LENGTH;					//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã®é•·ã•
 
-	static const VECTOR		ADJUSTMENT_BODY_POS;			//	“–‚½‚è”»’è’²®—p‚Ìƒ|ƒCƒ“ƒg ƒ{ƒfƒB[
-	static const VECTOR		ADJUSTMENT_SIDE_BARREL_POS;		//	“–‚½‚è”»’è’²®—p‚Ìƒ|ƒCƒ“ƒg ƒTƒCƒhƒoƒŒƒ‹
-	static const VECTOR		ADJUSTMENT_ARM_CIRCLE_POS;		//	“–‚½‚è”»’è’²®—p‚Ìƒ|ƒCƒ“ƒg ƒA[ƒ€
-	static const VECTOR		ADJUSTMENT_ARM_RECT_POS;		//	“–‚½‚è”»’è’²®—p‚Ìƒ|ƒCƒ“ƒg ƒA[ƒ€
-	static const VECTOR		ADJUSTMENT_LASER_POS;			//	“–‚½‚è”»’è’²®—p‚Ìƒ|ƒCƒ“ƒg ƒŒ[ƒU[
-	static const VECTOR		ADJUSTMENT_CENTER_BARRE_POS;	//	“–‚½‚è”»’è’²®—p‚Ìƒ|ƒCƒ“ƒg ƒZƒ“ƒ^[ƒoƒŒƒ‹
-	static const VECTOR		ARM_CORRECTION;					//	“–‚½‚è”»’è—p‚Ì•â³ ƒA[ƒ€
-	static const VECTOR		CENTER_BARRE_CORRECTION;		//	“–‚½‚è”»’è—p‚Ì•â³ ƒZƒ“ƒ^[ƒoƒŒƒ‹
-	static const float		LASER_EFFECT_CORRECTION;		//	ƒGƒtƒFƒNƒg‚Ì•â³ ƒŒ[ƒU[
-	static const float		ROCKET_EFFECT_CORRECTION;		//	ƒGƒtƒFƒNƒg‚Ì•â³ ƒƒPƒbƒg
-	static const float		HIT_BODY_RADIUS;				//	“–‚½‚è”»’è—p‚Ì”¼Œa ƒ{ƒfƒB[
-	static const float		HIT_SIDE_BARREL_RADIUS;			//	“–‚½‚è”»’è—p‚Ì”¼Œa ƒTƒCƒhƒoƒŒƒ‹
-	static const float		HIT_CORE_RADIUS;				//	“–‚½‚è”»’è—p‚Ì”¼Œa ƒRƒA
-	static const float		HIT_ARM_RADIUS;					//	“–‚½‚è”»’è—p‚Ì”¼Œa ƒA[ƒ€
-	static const int		MAX_SIDE_BARREL_LIFE;			//	ƒ‰ƒCƒt‚ÌÅ‘å ƒTƒCƒhƒoƒŒƒ‹
-	static const int		MAX_CORE_LIFE;					//	ƒ‰ƒCƒt‚ÌÅ‘å ƒRƒA
-	static const VECTOR		BOSS_RADIUS;					//	ƒ{ƒX‚Ì”¼Œa
-	static const int		LIFE_ZERO;						//	ƒ‰ƒCƒt‚È‚µ
+	static const VECTOR		ADJUSTMENT_BODY_POS;			//	å½“ãŸã‚Šåˆ¤å®šèª¿æ•´ç”¨ã®ãƒã‚¤ãƒ³ãƒˆ ãƒœãƒ‡ã‚£ãƒ¼
+	static const VECTOR		ADJUSTMENT_SIDE_BARREL_POS;		//	å½“ãŸã‚Šåˆ¤å®šèª¿æ•´ç”¨ã®ãƒã‚¤ãƒ³ãƒˆ ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«
+	static const VECTOR		ADJUSTMENT_ARM_CIRCLE_POS;		//	å½“ãŸã‚Šåˆ¤å®šèª¿æ•´ç”¨ã®ãƒã‚¤ãƒ³ãƒˆ ã‚¢ãƒ¼ãƒ 
+	static const VECTOR		ADJUSTMENT_ARM_RECT_POS;		//	å½“ãŸã‚Šåˆ¤å®šèª¿æ•´ç”¨ã®ãƒã‚¤ãƒ³ãƒˆ ã‚¢ãƒ¼ãƒ 
+	static const VECTOR		ADJUSTMENT_LASER_POS;			//	å½“ãŸã‚Šåˆ¤å®šèª¿æ•´ç”¨ã®ãƒã‚¤ãƒ³ãƒˆ ãƒ¬ãƒ¼ã‚¶ãƒ¼
+	static const VECTOR		ADJUSTMENT_CENTER_BARRE_POS;	//	å½“ãŸã‚Šåˆ¤å®šèª¿æ•´ç”¨ã®ãƒã‚¤ãƒ³ãƒˆ ã‚»ãƒ³ã‚¿ãƒ¼ãƒãƒ¬ãƒ«
+	static const VECTOR		ARM_CORRECTION;					//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®è£œæ­£ ã‚¢ãƒ¼ãƒ 
+	static const VECTOR		CENTER_BARRE_CORRECTION;		//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®è£œæ­£ ã‚»ãƒ³ã‚¿ãƒ¼ãƒãƒ¬ãƒ«
+	static const float		LASER_EFFECT_CORRECTION;		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®è£œæ­£ ãƒ¬ãƒ¼ã‚¶ãƒ¼
+	static const float		ROCKET_EFFECT_CORRECTION;		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®è£œæ­£ ãƒ­ã‚±ãƒƒãƒˆ
+	static const float		HIT_BODY_RADIUS;				//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„ ãƒœãƒ‡ã‚£ãƒ¼
+	static const float		HIT_SIDE_BARREL_RADIUS;			//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„ ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«
+	static const float		HIT_CORE_RADIUS;				//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„ ã‚³ã‚¢
+	static const float		HIT_ARM_RADIUS;					//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„ ã‚¢ãƒ¼ãƒ 
+	static const int		MAX_SIDE_BARREL_LIFE;			//	ãƒ©ã‚¤ãƒ•ã®æœ€å¤§ ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«
+	static const int		MAX_CORE_LIFE;					//	ãƒ©ã‚¤ãƒ•ã®æœ€å¤§ ã‚³ã‚¢
+	static const VECTOR		BOSS_RADIUS;					//	ãƒœã‚¹ã®åŠå¾„
+	static const int		LIFE_ZERO;						//	ãƒ©ã‚¤ãƒ•ãªã—
 };

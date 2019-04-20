@@ -1,116 +1,116 @@
-
+ï»¿
 //=============================================================================
 //	@file	Ranking.h
-//	@brief	ƒ‰ƒ“ƒLƒ“ƒO
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ©ãƒ³ã‚­ãƒ³ã‚°
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/3
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 #pragma warning(disable:4996)
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 struct UI;
 class Pad;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ‰ƒ“ƒLƒ“ƒOƒNƒ‰ƒX
+//	@brief	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Ranking final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Ranking();
 	~Ranking();
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(Pad& _pad, SoundEffect& _soundEffect);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
 //==================== getter =====================//
 
-	//	ƒ‰ƒ“ƒLƒ“ƒOŠJnƒtƒ‰ƒO‚Ì getter
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°é–‹å§‹ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsRankingStart() const { return m_isRankingStart; }
 
-	//	ƒV[ƒ“Ø‚è‘Ö‚¦ƒtƒ‰ƒO‚Ì getter
+	//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsSceneChange() const { return m_isSceneChange; }
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒ‰ƒCƒtƒ{[ƒiƒX
+	//	ãƒ©ã‚¤ãƒ•ãƒœãƒ¼ãƒŠã‚¹
 	void _LifeBonus(Pad& _pad, SoundEffect& _soundEffect);
 
-	//	“¢”°”ƒ{[ƒiƒX
+	//	è¨ä¼æ•°ãƒœãƒ¼ãƒŠã‚¹
 	void _DestructionBonus(Pad& _pad, SoundEffect& _soundEffect);
 
-	//	ƒ‰ƒ“ƒLƒ“ƒO
+	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°
 	void _Ranking(SoundEffect& _soundEffect);
 
-	//	“Ç‚İ‚İ
+	//	èª­ã¿è¾¼ã¿
 	void _Load();
 
-	//	ƒ\[ƒg
+	//	ã‚½ãƒ¼ãƒˆ
 	void _Sort();
 
-	//	‘‚«‚İ
+	//	æ›¸ãè¾¼ã¿
 	void _Writing();
 
-	//	“_–Å•`‰æ
+	//	ç‚¹æ»…æç”»
 	void _FlashingDraw(const int _num, const int _rank);
 
-	//	ƒ‰ƒ“ƒNŠO‚Ì“_–Å•`‰æ
+	//	ãƒ©ãƒ³ã‚¯å¤–ã®ç‚¹æ»…æç”»
 	void _AfterRankFlashingDraw();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int		m_score[CommonConstant::MAX_RANKING_NUM];										//	ƒXƒRƒA
-	int		m_rank;																			//	ƒ‰ƒ“ƒN
-	char	m_thisTimeScoreText[CommonConstant::MAX_SCORE_NUM];								//	¡‰ñ‚ÌƒXƒRƒA‚Ì•¶š—ñ
-	char	m_bonusScoreText[CommonConstant::MAX_SCORE_NUM];								//	ƒ{[ƒiƒX‚Ì•¶š—ñ
-	char	m_scoreText[CommonConstant::MAX_RANKING_NUM][CommonConstant::MAX_SCORE_NUM];	//	ƒXƒRƒA‚Ì•¶š—ñ
-	bool	m_isLifeBonusScore;																//	c‹@ƒ{[ƒiƒX
-	bool	m_isDestructionBonusScore;														//	“¢”°”ƒ{[ƒiƒX
-	bool	m_isRankingStart;																//	ƒ‰ƒ“ƒLƒ“ƒO‚ÌŠJn
-	float	m_productionTime;																//	‰‰oŠÔ
-	float	m_waitTime;																		//	’x‰„ŠÔ
-	float	m_lifeBonusScoreVal;															//	ƒ‰ƒCƒtƒ{[ƒiƒX’l
-	float	m_DestructionBonusScoreVal;														//	“¢”°”ƒ{[ƒiƒX’l
-	float	m_flashingTime;																	//	“_–ÅŠÔ
-	float	m_sceneChangeTime;																//	ƒV[ƒ“Ø‚è‘Ö‚¦ŠÔ
-	bool	m_isSceneChange;																//	ƒV[ƒ“Ø‚è‘Ö‚¦
-	UI		m_bonusUI;																		//	ƒ{[ƒiƒXUI
-	UI		m_rankingUI;																	//	ƒ‰ƒ“ƒLƒ“ƒOUI
+	int		m_score[CommonConstant::MAX_RANKING_NUM];										//	ã‚¹ã‚³ã‚¢
+	int		m_rank;																			//	ãƒ©ãƒ³ã‚¯
+	char	m_thisTimeScoreText[CommonConstant::MAX_SCORE_NUM];								//	ä»Šå›ã®ã‚¹ã‚³ã‚¢ã®æ–‡å­—åˆ—
+	char	m_bonusScoreText[CommonConstant::MAX_SCORE_NUM];								//	ãƒœãƒ¼ãƒŠã‚¹ã®æ–‡å­—åˆ—
+	char	m_scoreText[CommonConstant::MAX_RANKING_NUM][CommonConstant::MAX_SCORE_NUM];	//	ã‚¹ã‚³ã‚¢ã®æ–‡å­—åˆ—
+	bool	m_isLifeBonusScore;																//	æ®‹æ©Ÿãƒœãƒ¼ãƒŠã‚¹
+	bool	m_isDestructionBonusScore;														//	è¨ä¼æ•°ãƒœãƒ¼ãƒŠã‚¹
+	bool	m_isRankingStart;																//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®é–‹å§‹
+	float	m_productionTime;																//	æ¼”å‡ºæ™‚é–“
+	float	m_waitTime;																		//	é…å»¶æ™‚é–“
+	float	m_lifeBonusScoreVal;															//	ãƒ©ã‚¤ãƒ•ãƒœãƒ¼ãƒŠã‚¹å€¤
+	float	m_DestructionBonusScoreVal;														//	è¨ä¼æ•°ãƒœãƒ¼ãƒŠã‚¹å€¤
+	float	m_flashingTime;																	//	ç‚¹æ»…æ™‚é–“
+	float	m_sceneChangeTime;																//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆæ™‚é–“
+	bool	m_isSceneChange;																//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆ
+	UI		m_bonusUI;																		//	ãƒœãƒ¼ãƒŠã‚¹UI
+	UI		m_rankingUI;																	//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°UI
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const int		TEXT_START;					//	ƒeƒLƒXƒg‚Ì‰ŠúˆÊ’u
-	static const int		TEXT_INTERVAL;				//	ƒeƒLƒXƒg‚ÌŠÔŠu
-	static const int		AFTER_RANK;					//	ƒ‰ƒ“ƒNŠO
-	static const float		MAX_PRODUCTION_TIME;		//	‰‰oŠÔ‚ÌÅ‘å
-	static const float		MAX_WAITTIME;				//	’x‰„ŠÔ‚ÌÅ‘å
-	static const float		LIFE_BONUS_SCORE;			//	ƒ‰ƒCƒtƒ{[ƒiƒX
-	static const float		DESTRUCTION_BONUS_SCORE;	//	“¢”°”ƒ{[ƒiƒX
-	static const float		MAX_SCENE_CHANGE_TIME;		//	ƒV[ƒ“Ø‚è‘Ö‚¦ŠÔ‚ÌÅ‘å
+	static const int		TEXT_START;					//	ãƒ†ã‚­ã‚¹ãƒˆã®åˆæœŸä½ç½®
+	static const int		TEXT_INTERVAL;				//	ãƒ†ã‚­ã‚¹ãƒˆã®é–“éš”
+	static const int		AFTER_RANK;					//	ãƒ©ãƒ³ã‚¯å¤–
+	static const float		MAX_PRODUCTION_TIME;		//	æ¼”å‡ºæ™‚é–“ã®æœ€å¤§
+	static const float		MAX_WAITTIME;				//	é…å»¶æ™‚é–“ã®æœ€å¤§
+	static const float		LIFE_BONUS_SCORE;			//	ãƒ©ã‚¤ãƒ•ãƒœãƒ¼ãƒŠã‚¹
+	static const float		DESTRUCTION_BONUS_SCORE;	//	è¨ä¼æ•°ãƒœãƒ¼ãƒŠã‚¹
+	static const float		MAX_SCENE_CHANGE_TIME;		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆæ™‚é–“ã®æœ€å¤§
 };

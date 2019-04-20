@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	Opening.h
-//	@brief	ƒI[ƒvƒjƒ“ƒO
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/18
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct UI;
 struct Rect;
@@ -26,100 +26,100 @@ struct Color;
 class Pad;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒI[ƒvƒjƒ“ƒOƒNƒ‰ƒX
+//	@brief	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Opening final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Opening();
 	~Opening();
 
-	//	¶¬
+	//	ç”Ÿæˆ
 	static Opening* GetInstance()
 	{
 		static Opening m_instance;
 		return &m_instance;
 	}
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(Pad& _pad);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
 //==================== getter =====================//
 
-	//	ƒI[ƒvƒjƒ“ƒOI—¹ƒtƒ‰ƒO‚Ì@getter
+	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°çµ‚äº†ãƒ•ãƒ©ã‚°ã®ã€€getter
 	const bool GetIsEndOpening() const { return m_isEndOpening; }
 
 private:
 
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-	//	ƒI[ƒvƒjƒ“ƒO‚Ìí—Ş
+	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®ç¨®é¡
 	enum OPENING_KIND
 	{
-		OPENING_NONE,		//	‚È‚µ
-		OPENING_1,			//	ƒI[ƒvƒjƒ“ƒO‚P
-		OPENING_2,			//	ƒI[ƒvƒjƒ“ƒO‚Q
-		OPENING_3,			//	ƒI[ƒvƒjƒ“ƒO‚R
-		OPENING_4,			//	ƒI[ƒvƒjƒ“ƒO‚S
-		OPENING_5,			//	ƒI[ƒvƒjƒ“ƒO‚T
-		OPENING_6,			//	ƒI[ƒvƒjƒ“ƒO‚U
-		OPENING_NUM,		//	ƒI[ƒvƒjƒ“ƒO‚Ì”
+		OPENING_NONE,		//	ãªã—
+		OPENING_1,			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ï¼‘
+		OPENING_2,			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ï¼’
+		OPENING_3,			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ï¼“
+		OPENING_4,			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ï¼”
+		OPENING_5,			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ï¼•
+		OPENING_6,			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ï¼–
+		OPENING_NUM,		//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®æ•°
 	};
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	UI‚Ì“Ç‚İ‚İ
+	//	UIã®èª­ã¿è¾¼ã¿
 	void _LoadUI(UI& _ui, const char* _fileName);
 
-	//	UI‚Ì•`‰æ
+	//	UIã®æç”»
 	void _DrawUI(UI _ui);
 
-	//	ƒAƒ‹ƒtƒ@’l‚Ì•ÏX
+	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®å¤‰æ›´
 	void _ChangeAlpha();
 
-	//	ƒAƒ‹ƒtƒ@’l‚Ì‰Á‘¬
+	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®åŠ é€Ÿ
 	void _AcceleAlpha(Pad& _pad);
 
-	//	ƒI[ƒvƒjƒ“ƒO‚ÌƒXƒLƒbƒv
+	//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã®ã‚¹ã‚­ãƒƒãƒ—
 	void _OpeningSkip(Pad& _pad);
 
-	//	I—¹
+	//	çµ‚äº†
 	void _EndOpening();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	UI		m_OpeningUI1;			//	ƒI[ƒvƒjƒ“ƒOUI 1
-	UI		m_OpeningUI2;			//	ƒI[ƒvƒjƒ“ƒOUI 2
-	UI		m_OpeningUI3;			//	ƒI[ƒvƒjƒ“ƒOUI 3
-	UI		m_OpeningUI4;			//	ƒI[ƒvƒjƒ“ƒOUI 4
-	UI		m_OpeningUI5;			//	ƒI[ƒvƒjƒ“ƒOUI 5
-	UI		m_OpeningUI6;			//	ƒI[ƒvƒjƒ“ƒOUI 6
-	Rect	m_backGroundRect;		//	”wŒi
-	Color	m_backGroundColor;		//	”wŒiF
-	int		m_openingCount;			//	ƒI[ƒvƒjƒ“ƒOƒJƒEƒ“ƒg
-	int		m_alpha;				//	ƒAƒ‹ƒtƒ@’l
-	int		m_alphaSpeed;			//	ƒAƒ‹ƒtƒ@‘¬“x
-	float	m_waitTime;				//	’x‰„ŠÔ
-	bool	m_isChangeAlpha;		//	ƒAƒ‹ƒtƒ@’l‚ÌØ‚è‘Ö‚¦ƒtƒ‰ƒO
-	bool	m_isStart;				//	ŠJnƒtƒ‰ƒO
-	bool	m_isEndOpening;			//	ƒI[ƒvƒjƒ“ƒOI—¹ƒtƒ‰ƒO
+	UI		m_OpeningUI1;			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°UI 1
+	UI		m_OpeningUI2;			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°UI 2
+	UI		m_OpeningUI3;			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°UI 3
+	UI		m_OpeningUI4;			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°UI 4
+	UI		m_OpeningUI5;			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°UI 5
+	UI		m_OpeningUI6;			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°UI 6
+	Rect	m_backGroundRect;		//	èƒŒæ™¯
+	Color	m_backGroundColor;		//	èƒŒæ™¯è‰²
+	int		m_openingCount;			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°ã‚«ã‚¦ãƒ³ãƒˆ
+	int		m_alpha;				//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤
+	int		m_alphaSpeed;			//	ã‚¢ãƒ«ãƒ•ã‚¡é€Ÿåº¦
+	float	m_waitTime;				//	é…å»¶æ™‚é–“
+	bool	m_isChangeAlpha;		//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®åˆ‡ã‚Šæ›¿ãˆãƒ•ãƒ©ã‚°
+	bool	m_isStart;				//	é–‹å§‹ãƒ•ãƒ©ã‚°
+	bool	m_isEndOpening;			//	ã‚ªãƒ¼ãƒ—ãƒ‹ãƒ³ã‚°çµ‚äº†ãƒ•ãƒ©ã‚°
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const int		MIN_ALPHA;				//	ƒAƒ‹ƒtƒ@’l‚ÌÅ¬
-	static const int		MAX_ALPHA;				//	ƒAƒ‹ƒtƒ@’l‚ÌÅ‘å
-	static const int		ALPHA_DEFAULT_SPEED;	//	ƒAƒ‹ƒtƒ@’l‚ÌƒfƒtƒHƒ‹ƒg‘¬“x
-	static const int		ALPHA_ACCELE_SPEED;		//	ƒAƒ‹ƒtƒ@’l‚ÌƒAƒNƒZƒ‹‘¬“x
+	static const int		MIN_ALPHA;				//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å°
+	static const int		MAX_ALPHA;				//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å¤§
+	static const int		ALPHA_DEFAULT_SPEED;	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆé€Ÿåº¦
+	static const int		ALPHA_ACCELE_SPEED;		//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®ã‚¢ã‚¯ã‚»ãƒ«é€Ÿåº¦
 
 };
 

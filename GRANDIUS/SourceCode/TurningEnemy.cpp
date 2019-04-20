@@ -1,13 +1,13 @@
-
+﻿
 //=============================================================================
 //	@file	TurningEnemy.cpp
-//	@brief	����G�l�~�[
-//	@autor	���m ���
+//	@brief	旋回エネミー
+//	@autor	相知 拓弥
 //	@date	2018/12/20
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	�C���N���[�h
+//	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "TurningEnemy.h"
 #include "Common.h"
@@ -18,56 +18,56 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	�ÓI�萔
+//	@brief	静的定数
 //-----------------------------------------------------------------------------
-const float TurningEnemy::MOVE_ANGLE_SPEED = 20.0f;				//	��]�p�x�̉�]���x
-const float TurningEnemy::MAX_MOVE_ANGLE_WAIT_TIME = 6.5f;		//	��]���x�̑ҋ@���Ԃ̍ő�
-const float TurningEnemy::MAX_MOVE_ANGLE = 150.0f;				//	��]�p�x�̍ő�
-const float TurningEnemy::MIN_MOVE_ANGLE = -150.0f;				//	��]�p�x�̍ŏ�
+const float TurningEnemy::MOVE_ANGLE_SPEED = 20.0f;				//	回転角度の回転速度
+const float TurningEnemy::MAX_MOVE_ANGLE_WAIT_TIME = 6.5f;		//	回転速度の待機時間の最大
+const float TurningEnemy::MAX_MOVE_ANGLE = 150.0f;				//	回転角度の最大
+const float TurningEnemy::MIN_MOVE_ANGLE = -150.0f;				//	回転角度の最小
 
 //-----------------------------------------------------------------------------
-//	@brief	�R���X�g���N�^
+//	@brief	コンストラクタ
 //-----------------------------------------------------------------------------
 TurningEnemy::TurningEnemy(const int _modelHandle)
 	: EnemyBase(_modelHandle)
 {
-	//	�e�ϐ���������
+	//	各変数を初期化
 	m_pos = CommonConstant::ORIGIN;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�f�X�g���N�^
+//	@brief	デストラクタ
 //-----------------------------------------------------------------------------
 TurningEnemy::~TurningEnemy()
 {
-	//	�ŏI�I�ȉ������
+	//	最終的な解放処理
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�쐬����
+//	@brief	作成処理
 //-----------------------------------------------------------------------------
 void TurningEnemy::Create()
 {
-	// �����Ȃ�
+	// 処理なし
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�������
+//	@brief	解放処理
 //-----------------------------------------------------------------------------
 void TurningEnemy::Release()
 {
-	// �����Ȃ�
+	// 処理なし
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	��������
+//	@brief	初期処理
 //-----------------------------------------------------------------------------
 void TurningEnemy::Initialize()
 {
-	//	�e�ϐ���������Ԃɐݒ�
+	//	各変数を初期状態に設定
 	m_pos = VGet(0.0f, 50.0f, 0.0f);
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = VGet(0.0f, 5.0f, 0.0f);
@@ -87,86 +87,86 @@ void TurningEnemy::Initialize()
 	m_isOffDraw = false;
 	m_isDeleate = false;
 
-	//	�����蔻��p�̍\���̂̏�����
+	//	当たり判定用の構造体の初期化
 	m_hitCircle.m_radius = HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
-	//	�p�x�����蓖�Ă�
+	//	角度を割り当てる
 	MV1SetRotationXYZ(m_modelHandle, m_angle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�X�V����
+//	@brief	更新処理
 //-----------------------------------------------------------------------------
 void TurningEnemy::Update(PlayerManager& _playerManager, ShotManager& _shotManager, SoundEffect& _soundEffect)
 {
-	//	�q�b�g���Ă��Ȃ��Ƃ����A
-	//	�K�E�Z�ȊO�̂Ƃ�
+	//	ヒットしていないときか、
+	//	必殺技以外のとき
 	const bool isActive = !m_isHit && !PRODUCTION->GetIsSpecialProduction();
 	if (isActive)
 	{
-		//	�����̐؂�ւ�
+		//	向きの切り替え
 		_ChangeDir();
 
-		//	�ړ�����
+		//	移動処理
 		VECTOR moving = MoveHelper::AskMoveAmount(m_dir, m_moveSpeed);
 
-		//	�V���b�g���g�p����
+		//	ショットを使用する
 		if (m_isUseShot)
 		{
-			//	�V���b�g�̓o�^
+			//	ショットの登録
 			_ShotEntry(_playerManager, _shotManager);
 		}
 
-		//	�|�W�V�����̍X�V
+		//	ポジションの更新
 		m_pos = VAdd(m_pos, moving);
 
-		//	���f���Ƀ|�W�V���������蓖�Ă�
+		//	モデルにポジションを割り当てる
 		MV1SetPosition(m_modelHandle, m_pos);
 
-		//	���f���Ɋp�x�����蓖�Ă�
+		//	モデルに角度を割り当てる
 		MV1SetRotationXYZ(m_modelHandle, m_angle);
 	}
 
-	//	���f���̐F�̊��蓖��
+	//	モデルの色の割り当て
 	_ChangeColor();
 
-	//	�����G�t�F�N�g
+	//	爆発エフェクト
 	_OnEffectExplosion(_soundEffect);
 
-	//	�����蔻�肪�����̂ŁA
-	//	���f���Ƀ|�W�V���������蓖�Ă���ɁA
-	//	�����蔻��p�̍��W�̍X�V����
+	//	当たり判定がずれるので、
+	//	モデルにポジションを割り当てた後に、
+	//	当たり判定用の座標の更新する
 	_UpdateHitPoint();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����̐؂�ւ�
+//	@brief	向きの切り替え
 //-----------------------------------------------------------------------------
 void TurningEnemy::_ChangeDir()
 {
 	m_behaviorTime++;
 
-	//	���Ԃ���p�^�[���̐؂�ւ�
+	//	時間りよるパターンの切り替え
 	bool isPattern1 = m_behaviorTime >= 0.0f && m_behaviorTime <= 100.0f;
 	bool isPattern2 = m_behaviorTime >= 100.0f && m_behaviorTime <= 200.0f;
 	bool isPattern3 = m_behaviorTime >= 200.0f && m_behaviorTime <= 300.0f;
 	bool isPattern4 = m_behaviorTime >= 300.0f && m_behaviorTime <= 1000.0f;
 
-	//	���]����
+	//	反転処理
 	if (!m_isOneTime)
 	{
-		//	y���������Ⴉ������A
-		//	�ړ������𔽓]������
+		//	y軸が一定より低かったら、
+		//	移動向きを反転させる
 		bool isActiveReverse = m_pos.y <= 50.0f;
 		if (isActiveReverse) { m_isOnReverse = true; }
 		m_isOneTime = true;
 	}
 
-	//	���������߂�
+	//	向きを求める
 	if (m_isOnReverse)
 	{
-		//	��������
+		//	下から上に
 		if (isPattern1) { m_dir = VGet(-1.0f, 0.0f, 0.0f); }
 		if (isPattern2)
 		{
@@ -175,11 +175,11 @@ void TurningEnemy::_ChangeDir()
 			{
 				m_moveAngle -= MOVE_ANGLE_SPEED;
 
-				//	�ҋ@���Ԃ̏�����
+				//	待機時間の初期化
 				m_moveAngleWaitTime = 0.0f;
 			}
 
-			//	�ړ��p�x����ړ����������߂�
+			//	移動角度から移動向きを求める
 			m_dir = CommonFunction::AskDirFromAngle(m_moveAngle);
 		}
 		if (isPattern3)
@@ -189,18 +189,18 @@ void TurningEnemy::_ChangeDir()
 			{
 				m_moveAngle += MOVE_ANGLE_SPEED;
 
-				//	�ҋ@���Ԃ̏�����
+				//	待機時間の初期化
 				m_moveAngleWaitTime = 0.0f;
 			}
 
-			//	�ړ��p�x����ړ����������߂�
+			//	移動角度から移動向きを求める
 			m_dir = CommonFunction::AskDirFromAngle(m_moveAngle);
 		}
 		if(isPattern4) { m_dir = VGet(-1.0f, 0.0f, 0.0f); }
 	}
 	else
 	{
-		//	�ォ�牺��
+		//	上から下に
 		if (isPattern1) { m_dir = VGet(-1.0f, 0.0f, 0.0f); }
 		if (isPattern2)
 		{
@@ -209,11 +209,11 @@ void TurningEnemy::_ChangeDir()
 			{
 				m_moveAngle += MOVE_ANGLE_SPEED;
 
-				//	�ҋ@���Ԃ̏�����
+				//	待機時間の初期化
 				m_moveAngleWaitTime = 0.0f;
 			}
 
-			//	�ړ��p�x����ړ����������߂�
+			//	移動角度から移動向きを求める
 			m_dir = CommonFunction::AskDirFromAngle(m_moveAngle);
 		}
 		if (isPattern3)
@@ -223,11 +223,11 @@ void TurningEnemy::_ChangeDir()
 			{
 				m_moveAngle -= MOVE_ANGLE_SPEED;
 
-				//	�ҋ@���Ԃ̏�����
+				//	待機時間の初期化
 				m_moveAngleWaitTime = 0.0f;
 			}
 
-			//	�ړ��p�x����ړ����������߂�
+			//	移動角度から移動向きを求める
 			m_dir = CommonFunction::AskDirFromAngle(m_moveAngle);
 		}
 		if (isPattern4) { m_dir = VGet(-1.0f, 0.0f, 0.0f); }
@@ -235,51 +235,51 @@ void TurningEnemy::_ChangeDir()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�p�x�����߂�
+//	@brief	角度を求める
 //-----------------------------------------------------------------------------
 void TurningEnemy::_ChangeMoveAngle(const float _moveAngleSpeed, const bool _isScalingSize, const float _ScalingSize)
 {
-	//	5�t���[����1��A�ړ��p�x��ύX����
-	//	�ړ��p�x����ړ����������߂�
+	//	5フレームに1回、移動角度を変更する
+	//	移動角度から移動向きを求める
 	m_moveAngleWaitTime++;
 	if (m_moveAngleWaitTime >= MAX_MOVE_ANGLE_WAIT_TIME)
 	{
 		if (m_isOnReverse)
 		{
-			//	������ɐi�ނ̂ŁA
-			//	�p�x�̉��Z
+			//	上向きに進むので、
+			//	角度の加算
 			m_moveAngle += _moveAngleSpeed;
 		}
 		else
 		{
-			//	�������ɐi�ނ̂ŁA
-			//	�p�x�̌��Y
+			//	下向きに進むので、
+			//	角度の減産
 			m_moveAngle -= _moveAngleSpeed;
 		}
 
-		//	�ҋ@���Ԃ̏�����
+		//	待機時間の初期化
 		m_moveAngleWaitTime = 0.0f;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�����蔻��p�̓_�̍X�V
+//	@brief	当たり判定用の点の更新
 //-----------------------------------------------------------------------------
 void TurningEnemy::_UpdateHitPoint()
 {
-	//	�����蔻��p�̒��S���W�̍X�V
+	//	当たり判定用の中心座標の更新
 	m_hitCircle.m_centerPoint = VGet(m_pos.x, m_pos.y - CENTER_CORRECTION, m_pos.z);
 
-	//	�����蔻��p�̍��W�̍X�V
+	//	当たり判定用の座標の更新
 	m_hitRect.m_vertexTop = VGet(m_pos.x + RECT_CORRECTION.x, m_pos.y + RECT_CORRECTION.y, m_pos.z + RECT_CORRECTION.z);
 	m_hitRect.m_vertexUnder = VGet(m_pos.x - RECT_CORRECTION.x, m_pos.y - RECT_CORRECTION.y, m_pos.z - RECT_CORRECTION.z);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�ŏI�I�ȉ������
+//	@brief	最終的な解放処理
 //-----------------------------------------------------------------------------
 void TurningEnemy::_FinalRelease()
 {
-	// �����Ȃ�
+	// 処理なし
 }
 

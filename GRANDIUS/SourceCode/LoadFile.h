@@ -1,18 +1,18 @@
-
+ï»¿
 //=============================================================================
 //	@file	LoadFile.h
-//	@brief	ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/10/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒ­ãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
@@ -22,78 +22,78 @@
 #include <vector>
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İƒNƒ‰ƒX
+//	@brief	ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class LoadFile final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	~LoadFile();								//	ƒfƒXƒgƒ‰ƒNƒ^
+	~LoadFile();								//	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	
-	//	¶¬
+	//	ç”Ÿæˆ
 	static LoadFile* GetInstance()
 	{
 		static LoadFile m_instance;
 		return &m_instance;
 	}
 
-	//	CSV ‚QŸŒ³ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+	//	CSV ï¼’æ¬¡å…ƒãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 	bool LoadCsvTwoDimensionsFile(const char* _fileName);
 
-	//	ƒtƒ@ƒCƒ‹‚Ì“Ç‚İ‚İ
+	//	ãƒ•ã‚¡ã‚¤ãƒ«ã®èª­ã¿è¾¼ã¿
 	bool LoadCsvFile(const char* _fileName);
 
-	//	CSV ‚QŸŒ³ƒtƒ@ƒCƒ‹‚Ìæ“¾
+	//	CSV ï¼’æ¬¡å…ƒãƒ•ã‚¡ã‚¤ãƒ«ã®å–å¾—
 	int GetCsvFile(const int _row, const int _col);
 
-	//	CSV ƒtƒ@ƒCƒ‹‚Ìæ“¾
+	//	CSV ãƒ•ã‚¡ã‚¤ãƒ«ã®å–å¾—
 	int GetCsvFile(const int _row = 0);
 
-	//	CSV ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ
+	//	CSV ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿
 	bool WritingCsvFile(const char* _fileName, const float _writingVal);
 
-	//	CSV ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ
+	//	CSV ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿
 	bool WritingCsvFile(const char* _fileName, const int _writingVal);
 
-	//	CSV ƒtƒ@ƒCƒ‹‚Ì‘‚«‚İ
+	//	CSV ãƒ•ã‚¡ã‚¤ãƒ«ã®æ›¸ãè¾¼ã¿
 	bool WritingCsvFile(const char* _fileName, const int _size, int* _writingVal);
 
 private:
 
-//================== ƒVƒ“ƒOƒ‹ƒgƒ“ ==================//
+//================== ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ ==================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	LoadFile();
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 	
-	//	“Ç‚İæ‚è‚Ì‹æØ‚è
+	//	èª­ã¿å–ã‚Šã®åŒºåˆ‡ã‚Š
 	std::vector<std::string> _Split(std::string& _input, char _split);
 
-	//	“Ç‚İ‚İ
+	//	èª­ã¿è¾¼ã¿
 	bool _Load(const char* _fileName, std::vector<std::string>& _strvec, int* date);
 
-	//	“Ç‚İ‚İ
+	//	èª­ã¿è¾¼ã¿
 	bool _Load(const char* _fileName, std::vector<std::string>& _strvec, float* date);
 
-	//	ƒ\[ƒg
+	//	ã‚½ãƒ¼ãƒˆ
 	void _Sort(std::vector<std::string>& _strvec, const float _writingVal, int* date);
 
-	//	ƒ\[ƒg
+	//	ã‚½ãƒ¼ãƒˆ
 	void _Sort(std::vector<std::string>& _strvec, const float _writingVal, float* date);
 
-	//	‘‚«‚İ
+	//	æ›¸ãè¾¼ã¿
 	bool _ToWrite(const char* _fileName, std::vector<std::string>& _strvec, int* date);
 
-	//	‘‚«‚İ
+	//	æ›¸ãè¾¼ã¿
 	bool _ToWrite(const char* _fileName, std::vector<std::string>& _strvec, float* date);
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int m_twoDimensionsData[CommonConstant::MAX_CSV_NUM][CommonConstant::MAX_CSV_NUM];	//	2ŸŒ³ƒtƒ@ƒCƒ‹“Ç‚İ‚İ—p
-	int m_data[CommonConstant::MAX_CSV_NUM];								//	ƒtƒ@ƒCƒ‹“Ç‚İ‚İ—p
+	int m_twoDimensionsData[CommonConstant::MAX_CSV_NUM][CommonConstant::MAX_CSV_NUM];	//	2æ¬¡å…ƒãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ç”¨
+	int m_data[CommonConstant::MAX_CSV_NUM];								//	ãƒ•ã‚¡ã‚¤ãƒ«èª­ã¿è¾¼ã¿ç”¨
 
 };
 

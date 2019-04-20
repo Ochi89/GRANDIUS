@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	EnemyBase.h
-//	@brief	ƒGƒlƒ~[ƒx[ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒ™ãƒ¼ã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "CharacterBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class PlayerManager;
 class ShotManager;
@@ -26,143 +26,143 @@ class EffekseerEmitter;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[Šî’êƒNƒ‰ƒX
+//	@brief	ã‚¨ãƒãƒŸãƒ¼åŸºåº•ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class EnemyBase : public CharacterBase
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	EnemyBase(const int _modelHandle);
 	virtual ~EnemyBase();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	virtual void Create() override = 0;
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	virtual void Release() override = 0;
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	virtual void Initialize() override = 0;
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	virtual void Update(PlayerManager& _playerManager, ShotManager& _shotManager, SoundEffect& _soundEffect) = 0;
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	virtual void Draw() override final;
 
-	//	¶‘¶ŠÔ‚Ì‰ÁZ
+	//	ç”Ÿå­˜æ™‚é–“ã®åŠ ç®—
 	void AddAliveTime() { m_aliveTime++; }
 
 //==================== getter =====================//
 
-	//	“GID‚Ì getter
+	//	æ•µIDã® getter
 	const int GetFormationID() const { return m_formationID; }
 
-	//	“GID‚Ì getter
+	//	æ•µIDã® getter
 	const int GetEntryID() const { return m_entryID; }
 
-	//	“Gí‚Ì getter
+	//	æ•µç¨®ã® getter
 	const int GetEntryKind() const { return m_entryKind; }
 
-	//	¶‘¶ŠÔ‚Ì getter
+	//	ç”Ÿå­˜æ™‚é–“ã® getter
 	const float GetAliveTime() const { return m_aliveTime; }
 
-	//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚©‚Ì getter
+	//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã‹ã® getter
 	const bool& GetIsHavingItems() const { return m_isHavingItems; }
 
-	//	ƒqƒbƒgƒtƒ‰ƒO‚Ì getter
+	//	ãƒ’ãƒƒãƒˆãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsHIt() const { return m_isHit; }
 
-	//	íœƒtƒ‰ƒO‚Ì getter
+	//	å‰Šé™¤ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsDeleate() const { return m_isDeleate; }
 
 //==================== setter =====================//
 
-	//	“GID‚Ì setter
+	//	æ•µIDã® setter
 	void SetFormationID(const int _set) { m_formationID = _set; }
 
-	//	“GID‚Ì setter
+	//	æ•µIDã® setter
 	void SetEntryID(const int _set) { m_entryID = _set; }
 
-	//	“Gí‚Ì setter
+	//	æ•µç¨®ã® setter
 	void SetEntryKind(const int _set) { m_entryKind = _set; }
 	
-	//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚©‚Ì setter
+	//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã‹ã® setter
 	void SetIsHavingItems(const bool _set) { m_isHavingItems = _set; }
 
-	//	ƒVƒ‡ƒbƒg‚ğg‚¤‚©‚Ì setter
+	//	ã‚·ãƒ§ãƒƒãƒˆã‚’ä½¿ã†ã‹ã® setter
 	void SetIsUseShot(const bool _set) { m_isUseShot = _set; }
 
-	//	ƒqƒbƒgƒtƒ‰ƒO‚Ì setter
+	//	ãƒ’ãƒƒãƒˆãƒ•ãƒ©ã‚°ã® setter
 	void SetIsHit(const bool _set) { m_isHit = _set; }
 
 protected:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	Œü‚«‚ÌØ‚è‘Ö‚¦ˆ—
+	//	å‘ãã®åˆ‡ã‚Šæ›¿ãˆå‡¦ç†
 	virtual void _ChangeDir() = 0;
 
-	//	F‚Ì•ÏX
+	//	è‰²ã®å¤‰æ›´
 	void _ChangeColor();
 
-	//	ƒVƒ‡ƒbƒg‚Ì“o˜^
+	//	ã‚·ãƒ§ãƒƒãƒˆã®ç™»éŒ²
 	void _ShotEntry(PlayerManager& _playerManager, ShotManager& _shotManager);
 
-	//	”š”­ƒGƒtƒFƒNƒg
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnEffectExplosion(SoundEffect& _soundEffect);
 
-	//	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 	virtual void _UpdateHitPoint() = 0;
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	virtual void _FinalRelease() = 0;
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	float	m_behaviorTime;		//	s“®ŠÔ
-	float	m_moveSpeed;		//	ˆÚ“®‘¬“x
-	float	m_aliveTime;		//	¶¬‚µ‚Ä‚©‚ç‚ÌŠÔ
-	bool	m_isUseShot;		//	ƒVƒ‡ƒbƒg‚ğg‚¤‚©‚Ìƒtƒ‰ƒO
-	bool	m_isHavingItems;	//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚©‚Ìƒtƒ‰ƒO
-	int		m_formationID;		//	‘à—ñ‚Ì”Ô†
-	int		m_entryID;			//	g—p‚µ‚Ä‚¢‚é“GID
-	int		m_entryKind;		//	g—p‚µ‚Ä‚¢‚é“Gí
-	bool	m_isAttenuation;	//	Œ¸Šƒtƒ‰ƒO
-	bool	m_isHit;			//	ƒqƒbƒgƒtƒ‰ƒO
-	bool	m_isOffDraw;		//	•`‰æ‚µ‚È‚¢ƒtƒ‰ƒO
-	bool	m_isDeleate;		//	íœƒtƒ‰ƒO
+	float	m_behaviorTime;		//	è¡Œå‹•æ™‚é–“
+	float	m_moveSpeed;		//	ç§»å‹•é€Ÿåº¦
+	float	m_aliveTime;		//	ç”Ÿæˆã—ã¦ã‹ã‚‰ã®æ™‚é–“
+	bool	m_isUseShot;		//	ã‚·ãƒ§ãƒƒãƒˆã‚’ä½¿ã†ã‹ã®ãƒ•ãƒ©ã‚°
+	bool	m_isHavingItems;	//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã‹ã®ãƒ•ãƒ©ã‚°
+	int		m_formationID;		//	éšŠåˆ—ã®ç•ªå·
+	int		m_entryID;			//	ä½¿ç”¨ã—ã¦ã„ã‚‹æ•µID
+	int		m_entryKind;		//	ä½¿ç”¨ã—ã¦ã„ã‚‹æ•µç¨®
+	bool	m_isAttenuation;	//	æ¸›è¡°ãƒ•ãƒ©ã‚°
+	bool	m_isHit;			//	ãƒ’ãƒƒãƒˆãƒ•ãƒ©ã‚°
+	bool	m_isOffDraw;		//	æç”»ã—ãªã„ãƒ•ãƒ©ã‚°
+	bool	m_isDeleate;		//	å‰Šé™¤ãƒ•ãƒ©ã‚°
 
-	//	ƒGƒtƒFƒNƒgŠÖŒW
-	EffekseerEmitter*	m_effectExplosion;	//	”š”­ƒGƒtƒFƒNƒg
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆé–¢ä¿‚
+	EffekseerEmitter*	m_effectExplosion;	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const VECTOR		RECT_CORRECTION;	//	’·•ûŒ`‚Ì•â³
-	static const float		SHOT_SPEED;			//	ƒVƒ‡ƒbƒg‘¬“x
-	static const float		MAX_WAIT_TIME;		//	ƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-	static const float		HIT_RADIUS;			//	“–‚½‚è”»’è—p‚Ì”¼Œa
-	static const float		CENTER_CORRECTION;	//	’†SÀ•W‚Ì•â³
+	static const VECTOR		RECT_CORRECTION;	//	é•·æ–¹å½¢ã®è£œæ­£
+	static const float		SHOT_SPEED;			//	ã‚·ãƒ§ãƒƒãƒˆé€Ÿåº¦
+	static const float		MAX_WAIT_TIME;		//	ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+	static const float		HIT_RADIUS;			//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+	static const float		CENTER_CORRECTION;	//	ä¸­å¿ƒåº§æ¨™ã®è£œæ­£
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	Œ¸Fİ’è
+	//	æ¸›è‰²è¨­å®š
 	void _AttenuationColor();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	COLOR_F		m_color;			//	ƒ‚ƒfƒ‹‚ÌF
+	COLOR_F		m_color;			//	ãƒ¢ãƒ‡ãƒ«ã®è‰²
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const COLOR_F	COLOR_NORMAL;		//	ƒfƒtƒHƒ‹ƒgF
-	static const COLOR_F	COLOR_DECAY_NORMAL;	//	ƒfƒtƒHƒ‹ƒgF‚ÌŒ¸Š
-	static const COLOR_F	COLOR_RED;			//	ÔF
-	static const COLOR_F	COLOR_DECAY_RED;	//	ÔF‚ÌŒ¸Š
+	static const COLOR_F	COLOR_NORMAL;		//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè‰²
+	static const COLOR_F	COLOR_DECAY_NORMAL;	//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè‰²ã®æ¸›è¡°
+	static const COLOR_F	COLOR_RED;			//	èµ¤è‰²
+	static const COLOR_F	COLOR_DECAY_RED;	//	èµ¤è‰²ã®æ¸›è¡°
 
 };

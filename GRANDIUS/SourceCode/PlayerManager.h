@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	PlayerManager.cpp
-//	@brief	ƒvƒŒƒCƒ„[ƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "PlayerBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class Pad;
 class PlayerBase;
@@ -29,70 +29,70 @@ class SoundEffect;
 class EnemyManager;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[ŠÇ—ƒNƒ‰ƒX
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ç®¡ç†ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class PlayerManager final
 {
 public:
 
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-    //	ƒV[ƒ“‚Ìí—Ş
+    //	ã‚·ãƒ¼ãƒ³ã®ç¨®é¡
     enum PLAYER_INFO
     {
-        PLAYER_TITLE,		//	ƒ^ƒCƒgƒ‹
-        PLAYER_GAME,		//	ƒQ[ƒ€
-        PLAYER_RESULT,		//	ƒŠƒUƒ‹ƒg
-        PLAYER_DEMO,		//	ƒfƒ‚
+        PLAYER_TITLE,		//	ã‚¿ã‚¤ãƒˆãƒ«
+        PLAYER_GAME,		//	ã‚²ãƒ¼ãƒ 
+        PLAYER_RESULT,		//	ãƒªã‚¶ãƒ«ãƒˆ
+        PLAYER_DEMO,		//	ãƒ‡ãƒ¢
     };
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	PlayerManager();
 	~PlayerManager();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create(PLAYER_INFO _playerInfo);
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release();	
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
     void Update();
     void Update(Pad& _pad, ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gauge);
     void Update(ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gauge, EnemyManager& _enemyManager);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
 //==================== getter =====================//
 
-	//	ƒvƒŒƒCƒ„[‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ì getter
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã® getter
 	PlayerBase* GetPlayerPtr() { return m_pPlayer; }
 
-	//	ƒNƒŠƒA‚µ‚½‚©‚Ì getter
+	//	ã‚¯ãƒªã‚¢ã—ãŸã‹ã® getter
 	const bool GetIsClear() const { return m_isClear; }
 
 //==================== setter =====================//
 
-	//	ƒNƒŠƒA‚µ‚½‚©‚Ì setter
+	//	ã‚¯ãƒªã‚¢ã—ãŸã‹ã® setter
 	void SetIsClear(const bool _set) { m_isClear = _set; }
 
-	//	‰‰o’†ƒtƒ‰ƒO‚Ì setter
+	//	æ¼”å‡ºä¸­ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsProduction(const bool _set) { m_isProduction = _set; }
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int				m_sourceModelHandle;	//	‘å–{ƒnƒ“ƒhƒ‹
-	PlayerBase*		m_pPlayer;				//	ƒvƒŒƒCƒ„[
-	bool			m_isClear;				//	ƒNƒŠƒAƒtƒ‰ƒO
-	bool			m_isProduction;			//	‰‰o’†ƒtƒ‰ƒO
+	int				m_sourceModelHandle;	//	å¤§æœ¬ãƒãƒ³ãƒ‰ãƒ«
+	PlayerBase*		m_pPlayer;				//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+	bool			m_isClear;				//	ã‚¯ãƒªã‚¢ãƒ•ãƒ©ã‚°
+	bool			m_isProduction;			//	æ¼”å‡ºä¸­ãƒ•ãƒ©ã‚°
 };

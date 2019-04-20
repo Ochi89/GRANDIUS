@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	PlayerManager.cpp
-//	@brief	ƒvƒŒƒCƒ„[ƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "PlayerManager.h"
 #include "PlayerBase.h"
@@ -24,44 +24,44 @@
 #include "SceneManager.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 PlayerManager::PlayerManager()
 	: m_sourceModelHandle(-1)
 {
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULL
 	m_pPlayer = NULL;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 PlayerManager::~PlayerManager()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void PlayerManager::Create(PLAYER_INFO _playerInfo)
 {
-    //	‘å–{‚Ìƒ‚ƒfƒ‹‚Ì“Ç‚İ‚İ
+    //	å¤§æœ¬ã®ãƒ¢ãƒ‡ãƒ«ã®èª­ã¿è¾¼ã¿
     m_sourceModelHandle = MV1LoadModel("Data/Model/Player/Player.pmx");
     CommonDebug::Assert((m_sourceModelHandle <= -1), " [ PlayerManager.cpp ] : error : model loading failed.");
 
-    //	ƒvƒŒƒCƒ„[‚ÌØ‚è‘Ö‚¦
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®åˆ‡ã‚Šæ›¿ãˆ
     switch (_playerInfo)
     {
-        //	ƒ^ƒCƒgƒ‹ƒV[ƒ“
+        //	ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³
     case PLAYER_INFO::PLAYER_TITLE:
         m_pPlayer = new TitlePlayer(m_sourceModelHandle);
         m_pPlayer->Create();
         m_pPlayer->Initialize();
         break;
 
-        //	ƒQ[ƒ€ƒV[ƒ“
+        //	ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³
     case PLAYER_INFO::PLAYER_GAME:
         m_isClear = false;
         m_isProduction = false;
@@ -70,14 +70,14 @@ void PlayerManager::Create(PLAYER_INFO _playerInfo)
         m_pPlayer->Initialize();
         break;
 
-        //	ƒŠƒUƒ‹ƒgƒV[ƒ“
+        //	ãƒªã‚¶ãƒ«ãƒˆã‚·ãƒ¼ãƒ³
     case PLAYER_INFO::PLAYER_RESULT:
         m_pPlayer = new ResultPlayer(m_sourceModelHandle);
         m_pPlayer->Create();
         m_pPlayer->Initialize();
         break;
 
-        //	ƒfƒ‚ƒV[ƒ“
+        //	ãƒ‡ãƒ¢ã‚·ãƒ¼ãƒ³
     case PLAYER_INFO::PLAYER_DEMO:
         m_pPlayer = new DemoPlayer(m_sourceModelHandle);
         m_pPlayer->Create();
@@ -87,64 +87,64 @@ void PlayerManager::Create(PLAYER_INFO _playerInfo)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void PlayerManager::Release()
 {
-	//	ƒvƒŒƒCƒ„[‚Ì‰ğ•ú
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£æ”¾
 	CommonSafe::Release(m_pPlayer);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void PlayerManager::Update()
 {
-    //	ƒvƒŒƒCƒ„[‚ÌXV
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ›´æ–°
     m_pPlayer->Update();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void PlayerManager::Update(Pad& _pad, ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gauge)
 {
-    //	ƒNƒŠƒA‚µ‚½‚Æ‚«‚ÍˆÚ“®’â~
+    //	ã‚¯ãƒªã‚¢ã—ãŸã¨ãã¯ç§»å‹•åœæ­¢
     if (m_isClear)
     {
         m_pPlayer->SetIsStopMove(m_isClear);
     }
 
-    //	ƒNƒŠƒAó‹µ‚ğƒŠƒUƒ‹ƒg‚Öˆø‚«“n‚·
+    //	ã‚¯ãƒªã‚¢çŠ¶æ³ã‚’ãƒªã‚¶ãƒ«ãƒˆã¸å¼•ãæ¸¡ã™
     HAND_OVER_RESULT->SetIsClear(m_isClear);
 
-    //	ƒvƒŒƒCƒ„[‚ÌXV
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ›´æ–°
     m_pPlayer->Update(_pad, _shot, _stayShot, _soundEffect, _gauge);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void PlayerManager::Update(ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gauge, EnemyManager& _enemyManager)
 {
-    //	ƒvƒŒƒCƒ„[‚ÌXV
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ›´æ–°
     m_pPlayer->Update(_shot, _stayShot, _soundEffect, _gauge, _enemyManager);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void PlayerManager::Draw()
 {
-	//	ƒvƒŒƒCƒ„[‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æç”»
 	m_pPlayer->Draw();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void PlayerManager::_FinalRelease()
 {
-	//	ƒvƒŒƒCƒ„[‚Ì‰ğ•ú
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£æ”¾
 	CommonSafe::Release(m_pPlayer);
 }

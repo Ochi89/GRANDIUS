@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	HitChecker.h
-//	@brief	ƒqƒbƒgƒ`ƒFƒbƒJ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ’ãƒƒãƒˆãƒã‚§ãƒƒã‚«ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/13
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class PlayerManager;
 class EnemyManager;
@@ -34,132 +34,132 @@ class UIGauge;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒqƒbƒgƒ`ƒFƒbƒJ[ƒNƒ‰ƒX
+//	@brief	ãƒ’ãƒƒãƒˆãƒã‚§ãƒƒã‚«ãƒ¼ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class HitChecker final
 {
 public:
 
-//==================== —ñ‹“‘Ì =====================//
+//==================== åˆ—æŒ™ä½“ =====================//
 
-	//	“–‚½‚è”»’è‚Ìí—Ş
+	//	å½“ãŸã‚Šåˆ¤å®šã®ç¨®é¡
 	enum HIT_CHECKER_KIND
 	{
 		CIRCLE,
 		RECT,
 	};
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerToEnemy(PlayerManager& _playerManager, EnemyManager& _enemyManager, ItemManager& _itemManager);
 
-	//	ƒvƒŒƒCƒ„[‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerToMediumBoss(PlayerManager& _playerManager, BossManager& _bossManager);
 
-	//	ƒvƒŒƒCƒ„[‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerToLastBoss(PlayerManager& _playerManager, BossManager& _bossManager);
 
 
-	//	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì’e‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å¼¾ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerToEnemyShot(PlayerManager& _playerManager, ShotManager& _shotManager);
 
 
-	//	ƒvƒŒƒCƒ„[’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerShotToEnemy(ShotManager& _shotManager, EnemyManager& _enemyManager, ItemManager& _itemManager, UIGauge& _gaugeUI);
 
-	//	ƒvƒŒƒCƒ„[’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerShotToMediumBoss(ShotManager& _shotManager, BossManager& _bossManager, UIGauge& _gaugeUI);
 
-	//	ƒvƒŒƒCƒ„[’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerShotToLastBoss(PlayerManager& _playerManager, ShotManager& _shotManager, BossManager& _bossManager, UIGauge& _gaugeUI);
 	
 
-	//	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerStayShotToEnemy(StayShotManager& _stayShotManager, EnemyManager& _enemyManager, ItemManager& _itemManager, UIGauge& _gaugeUI);
 
-	//	ƒvƒŒƒCƒ„[‘Øİ’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerStayShotToMediumBoss(StayShotManager& _stayShotManager, BossManager& _bossManager, UIGauge& _gaugeUI);
 
-	//	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerStayShotToLastBoss(PlayerManager& _playerManager, StayShotManager& _stayShotManager, BossManager& _bossManager, UIGauge& _gaugeUI);
 
 
-	//	ƒvƒŒƒCƒ„[‚ÆƒAƒCƒeƒ€‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¢ã‚¤ãƒ†ãƒ ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerToItem(PlayerManager& _playerManager, ItemManager& _itemManager, SoundEffect& _soundEffect, UIGauge& _gaugeUI);
 
 
-	//	ƒvƒŒƒCƒ„[‚Ì•KE‹Z‚Æ‚·‚×‚Ä‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¿…æ®ºæŠ€ã¨ã™ã¹ã¦ã®å½“ãŸã‚Šåˆ¤å®š
 	static void PlayerSpecialAttackToAllObject(PlayerManager& _playerManager, EnemyManager& _enemyManager, BossManager& _bossManager, ShotManager& _shotManager, ItemManager& _itemManager);
 
 
 	//=============================================================================
-	//	@brief	ˆÈ‰ºAƒfƒoƒbƒO—p‚Ì“–‚½‚è”»’è‚Ì•`‰æŠÖ”
+	//	@brief	ä»¥ä¸‹ã€ãƒ‡ãƒãƒƒã‚°ç”¨ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»é–¢æ•°
 	//=============================================================================
 
 
-	//	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerToEnemyOfDraw(PlayerManager& _playerManager, EnemyManager& _enemyManager);
 
-	//	ƒvƒŒƒCƒ„[‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerToMediumBossOfDraw(PlayerManager& _playerManager, BossManager& _bossManager);
 
-	//	ƒvƒŒƒCƒ„[‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerToLastBossOfDraw(PlayerManager& _playerManager, BossManager& _bossManager);
 
 
-	//	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì’e‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å¼¾ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerToEnemyShotOfDraw(PlayerManager& _playerManager, ShotManager& _shotManager);
 
 
-	//	ƒvƒŒƒCƒ„[‚Ì’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerShotToEnemyOfDraw(ShotManager& _shotManager, EnemyManager& _enemyManager);
 
-	//	ƒvƒŒƒCƒ„[‚Ì’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerShotToMediumBossOfDraw(ShotManager& _shotManager, BossManager& _bossManager);
 
-	//	ƒvƒŒƒCƒ„[’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerShotToLastBossOfDraw(ShotManager& _shotManager, BossManager& _bossManager);
 
 
-	//	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerStayShotToEnemyOfDraw(StayShotManager& _stayShotManager, EnemyManager& _enemyManager);
 
-	//	ƒvƒŒƒCƒ„[‘Øİ’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerStayShotToMediumBossOfDraw(StayShotManager& _stayShotManager, BossManager& _bossManager);
 
-	//	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerStayShotToLastBossOfDraw(StayShotManager& _stayShotManager, BossManager& _bossManager);
 
 
-	//	ƒvƒŒƒCƒ„[‚ÆƒAƒCƒeƒ€‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¢ã‚¤ãƒ†ãƒ ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerToItemOfDraw(PlayerManager& _playerManager, ItemManager& _item);
 
 
-	//	ƒvƒŒƒCƒ„[‚Ì•KE‹Z‚Æ‚·‚×‚Ä‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¿…æ®ºæŠ€ã¨ã™ã¹ã¦ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void PlayerSpecialAttackToAllObjectOfDraw(PlayerManager& _playerManager, EnemyManager& _enemyManager, BossManager& _bossManager);
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒIƒuƒWƒFƒNƒgŠÔ‚Ì‹——£‚ğ‘ª‚é
+	//	ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆé–“ã®è·é›¢ã‚’æ¸¬ã‚‹
 	static bool _AskObjectLenght(const VECTOR _pos1, const VECTOR _pos2);
 
-	//	‰~Œ`‚Ì“–‚½‚è”»’è
+	//	å††å½¢ã®å½“ãŸã‚Šåˆ¤å®š
 	static bool _CircleHitCheck(Circle _target1, Circle _target2);
 
-	//	‹éŒ`‚Ì“–‚½‚è”»’è
+	//	çŸ©å½¢ã®å½“ãŸã‚Šåˆ¤å®š
 	static bool _BoxHitCheck(Rect _target1, Rect _target2);
 
-	//	‰~Œ`‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	å††å½¢ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void _CircleHitCheckOfDraw(Circle _target1, Circle _target2);
 
-	//	‹éŒ`‚Ì“–‚½‚è”»’è‚Ì•`‰æ
+	//	çŸ©å½¢ã®å½“ãŸã‚Šåˆ¤å®šã®æç”»
 	static void _BoxHitCheckOfDraw(Rect _target1, Rect _target2);
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float ACTIVE_LENGHT;			//	“–‚½‚è”»’è‚Ì—LŒø‹——£
+	static const float ACTIVE_LENGHT;			//	å½“ãŸã‚Šåˆ¤å®šã®æœ‰åŠ¹è·é›¢
 
 };

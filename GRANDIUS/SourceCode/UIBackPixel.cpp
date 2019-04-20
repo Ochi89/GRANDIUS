@@ -1,130 +1,130 @@
-
+﻿
 //=============================================================================
 //	@file	UIBackPixel.h
-//	@brief	�w�i�s�N�Z��UI
-//	@autor	���m ���
+//	@brief	背景ピクセルUI
+//	@autor	相知 拓弥
 //	@date	2018/1/15
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	�C���N���[�h
+//	@brief	インクルード
 //-----------------------------------------------------------------------------
 #include "UIBackPixel.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	�ÓI�萔
+//	@brief	静的定数
 //-----------------------------------------------------------------------------
-const float		UIBackPixel::MIN_RADIUS_SIZE = 0.1f;					//	���a�T�C�Y�̍ŏ�
-const float		UIBackPixel::MAX_RADIUS_SIZE = 0.2f;					//	���a�T�C�Y�̍ő�
-const float		UIBackPixel::MIN_SPEED = 0.1f;							//	X���W�̍ŏ�
-const float		UIBackPixel::MAX_SPEED = 0.2f;							//	X���W�̍ő�
-const VECTOR	UIBackPixel::START_POSTION = VGet(-120.0f, 0.0f, 0.0f);	//	X���W�̊J�n�ʒu
-const VECTOR	UIBackPixel::MIN_POSTION = VGet(120.0f, 120.0f, 0.0f);	//	X���W�̍ŏ�
-const VECTOR	UIBackPixel::MAX_POSTION = VGet(140.0f, 140.0f, 0.0f);	//	X���W�̍ő�
+const float		UIBackPixel::MIN_RADIUS_SIZE = 0.1f;					//	半径サイズの最小
+const float		UIBackPixel::MAX_RADIUS_SIZE = 0.2f;					//	半径サイズの最大
+const float		UIBackPixel::MIN_SPEED = 0.1f;							//	X座標の最小
+const float		UIBackPixel::MAX_SPEED = 0.2f;							//	X座標の最大
+const VECTOR	UIBackPixel::START_POSTION = VGet(-120.0f, 0.0f, 0.0f);	//	X座標の開始位置
+const VECTOR	UIBackPixel::MIN_POSTION = VGet(120.0f, 120.0f, 0.0f);	//	X座標の最小
+const VECTOR	UIBackPixel::MAX_POSTION = VGet(140.0f, 140.0f, 0.0f);	//	X座標の最大
 
 //-----------------------------------------------------------------------------
-//	@brief	�R���X�g���N�^
+//	@brief	コンストラクタ
 //-----------------------------------------------------------------------------
 UIBackPixel::UIBackPixel()
 {
-	//	�J�n���̐ݒ�
+	//	開始時の設定
 	for (int i = 0; i < CommonConstant::MAX_BACK_PIXEL_NUM; i++)
 	{
-		//	���S�ʒu
+		//	中心位置
 		m_backPixel[i].m_centerPoint.x = CommonFunction::GetRand(START_POSTION.x, MIN_POSTION.x);
 		m_backPixel[i].m_centerPoint.y = CommonFunction::GetRand(START_POSTION.y, MIN_POSTION.y);
 		m_backPixel[i].m_centerPoint.z = 0.0f;
 
-		//	���a
+		//	半径
 		m_backPixel[i].m_radius = CommonFunction::GetRand(MIN_RADIUS_SIZE, MAX_RADIUS_SIZE);
 
-		//	���x
+		//	速度
 		m_backPixel[i].m_speed = CommonFunction::GetRand(MIN_SPEED, MAX_SPEED);
 
-		//	�g�p��
+		//	使用中
 		m_backPixel[i].m_isInUse = true;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�f�X�g���N�^
+//	@brief	デストラクタ
 //-----------------------------------------------------------------------------
 UIBackPixel::~UIBackPixel()
 {
-	//	�����Ȃ�
+	//	処理なし
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�X�V����
+//	@brief	更新処理
 //-----------------------------------------------------------------------------
 void UIBackPixel::Update()
 {
-	//	�_�̍쐬����
+	//	点の作成処理
 	_CreateBackPixel();
 
-	//	�_�̍X�V����
+	//	点の更新処理
 	_UpdateBackPixel();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�`�揈��
+//	@brief	描画処理
 //-----------------------------------------------------------------------------
 void UIBackPixel::Draw()
 {
-	//	�_�̕`�揈��
+	//	点の描画処理
 	_DrawBackPixel();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�_�̐�������
+//	@brief	点の生成処理
 //-----------------------------------------------------------------------------
 void UIBackPixel::_CreateBackPixel()
 {
 	for (int i = 0; i < CommonConstant::MAX_BACK_PIXEL_NUM; i++)
 	{
-		//	�_�̎g�p�󋵂͖��g�p�̂Ƃ�
+		//	点の使用状況は未使用のとき
 		const bool isBackPixelUnused = !m_backPixel[i].m_isInUse;
 		if (isBackPixelUnused)
 		{
-			//	��̓_�̐���
+			//	一つの点の生成
 
-			//	���S�ʒu
+			//	中心位置
 			m_backPixel[i].m_centerPoint.x = CommonFunction::GetRand(MIN_POSTION.x, MAX_POSTION.x);
 			m_backPixel[i].m_centerPoint.y = CommonFunction::GetRand(START_POSTION.y, MAX_POSTION.y);
 			m_backPixel[i].m_centerPoint.z = 0.0f;
 
-			//	���a
+			//	半径
 			m_backPixel[i].m_radius = CommonFunction::GetRand(MIN_RADIUS_SIZE, MAX_RADIUS_SIZE);
 
-			//	���x
+			//	速度
 			m_backPixel[i].m_speed = CommonFunction::GetRand(MIN_SPEED, MAX_SPEED);
 
-			//	�g�p��
+			//	使用中
 			m_backPixel[i].m_isInUse = true;
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�_�̍X�V����
+//	@brief	点の更新処理
 //-----------------------------------------------------------------------------
 void UIBackPixel::_UpdateBackPixel()
 {
-	//	���o���ȊO
+	//	演出時以外
 	const bool isNotProduction = !PRODUCTION->GetIsSpecialProduction() || !PRODUCTION->GetIsSceneProduction() || !PRODUCTION->GetIsClearProduction();
 	if (isNotProduction)
 	{
 		for (int i = 0; i < CommonConstant::MAX_BACK_PIXEL_NUM; i++)
 		{
-			//	�_�̎g�p�󋵂͎g�p���̂Ƃ�
+			//	点の使用状況は使用中のとき
 			const bool isBackPixelUse = m_backPixel[i].m_isInUse;
 			if (isBackPixelUse)
 			{
-				//	�ړ�����
+				//	移動処理
 				m_backPixel[i].m_centerPoint.x -= m_backPixel[i].m_speed;
 				m_backPixel[i].m_centerPoint.z = 0.0f;
 
-				//	�͈͊O����
+				//	範囲外処理
 				const bool isMinXVal = m_backPixel[i].m_centerPoint.x <= START_POSTION.x;
 				const bool isMinYVal = m_backPixel[i].m_centerPoint.y <= START_POSTION.y;
 				const bool isMinVal = isMinXVal || isMinYVal;
@@ -135,17 +135,17 @@ void UIBackPixel::_UpdateBackPixel()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	�_�̕`�揈��
+//	@brief	点の描画処理
 //-----------------------------------------------------------------------------
 void UIBackPixel::_DrawBackPixel()
 {
-	//	���o���ȊO
+	//	演出時以外
 	const bool isNotProduction = !PRODUCTION->GetIsSpecialProduction() && !PRODUCTION->GetIsSceneProduction() && !PRODUCTION->GetIsClearProduction();
 	if (isNotProduction)
 	{
 		for (int i = 0; i < CommonConstant::MAX_BACK_PIXEL_NUM; i++)
 		{
-			//	�_�̎g�p�󋵂͎g�p���̂Ƃ�
+			//	点の使用状況は使用中のとき
 			const bool isBackPixelUse = m_backPixel[i].m_isInUse;
 			if (isBackPixelUse)
 			{

@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	StayShot.cpp
-//	@brief	‘Øİ’e‚Ğ‚Æ‚Â•ª‚Ìˆ—
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	æ»åœ¨å¼¾ã²ã¨ã¤åˆ†ã®å‡¦ç†
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/25
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "StayShot.h"
 #include "Common.h"
@@ -15,24 +15,24 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const VECTOR	StayShot::MOVE_DIR = VGet(1.0f, 0.0f, 0.0f);			//	ˆÚ“®Œü‚«
-const float		StayShot::MOVE_SPEED = 0.5f;							//	ˆÚ“®‘¬“x
-const float		StayShot::MOVE_HIT_RADIUS = 2.0f;						//	ˆÚ“®’†‚Ì“–‚½‚è”»’è—p‚Ì”¼Œa
-const float		StayShot::STAY_HIT_RADIUS = 5.0f;						//	‘Øİ’†‚Ì“–‚½‚è”»’è—p‚Ì”¼Œa
-const float		StayShot::MIN_HIT_RADIUS = 0.1f;						//	“–‚½‚è”»’è—p‚ÌÅ¬”¼Œa
-const float		StayShot::MAX_STAY_TIME = 80.0f;						//	‘Øİ’†‚ÌŠÔ‚ÌÅ‘å
-const float		StayShot::EFFECT_SCALE = 0.01f;							//	ƒGƒtƒFƒNƒg‚ÌŠg‘å‘¬“x
-const float		StayShot::MAX_X_POS = 110.0f;							//	XÀ•W‚ÌÅ‘å
-const VECTOR	StayShot::ADJUSTMENT_RECT = VGet(2.0f, 2.0f, 2.0f);		//	“–‚½‚è”»’è’²®—p
+const VECTOR	StayShot::MOVE_DIR = VGet(1.0f, 0.0f, 0.0f);			//	ç§»å‹•å‘ã
+const float		StayShot::MOVE_SPEED = 0.5f;							//	ç§»å‹•é€Ÿåº¦
+const float		StayShot::MOVE_HIT_RADIUS = 2.0f;						//	ç§»å‹•ä¸­ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+const float		StayShot::STAY_HIT_RADIUS = 5.0f;						//	æ»åœ¨ä¸­ã®å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+const float		StayShot::MIN_HIT_RADIUS = 0.1f;						//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æœ€å°åŠå¾„
+const float		StayShot::MAX_STAY_TIME = 80.0f;						//	æ»åœ¨ä¸­ã®æ™‚é–“ã®æœ€å¤§
+const float		StayShot::EFFECT_SCALE = 0.01f;							//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ‹¡å¤§é€Ÿåº¦
+const float		StayShot::MAX_X_POS = 110.0f;							//	Xåº§æ¨™ã®æœ€å¤§
+const VECTOR	StayShot::ADJUSTMENT_RECT = VGet(2.0f, 2.0f, 2.0f);		//	å½“ãŸã‚Šåˆ¤å®šèª¿æ•´ç”¨
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 StayShot::StayShot()
 {
-	//	Še•Ï”‚Ì‰Šú‰»
+	//	å„å¤‰æ•°ã®åˆæœŸåŒ–
 	m_pos = CommonConstant::ORIGIN;
 	m_isOneTime = false;
 	m_isChangeStay = false;
@@ -41,33 +41,33 @@ StayShot::StayShot()
 	m_isMoveShotSeStart = false;
 	m_isStayShotSeStart = false;
 
-	//	“–‚½‚è”»’è—p‚Ì\‘¢‘Ì‚Ì‰Šú‰»
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ§‹é€ ä½“ã®åˆæœŸåŒ–
 	m_hitCircle.m_radius = MOVE_HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
 	m_hitRect.m_vertexTop = CommonConstant::ORIGIN;
 	m_hitRect.m_vertexUnder = CommonConstant::ORIGIN;
 
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
 	m_effectMove = NULL;
 	m_effectStay = NULL;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 StayShot::~StayShot()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShot::Initialize()
 {
-	//	Še•Ï”‚Ì‰Šú‰»
+	//	å„å¤‰æ•°ã®åˆæœŸåŒ–
 	m_pos = CommonConstant::ORIGIN;
 	m_isOneTime = false;
 	m_isChangeStay = false;
@@ -76,48 +76,48 @@ void StayShot::Initialize()
 	m_isMoveShotSeStart = false;
 	m_isStayShotSeStart = false;
 
-	//	“–‚½‚è”»’è—p‚Ì\‘¢‘Ì‚Ì‰Šú‰»
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ§‹é€ ä½“ã®åˆæœŸåŒ–
 	m_hitCircle.m_radius = MOVE_HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
 	m_hitRect.m_vertexTop = CommonConstant::ORIGIN;
 	m_hitRect.m_vertexUnder = CommonConstant::ORIGIN;
 
-	//	ƒGƒtƒFƒNƒg‚Ì“Ç‚İ‚İ
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®èª­ã¿è¾¼ã¿
 	m_effectMove = new EffekseerEmitter("Data/Effect/Player/StayShot/Move/Move.efk");
 	m_effectStay = new EffekseerEmitter("Data/Effect/Player/StayShot/Stay/Stay.efk");
 	m_effectScale = 1.0f;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShot::Update(SoundEffect& _soundEffect)
 {
 	if (m_isChangeStay)
 	{
-		//	‘Øİˆ—
+		//	æ»åœ¨å‡¦ç†
 		_Stay(_soundEffect);
 	}
 	else
 	{
-		//	ˆÚ“®ˆ—
+		//	ç§»å‹•å‡¦ç†
 		_Move(_soundEffect);
 	}
 
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV‚·‚é
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°ã™ã‚‹
 	_UpdateHitPoint();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆÚ“®ˆ—
+//	@brief	ç§»å‹•å‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShot::_Move(SoundEffect& _soundEffect)
 {
 	//	SE
 	if (!m_isMoveShotSeStart) { _soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_MOVE_SHOT); m_isMoveShotSeStart = true; }
 
-	//	ˆÚ“®
+	//	ç§»å‹•
 	VECTOR velocity = VScale(MOVE_DIR, MOVE_SPEED);
 	m_pos = VAdd(m_pos, velocity);
 
@@ -125,7 +125,7 @@ void StayShot::_Move(SoundEffect& _soundEffect)
 	m_effectMove->SetPlaySpeed(2.0f);
 	m_effectMove->OnPlayEffect();
 
-	//	”ÍˆÍŠO‚Éo‚½‚çAƒGƒtƒFƒNƒg‚ğÁ‚·
+	//	ç¯„å›²å¤–ã«å‡ºãŸã‚‰ã€ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã‚’æ¶ˆã™
 	const bool isArrivalRight = m_pos.x >= MAX_X_POS;
 	if (isArrivalRight) { m_effectMove->OnEndEffect(); }
 
@@ -133,7 +133,7 @@ void StayShot::_Move(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘Øİˆ—
+//	@brief	æ»åœ¨å‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShot::_Stay(SoundEffect& _soundEffect)
 {
@@ -148,15 +148,15 @@ void StayShot::_Stay(SoundEffect& _soundEffect)
 
 		m_stayTime++;
 
-		//	‚»‚Ìê‚É‘Øİ‚·‚é
+		//	ãã®å ´ã«æ»åœ¨ã™ã‚‹
 		const bool isStay = m_stayTime <= MAX_STAY_TIME;
 		if (isStay)
 		{
-			//	“–‚½‚è”»’è‚ğ‘å‚«‚­‚·‚é
+			//	å½“ãŸã‚Šåˆ¤å®šã‚’å¤§ããã™ã‚‹
 			const float lerpSpeed = 0.5f;
 			m_hitCircle.m_radius = CommonFunction::Lerp(m_hitCircle.m_radius, STAY_HIT_RADIUS, lerpSpeed);
 
-			//	ƒGƒtƒFƒNƒg
+			//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 			m_effectScale += EFFECT_SCALE;
 			m_effectStay->SetPos(m_pos);
 			m_effectStay->SetPlaySpeed(1.5f);
@@ -165,21 +165,21 @@ void StayShot::_Stay(SoundEffect& _soundEffect)
 			m_effectMove->OnEndEffect();
 		}
 
-		//	“–‚½‚è”»’è‚ğ‚¾‚ñ‚¾‚ñ¬‚³‚­‚·‚é
+		//	å½“ãŸã‚Šåˆ¤å®šã‚’ã ã‚“ã ã‚“å°ã•ãã™ã‚‹
 		const bool isStayEnd = m_stayTime >= MAX_STAY_TIME;
 		if (isStayEnd)
 		{
-			//	“–‚½‚è”»’è‚ğ¬‚³‚­‚·‚é
+			//	å½“ãŸã‚Šåˆ¤å®šã‚’å°ã•ãã™ã‚‹
 			const float lerpSpeed = 0.1f;
 			m_hitCircle.m_radius = CommonFunction::Lerp(m_hitCircle.m_radius, 0.0f, lerpSpeed);
 
-			//	ƒGƒtƒFƒNƒg
+			//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 			m_effectScale -= EFFECT_SCALE;
 			m_effectStay->SetScale(VGet(m_effectScale, m_effectScale, m_effectScale));
 		}
 
-		//	“–‚½‚è”»’è‚ªˆê’è”‚æ‚è¬‚³‚­‚È‚Á‚½‚çA
-		//	ƒVƒ‡ƒbƒg‚ğI—¹‚³‚¹‚é
+		//	å½“ãŸã‚Šåˆ¤å®šãŒä¸€å®šæ•°ã‚ˆã‚Šå°ã•ããªã£ãŸã‚‰ã€
+		//	ã‚·ãƒ§ãƒƒãƒˆã‚’çµ‚äº†ã•ã›ã‚‹
 		const bool isShotEnd = m_hitCircle.m_radius <= MIN_HIT_RADIUS;
 		if (isShotEnd) { m_isShotEnd = true; m_effectStay->OnEndEffect(); }
 
@@ -188,11 +188,11 @@ void StayShot::_Stay(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+//	@brief	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void StayShot::_UpdateHitPoint()
 {
-	//	“–‚½‚è”»’è—p‚Ì’†SÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ä¸­å¿ƒåº§æ¨™ã®æ›´æ–°
 	m_hitCircle.m_centerPoint = m_pos;
 
 	m_hitRect.m_vertexTop = VSub(m_pos, ADJUSTMENT_RECT);
@@ -200,11 +200,11 @@ void StayShot::_UpdateHitPoint()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShot::_FinalRelease()
 {
-	//	ƒGƒtƒFƒNƒg‚Ìíœ
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å‰Šé™¤
 	CommonSafe::Delete(m_effectMove);
 	CommonSafe::Delete(m_effectStay);
 }

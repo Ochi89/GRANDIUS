@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	Common.cpp
-//	@brief	‹¤’Ê
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	å…±é€š
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
@@ -18,13 +18,13 @@
 #include <cmath>
 
 //-----------------------------------------------------------------------------
-//	@brief	–¼‘O‹óŠÔ	[ŠÖ”]
+//	@brief	åå‰ç©ºé–“	[é–¢æ•°]
 //-----------------------------------------------------------------------------
 namespace CommonFunction
 {
 
 	//-----------------------------------------------------------------------------
-	//	@brief	ƒ‰ƒVƒAƒ“‚ğ“x‚É•ÏŠ·‚·‚é
+	//	@brief	ãƒ©ã‚·ã‚¢ãƒ³ã‚’åº¦ã«å¤‰æ›ã™ã‚‹
 	//-----------------------------------------------------------------------------
 	float RadToDeg(float _rad) { return _rad * (180 / CommonConstant::PI); }
 	VECTOR RadToDeg(VECTOR _rad)
@@ -37,7 +37,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	“x‚ğƒ‰ƒWƒAƒ“‚É•ÏŠ·‚·‚é
+	//	@brief	åº¦ã‚’ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›ã™ã‚‹
 	//-----------------------------------------------------------------------------
 	float DegToRad(float _deg) { return _deg * (CommonConstant::PI / 180); }
 	VECTOR DegToRad(VECTOR _rad)
@@ -50,17 +50,17 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	ƒOƒŠƒbƒh‚Ìì¬
+	//	@brief	ã‚°ãƒªãƒƒãƒ‰ã®ä½œæˆ
 	//-----------------------------------------------------------------------------
 	void CreateGrid()
 	{
-		//	ˆÊ’uŠÖŒW‚ª•ª‚©‚é‚æ‚¤‚É’n–Ê‚Éƒ‰ƒCƒ“‚ğ•`‰æ‚·‚é
+		//	ä½ç½®é–¢ä¿‚ãŒåˆ†ã‹ã‚‹ã‚ˆã†ã«åœ°é¢ã«ãƒ©ã‚¤ãƒ³ã‚’æç”»ã™ã‚‹
 		VECTOR Pos1;
 		VECTOR Pos2;
 
 		SetUseZBufferFlag(TRUE);
 
-		//	x²
+		//	xè»¸
 		Pos1 = VGet(-CommonConstant::LINE_AREA_SIZE / 2.0f, 0.0f, -CommonConstant::LINE_AREA_SIZE / 2.0f);
 		Pos2 = VGet(-CommonConstant::LINE_AREA_SIZE / 2.0f, 0.0f, CommonConstant::LINE_AREA_SIZE / 2.0f);
 		for (int i = 0; i <= CommonConstant::LINE_NUM; i++)
@@ -70,7 +70,7 @@ namespace CommonFunction
 			Pos2.x += CommonConstant::LINE_AREA_SIZE / CommonConstant::LINE_NUM;
 		}
 
-		//	z²
+		//	zè»¸
 		Pos1 = VGet(-CommonConstant::LINE_AREA_SIZE / 2.0f, 0.0f, -CommonConstant::LINE_AREA_SIZE / 2.0f);
 		Pos2 = VGet(CommonConstant::LINE_AREA_SIZE / 2.0f, 0.0f, -CommonConstant::LINE_AREA_SIZE / 2.0f);
 		for (int i = 0; i < CommonConstant::LINE_NUM; i++)
@@ -84,57 +84,57 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	w’è”ÍˆÍ‚Ì—”‚ğæ“¾i®”j
+	//	@brief	æŒ‡å®šç¯„å›²ã®ä¹±æ•°ã‚’å–å¾—ï¼ˆæ•´æ•°ï¼‰
 	//-----------------------------------------------------------------------------
 	int GetRand(const int _min, const int _max)
 	{
-		//	‘å¬‚ª‹t‚Ì‚Æ‚«
+		//	å¤§å°ãŒé€†ã®ã¨ã
 		if (_min > _max)
 		{
 			int tmpMin = _max;
 			int tmpMax = _min;
 
-			std::random_device randDevice;								//	”ñŒˆ’è“I‚È—”¶¬Ší‚ğ¶¬
-			std::mt19937 mt(randDevice());								//	ˆø”‚Í‰ŠúƒV[ƒh’l
-			std::uniform_int_distribution<int> rand(tmpMin, tmpMax);	//	[tmpMin, tmpMax] ”ÍˆÍ‚Ìˆê—l—”
+			std::random_device randDevice;								//	éæ±ºå®šçš„ãªä¹±æ•°ç”Ÿæˆå™¨ã‚’ç”Ÿæˆ
+			std::mt19937 mt(randDevice());								//	å¼•æ•°ã¯åˆæœŸã‚·ãƒ¼ãƒ‰å€¤
+			std::uniform_int_distribution<int> rand(tmpMin, tmpMax);	//	[tmpMin, tmpMax] ç¯„å›²ã®ä¸€æ§˜ä¹±æ•°
 
 			return rand(mt);
 		}
 
-		std::random_device randDevice;								//	”ñŒˆ’è“I‚È—”¶¬Ší‚ğ¶¬
-		std::mt19937 mt(randDevice());								//	ˆø”‚Í‰ŠúƒV[ƒh’l
-		std::uniform_int_distribution<int> rand(_min, _max);		//	[_min, _max] ”ÍˆÍ‚Ìˆê—l—”
+		std::random_device randDevice;								//	éæ±ºå®šçš„ãªä¹±æ•°ç”Ÿæˆå™¨ã‚’ç”Ÿæˆ
+		std::mt19937 mt(randDevice());								//	å¼•æ•°ã¯åˆæœŸã‚·ãƒ¼ãƒ‰å€¤
+		std::uniform_int_distribution<int> rand(_min, _max);		//	[_min, _max] ç¯„å›²ã®ä¸€æ§˜ä¹±æ•°
 
 		return rand(mt);
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	w’è”ÍˆÍ‚Ì—”‚ğæ“¾i•‚“®¬”j
+	//	@brief	æŒ‡å®šç¯„å›²ã®ä¹±æ•°ã‚’å–å¾—ï¼ˆæµ®å‹•å°æ•°ï¼‰
 	//-----------------------------------------------------------------------------
 	float GetRand(const float _min, const float _max)
 	{
-		//	‘å¬‚ª‹t‚Ì‚Æ‚«
+		//	å¤§å°ãŒé€†ã®ã¨ã
 		if (_min > _max)
 		{
 			float tmpMin = _max;
 			float tmpMax = _min;
 
-			std::random_device randDevice;								//	”ñŒˆ’è“I‚È—”¶¬Ší‚ğ¶¬
-			std::mt19937 mt(randDevice());								//	ˆø”‚Í‰ŠúƒV[ƒh’l
-			std::uniform_real_distribution<float> rand(tmpMin, tmpMax);	//	[tmpMin, tmpMax] ”ÍˆÍ‚Ìˆê—l—”
+			std::random_device randDevice;								//	éæ±ºå®šçš„ãªä¹±æ•°ç”Ÿæˆå™¨ã‚’ç”Ÿæˆ
+			std::mt19937 mt(randDevice());								//	å¼•æ•°ã¯åˆæœŸã‚·ãƒ¼ãƒ‰å€¤
+			std::uniform_real_distribution<float> rand(tmpMin, tmpMax);	//	[tmpMin, tmpMax] ç¯„å›²ã®ä¸€æ§˜ä¹±æ•°
 
 			return rand(mt);
 		}
 
-		std::random_device randDevice;									//	”ñŒˆ’è“I‚È—”¶¬Ší‚ğ¶¬
-		std::mt19937 mt(randDevice());									//	ˆø”‚Í‰ŠúƒV[ƒh’l
-		std::uniform_real_distribution<float> rand(_min, _max);			//	[_min, _max] ”ÍˆÍ‚Ìˆê—l—”
+		std::random_device randDevice;									//	éæ±ºå®šçš„ãªä¹±æ•°ç”Ÿæˆå™¨ã‚’ç”Ÿæˆ
+		std::mt19937 mt(randDevice());									//	å¼•æ•°ã¯åˆæœŸã‚·ãƒ¼ãƒ‰å€¤
+		std::uniform_real_distribution<float> rand(_min, _max);			//	[_min, _max] ç¯„å›²ã®ä¸€æ§˜ä¹±æ•°
 
 		return rand(mt);
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	w’è”ÍˆÍ‚Ì—”‚ğæ“¾iƒxƒNƒgƒ‹j
+	//	@brief	æŒ‡å®šç¯„å›²ã®ä¹±æ•°ã‚’å–å¾—ï¼ˆãƒ™ã‚¯ãƒˆãƒ«ï¼‰
 	//-----------------------------------------------------------------------------
 	VECTOR GetRand(const VECTOR _min, const VECTOR _max)
 	{
@@ -148,11 +148,11 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	üŒ`•âŠÔ
+	//	@brief	ç·šå½¢è£œé–“
 	//-----------------------------------------------------------------------------
 	float Lerp(const float _a, const float _b, const float _t, const float _ignoreVal)
 	{
-		//	Œë·
+		//	èª¤å·®
 		const float tmpVal = _b - _a;
 		const bool isIgnore = std::abs(tmpVal) <= _ignoreVal;
 		if (isIgnore)
@@ -164,7 +164,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	üŒ`•âŠÔ
+	//	@brief	ç·šå½¢è£œé–“
 	//-----------------------------------------------------------------------------
 	VECTOR Lerp(const VECTOR _a, const VECTOR _b, const float _t, const float _ignoreVal)
 	{
@@ -178,16 +178,16 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	F‚Ì‰ÁZ
+	//	@brief	è‰²ã®åŠ ç®—
 	//-----------------------------------------------------------------------------
 	COLOR_F AddColor(COLOR_F _a, COLOR_F _b, float _t)
 	{
 		COLOR_F tmp;
 
-		tmp.r = _a.r += _t;;		//	Ô
-		tmp.g = _a.g += _t;;		//	—Î
-		tmp.b = _a.b += _t;;		//	Â
-		tmp.a = _a.a += _t;;		//	ƒAƒ‹ƒtƒ@’l
+		tmp.r = _a.r += _t;;		//	èµ¤
+		tmp.g = _a.g += _t;;		//	ç·‘
+		tmp.b = _a.b += _t;;		//	é’
+		tmp.a = _a.a += _t;;		//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤
 
 		if (tmp.r >= _b.r) { tmp.r = _b.r; }
 		if (tmp.g >= _b.g) { tmp.g = _b.g; }
@@ -198,7 +198,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	üŒ`•âŠÔ
+	//	@brief	ç·šå½¢è£œé–“
 	//-----------------------------------------------------------------------------
 	float LerpRadian(float _a, float _b, float _t)
 	{
@@ -226,7 +226,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	“ñ‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠp“x‚ğ•Ô‚·
+	//	@brief	äºŒã¤ã®ãƒ™ã‚¯ãƒˆãƒ«ã®è§’åº¦ã‚’è¿”ã™
 	//-----------------------------------------------------------------------------
 	float Vec2Radian(const VECTOR _base, const VECTOR _dir)
 	{
@@ -235,21 +235,21 @@ namespace CommonFunction
 		base = _base;
 		dir = _dir;
 
-		//	Šî€•ûŒüƒxƒNƒgƒ‹‚©‚ç‚ÌŠp“x‚ğ‹‚ß‚é
+		//	åŸºæº–æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 		float dot;
 		float angle;
 		VNorm(base);
 		VNorm(dir);
 
-		//	ƒx[ƒX‚ÆŒ»İ‚ÌŒü‚«‚©‚çAŠp“x‚ğæ‚é
+		//	ãƒ™ãƒ¼ã‚¹ã¨ç¾åœ¨ã®å‘ãã‹ã‚‰ã€è§’åº¦ã‚’å–ã‚‹
 		dot = VDot(base, dir);
 		angle = acosf(dot);
 
-		//	‰E‰ñ‚è‚©¶‰ñ‚è‚©H‚Å‰ñ“]•„†‚ğŒvZ
+		//	å³å›ã‚Šã‹å·¦å›ã‚Šã‹ï¼Ÿã§å›è»¢ç¬¦å·ã‚’è¨ˆç®—
 		VECTOR tmpDir;
 		tmpDir = VCross(base, dir);
 
-		//	¶Œü‚«‚©‚Ç‚¤‚©
+		//	å·¦å‘ãã‹ã©ã†ã‹
 		const bool isLeftDir = tmpDir.y < 0;
 		if (isLeftDir) { angle *= -1.0f; }
 
@@ -257,13 +257,13 @@ namespace CommonFunction
 	}
 
     //-----------------------------------------------------------------------------
-    //	@brief	ƒJƒƒ‰‚É‚æ‚é’²®
+    //	@brief	ã‚«ãƒ¡ãƒ©ã«ã‚ˆã‚‹èª¿æ•´
     //-----------------------------------------------------------------------------
     VECTOR AdjustmentByCamera(const VECTOR& _velocity, const Camera& _camera)
     {
         VECTOR tempMoveVector;
 
-        //  ƒJƒƒ‰‚ÌŠp“x‚É‡‚í‚¹‚ÄˆÚ“®ƒxƒNƒgƒ‹‚ğ‰ñ“]‚µ‚Ä‚©‚ç‰ÁZ
+        //  ã‚«ãƒ¡ãƒ©ã®è§’åº¦ã«åˆã‚ã›ã¦ç§»å‹•ãƒ™ã‚¯ãƒˆãƒ«ã‚’å›è»¢ã—ã¦ã‹ã‚‰åŠ ç®—
         float sinParam = sinf(CommonFunction::DegToRad(_camera.GetHorizontalAngle()));
         float cosParam = cosf(CommonFunction::DegToRad(_camera.GetHorizontalAngle()));
         tempMoveVector.x = _velocity.x * cosParam - _velocity.z * sinParam;
@@ -275,7 +275,7 @@ namespace CommonFunction
 
 
 	//-----------------------------------------------------------------------------
-	//	@brief	ƒxƒNƒgƒ‹‚Í”ÍˆÍ“à‚©
+	//	@brief	ãƒ™ã‚¯ãƒˆãƒ«ã¯ç¯„å›²å†…ã‹
 	//-----------------------------------------------------------------------------
 	bool VectorWithinRange(const VECTOR _vec1, const VECTOR _vec2, const float _range)
 	{
@@ -288,7 +288,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	ƒxƒNƒgƒ‹‚Í“™‚µ‚¢‚©
+	//	@brief	ãƒ™ã‚¯ãƒˆãƒ«ã¯ç­‰ã—ã„ã‹
 	//-----------------------------------------------------------------------------
 	bool VectorSame(const VECTOR _vec1, const VECTOR _vec2)
 	{
@@ -300,45 +300,45 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	Šp“x‚©‚çŒü‚«‚ğæ‚é
+	//	@brief	è§’åº¦ã‹ã‚‰å‘ãã‚’å–ã‚‹
 	//-----------------------------------------------------------------------------
 	VECTOR AskDirFromAngle(const float _angle)
 	{
 		VECTOR tmp = CommonConstant::ORIGIN;
 
-		//	sin, cos ‚ğg‚¢Šp“x‚©‚ç
-		//	x, y²‚ÌŒü‚«‚ğæ‚é
+		//	sin, cos ã‚’ä½¿ã„è§’åº¦ã‹ã‚‰
+		//	x, yè»¸ã®å‘ãã‚’å–ã‚‹
 		tmp.x = cosf(CommonFunction::DegToRad(_angle));
 		tmp.y = sinf(CommonFunction::DegToRad(_angle));
 
-		//	³‹K‰»
+		//	æ­£è¦åŒ–
 		if (VSquareSize(tmp) != 0) { tmp = VNorm(tmp); }
 
 		return tmp;
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	Œü‚«‚©‚çŠp“x‚ğæ‚é
+	//	@brief	å‘ãã‹ã‚‰è§’åº¦ã‚’å–ã‚‹
 	//-----------------------------------------------------------------------------
 	float AskAngleFromDir(const VECTOR _dir)
 	{
-		//	Šî€•ûŒüƒxƒNƒgƒ‹‚©‚ç‚ÌŠp“x‚ğ‹‚ß‚é
+		//	åŸºæº–æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 		VECTOR base = VGet(0.0f, 1.0f, 0.0f);
 		VECTOR dir = _dir;
 
-		//	³‹K‰»
+		//	æ­£è¦åŒ–
 		VNorm(dir);
 
-		//	ƒx[ƒX‚ÆŒ»İ‚ÌŒü‚«‚©‚çAŠp“x‚ğæ‚é
+		//	ãƒ™ãƒ¼ã‚¹ã¨ç¾åœ¨ã®å‘ãã‹ã‚‰ã€è§’åº¦ã‚’å–ã‚‹
 		float dot = VDot(base, dir);
 		float angle = acosf(dot);
 
-		//	‰ñ“]•„†‚ğŒvZ
+		//	å›è»¢ç¬¦å·ã‚’è¨ˆç®—
 		VECTOR tmpDir;
 		tmpDir = VCross(base, dir);
 
-		//	¶Œü‚«‚Ì‚Æ‚«‚ÍA
-		//	•„†”½“]
+		//	å·¦å‘ãã®ã¨ãã¯ã€
+		//	ç¬¦å·åè»¢
 		const bool isLeftDir = tmpDir.y < 0;
 		if (isLeftDir) { angle *= -1.0f; }
 
@@ -346,27 +346,27 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	Œü‚«‚©‚çƒ‰ƒWƒAƒ““x‚ğæ‚é
+	//	@brief	å‘ãã‹ã‚‰ãƒ©ã‚¸ã‚¢ãƒ³åº¦ã‚’å–ã‚‹
 	//-----------------------------------------------------------------------------
 	float AskRadianFromDir(const VECTOR _dir)
 	{
-		//	Šî€•ûŒüƒxƒNƒgƒ‹‚©‚ç‚ÌŠp“x‚ğ‹‚ß‚é
+		//	åŸºæº–æ–¹å‘ãƒ™ã‚¯ãƒˆãƒ«ã‹ã‚‰ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 		VECTOR base = VGet(0.0f, 1.0f, 0.0f);;
 		VECTOR dir = _dir;
 
-		//	³‹K‰»
+		//	æ­£è¦åŒ–
 		VNorm(dir);
 
-		//	ƒx[ƒX‚ÆŒ»İ‚ÌŒü‚«‚©‚çAŠp“x‚ğæ‚é
+		//	ãƒ™ãƒ¼ã‚¹ã¨ç¾åœ¨ã®å‘ãã‹ã‚‰ã€è§’åº¦ã‚’å–ã‚‹
 		float dot = VDot(base, dir);
 		float angle = acosf(dot);
 
-		//	‰ñ“]•„†‚ğŒvZ
+		//	å›è»¢ç¬¦å·ã‚’è¨ˆç®—
 		VECTOR tmpDir;
 		tmpDir = VCross(base, dir);
 
-		//	¶Œü‚«‚Ì‚Æ‚«‚ÍA
-		//	•„†”½“]
+		//	å·¦å‘ãã®ã¨ãã¯ã€
+		//	ç¬¦å·åè»¢
 		const bool isLeftDir = tmpDir.y < 0;
 		if (isLeftDir) { angle *= -1.0f; }
 
@@ -374,7 +374,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	F‚Ìæ“¾
+	//	@brief	è‰²ã®å–å¾—
 	//-----------------------------------------------------------------------------
 	int GetColor(const Color _color)
 	{
@@ -382,7 +382,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	F‚Ìæ“¾
+	//	@brief	è‰²ã®å–å¾—
 	//-----------------------------------------------------------------------------
 	Color GetColor(const int _red, const int _green, const int _blue)
 	{
@@ -395,7 +395,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	F‚Ìæ“¾
+	//	@brief	è‰²ã®å–å¾—
 	//-----------------------------------------------------------------------------
 	COLOR_F GetColor(const ColorF _colorf)
 	{
@@ -403,7 +403,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	F‚Ìæ“¾
+	//	@brief	è‰²ã®å–å¾—
 	//-----------------------------------------------------------------------------
 	ColorF GetColor(const float _red, const float _green, const float _blue, const float _alpha)
 	{
@@ -417,11 +417,11 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ‹‚ß‚é
+	//	@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ±‚ã‚ã‚‹
 	//-----------------------------------------------------------------------------
 	void AskAnimationCount(Animation& _animation)
 	{
-		//	ƒAƒjƒ[ƒVƒ‡ƒ“
+		//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
 		const bool isAddanim = _animation.m_time >= _animation.m_maxTime;
 		if (isAddanim)
 		{
@@ -429,7 +429,7 @@ namespace CommonFunction
 			_animation.m_time = 0.0f;
 		}
 
-		//	Å‘åˆ—
+		//	æœ€å¤§å‡¦ç†
 		const bool isMaxAnim = _animation.m_count >= _animation.m_maxCount;
 		if (isMaxAnim) { _animation.m_count = 0; }
 
@@ -437,7 +437,7 @@ namespace CommonFunction
 	}
 
 	//-----------------------------------------------------------------------------
-	//	@brief	ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌƒŠƒZƒbƒg
+	//	@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒªã‚»ãƒƒãƒˆ
 	//-----------------------------------------------------------------------------
 	void ResetAnimationCount(Animation & _animation)
 	{
@@ -448,7 +448,7 @@ namespace CommonFunction
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	–¼‘O‹óŠÔ	[ƒfƒoƒbƒN]
+//	@brief	åå‰ç©ºé–“	[ãƒ‡ãƒãƒƒã‚¯]
 //-----------------------------------------------------------------------------
 namespace CommonDebug
 {
@@ -476,7 +476,7 @@ namespace CommonDebug
 
 	void PadInputPushTest(Pad& _pad)
 	{
-		//	ƒ{ƒ^ƒ“
+		//	ãƒœã‚¿ãƒ³
 		if (_pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { Log("PushTest : [ A ] Button"); }
 		if (_pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { Log("PushTest : [ B ] Button"); }
 		if (_pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { Log("PushTest : [ X ] Button"); }
@@ -488,14 +488,14 @@ namespace CommonDebug
 		if (_pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_RSB)) { Log("PushTest : [ Right ] Stick Button"); }
 		if (_pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_LSB)) { Log("PushTest : [ Left ] Stick Button"); }
 
-		//	ƒgƒŠƒK[
+		//	ãƒˆãƒªã‚¬ãƒ¼
 		if (_pad.GetXInputPushTrigger(PadInfo::PAD_BUTTON_KIND::BUTTON_LT, PadInfo::TRIGGER_DEAD_ZONE)) { Log("PushTest : [ Left ] Trigger"); }
 		if (_pad.GetXInputPushTrigger(PadInfo::PAD_BUTTON_KIND::BUTTON_RT, PadInfo::TRIGGER_DEAD_ZONE)) { Log("PushTest : [ Right ] Trigger"); }
 	}
 
 	void PadInputDisuniteTest(Pad& _pad)
 	{
-		//	ƒ{ƒ^ƒ“
+		//	ãƒœã‚¿ãƒ³
 		if (_pad.GetXInputDisuniteButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { Log("DisuniteTest [ A ] Button"); }
 		if (_pad.GetXInputDisuniteButton(PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { Log("DisuniteTest [ B ] Button"); }
 		if (_pad.GetXInputDisuniteButton(PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { Log("DisuniteTest [ X ] Button"); }
@@ -507,14 +507,14 @@ namespace CommonDebug
 		if (_pad.GetXInputDisuniteButton(PadInfo::PAD_BUTTON_KIND::BUTTON_RSB)) { Log("DisuniteTest [ Right ] Stick Button"); }
 		if (_pad.GetXInputDisuniteButton(PadInfo::PAD_BUTTON_KIND::BUTTON_LSB)) { Log("DisuniteTest [ Left ] Stick Button"); }
 
-		//	ƒgƒŠƒK[
+		//	ãƒˆãƒªã‚¬ãƒ¼
 		if (_pad.GetXInputDisuniteTrigger(PadInfo::PAD_BUTTON_KIND::BUTTON_LT, PadInfo::TRIGGER_DEAD_ZONE)) { Log("DisuniteTest [ Left ] Trigger"); }
 		if (_pad.GetXInputDisuniteTrigger(PadInfo::PAD_BUTTON_KIND::BUTTON_RT, PadInfo::TRIGGER_DEAD_ZONE)) { Log("DisuniteTest [ Right ] Trigger"); }
 	}
 
 	void PadInputTest(Pad& _pad)
 	{
-		//	ƒ{ƒ^ƒ“
+		//	ãƒœã‚¿ãƒ³
 		if (_pad.GetXInputButton(PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { Log("InputTest [ A ] Button"); }
 		if (_pad.GetXInputButton(PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { Log("InputTest [ B ] Button"); }
 		if (_pad.GetXInputButton(PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { Log("InputTest [ X ] Button"); }
@@ -534,7 +534,7 @@ namespace CommonDebug
 		if (_pad.GetXInputDpad(PadInfo::PAD_DPAD_KIND::DPAD_RIGHT)) { Log("InputTest Dpad [ Right ] "); }
 		if (_pad.GetXInputDpad(PadInfo::PAD_DPAD_KIND::DPAD_LEFT)) { Log("InputTest Dpad [ Left ] "); }
 
-		//	ƒXƒeƒBƒbƒN
+		//	ã‚¹ãƒ†ã‚£ãƒƒã‚¯
 		if (_pad.GetXInputStick(PadInfo::PAD_STICK_KIND::LEFT_STICK_UP, PadInfo::STICK_DEAD_ZONE)) { Log("InputTest Left Stick [ Up ] "); }
 		if (_pad.GetXInputStick(PadInfo::PAD_STICK_KIND::LEFT_STICK_DOWN, PadInfo::STICK_DEAD_ZONE)) { Log("InputTest Left Stick [ Down ] "); }
 		if (_pad.GetXInputStick(PadInfo::PAD_STICK_KIND::LEFT_STICK_RIGHT, PadInfo::STICK_DEAD_ZONE)) { Log("InputTest Left Stick [ Right ] "); }

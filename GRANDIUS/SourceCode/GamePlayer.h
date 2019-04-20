@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	Player.cpp
-//	@brief	ƒvƒŒƒCƒ„[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "PlayerBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class Pad;
 class ShotManager;
@@ -28,70 +28,70 @@ class SoundEffect;
 class EnemyManager;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŒƒCƒ„[ƒNƒ‰ƒX
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class GamePlayer : public PlayerBase
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
     GamePlayer(const int _modelHandle);
 	~GamePlayer();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
     virtual void Create() override;
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
     virtual void Release() override;
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
     virtual void Initialize() override;
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
     virtual void Update(Pad& _pad, ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gaugeUI) override;
 
 protected:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	’e‚Ìˆ—
+	//	å¼¾ã®å‡¦ç†
 	void _Shot(Pad& _pad, ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect);
 
-	//	•KE‹ZˆÏ
+	//	å¿…æ®ºæŠ€å§”
 	void _SpecialAttack(Pad& _pad, UIGauge& _gaugeUI);
 
-	//	ƒŒ[ƒU[
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼
 	void _Laser();
 
-	//	”ÍˆÍŠOˆ—
+	//	ç¯„å›²å¤–å‡¦ç†
 	void _OutOfRange();
 
-	//	ŠJn‚ÌˆÚ“®
+	//	é–‹å§‹æ™‚ã®ç§»å‹•
 	void _EmergeMove();
 
-	//	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 	void _UpdateHitPoint();
 
-	//	ƒŒ[ƒU[ƒGƒtƒFƒNƒg
+	//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _LaseEffect(SoundEffect& _soundEffect);
 
-	//	ƒqƒbƒgƒGƒtƒFƒNƒg
+	//	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnHitEffect(SoundEffect& _soundEffect);
 
-	//	”š”­ƒGƒtƒFƒNƒg
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnEffectExplosion(SoundEffect& _soundEffect);
 
-	//	‘¬“xƒAƒbƒvƒGƒtƒFƒNƒg
+	//	é€Ÿåº¦ã‚¢ãƒƒãƒ—ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnEffectSpeedUp(SoundEffect& _soundEffect);
 
-	//	ƒAƒCƒeƒ€æ“¾‚ÌƒGƒtƒFƒNƒg
+	//	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—æ™‚ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	void _OnEffectGetItem();
 
-	//	–³“GŠÔ‚ÌŒv‘ª
+	//	ç„¡æ•µæ™‚é–“ã®è¨ˆæ¸¬
 	void _MeasuringInvincibleTime();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
     virtual void _FinalRelease() override;
 };

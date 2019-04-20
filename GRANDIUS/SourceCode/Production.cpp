@@ -1,38 +1,38 @@
-
+ï»¿
 //=============================================================================
 //	@file	Production.h
-//	@brief	ƒVƒ‡ƒbƒgƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆãƒžãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/12
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Production.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const VECTOR	Production::GAUGE_START_VERTEX_1 = VGet(0.0f, 0.0f, 0.0f);			//	ƒQ[ƒW‚ÌŠJŽn’¸“_‚P
-const VECTOR	Production::GAUGE_START_VERTEX_2 = VGet(0.0f, 1080.0f, 0.0f);		//	ƒQ[ƒW‚ÌŠJŽn’¸“_‚Q
-const VECTOR	Production::GAUGE_END_VERTEX_1 = VGet(1920.0f, 0.0f, 0.0f);			//	ƒQ[ƒW‚ÌI—¹’¸“_‚P
-const VECTOR	Production::GAUGE_END_VERTEX_2 = VGet(1920.0f, 1080.0f, 0.0f);		//	ƒQ[ƒW‚ÌI—¹’¸“_‚Q
-const float		Production::MAX_Y_AXIS_1 = 120.0f;									//	ƒQ[ƒW‚ÌÅ‘å’l
-const float		Production::MAX_Y_AXIS_2 = 960.0f;									//	ƒQ[ƒW‚ÌÅ‘å’l
-const float		Production::GAUGE_ADD_SPEED = 10.0f;								//	ƒQ[ƒW‚Ì‰ÁŽZ‘¬“x‚P
+const VECTOR	Production::GAUGE_START_VERTEX_1 = VGet(0.0f, 0.0f, 0.0f);			//	ã‚²ãƒ¼ã‚¸ã®é–‹å§‹é ‚ç‚¹ï¼‘
+const VECTOR	Production::GAUGE_START_VERTEX_2 = VGet(0.0f, 1080.0f, 0.0f);		//	ã‚²ãƒ¼ã‚¸ã®é–‹å§‹é ‚ç‚¹ï¼’
+const VECTOR	Production::GAUGE_END_VERTEX_1 = VGet(1920.0f, 0.0f, 0.0f);			//	ã‚²ãƒ¼ã‚¸ã®çµ‚äº†é ‚ç‚¹ï¼‘
+const VECTOR	Production::GAUGE_END_VERTEX_2 = VGet(1920.0f, 1080.0f, 0.0f);		//	ã‚²ãƒ¼ã‚¸ã®çµ‚äº†é ‚ç‚¹ï¼’
+const float		Production::MAX_Y_AXIS_1 = 120.0f;									//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§å€¤
+const float		Production::MAX_Y_AXIS_2 = 960.0f;									//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§å€¤
+const float		Production::GAUGE_ADD_SPEED = 10.0f;								//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—é€Ÿåº¦ï¼‘
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Production::Production()
 {
-	//	Še•Ï”‚Ì‰Šú‰»
+	//	å„å¤‰æ•°ã®åˆæœŸåŒ–
 	m_gaugeBar1.m_vertexTop = GAUGE_START_VERTEX_1;
 	m_gaugeBar1.m_vertexUnder = GAUGE_END_VERTEX_1;
 	m_gaugeBar2.m_vertexTop = GAUGE_START_VERTEX_2;
@@ -46,45 +46,45 @@ Production::Production()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Production::~Production()
 {
-	//	ˆ—‚È‚µ
+	//	å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Production::Update()
 {
-	//	‰‰o’†
+	//	æ¼”å‡ºä¸­
 	const bool isActive = m_isSceneProduction || m_isSpecialProduction || m_isClearProduction;
 	if (isActive)
 	{
-		//	‰‰o’†‚È‚Ì‚ÅA
-		//	ƒQ[ƒW‚ðoŒ»‚³‚¹‚é
+		//	æ¼”å‡ºä¸­ãªã®ã§ã€
+		//	ã‚²ãƒ¼ã‚¸ã‚’å‡ºç¾ã•ã›ã‚‹
 		_EmergenceGauge();
 		return;
 	}
 
-	//	‰‰o’†‚Å‚Í‚È‚¢‚Ì‚ÅA
-	//	ƒQ[ƒW‚ðŒ³‚Ìó‘Ô‚É–ß‚·
+	//	æ¼”å‡ºä¸­ã§ã¯ãªã„ã®ã§ã€
+	//	ã‚²ãƒ¼ã‚¸ã‚’å…ƒã®çŠ¶æ…‹ã«æˆ»ã™
 	_RestoreGauge();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void Production::Draw()
 {
-	//	ƒQ[ƒW‚Ì•`‰æ
+	//	ã‚²ãƒ¼ã‚¸ã®æç”»
 	DrawBox((int)m_gaugeBar1.m_vertexTop.x, (int)m_gaugeBar1.m_vertexTop.y, (int)m_gaugeBar1.m_vertexUnder.x, (int)m_gaugeBar1.m_vertexUnder.y, m_gaugeColor, TRUE);
 	DrawBox((int)m_gaugeBar2.m_vertexTop.x, (int)m_gaugeBar2.m_vertexTop.y, (int)m_gaugeBar2.m_vertexUnder.x, (int)m_gaugeBar2.m_vertexUnder.y, m_gaugeColor, TRUE);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•KŽE‹Z‚ÌƒŠƒZƒbƒg
+//	@brief	å¿…æ®ºæŠ€ã®ãƒªã‚»ãƒƒãƒˆ
 //-----------------------------------------------------------------------------
 void Production::ResetSpecialProduction()
 {
@@ -93,11 +93,11 @@ void Production::ResetSpecialProduction()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‚·‚×‚Ä‚ÌƒŠƒZƒbƒg
+//	@brief	ã™ã¹ã¦ã®ãƒªã‚»ãƒƒãƒˆ
 //-----------------------------------------------------------------------------
 void Production::AllReset()
 {
-	//	Še•Ï”‚Ì‰Šú‰»
+	//	å„å¤‰æ•°ã®åˆæœŸåŒ–
 	m_gaugeBar1.m_vertexTop = GAUGE_START_VERTEX_1;
 	m_gaugeBar1.m_vertexUnder = GAUGE_END_VERTEX_1;
 	m_gaugeBar2.m_vertexTop = GAUGE_START_VERTEX_2;
@@ -111,14 +111,14 @@ void Production::AllReset()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒQ[ƒW‚ÌoŒ»
+//	@brief	ã‚²ãƒ¼ã‚¸ã®å‡ºç¾
 //-----------------------------------------------------------------------------
 void Production::_EmergenceGauge()
 {
 	m_gaugeBar1.m_vertexUnder.y += GAUGE_ADD_SPEED;
 	m_gaugeBar2.m_vertexTop.y -= GAUGE_ADD_SPEED;
 
-	//	ƒQ[ƒW‚ÌÅ‘åÅ¬ˆ—
+	//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§æœ€å°å‡¦ç†
 	const bool isMaxGauge1 = m_gaugeBar1.m_vertexUnder.y >= MAX_Y_AXIS_1;
 	const bool isMaxGauge2 = m_gaugeBar2.m_vertexTop.y <= MAX_Y_AXIS_2;
 	const bool isMax = isMaxGauge1 || isMaxGauge2;
@@ -130,14 +130,14 @@ void Production::_EmergenceGauge()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒQ[ƒW‚ðŒ³‚É–ß‚·
+//	@brief	ã‚²ãƒ¼ã‚¸ã‚’å…ƒã«æˆ»ã™
 //-----------------------------------------------------------------------------
 void Production::_RestoreGauge()
 {
 	m_gaugeBar1.m_vertexUnder.y -= GAUGE_ADD_SPEED;
 	m_gaugeBar2.m_vertexTop.y += GAUGE_ADD_SPEED;
 
-	//	ƒQ[ƒW‚ÌÅ‘åÅ¬ˆ—
+	//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§æœ€å°å‡¦ç†
 	const bool isMaxGauge1 = m_gaugeBar1.m_vertexUnder.y <= GAUGE_END_VERTEX_1.y;
 	const bool isMaxGauge2 = m_gaugeBar2.m_vertexTop.y >= GAUGE_START_VERTEX_2.y;
 	const bool isMax = isMaxGauge1 || isMaxGauge2;

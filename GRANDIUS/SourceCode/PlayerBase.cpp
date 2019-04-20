@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	PlayerBase.cpp
-//	@brief	ƒvƒŒƒCƒ„[ƒx[ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ãƒ™ãƒ¼ã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "PlayerBase.h"
 #include "ShotManager.h"
@@ -20,64 +20,64 @@
 #include "EnemyManager.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const VECTOR	PlayerBase::TITLE_POS = VGet(10.0f, 25.0f, 40.0f);			//	ƒ^ƒCƒgƒ‹‚ÌÀ•W
-const VECTOR	PlayerBase::RESULT_POS = VGet(-50.0f, 50.0f, 0.0f);			//	ƒŠƒUƒ‹ƒg‚ÌÀ•W
-const VECTOR	PlayerBase::EMERGE_POS = VGet(-70.0f, 50.0f, -40.0f);		//	oŒ»‚ÌÀ•W
-const VECTOR	PlayerBase::START_POS = VGet(-30.0f, 50.0f, 0.0f);			//	ŠJn‚ÌÀ•W
-const VECTOR	PlayerBase::RECT_CORRECTION = VGet(0.5f, 0.5f, 1.0f);		//	À•W‚Ì•â³
-const VECTOR	PlayerBase::ITEM_RECT_CORRECTION = VGet(7.0f, 2.0f, 1.0f);	//	ƒAƒCƒeƒ€À•W‚Ì•â³
-const float		PlayerBase::EMERGE_MOVE_SPEED = 4.0f;						//	oŒ»‚ÌˆÚ“®‘¬“x
-const float		PlayerBase::SHOT_SPEED = 7.0f;								//	ƒVƒ‡ƒbƒg‘¬“x
-const float		PlayerBase::MAX_SHOT_WAIT_TIME = 8.0f;						//	ƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-const float		PlayerBase::MAX_STAY_SHOT_WAIT_TIME = 70.0f;				//	‘ØİƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-const float		PlayerBase::CENTER_CORRECTION = 5.0f;						//	’†SÀ•W‚Ì•â³
-const float		PlayerBase::HIT_RADIUS = 0.5f;								//	“–‚½‚è”»’è—p‚Ì”¼Œa
-const float		PlayerBase::MAX_INVINCIBLE_TIME_1 = 120.0f;					//	“–‚½‚è”»’è‚Ì–³ŒøŠÔ‚ÌÅ‘å
-const float		PlayerBase::MAX_INVINCIBLE_TIME_2 = 30.0f;					//	“–‚½‚è”»’è‚Ì–³ŒøŠÔ‚ÌÅ‘å
-const float		PlayerBase::MOVE_SPEED = 1.2f;								//	ˆÚ“®‘¬“x
-const float		PlayerBase::MIN_POS_X = -90.0f;								//	‚˜À•W‚ÌÅ¬
-const float		PlayerBase::MAX_POS_X = 95.0f;								//	‚˜À•W‚ÌÅ‘å
-const float		PlayerBase::MIN_POS_Y = 5.0f;								//	‚™À•W‚ÌÅ¬
-const float		PlayerBase::MAX_POS_Y = 105.0f;								//	‚™À•W‚ÌÅ‘å
-const float		PlayerBase::LASER_SIZE = 40.0f;								//	ƒŒ[ƒU[ƒTƒCƒY
-const float		PlayerBase::LASER_SIZE_DEPTH = 60.0f;						//	ƒŒ[ƒU[ƒTƒCƒY‚Ì‰œs‚«
-const float		PlayerBase::LASER_SPEED = 20.0f;							//	ƒŒ[ƒU[‘¬“x
-const float		PlayerBase::ADD_RADIAN_SPEED = 0.1f;						//	ƒ‰ƒWƒAƒ“Šp‚Ì‰ÁZ‘¬“x
-const float		PlayerBase::MAX_DEMO_SHOT_FIRING_TIME = -3.0f;				//	ƒVƒ‡ƒbƒg‚Ì”­ËŠÔ
-const float		PlayerBase::MAX_DEMO_STAY_SHOT_FIRING_TIME = -10.0f;		//	‘ØİƒVƒ‡ƒbƒg‚Ì”­ËŠÔ
-const float		PlayerBase::MAX_DEMO_CHANGE_DIR_WAIT_TIME = 180.0f;			//	ƒfƒ‚—p‚ÌŒü‚«Ø‚è‘Ö‚¦’x‰„ŠÔ
-const float		PlayerBase::MAX_DEMO_DISTANCE_TO_ENEMY = 80.0f;				//	ƒfƒ‚—p‚Ì“G‚Æ‚Ì‹——£‚ÌŠÔŠu
-const int		PlayerBase::START_LIFE = 5;									//	ŠJn‚Ìc‹@
-const int		PlayerBase::ZERO_LIFE = 0;									//	c‹@‚È‚µ
+const VECTOR	PlayerBase::TITLE_POS = VGet(10.0f, 25.0f, 40.0f);			//	ã‚¿ã‚¤ãƒˆãƒ«æ™‚ã®åº§æ¨™
+const VECTOR	PlayerBase::RESULT_POS = VGet(-50.0f, 50.0f, 0.0f);			//	ãƒªã‚¶ãƒ«ãƒˆæ™‚ã®åº§æ¨™
+const VECTOR	PlayerBase::EMERGE_POS = VGet(-70.0f, 50.0f, -40.0f);		//	å‡ºç¾æ™‚ã®åº§æ¨™
+const VECTOR	PlayerBase::START_POS = VGet(-30.0f, 50.0f, 0.0f);			//	é–‹å§‹æ™‚ã®åº§æ¨™
+const VECTOR	PlayerBase::RECT_CORRECTION = VGet(0.5f, 0.5f, 1.0f);		//	åº§æ¨™ã®è£œæ­£
+const VECTOR	PlayerBase::ITEM_RECT_CORRECTION = VGet(7.0f, 2.0f, 1.0f);	//	ã‚¢ã‚¤ãƒ†ãƒ åº§æ¨™ã®è£œæ­£
+const float		PlayerBase::EMERGE_MOVE_SPEED = 4.0f;						//	å‡ºç¾æ™‚ã®ç§»å‹•é€Ÿåº¦
+const float		PlayerBase::SHOT_SPEED = 7.0f;								//	ã‚·ãƒ§ãƒƒãƒˆé€Ÿåº¦
+const float		PlayerBase::MAX_SHOT_WAIT_TIME = 8.0f;						//	ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+const float		PlayerBase::MAX_STAY_SHOT_WAIT_TIME = 70.0f;				//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+const float		PlayerBase::CENTER_CORRECTION = 5.0f;						//	ä¸­å¿ƒåº§æ¨™ã®è£œæ­£
+const float		PlayerBase::HIT_RADIUS = 0.5f;								//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+const float		PlayerBase::MAX_INVINCIBLE_TIME_1 = 120.0f;					//	å½“ãŸã‚Šåˆ¤å®šã®ç„¡åŠ¹æ™‚é–“ã®æœ€å¤§
+const float		PlayerBase::MAX_INVINCIBLE_TIME_2 = 30.0f;					//	å½“ãŸã‚Šåˆ¤å®šã®ç„¡åŠ¹æ™‚é–“ã®æœ€å¤§
+const float		PlayerBase::MOVE_SPEED = 1.2f;								//	ç§»å‹•é€Ÿåº¦
+const float		PlayerBase::MIN_POS_X = -90.0f;								//	ï½˜åº§æ¨™ã®æœ€å°
+const float		PlayerBase::MAX_POS_X = 95.0f;								//	ï½˜åº§æ¨™ã®æœ€å¤§
+const float		PlayerBase::MIN_POS_Y = 5.0f;								//	ï½™åº§æ¨™ã®æœ€å°
+const float		PlayerBase::MAX_POS_Y = 105.0f;								//	ï½™åº§æ¨™ã®æœ€å¤§
+const float		PlayerBase::LASER_SIZE = 40.0f;								//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚µã‚¤ã‚º
+const float		PlayerBase::LASER_SIZE_DEPTH = 60.0f;						//	ãƒ¬ãƒ¼ã‚¶ãƒ¼ã‚µã‚¤ã‚ºã®å¥¥è¡Œã
+const float		PlayerBase::LASER_SPEED = 20.0f;							//	ãƒ¬ãƒ¼ã‚¶ãƒ¼é€Ÿåº¦
+const float		PlayerBase::ADD_RADIAN_SPEED = 0.1f;						//	ãƒ©ã‚¸ã‚¢ãƒ³è§’ã®åŠ ç®—é€Ÿåº¦
+const float		PlayerBase::MAX_DEMO_SHOT_FIRING_TIME = -3.0f;				//	ã‚·ãƒ§ãƒƒãƒˆã®ç™ºå°„æ™‚é–“
+const float		PlayerBase::MAX_DEMO_STAY_SHOT_FIRING_TIME = -10.0f;		//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®ç™ºå°„æ™‚é–“
+const float		PlayerBase::MAX_DEMO_CHANGE_DIR_WAIT_TIME = 180.0f;			//	ãƒ‡ãƒ¢ç”¨ã®å‘ãåˆ‡ã‚Šæ›¿ãˆé…å»¶æ™‚é–“
+const float		PlayerBase::MAX_DEMO_DISTANCE_TO_ENEMY = 80.0f;				//	ãƒ‡ãƒ¢ç”¨ã®æ•µã¨ã®è·é›¢ã®é–“éš”
+const int		PlayerBase::START_LIFE = 5;									//	é–‹å§‹æ™‚ã®æ®‹æ©Ÿ
+const int		PlayerBase::ZERO_LIFE = 0;									//	æ®‹æ©Ÿãªã—
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 PlayerBase::PlayerBase(const int _modelHandle)
 {
-	//	ƒ‚ƒfƒ‹‚Ì•¡»
+	//	ãƒ¢ãƒ‡ãƒ«ã®è¤‡è£½
 	m_modelHandle = MV1DuplicateModel(_modelHandle);
 	CommonDebug::Assert((m_modelHandle <= -1), " [ PlayerBase.cpp ] : error : missing duplicat model.");
 	m_flashingTime = 0.0f;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 PlayerBase::~PlayerBase()
 {
-	//	ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_modelHandle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æ
+//	@brief	æç”»
 //-----------------------------------------------------------------------------
 void PlayerBase::Draw()
 {
-	//	–³“Gó‘Ô‚Ì‚Æ‚«
+	//	ç„¡æ•µçŠ¶æ…‹ã®ã¨ã
 	const bool isInvincible = m_isInvincible && !m_isEmerge;
 	if (isInvincible)
 	{
@@ -89,18 +89,18 @@ void PlayerBase::Draw()
 		if (isFlashing) { return; }
 	}
 
-	//	•`‰æ–³‹‚µ‚È‚¢‚Æ‚«‚ÍA
-	//	ƒ‚ƒfƒ‹‚ğ•`‰æ
+	//	æç”»ç„¡è¦–ã—ãªã„ã¨ãã¯ã€
+	//	ãƒ¢ãƒ‡ãƒ«ã‚’æç”»
 	const bool isDraw = !m_offDraw && m_life > ZERO_LIFE;
 	if (isDraw)
 	{
-		//	ƒ‚ƒfƒ‹‚Ì•`‰æ
+		//	ãƒ¢ãƒ‡ãƒ«ã®æç”»
 		MV1DrawModel(m_modelHandle);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ŠúˆÊ’u‚Ì getter
+//	@brief	åˆæœŸä½ç½®ã® getter
 //-----------------------------------------------------------------------------
 const VECTOR PlayerBase::GetStartPos() const
 {
@@ -108,14 +108,14 @@ const VECTOR PlayerBase::GetStartPos() const
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	sinƒJ[ƒu‚É‚æ‚éŒü‚«‚ğ‹‚ß‚é
+//	@brief	sinã‚«ãƒ¼ãƒ–ã«ã‚ˆã‚‹å‘ãã‚’æ±‚ã‚ã‚‹
 //-----------------------------------------------------------------------------
 void PlayerBase::_AskSinCurveDirection()
 {
-    //	ƒ‰ƒWƒAƒ“Šp‚Ì‰ÁZ
+    //	ãƒ©ã‚¸ã‚¢ãƒ³è§’ã®åŠ ç®—
     m_radian += ADD_RADIAN_SPEED;
 
-    //	Œü‚«‚ğ‹‚ß‚é
-    //	sinƒJ[ƒu‚ğg‚¢A•‚—V‚·‚é‚æ‚¤‚ÈƒJ[ƒu
+    //	å‘ãã‚’æ±‚ã‚ã‚‹
+    //	sinã‚«ãƒ¼ãƒ–ã‚’ä½¿ã„ã€æµ®éŠã™ã‚‹ã‚ˆã†ãªã‚«ãƒ¼ãƒ–
     m_dir.y = sinf(m_radian);
 }

@@ -1,89 +1,89 @@
-
+ï»¿
 //=============================================================================
 //	@file	Sound.h
-//	@brief	ƒTƒEƒ“ƒh
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/04
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒTƒEƒ“ƒhƒNƒ‰ƒX
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Sound
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Sound(const char* _soundName);
 	Sound(const char* _soundName, const char* _nextSoundName);
 	Sound(const int _soundHandle);
 	~Sound();
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 	
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update();
 
-	//	Ä¶ˆ—
+	//	å†ç”Ÿå‡¦ç†
 	void OnPlay(const int _playType);
 
-	//	ƒTƒEƒ“ƒh‚ÌØ‚è‘Ö‚¦
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®åˆ‡ã‚Šæ›¿ãˆ
 	void ChangeSound(const int _nextPlayType, const float _nextSoundWaitTime);
 
 //==================== getter =====================//
 
-	//	g—pó‘Ôƒtƒ‰ƒO‚Ì getter
+	//	ä½¿ç”¨çŠ¶æ…‹ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsUsedStatus() const { return m_isUsedStatus; }
 
-	//	íœƒtƒ‰ƒO‚Ì getter
+	//	å‰Šé™¤ãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsDelete() const { return m_isDelete; }
 
-	//	ƒTƒEƒ“ƒh‚ÌØ‚è‘Ö‚¦ƒtƒ‰ƒO‚Ì getter
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®åˆ‡ã‚Šæ›¿ãˆãƒ•ãƒ©ã‚°ã® getter
 	const bool& GetIsChageSound() const { return m_isChangeSound; }
 
 //==================== setter =====================//
 
-	//	g—pó‘Ôƒtƒ‰ƒO‚Ì setter
+	//	ä½¿ç”¨çŠ¶æ…‹ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsUsedStatus(const bool& _set) { m_isUsedStatus = _set; }
 	
-	//	íœƒtƒ‰ƒO‚Ì setter
+	//	å‰Šé™¤ãƒ•ãƒ©ã‚°ã® setter
 	void SetIsDelete(const bool& _set) { m_isDelete = _set; }
 
-	//	ƒTƒEƒ“ƒh‚ÌØ‚è‘Ö‚¦ƒtƒ‰ƒO‚Ì setter
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®åˆ‡ã‚Šæ›¿ãˆãƒ•ãƒ©ã‚°ã® setter
 	void SetIsChageSound(const bool& _set) { m_isChangeSound = _set; }
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int		m_soundHandle;			//	ƒTƒEƒ“ƒhƒnƒ“ƒhƒ‹
-	int		m_nextSoundHandle;		//	Ÿ‚ÌƒTƒEƒ“ƒhƒnƒ“ƒhƒ‹
-	bool	m_isUsedStatus;			//	g—pó‘Ôƒtƒ‰ƒO
-	bool	m_isDelete;				//	íœƒtƒ‰ƒO
-	bool	m_isChangeSound;		//	ƒTƒEƒ“ƒh‚ÌØ‚è‘Ö‚¦ƒtƒ‰ƒO
-	float	m_nextWaitTime;			//	ƒTƒEƒ“ƒh‚Ì’x‰„ŠÔ
+	int		m_soundHandle;			//	ã‚µã‚¦ãƒ³ãƒ‰ãƒãƒ³ãƒ‰ãƒ«
+	int		m_nextSoundHandle;		//	æ¬¡ã®ã‚µã‚¦ãƒ³ãƒ‰ãƒãƒ³ãƒ‰ãƒ«
+	bool	m_isUsedStatus;			//	ä½¿ç”¨çŠ¶æ…‹ãƒ•ãƒ©ã‚°
+	bool	m_isDelete;				//	å‰Šé™¤ãƒ•ãƒ©ã‚°
+	bool	m_isChangeSound;		//	ã‚µã‚¦ãƒ³ãƒ‰ã®åˆ‡ã‚Šæ›¿ãˆãƒ•ãƒ©ã‚°
+	float	m_nextWaitTime;			//	ã‚µã‚¦ãƒ³ãƒ‰ã®é…å»¶æ™‚é–“
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const int NO_SOUND;	//	‰¹–³‚µ
+	static const int NO_SOUND;	//	éŸ³ç„¡ã—
 
 };

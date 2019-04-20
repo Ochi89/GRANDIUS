@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	UpDownEnemy.cpp
-//	@brief	ù‰ñƒGƒlƒ~[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	æ—‹å›ã‚¨ãƒãƒŸãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/20
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "UpDownEnemy.h"
 #include "Common.h"
@@ -18,56 +18,56 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float UpDownEnemy::MOVE_ANGLE_SPEED = 20.0f;				//	‰ñ“]Šp“x‚Ì‰ñ“]‘¬“x
-const float UpDownEnemy::MAX_MOVE_ANGLE_WAIT_TIME = 6.5f;		//	‰ñ“]‘¬“x‚Ì‘Ò‹@ŠÔ‚ÌÅ‘å
-const float UpDownEnemy::MAX_MOVE_ANGLE = 150.0f;				//	‰ñ“]Šp“x‚ÌÅ‘å
-const float UpDownEnemy::MIN_MOVE_ANGLE = -150.0f;				//	‰ñ“]Šp“x‚ÌÅ¬
+const float UpDownEnemy::MOVE_ANGLE_SPEED = 20.0f;				//	å›è»¢è§’åº¦ã®å›è»¢é€Ÿåº¦
+const float UpDownEnemy::MAX_MOVE_ANGLE_WAIT_TIME = 6.5f;		//	å›è»¢é€Ÿåº¦ã®å¾…æ©Ÿæ™‚é–“ã®æœ€å¤§
+const float UpDownEnemy::MAX_MOVE_ANGLE = 150.0f;				//	å›è»¢è§’åº¦ã®æœ€å¤§
+const float UpDownEnemy::MIN_MOVE_ANGLE = -150.0f;				//	å›è»¢è§’åº¦ã®æœ€å°
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UpDownEnemy::UpDownEnemy(const int _modelHandle)
 	: EnemyBase(_modelHandle)
 {
-	//	Še•Ï”‚ğ‰Šú‰»
+	//	å„å¤‰æ•°ã‚’åˆæœŸåŒ–
 	m_pos = CommonConstant::ORIGIN;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UpDownEnemy::~UpDownEnemy()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void UpDownEnemy::Create()
 {
-	// ˆ—‚È‚µ
+	// å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void UpDownEnemy::Release()
 {
-	// ˆ—‚È‚µ
+	// å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void UpDownEnemy::Initialize()
 {
-	//	Še•Ï”‚ğ‰Šúó‘Ô‚Éİ’è
+	//	å„å¤‰æ•°ã‚’åˆæœŸçŠ¶æ…‹ã«è¨­å®š
 	m_pos = VGet(0.0f, 50.0f, 0.0f);
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = VGet(0.0f, 5.0f, 0.0f);
@@ -88,88 +88,88 @@ void UpDownEnemy::Initialize()
 	m_isOffDraw = false;
 	m_isDeleate = false;
 
-	//	“–‚½‚è”»’è—p‚Ì\‘¢‘Ì‚Ì‰Šú‰»
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ§‹é€ ä½“ã®åˆæœŸåŒ–
 	m_hitCircle.m_radius = HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
-	//	Šp“x‚ğŠ„‚è“–‚Ä‚é
+	//	è§’åº¦ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	MV1SetRotationXYZ(m_modelHandle, m_angle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void UpDownEnemy::Update(PlayerManager& _playerManager, ShotManager& _shotManager, SoundEffect& _soundEffect)
 {
-	//	ƒqƒbƒg‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚©A
-	//	•KE‹ZˆÈŠO‚Ì‚Æ‚«
+	//	ãƒ’ãƒƒãƒˆã—ã¦ã„ãªã„ã¨ãã‹ã€
+	//	å¿…æ®ºæŠ€ä»¥å¤–ã®ã¨ã
 	const bool isActive = !m_isHit && !PRODUCTION->GetIsSpecialProduction();
 	if (isActive)
 	{
-		//	Œü‚«‚ÌØ‚è‘Ö‚¦
+		//	å‘ãã®åˆ‡ã‚Šæ›¿ãˆ
 		_ChangeDir();
 
-		//	ˆÚ“®ˆ—
+		//	ç§»å‹•å‡¦ç†
 		VECTOR moving = MoveHelper::AskMoveAmount(m_dir, m_moveSpeed);
 
-		//	ƒVƒ‡ƒbƒg‚ğg—p‚·‚é
+		//	ã‚·ãƒ§ãƒƒãƒˆã‚’ä½¿ç”¨ã™ã‚‹
 		if (m_isUseShot)
 		{
-			//	ƒVƒ‡ƒbƒg‚Ì“o˜^
+			//	ã‚·ãƒ§ãƒƒãƒˆã®ç™»éŒ²
 			_ShotEntry(_playerManager, _shotManager);
 		}
 
-		//	ƒ|ƒWƒVƒ‡ƒ“‚ÌXV
+		//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã®æ›´æ–°
 		m_pos = VAdd(m_pos, moving);
 
-		//	‰œs‚«‚ÌÅ¬’l
+		//	å¥¥è¡Œãã®æœ€å°å€¤
 		if (m_pos.z <= 0.0f) { m_pos.z = 0.0f; }
 
-		//	ƒ‚ƒfƒ‹‚Éƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä‚é
+		//	ãƒ¢ãƒ‡ãƒ«ã«ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 		MV1SetPosition(m_modelHandle, m_pos);
 
-		//	ƒ‚ƒfƒ‹‚ÉŠp“x‚ğŠ„‚è“–‚Ä‚é
+		//	ãƒ¢ãƒ‡ãƒ«ã«è§’åº¦ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 		MV1SetRotationXYZ(m_modelHandle, m_angle);
 	}
 
-	//	ƒ‚ƒfƒ‹‚ÌF‚ÌŠ„‚è“–‚Ä
+	//	ãƒ¢ãƒ‡ãƒ«ã®è‰²ã®å‰²ã‚Šå½“ã¦
 	_ChangeColor();
 
-	//	”š”­ƒGƒtƒFƒNƒg
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	_OnEffectExplosion(_soundEffect);
 
-	//	“–‚½‚è”»’è‚ª‚¸‚ê‚é‚Ì‚ÅA
-	//	ƒ‚ƒfƒ‹‚Éƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä‚½Œã‚ÉA
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV‚·‚é
+	//	å½“ãŸã‚Šåˆ¤å®šãŒãšã‚Œã‚‹ã®ã§ã€
+	//	ãƒ¢ãƒ‡ãƒ«ã«ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦ãŸå¾Œã«ã€
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°ã™ã‚‹
 	_UpdateHitPoint();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	Œü‚«‚ÌØ‚è‘Ö‚¦
+//	@brief	å‘ãã®åˆ‡ã‚Šæ›¿ãˆ
 //-----------------------------------------------------------------------------
 void UpDownEnemy::_ChangeDir()
 {
 	m_behaviorTime++;
 
-	//	ŠÔ‚è‚æ‚éƒpƒ^[ƒ“‚ÌØ‚è‘Ö‚¦
+	//	æ™‚é–“ã‚Šã‚ˆã‚‹ãƒ‘ã‚¿ãƒ¼ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆ
 	bool isPattern1 = m_behaviorTime >= 0.0f && m_behaviorTime <= 90.0f;
 	bool isPattern2 = m_behaviorTime >= 90.0f && m_behaviorTime <= 180.0f;
 	bool isPattern3 = m_behaviorTime >= 180.0f && m_behaviorTime <= 270.0f;
 
-	//	”½“]ˆ—
+	//	åè»¢å‡¦ç†
 	if (!m_isOneTime)
 	{
-		//	y²‚ªˆê’è‚æ‚è’á‚©‚Á‚½‚çA
-		//	ˆÚ“®Œü‚«‚ğ”½“]‚³‚¹‚é
+		//	yè»¸ãŒä¸€å®šã‚ˆã‚Šä½ã‹ã£ãŸã‚‰ã€
+		//	ç§»å‹•å‘ãã‚’åè»¢ã•ã›ã‚‹
 		bool isActiveReverse = m_pos.y <= 0.0f;
 		if (isActiveReverse) { m_isOnReverse = true; }
 		m_isOneTime = true;
 	}
 
-	//	Œü‚«‚ğ‹‚ß‚é
+	//	å‘ãã‚’æ±‚ã‚ã‚‹
 	if (m_isOnReverse)
 	{
-		//	‰º‚©‚çã‚É
+		//	ä¸‹ã‹ã‚‰ä¸Šã«
 		if (isPattern1) { m_dir = VGet(0.0f, 1.0f, 0.0f); 	m_isAttenuation = true; }
 		if (isPattern2)
 		{
@@ -188,7 +188,7 @@ void UpDownEnemy::_ChangeDir()
 	}
 	else
 	{
-		//	ã‚©‚ç‰º‚É
+		//	ä¸Šã‹ã‚‰ä¸‹ã«
 		if (isPattern1) { m_dir = VGet(0.0f, -1.0f, 0.0f); 	m_isAttenuation = true; }
 		if (isPattern2)
 		{
@@ -208,23 +208,23 @@ void UpDownEnemy::_ChangeDir()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+//	@brief	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void UpDownEnemy::_UpdateHitPoint()
 {
-	//	“–‚½‚è”»’è—p‚Ì’†SÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ä¸­å¿ƒåº§æ¨™ã®æ›´æ–°
 	m_hitCircle.m_centerPoint = VGet(m_pos.x, m_pos.y - CENTER_CORRECTION, m_pos.z);
 
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°
 	m_hitRect.m_vertexTop = VGet(m_pos.x + RECT_CORRECTION.x, m_pos.y + RECT_CORRECTION.y, m_pos.z + RECT_CORRECTION.z);
 	m_hitRect.m_vertexUnder = VGet(m_pos.x - RECT_CORRECTION.x, m_pos.y - RECT_CORRECTION.y, m_pos.z - RECT_CORRECTION.z);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void UpDownEnemy::_FinalRelease()
 {
-	// ˆ—‚È‚µ
+	// å‡¦ç†ãªã—
 }
 

@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	Player.cpp
-//	@brief	ƒvƒŒƒCƒ„[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DemoPlayer.h"
 #include "Common.h"
@@ -23,7 +23,7 @@
 #include "EnemyBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 DemoPlayer::DemoPlayer(const int _modelHandle)
     : GamePlayer(_modelHandle)
@@ -31,20 +31,20 @@ DemoPlayer::DemoPlayer(const int _modelHandle)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 DemoPlayer::~DemoPlayer()
 {
-    //	ÅI“I‚È‰ğ•úˆ—
+    //	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
     _FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void DemoPlayer::Create()
 {
-    //	ƒGƒtƒFƒNƒg‚Ì“Ç‚İ‚İ
+    //	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®èª­ã¿è¾¼ã¿
     m_effectLaser = new EffekseerEmitter("Data/Effect/Player/Laser/Laser.efk");
     m_effectHit = new EffekseerEmitter("Data/Effect/Hit/Hit.efk");
     m_effectExplosion = new EffekseerEmitter("Data/Effect/Explosion/Explosion.efk");
@@ -53,11 +53,11 @@ void DemoPlayer::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void DemoPlayer::Release()
 {
-    //	ƒGƒtƒFƒNƒg‚Ìíœ
+    //	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å‰Šé™¤
     CommonSafe::Delete(m_effectLaser);
     CommonSafe::Delete(m_effectHit);
     CommonSafe::Delete(m_effectExplosion);
@@ -66,11 +66,11 @@ void DemoPlayer::Release()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void DemoPlayer::Initialize()
 {
-    //	Še•Ï”‚ğ‰Šúó‘Ô‚Éİ’è
+    //	å„å¤‰æ•°ã‚’åˆæœŸçŠ¶æ…‹ã«è¨­å®š
     m_pos = EMERGE_POS;
     m_dir = CommonConstant::ORIGIN;
     m_angle = VGet(0.0f, 1.4f, 0.0f);
@@ -99,148 +99,148 @@ void DemoPlayer::Initialize()
     m_offDraw = false;
     m_isStartEffectGetItem = false;
 
-    //	ƒfƒ‚—p
+    //	ãƒ‡ãƒ¢ç”¨
     m_demoDirChangeTime = 0.0f;
     m_demoTargetPos = CommonConstant::ORIGIN;
 
-    //	“–‚½‚è”»’è—p‚Ì‰~Œ`\‘¢‘Ì‚Ì‰Šú‰»
+    //	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††å½¢æ§‹é€ ä½“ã®åˆæœŸåŒ–
     m_hitCircle.m_radius = HIT_RADIUS;
     m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
-    //	“–‚½‚è”»’è—p‚Ì’·•ûŒ`\‘¢‘Ì‚Ì‰Šú‰»
+    //	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢æ§‹é€ ä½“ã®åˆæœŸåŒ–
     m_hitRect.m_vertexTop = CommonConstant::ORIGIN;
     m_hitRect.m_vertexUnder = CommonConstant::ORIGIN;
 
-    //	Šp“x‚ÆƒTƒCƒY‚ğŠ„‚è“–‚Ä‚é
+    //	è§’åº¦ã¨ã‚µã‚¤ã‚ºã‚’å‰²ã‚Šå½“ã¦ã‚‹
     MV1SetRotationXYZ(m_modelHandle, m_angle);
     MV1SetScale(m_modelHandle, m_size);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void DemoPlayer::Update(ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect, UIGauge& _gaugeUI, EnemyManager& _enemyManager)
 {
-    //	c‹@‚ª‚ ‚èAˆÚ“®‰Â”\‚Ì‚Æ‚«‚Ì‚İXV‚·‚é
+    //	æ®‹æ©ŸãŒã‚ã‚Šã€ç§»å‹•å¯èƒ½ã®ã¨ãã®ã¿æ›´æ–°ã™ã‚‹
     const int notLife = 0;
     const bool isAlive = m_life > notLife;
     const bool isActive = !m_isStopMove && isAlive && !m_isDamage;
     if (isActive)
     {
-        //	ŠJn‚ÌˆÚ“®
+        //	é–‹å§‹æ™‚ã®ç§»å‹•
         _EmergeMove();
 
-        //	–³“GŠÔ‚ÌŒv‘ª
+        //	ç„¡æ•µæ™‚é–“ã®è¨ˆæ¸¬
         _MeasuringInvincibleTime();
 
-        //	oŒ»‚ªI‚í‚Á‚Ä‚¢‚½‚çA
-        //	“®‚¯‚é‚æ‚¤‚É‚·‚é
+        //	å‡ºç¾ãŒçµ‚ã‚ã£ã¦ã„ãŸã‚‰ã€
+        //	å‹•ã‘ã‚‹ã‚ˆã†ã«ã™ã‚‹
         if (!m_isEmerge)
         {
-            //	Œü‚«‚ÌØ‚è‘Ö‚¦
+            //	å‘ãã®åˆ‡ã‚Šæ›¿ãˆ
             _ChangeDir(_enemyManager);
 
-            //	ˆÚ“®ˆ—
-            //	moving ‚Ìƒmƒ‹ƒ€‚ª0ˆÈŠO‚Ì‚Æ‚«‚ÍAˆÚ“®’†
+            //	ç§»å‹•å‡¦ç†
+            //	moving ã®ãƒãƒ«ãƒ ãŒ0ä»¥å¤–ã®ã¨ãã¯ã€ç§»å‹•ä¸­
             VECTOR moving = MoveHelper::AskMoveAmount(m_dir, m_speed);
             m_isMove = VSize(moving) != 0;
 
-            //	ƒ|ƒWƒVƒ‡ƒ“‚ÌXV
+            //	ãƒã‚¸ã‚·ãƒ§ãƒ³ã®æ›´æ–°
             m_pos = VAdd(m_pos, moving);
 
-            //	”ÍˆÍŠOw’è
+            //	ç¯„å›²å¤–æŒ‡å®š
             _OutOfRange();
 
-            //	ËŒ‚ˆ—
+            //	å°„æ’ƒå‡¦ç†
             _Shot(_shot, _stayShot, _soundEffect);
 
-            //	Šp“xˆ—
+            //	è§’åº¦å‡¦ç†
             AngleHelper::AskAngle(m_angle, m_dir);
         }
     }
 
-    //	ƒqƒbƒgƒGƒtƒFƒNƒg
+    //	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
     _OnHitEffect(_soundEffect);
 
-    //	”š”­ƒGƒtƒFƒNƒg
+    //	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
     _OnEffectExplosion(_soundEffect);
 
-    //	ƒAƒCƒeƒ€æ“¾ƒGƒtƒFƒNƒg
+    //	ã‚¢ã‚¤ãƒ†ãƒ å–å¾—ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
     _OnEffectGetItem();
 
-    //	ƒ‚ƒfƒ‹‚Éƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä‚é
+    //	ãƒ¢ãƒ‡ãƒ«ã«ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦ã‚‹
     MV1SetPosition(m_modelHandle, m_pos);
 
-    //	ƒ‚ƒfƒ‹‚ÉŠp“x‚ğŠ„‚è“–‚Ä‚é
+    //	ãƒ¢ãƒ‡ãƒ«ã«è§’åº¦ã‚’å‰²ã‚Šå½“ã¦ã‚‹
     MV1SetRotationXYZ(m_modelHandle, m_angle);
 
-    //	“–‚½‚è”»’è‚ª‚¸‚ê‚é‚Ì‚ÅA
-    //	ƒ‚ƒfƒ‹‚Éƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä‚½Œã‚ÉA
-    //	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV‚·‚é
+    //	å½“ãŸã‚Šåˆ¤å®šãŒãšã‚Œã‚‹ã®ã§ã€
+    //	ãƒ¢ãƒ‡ãƒ«ã«ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦ãŸå¾Œã«ã€
+    //	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°ã™ã‚‹
     _UpdateHitPoint();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆÚ“®Œü‚«‚ÌØ‚è‘Ö‚¦
+//	@brief	ç§»å‹•å‘ãã®åˆ‡ã‚Šæ›¿ãˆ
 //-----------------------------------------------------------------------------
 void DemoPlayer::_ChangeDir(EnemyManager& _enemyManager)
 {
-    //	Œü‚«‚ÌØ‚è‘Ö‚¦
+    //	å‘ãã®åˆ‡ã‚Šæ›¿ãˆ
     const float startTime = 0.0f;
     const bool isStart = m_demoDirChangeTime == startTime;
     if (isStart)
     {
-        //	“GƒŠƒXƒg‚Ìæ“ª‚ğæ“¾
+        //	æ•µãƒªã‚¹ãƒˆã®å…ˆé ­ã‚’å–å¾—
         const int beginningOfEnemyList = 0;
         EnemyBase* enemy = _enemyManager.GetEnemyPtr(beginningOfEnemyList);
 
         if (enemy)
         {
-            //	–Ú“I’n‚ğ‹‚ß‚é
+            //	ç›®çš„åœ°ã‚’æ±‚ã‚ã‚‹
             m_demoTargetPos = enemy->GetPos();
             m_demoTargetPos.x -= MAX_DEMO_DISTANCE_TO_ENEMY;
         }
 
-        //	Œü‚«‚ğ‹‚ß‚é
+        //	å‘ãã‚’æ±‚ã‚ã‚‹
         m_dir = VSub(m_demoTargetPos, m_pos);
 
-        //	³‹K‰»
+        //	æ­£è¦åŒ–
         m_dir = VNorm(m_dir);
     }
 
-    //	Œü‚«‚Ì‰Šú‰»
+    //	å‘ãã®åˆæœŸåŒ–
     const float endTime = 60.0f;
     const bool isInitDir = m_demoDirChangeTime == endTime;
     if (isInitDir) { m_dir = CommonConstant::ORIGIN; }
 
     m_demoDirChangeTime++;
 
-    //	Å‘åˆ—
+    //	æœ€å¤§å‡¦ç†
     const float resetTime = 100.0f;
     const bool isMaxVal = m_demoDirChangeTime > resetTime;
     if (isMaxVal) { m_demoDirChangeTime = 0.0f; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	’e‚Ìˆ—
+//	@brief	å¼¾ã®å‡¦ç†
 //-----------------------------------------------------------------------------
 void DemoPlayer::_Shot(ShotManager& _shot, StayShotManager& _stayShot, SoundEffect& _soundEffect)
 {
-    //	’x‰„ŠÔ‚ª‚È‚­‚È‚Á‚½‚çA’e‚ğ¶¬‚·‚é
+    //	é…å»¶æ™‚é–“ãŒãªããªã£ãŸã‚‰ã€å¼¾ã‚’ç”Ÿæˆã™ã‚‹
     m_shotWaitTime--;
     const bool isActiveShot = m_shotWaitTime <= MAX_DEMO_SHOT_FIRING_TIME;
     if (isActiveShot)
     {
-        //	’eƒŠƒXƒg‚É’Ç‰Á‚·‚é
+        //	å¼¾ãƒªã‚¹ãƒˆã«è¿½åŠ ã™ã‚‹
         _shot.RegisterOnList(ShotManager::SHOT_KIND::PLAYER_SHOT, m_pos, VGet(1.0f, 0.0f, 0.0f), SHOT_SPEED, _soundEffect);
         m_shotWaitTime = MAX_SHOT_WAIT_TIME;
     }
 
-    //	‘ØİƒVƒ‡ƒbƒg‚Ìg—pó‹µ
+    //	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®ä½¿ç”¨çŠ¶æ³
     m_stayShotWaitTime--;
     m_isUseStayShot = (m_stayShotWaitTime <= 0.0f);
 
-    //	”­Ë’x‰„ŠÔ‚ª”­ËŠÔ‚æ‚è¬‚³‚­‚È‚Á‚½‚çA‘Øİ’e‚ğ¶¬‚·‚é
+    //	ç™ºå°„é…å»¶æ™‚é–“ãŒç™ºå°„æ™‚é–“ã‚ˆã‚Šå°ã•ããªã£ãŸã‚‰ã€æ»åœ¨å¼¾ã‚’ç”Ÿæˆã™ã‚‹
     const bool isActiveStayShot = m_stayShotWaitTime <= MAX_DEMO_STAY_SHOT_FIRING_TIME;
     if (isActiveStayShot)
     {
@@ -250,11 +250,11 @@ void DemoPlayer::_Shot(ShotManager& _shot, StayShotManager& _stayShot, SoundEffe
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void DemoPlayer::_FinalRelease()
 {
-    //	ƒGƒtƒFƒNƒg‚Ìíœ
+    //	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å‰Šé™¤
     CommonSafe::Delete(m_effectLaser);
     CommonSafe::Delete(m_effectHit);
     CommonSafe::Delete(m_effectExplosion);

@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	SceneDemo.cpp
-//	@brief	ƒfƒ‚ƒV[ƒ“
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ‡ãƒ¢ã‚·ãƒ¼ãƒ³
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/13
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "SceneDemo.h"
 #include "SceneManager.h"
@@ -34,17 +34,17 @@
 #include "Warning.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float		SceneDemo::END_DEMO_TIME = 1600.0f;						//	ƒfƒ‚‚ÌI—¹
-const float		SceneDemo::MAX_CHANGE_LOSE_SCENE_WAIT_TIME = 60.0f;		//	ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì’x‰„‚ÌÅ‘å
+const float		SceneDemo::END_DEMO_TIME = 1600.0f;						//	ãƒ‡ãƒ¢ã®çµ‚äº†
+const float		SceneDemo::MAX_CHANGE_LOSE_SCENE_WAIT_TIME = 60.0f;		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã®é…å»¶ã®æœ€å¤§
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 SceneDemo::SceneDemo()
 {
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
     m_pPlayerManager = NULL;
     m_pEnemyManager = NULL;
 	m_pBossManager = NULL;
@@ -62,321 +62,321 @@ SceneDemo::SceneDemo()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 SceneDemo::~SceneDemo()
 {
-	//	ÅIŠm”F
+	//	æœ€çµ‚ç¢ºèª
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void SceneDemo::Create()
 {
-	//	ƒ[ƒh‚Ì•`‰æ
+	//	ãƒ­ãƒ¼ãƒ‰ã®æç”»
 	LOADING->Draw();
 
-	//	ƒGƒtƒFƒNƒg‚Ìì¬
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ä½œæˆ
 	m_pEffekseerManager = new EffekseerManager();
 
-    //  ƒvƒŒƒCƒ„[‚Ìì¬
+    //  ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ä½œæˆ
     m_pPlayerManager = new PlayerManager();
     m_pPlayerManager->Create(m_pPlayerManager->PLAYER_INFO::PLAYER_DEMO);
 
-	//	ƒGƒlƒ~[‚Ìì¬
+	//	ã‚¨ãƒãƒŸãƒ¼ã®ä½œæˆ
 	m_pEnemyManager = new EnemyManager();
     m_pEnemyManager->Create();
     m_pEnemyManager->Initialize();
 
-	//	ƒ{ƒX‚Ìì¬
+	//	ãƒœã‚¹ã®ä½œæˆ
 	m_pBossManager = new BossManager();
     m_pBossManager->Create();
     m_pBossManager->Initialize();
 
-	//	ƒVƒ‡ƒbƒg‚Ìì¬
+	//	ã‚·ãƒ§ãƒƒãƒˆã®ä½œæˆ
 	m_pShotManager = new ShotManager();
     m_pShotManager->Create();
 
-	//	‘ØİƒVƒ‡ƒbƒg‚Ìì¬
+	//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®ä½œæˆ
 	m_pStayShotManager = new StayShotManager();
     m_pStayShotManager->Create();
     m_pStayShotManager->Initialize();
 
-	//	ƒAƒCƒeƒ€‚Ìì¬
+	//	ã‚¢ã‚¤ãƒ†ãƒ ã®ä½œæˆ
 	m_pItemManager = new ItemManager();
     m_pItemManager->Create();
 
-	//	ƒ‰ƒCƒtUI‚Ìì¬
+	//	ãƒ©ã‚¤ãƒ•UIã®ä½œæˆ
 	m_pUILife = new UILife();
     m_pUILife->Create();
 
-	//	ƒQ[ƒWUI‚Ìì¬
+	//	ã‚²ãƒ¼ã‚¸UIã®ä½œæˆ
 	m_pUIGauge = new UIGauge();
     m_pUIGauge->Create();
 
-	//	ƒXƒeƒCƒVƒ‡ƒbƒgUI
+	//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUI
 	m_pUIStayShot = new UIStayShot();
     m_pUIStayShot->Create();
 
-	//	ƒfƒ‚ƒvƒŒƒCUI1‚Ìì¬
+	//	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UI1ã®ä½œæˆ
 	m_pUIDemoPlay = new UIDemoPlay();
     m_pUIDemoPlay->Create();
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ìì¬
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®ä½œæˆ
 	m_pUIBackPixel = new UIBackPixel();
 
-	//	ƒtƒHƒ“ƒg‚Ìì¬ˆ—
+	//	ãƒ•ã‚©ãƒ³ãƒˆã®ä½œæˆå‡¦ç†
 	FONT->Create();
 
-	//	ƒTƒEƒ“ƒh‚Ìì¬
+	//	ã‚µã‚¦ãƒ³ãƒ‰ã®ä½œæˆ
 	m_pBackgroundMusic = new Sound("Data/Sound/BGM/Game.mp3");
 	m_pBackgroundMusic->OnPlay(DX_PLAYTYPE_LOOP);
 
-	//	Œx‚Ìì¬
+	//	è­¦å‘Šã®ä½œæˆ
 	m_pWarning = new Warning();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•ú
+//	@brief	è§£æ”¾
 //-----------------------------------------------------------------------------
 void SceneDemo::Release()
 {
-    //	ƒvƒŒƒCƒ„[‚Ì‰ğ•ú
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£æ”¾
     CommonSafe::Release(m_pPlayerManager);
 
-	//	ƒGƒlƒ~[‚Ì‰ğ•ú
+	//	ã‚¨ãƒãƒŸãƒ¼ã®è§£æ”¾
 	CommonSafe::Release(m_pEnemyManager);
 
-	//	ƒ{ƒX‚Ì‰ğ•ú
+	//	ãƒœã‚¹ã®è§£æ”¾
 	CommonSafe::Release(m_pBossManager);
 
-	//	ƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	CommonSafe::Release(m_pShotManager);
 
-	//	‘ØİƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	CommonSafe::Release(m_pStayShotManager);
 
-	//	ƒAƒCƒeƒ€‚Ì‰ğ•ú
+	//	ã‚¢ã‚¤ãƒ†ãƒ ã®è§£æ”¾
 	CommonSafe::Release(m_pItemManager);
 
-	//	ƒ‰ƒCƒtUI‚Ì‰ğ•ú
+	//	ãƒ©ã‚¤ãƒ•UIã®è§£æ”¾
 	CommonSafe::Release(m_pUILife);
 
-	//	ƒQ[ƒWUI‚Ì‰ğ•ú
+	//	ã‚²ãƒ¼ã‚¸UIã®è§£æ”¾
 	CommonSafe::Release(m_pUIGauge);
 
-	//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚Ì‰ğ•ú
+	//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®è§£æ”¾
 	CommonSafe::Release(m_pUIStayShot);
 
-	//	ƒfƒ‚ƒvƒŒƒCUI‚Ì‰ğ•ú
+	//	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UIã®è§£æ”¾
 	CommonSafe::Release(m_pUIDemoPlay);
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ì‰ğ•ú
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®è§£æ”¾
 	CommonSafe::Delete(m_pUIBackPixel);
 
-	//	ƒGƒtƒFƒNƒg‚Ì‰ğ•ú
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®è§£æ”¾
 	CommonSafe::Delete(m_pEffekseerManager);
 
-	//	BGM‚Ì‰ğ•ú
+	//	BGMã®è§£æ”¾
 	CommonSafe::Delete(m_pBackgroundMusic);
 
-	//	Œx‚Ì‰ğ•ú
+	//	è­¦å‘Šã®è§£æ”¾
 	CommonSafe::Delete(m_pWarning);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šú‰»
+//	@brief	åˆæœŸåŒ–
 //-----------------------------------------------------------------------------
 void SceneDemo::Initialize(Pad& _pad, Camera& _camera)
 {
-	//	ŠeƒNƒ‰ƒX‚Ì‰Šúˆ—
+	//	å„ã‚¯ãƒ©ã‚¹ã®åˆæœŸå‡¦ç†
 	_camera.Initialize();
     m_pEnemyManager->Initialize();
     m_pBossManager->Initialize();
     m_pStayShotManager->Initialize();
 
-	//	ƒL[‚Ì“ü—Í‚ğg—p’†‚É‚·‚é
+	//	ã‚­ãƒ¼ã®å…¥åŠ›ã‚’ä½¿ç”¨ä¸­ã«ã™ã‚‹
 	KEY->AllInUse();
 
-	//	ƒpƒbƒh‚Ì“ü—Í‚ğg—p’†‚É‚·‚é
+	//	ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›ã‚’ä½¿ç”¨ä¸­ã«ã™ã‚‹
 	_pad.AllInUse();
 
-	//	ƒfƒ‚ŠÔ‚Ì‰Šú‰»
+	//	ãƒ‡ãƒ¢æ™‚é–“ã®åˆæœŸåŒ–
 	m_demoTime = 0.0f;
 
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XV
+//	@brief	æ›´æ–°
 //-----------------------------------------------------------------------------
 void SceneDemo::Update(Pad& _pad, Camera& _camera, BackGround& _backGround, SoundEffect& _soundEffect, SceneManager* _sceneManager)
 {
-	//	ƒJƒƒ‰‚ÌXVˆ—
+	//	ã‚«ãƒ¡ãƒ©ã®æ›´æ–°å‡¦ç†
 	_camera.Update(*m_pPlayerManager);
 
-	//	ƒvƒŒƒCƒ„[‚ÌXVˆ—
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ›´æ–°å‡¦ç†
     m_pPlayerManager->Update(*m_pShotManager, *m_pStayShotManager, _soundEffect, *m_pUIGauge, *m_pEnemyManager);
 
-	//	ƒGƒlƒ~[‚ÌXVˆ—
+	//	ã‚¨ãƒãƒŸãƒ¼ã®æ›´æ–°å‡¦ç†
 	m_pEnemyManager->Update(*m_pPlayerManager, *m_pShotManager, *m_pBossManager, *m_pItemManager, *m_pBackgroundMusic, _soundEffect, *m_pWarning);
 
-	//	ƒ{ƒX‚ÌXVˆ—
+	//	ãƒœã‚¹ã®æ›´æ–°å‡¦ç†
 	m_pBossManager->Update(*m_pShotManager, _soundEffect);
 
-	//	ƒVƒ‡ƒbƒg‚ÌXVˆ—
+	//	ã‚·ãƒ§ãƒƒãƒˆã®æ›´æ–°å‡¦ç†
 	m_pShotManager->Update();
 
-	//	‘ØİƒVƒ‡ƒbƒg‚ÌXVˆ—
+	//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®æ›´æ–°å‡¦ç†
 	m_pStayShotManager->Update(_soundEffect);
 
-	//	ƒAƒCƒeƒ€‚ÌXVˆ—
+	//	ã‚¢ã‚¤ãƒ†ãƒ ã®æ›´æ–°å‡¦ç†
 	m_pItemManager->Update();
 
-	//	”wŒi‚ÌXVˆ—
+	//	èƒŒæ™¯ã®æ›´æ–°å‡¦ç†
 	_backGround.Update();
 
-	//	”wŒiƒsƒNƒZƒ‹‚ÌXVˆ—
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«ã®æ›´æ–°å‡¦ç†
 	m_pUIBackPixel->Update();
 
-	//	ƒQ[ƒWUI‚ÌXVˆ—
+	//	ã‚²ãƒ¼ã‚¸UIã®æ›´æ–°å‡¦ç†
 	m_pUIGauge->Update(_soundEffect);
 
-	//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚ÌXVˆ—
+	//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®æ›´æ–°å‡¦ç†
 	m_pUIStayShot->Update(*m_pPlayerManager, _soundEffect);
 
-	//	ƒfƒ‚ƒvƒŒƒCUI‚ÌXVˆ—
+	//	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UIã®æ›´æ–°å‡¦ç†
 	m_pUIDemoPlay->Update();
 
-	//	‰‰o‚ÌƒQ[ƒW‚ÌXVˆ—
+	//	æ¼”å‡ºæ™‚ã®ã‚²ãƒ¼ã‚¸ã®æ›´æ–°å‡¦ç†
 	PRODUCTION->Update();
 
-	//	ƒXƒRƒA‚ÌXVˆ—
+	//	ã‚¹ã‚³ã‚¢ã®æ›´æ–°å‡¦ç†
 	SCORE->Update();
 
-	//	ƒGƒtƒFƒNƒg‚ÌXVˆ—
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ›´æ–°å‡¦ç†
 	m_pEffekseerManager->Update();
 
-	//	Œx
+	//	è­¦å‘Š
 	m_pWarning->Update();
 
-	//	‚·‚×‚Ä‚Ì“–‚½‚è”»’è
+	//	ã™ã¹ã¦ã®å½“ãŸã‚Šåˆ¤å®š
 	_AllHitChecker(_soundEffect);
 
-	//	SE‚ÌXV
+	//	SEã®æ›´æ–°
 	_soundEffect.Update();
 
-	//	ƒV[ƒ“‚Ì•ÏX
+	//	ã‚·ãƒ¼ãƒ³ã®å¤‰æ›´
 	_ChangeScene(_pad, _soundEffect, _sceneManager);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æ
+//	@brief	æç”»
 //-----------------------------------------------------------------------------
 void SceneDemo::Draw(BackGround& _backGround)
 {
-	//	”wŒi‚Ì•`‰æˆ—
+	//	èƒŒæ™¯ã®æç”»å‡¦ç†
 	_backGround.Draw();
 
-	//	”wŒiƒsƒNƒZƒ‹‚Ì•`‰æˆ—
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«ã®æç”»å‡¦ç†
 	m_pUIBackPixel->Draw();
 
-	//	ƒGƒlƒ~[‚Ì•`‰æˆ—
+	//	ã‚¨ãƒãƒŸãƒ¼ã®æç”»å‡¦ç†
 	m_pEnemyManager->Draw();
 
-	//	ƒ{ƒX‚Ì•`‰æˆ—
+	//	ãƒœã‚¹ã®æç”»å‡¦ç†
 	m_pBossManager->Draw();
 
-	//	ƒVƒ‡ƒbƒg‚Ì•`‰æˆ—
+	//	ã‚·ãƒ§ãƒƒãƒˆã®æç”»å‡¦ç†
 	m_pShotManager->Draw();
 
-	//	ƒvƒŒƒCƒ„[‚Ì•`‰æˆ—
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æç”»å‡¦ç†
     m_pPlayerManager->Draw();
 
-	//	ƒAƒCƒeƒ€‚Ì•`‰æˆ—
+	//	ã‚¢ã‚¤ãƒ†ãƒ ã®æç”»å‡¦ç†
 	m_pItemManager->Draw();
 
-	//	ƒ‰ƒCƒtUI‚Ì•`‰æˆ—
+	//	ãƒ©ã‚¤ãƒ•UIã®æç”»å‡¦ç†
 	m_pUILife->Draw(*m_pPlayerManager);
 
-	//	ƒQ[ƒWUI‚Ì•`‰æˆ—
+	//	ã‚²ãƒ¼ã‚¸UIã®æç”»å‡¦ç†
 	m_pUIGauge->Draw();
 
-	//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚Ì•`‰æˆ—
+	//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®æç”»å‡¦ç†
 	m_pUIStayShot->Draw(*m_pPlayerManager);
 
-	//	ƒXƒRƒA‚Ì•`‰æˆ—
+	//	ã‚¹ã‚³ã‚¢ã®æç”»å‡¦ç†
 	SCORE->Draw();
 
-	//	‰‰o‚ÌƒQ[ƒW‚Ì•`‰æˆ—
+	//	æ¼”å‡ºæ™‚ã®ã‚²ãƒ¼ã‚¸ã®æç”»å‡¦ç†
 	PRODUCTION->Draw();
 
-	//	ƒfƒ‚ƒvƒŒƒCUI‚Ì•`‰æˆ—
+	//	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UIã®æç”»å‡¦ç†
 	m_pUIDemoPlay->Draw();
 
-	//	ƒGƒtƒFƒNƒg‚Ì•`‰æˆ—
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æç”»å‡¦ç†
 	m_pEffekseerManager->Draw();
 
-	//	ƒƒjƒ…[‚Ì•`‰æˆ—
+	//	ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã®æç”»å‡¦ç†
 	MENU->Draw();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‚·‚×‚Ä‚Ì“–‚½‚è”»’è
+//	@brief	ã™ã¹ã¦ã®å½“ãŸã‚Šåˆ¤å®š
 //-----------------------------------------------------------------------------
 void SceneDemo::_AllHitChecker(SoundEffect& _soundEffect)
 {
-	//	‰‰o’†‚Í“–‚½‚è”»’è‚ğ–³‹
+	//	æ¼”å‡ºä¸­ã¯å½“ãŸã‚Šåˆ¤å®šã‚’ç„¡è¦–
 	const bool isProduction = PRODUCTION->GetIsSceneProduction() || PRODUCTION->GetIsSpecialProduction() || PRODUCTION->GetIsClearProduction();
 	if (!isProduction)
 	{
-		//	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
-		//	ƒGƒlƒ~[‚Ì€–S‚ÉƒAƒCƒeƒ€‚Ì¶¬‚às‚¤
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
+		//	ã‚¨ãƒãƒŸãƒ¼ã®æ­»äº¡æ™‚ã«ã‚¢ã‚¤ãƒ†ãƒ ã®ç”Ÿæˆã‚‚è¡Œã†
 		HitChecker::PlayerToEnemy(*m_pPlayerManager, *m_pEnemyManager, *m_pItemManager);
 
-		//	ƒvƒŒƒCƒ„[‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 		HitChecker::PlayerToMediumBoss(*m_pPlayerManager, *m_pBossManager);
 
-		//	ƒvƒŒƒCƒ„[‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 		HitChecker::PlayerToLastBoss(*m_pPlayerManager, *m_pBossManager);
 
-		//	ƒvƒŒƒCƒ„[‚ÆƒGƒlƒ~[‚Ì’e‚Ì“–‚½‚è”»’è
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¨ãƒãƒŸãƒ¼ã®å¼¾ã®å½“ãŸã‚Šåˆ¤å®š
 		HitChecker::PlayerToEnemyShot(*m_pPlayerManager, *m_pShotManager);
 
-		//	ƒvƒŒƒCƒ„[‚Ì’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
-		//	ƒGƒlƒ~[‚Ì€–S‚ÉƒAƒCƒeƒ€‚Ì¶¬‚às‚¤
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
+		//	ã‚¨ãƒãƒŸãƒ¼ã®æ­»äº¡æ™‚ã«ã‚¢ã‚¤ãƒ†ãƒ ã®ç”Ÿæˆã‚‚è¡Œã†
 		HitChecker::PlayerShotToEnemy(*m_pShotManager, *m_pEnemyManager, *m_pItemManager, *m_pUIGauge);
 
-		//	ƒvƒŒƒCƒ„[‚Ì’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 		HitChecker::PlayerShotToMediumBoss(*m_pShotManager, *m_pBossManager, *m_pUIGauge);
 
-		//	ƒvƒŒƒCƒ„[‚Ì’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 		HitChecker::PlayerShotToLastBoss(*m_pPlayerManager, *m_pShotManager, *m_pBossManager, *m_pUIGauge);
 
-		//	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆƒGƒlƒ~[‚Ì“–‚½‚è”»’è
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ã‚¨ãƒãƒŸãƒ¼ã®å½“ãŸã‚Šåˆ¤å®š
 		HitChecker::PlayerStayShotToEnemy(*m_pStayShotManager, *m_pEnemyManager, *m_pItemManager, *m_pUIGauge);
 
-		//	ƒvƒŒƒCƒ„[‘Øİ’e‚Æ’†ƒ{ƒX‚Ì“–‚½‚è”»’è
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨ä¸­ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 		HitChecker::PlayerStayShotToMediumBoss(*m_pStayShotManager, *m_pBossManager, *m_pUIGauge);
 
-		//	ƒvƒŒƒCƒ„[‘Øİ’e‚ÆÅIƒ{ƒX‚Ì“–‚½‚è”»’è
+		//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼æ»åœ¨å¼¾ã¨æœ€çµ‚ãƒœã‚¹ã®å½“ãŸã‚Šåˆ¤å®š
 		HitChecker::PlayerStayShotToLastBoss(*m_pPlayerManager, *m_pStayShotManager, *m_pBossManager, *m_pUIGauge);
 	}
 
-	//	ƒvƒŒƒCƒ„[‚ÆƒAƒCƒeƒ€‚Ì“–‚½‚è”»’è
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¨ã‚¢ã‚¤ãƒ†ãƒ ã®å½“ãŸã‚Šåˆ¤å®š
 	HitChecker::PlayerToItem(*m_pPlayerManager, *m_pItemManager, _soundEffect, *m_pUIGauge);
 
-	//	•KE‹Z‚Ì“–‚½‚è”»’è
+	//	å¿…æ®ºæŠ€ã®å½“ãŸã‚Šåˆ¤å®š
 	HitChecker::PlayerSpecialAttackToAllObject(*m_pPlayerManager, *m_pEnemyManager, *m_pBossManager, *m_pShotManager, *m_pItemManager);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒV[ƒ“‚ÌØ‚è‘Ö‚¦
+//	@brief	ã‚·ãƒ¼ãƒ³ã®åˆ‡ã‚Šæ›¿ãˆ
 //-----------------------------------------------------------------------------
 void SceneDemo::_ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManager* _sceneManager)
 {
-	//	ƒvƒŒƒCƒ„[‚Ì€–S
+	//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®æ­»äº¡æ™‚
 	PlayerBase* player = m_pPlayerManager->GetPlayerPtr();
 	const bool isLoseActive = !player->GetIsAlive();
 	if (isLoseActive)
@@ -391,59 +391,59 @@ void SceneDemo::_ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManager*
 	const bool isNextActive = isKeyActive || _pad.GetXInputPushButton(PadInfo::PAD_BUTTON_KIND::BUTTON_ALL);
 	if (isNextActive) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_MENU_DECISION); }
 
-	//	ƒfƒ‚I—¹‚©AƒL[“ü—Í‚ª‚ ‚é‚Æ‚«
+	//	ãƒ‡ãƒ¢çµ‚äº†ã‹ã€ã‚­ãƒ¼å…¥åŠ›ãŒã‚ã‚‹ã¨ã
 	m_demoTime++;
 	const bool isDemoEnd = m_demoTime >= END_DEMO_TIME;
 	const bool isActive = isDemoEnd || isNextActive;
 	
-	//	ƒ^ƒCƒgƒ‹ƒV[ƒ“‚Ö
+	//	ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³ã¸
 	if (isActive) { _sceneManager->ChangeScene(SceneManager::SCENE_KIND::TITLE_SCENE); }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void SceneDemo::_FinalRelease()
 {
-    //	ƒvƒŒƒCƒ„[‚Ì‰ğ•ú
+    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®è§£æ”¾
     CommonSafe::Release(m_pPlayerManager);
 
-	//	ƒGƒlƒ~[‚Ì‰ğ•ú
+	//	ã‚¨ãƒãƒŸãƒ¼ã®è§£æ”¾
 	CommonSafe::Release(m_pEnemyManager);
 
-	//	ƒ{ƒX‚Ì‰ğ•ú
+	//	ãƒœã‚¹ã®è§£æ”¾
 	CommonSafe::Release(m_pBossManager);
 
-	//	ƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	CommonSafe::Release(m_pShotManager);
 
-	//	‘ØİƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	CommonSafe::Release(m_pStayShotManager);
 
-	//	ƒAƒCƒeƒ€‚Ì‰ğ•ú
+	//	ã‚¢ã‚¤ãƒ†ãƒ ã®è§£æ”¾
 	CommonSafe::Release(m_pItemManager);
 
-	//	ƒ‰ƒCƒtUI‚Ì‰ğ•ú
+	//	ãƒ©ã‚¤ãƒ•UIã®è§£æ”¾
 	CommonSafe::Release(m_pUILife);
 
-	//	ƒQ[ƒWUI‚Ì‰ğ•ú
+	//	ã‚²ãƒ¼ã‚¸UIã®è§£æ”¾
 	CommonSafe::Release(m_pUIGauge);
 
-	//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚Ì‰ğ•ú
+	//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®è§£æ”¾
 	CommonSafe::Release(m_pUIStayShot);
 
-	//	ƒfƒ‚ƒvƒŒƒCUI‚Ì‰ğ•ú
+	//	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UIã®è§£æ”¾
 	CommonSafe::Release(m_pUIDemoPlay);
 
-	//	”wŒiƒsƒNƒZƒ‹UI‚Ì‰ğ•ú
+	//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UIã®è§£æ”¾
 	CommonSafe::Delete(m_pUIBackPixel);
 
-	//	ƒGƒtƒFƒNƒg‚Ì‰ğ•ú
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®è§£æ”¾
 	CommonSafe::Delete(m_pEffekseerManager);
 
-	//	BGM‚Ì‰ğ•ú
+	//	BGMã®è§£æ”¾
 	CommonSafe::Delete(m_pBackgroundMusic);
 
-	//	Œx‚Ì‰ğ•ú
+	//	è­¦å‘Šã®è§£æ”¾
 	CommonSafe::Delete(m_pWarning);
 }

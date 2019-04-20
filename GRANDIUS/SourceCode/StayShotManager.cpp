@@ -1,34 +1,34 @@
-
+ï»¿
 //=============================================================================
 //	@file	StayShotManager.h
-//	@brief	ƒVƒ‡ƒbƒgƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/12
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "StayShotManager.h"
 #include "StayShot.h"
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float StayShotManager::MAX_X_POS = 110.0f;	//	XÀ•W‚ÌÅ‘å
+const float StayShotManager::MAX_X_POS = 110.0f;	//	Xåº§æ¨™ã®æœ€å¤§
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 StayShotManager::StayShotManager()
 {
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
 	for (int i = 0; i < CommonConstant::MAX_STAY_SHOT_NUM; i++)
 	{
 		m_pStayShot[i] = NULL;
@@ -36,40 +36,40 @@ StayShotManager::StayShotManager()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 StayShotManager::~StayShotManager()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShotManager::Create()
 {
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	for (int i = 0; i < CommonConstant::MAX_STAY_SHOT_NUM; i++)
 	{
-		//	ƒVƒ‡ƒbƒg‚Ìì¬
+		//	ã‚·ãƒ§ãƒƒãƒˆã®ä½œæˆ
 		m_pStayShot[i] = new StayShot();
 
-		//	–¢g—pƒŠƒXƒg‚É“o˜^
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		m_unusedList.push_back(m_pStayShot[i]);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShotManager::Release()
 {
-	//	ƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚½‚çíœ
+	//	ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ãŸã‚‰å‰Šé™¤
 	if (!m_unusedList.empty()) { m_unusedList.clear(); }
 	if (!m_useList.empty()) { m_useList.clear(); }
 
-	//	ƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	for (int i = 0; i < CommonConstant::MAX_STAY_SHOT_NUM; i++)
 	{
 		CommonSafe::Delete(m_pStayShot[i]);
@@ -77,14 +77,14 @@ void StayShotManager::Release()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShotManager::Initialize()
 {
-	//	–¢g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_unusedList.empty())
 	{
-		//	‰Šú‰»
+		//	åˆæœŸåŒ–
 		std::list<StayShot*>::iterator 	ite;
 		for (ite = m_unusedList.begin(); ite != m_unusedList.end(); ite++)
 		{
@@ -94,67 +94,67 @@ void StayShotManager::Initialize()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShotManager::Update(SoundEffect& _soundEffect)
 {
-	//	•KE‹Z‚Ì‚Æ‚«‚ÍXV‚µ‚È‚¢
+	//	å¿…æ®ºæŠ€ã®ã¨ãã¯æ›´æ–°ã—ãªã„
 	const bool isNotSpecialProduction = !PRODUCTION->GetIsSpecialProduction();
 	if (isNotSpecialProduction)
 	{
-		//	ƒŠƒXƒg‚ÌXV
+		//	ãƒªã‚¹ãƒˆã®æ›´æ–°
 		_UpdateList(_soundEffect);
 
-		//	ƒŠƒXƒg‚©‚ç‰ğ•ú
+		//	ãƒªã‚¹ãƒˆã‹ã‚‰è§£æ”¾
 		_RemoveFromList();
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚É“o˜^
+//	@brief	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 //-----------------------------------------------------------------------------
 void StayShotManager::RegisterOnList(const VECTOR _startPos)
 {
-	//	–¢g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	const bool isAlreadyEntry = !m_unusedList.empty();
 	if (isAlreadyEntry)
 	{
-		//	–¢g—pƒŠƒXƒg‚Ìæ“ª‚ÌƒCƒeƒŒ[ƒ^[‚ğæ‚é
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã®å…ˆé ­ã®ã‚¤ãƒ†ãƒ¬ãƒ¼ã‚¿ãƒ¼ã‚’å–ã‚‹
 		std::list<StayShot*>::iterator 	ite;
 		ite = m_unusedList.begin();
 
-		//	‚Ü‚¾Œü‚«‚ğİ’è‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚Íİ’è‚·‚é
+		//	ã¾ã å‘ãã‚’è¨­å®šã—ã¦ã„ãªã„ã¨ãã¯è¨­å®šã™ã‚‹
 		const bool isNotSet = !(*ite)->GetIsOneTime();
 		if (isNotSet)
 		{
-			//	“à—e‚Ì‰Šú‰»
+			//	å†…å®¹ã®åˆæœŸåŒ–
 			(*ite)->SetStartPos(_startPos);
 			(*ite)->SetIsOneTime(true);
 		}
 
-		//	–¢g—pƒŠƒXƒg‚©‚çg—pƒŠƒXƒg‚É“o˜^
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		m_useList.push_back(*ite);
 
-		//	–¢g—pƒŠƒXƒg‚©‚çíœ
+		//	æœªä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 		m_unusedList.remove(*ite);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒVƒ‡ƒbƒg‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ìæ“¾
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆã¸ã®ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 //-----------------------------------------------------------------------------
 StayShot* StayShotManager::GetStayShotPtr(const int _num)
 {
 	int counter = 0;
 
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<StayShot*>::iterator 	ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	_num ‚Æˆê’v‚µ‚½ƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+			//	_num ã¨ä¸€è‡´ã—ãŸãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
 			const bool isSame = counter == _num;
 			if (isSame) { return (*ite); }
 			counter++;
@@ -165,48 +165,48 @@ StayShot* StayShotManager::GetStayShotPtr(const int _num)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚ÌXV
+//	@brief	ãƒªã‚¹ãƒˆã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void StayShotManager::_UpdateList(SoundEffect& _soundEffect)
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<StayShot*>::iterator 	ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	XVˆ—
+			//	æ›´æ–°å‡¦ç†
 			(*ite)->Update(_soundEffect);
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void StayShotManager::_RemoveFromList()
 {
-	//	g—pƒŠƒXƒg‚ª‹ó‚Å‚È‚¢‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆãŒç©ºã§ãªã„ã¨ã
 	if (!m_useList.empty())
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<StayShot*>::iterator 	ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	”ÍˆÍŠO‚©AƒVƒ‡ƒbƒg‚ªI—¹‚µ‚Ä‚¢‚½‚çA
-			//	ƒŠƒXƒg‚©‚çíœ‚·‚é
+			//	ç¯„å›²å¤–ã‹ã€ã‚·ãƒ§ãƒƒãƒˆãŒçµ‚äº†ã—ã¦ã„ãŸã‚‰ã€
+			//	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 			const bool isArrivalRight = (*ite)->GetPos().x >= MAX_X_POS;
 			const bool isActive = isArrivalRight || (*ite)->GetIsShotEnd();
 			if (isActive)
 			{
-				//	‰Šú‰»
+				//	åˆæœŸåŒ–
 				(*ite)->Initialize();
 
-				//	g—pƒŠƒXƒg‚©‚ç–¢g—pƒŠƒXƒg‚É“o˜^
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰æœªä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 				m_unusedList.push_back(*ite);
 
-				//	g—pƒŠƒXƒg‚©‚çíœ
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 				m_useList.remove(*ite);
 
 				break;
@@ -216,15 +216,15 @@ void StayShotManager::_RemoveFromList()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void StayShotManager::_FinalRelease()
 {
-	//	ƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚½‚çíœ
+	//	ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ãŸã‚‰å‰Šé™¤
 	if (!m_unusedList.empty()) { m_unusedList.clear(); }
 	if (!m_useList.empty()) { m_useList.clear(); }
 
-	//	ƒVƒ‡ƒbƒg‚Ì‰ğ•ú
+	//	ã‚·ãƒ§ãƒƒãƒˆã®è§£æ”¾
 	for (int i = 0; i < CommonConstant::MAX_STAY_SHOT_NUM; i++)
 	{
 		CommonSafe::Delete(m_pStayShot[i]);

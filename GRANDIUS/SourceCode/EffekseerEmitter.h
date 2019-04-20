@@ -1,109 +1,109 @@
-
+ï»¿
 //=============================================================================
 //	@file	EffekseerEmitter.h
 //	@brief	EffekseerEmitter
-//	@autor	‘Š’m ‘ñ–í
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/26
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "EffekseerForDXLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	EffekseerEmitterƒNƒ‰ƒX
+//	@brief	EffekseerEmitterã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class EffekseerEmitter final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	EffekseerEmitter(const char* _fileName);
 	~EffekseerEmitter();
 
-	//	ƒGƒtƒFƒNƒg‚ÌÄ¶ˆ—
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿå‡¦ç†
 	void OnPlayEffect();
 
-	//	ƒGƒtƒFƒNƒg‚ÌI—¹ˆ—
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†å‡¦ç†
 	void OnEndEffect();
 
-	//	ƒGƒtƒFƒNƒg‚ÌXVˆ—
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®æ›´æ–°å‡¦ç†
 	void Update();
 
-	//	Ä¶ŠÔ‚Ì‰ÁZ
+	//	å†ç”Ÿæ™‚é–“ã®åŠ ç®—
 	void AddPlayTime() { m_playTime++; }
 
 //==================== setter =====================//
 
-	//	ƒ|ƒWƒVƒ‡ƒ“‚Ì setter
+	//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã® setter
 	void SetPos(const VECTOR _set) { m_pos = _set; m_isUsePos = true; }
 
-	//	Šp“x‚Ì setter
+	//	è§’åº¦ã® setter
 	void SetAngle(const VECTOR _set) { m_angle = _set; m_isUseAngle = true; }
 
-	//	”ä—¦‚Ì setter
+	//	æ¯”ç‡ã® setter
 	void SetScale(const VECTOR _set) { m_scale = _set; m_isUseScale = true; }
 
-	//	Ä¶‘¬“x‚Ì setter
+	//	å†ç”Ÿé€Ÿåº¦ã® setter
 	void SetPlaySpeed(const float _set) { m_speed = _set; m_isUseSpeed = true; }
 
-	//	Ä¶’†‚©‚Ì setter
+	//	å†ç”Ÿä¸­ã‹ã® setter
 	void SetIsPlayEffect(const bool _set) { m_isPlayEffect = _set; }
 
-	//	ŠJn‚·‚é‚©‚Ì setter
+	//	é–‹å§‹ã™ã‚‹ã‹ã® setter
 	void SetIsStartEffect(const bool _set) { m_isStartEffect = _set; }
 
-	//	Ä¶ŠÔ‚Ì setter
+	//	å†ç”Ÿæ™‚é–“ã® setter
 	void SetPlayTime(const float _set) { m_playTime = _set; }
 
 //==================== getter =====================//
 	
-	//	Ä¶‘¬“x‚Ì getter
+	//	å†ç”Ÿé€Ÿåº¦ã® getter
 	const float GetPlaySpeed() const;
 
-	//	Ä¶ŠÔ‚Ì getter
+	//	å†ç”Ÿæ™‚é–“ã® getter
 	const float& GetPlayTime() const { return m_playTime; }
 
-	//	Ä¶’†‚©‚Ì getter
+	//	å†ç”Ÿä¸­ã‹ã® getter
 	const bool& GetIsPlayEffect() const { return m_isPlayEffect; }
 
-	//	ŠJn‚·‚é‚©‚Ì getter
+	//	é–‹å§‹ã™ã‚‹ã‹ã® getter
 	const bool& GetIsStartEffect() const { return m_isStartEffect; }
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int			m_effectResourceHandle;		//	ƒGƒtƒFƒNƒgƒŠƒ\[ƒXƒnƒ“ƒhƒ‹
-	int			m_playingEffectHandle;		//	Ä¶’†‚ÌƒGƒtƒFƒNƒg‚Ìƒnƒ“ƒhƒ‹
-	VECTOR		m_pos;						//	ƒ|ƒWƒVƒ‡ƒ“
-	VECTOR		m_scale;					//	Šg‘å—¦
-	VECTOR		m_angle;					//	Šp“x
-	float		m_speed;					//	‘¬“x
-	bool		m_isUsePos;					//	ƒ|ƒWƒVƒ‡ƒ“‚Ìİ’è‚ğg‚¤
-	bool		m_isUseAngle;				//	Šp“x‚Ìİ’è‚ğg‚¤
-	bool		m_isUseScale;				//	Šg‘å—¦‚Ìİ’è‚ğg‚¤
-	bool		m_isUseSpeed;				//	‘¬“x‚Ìİ’è‚ğg‚¤
-	bool		m_isPlayEffect;				//	Ä¶’†‚©‚Ìƒtƒ‰ƒO
-	bool		m_isStartEffect;			//	ŠJn‚·‚é‚©‚Ìƒtƒ‰ƒO
-	float		m_playTime;					//	ƒGƒtƒFƒNƒg‚ÌÄ¶ŠÔ
-	bool		m_isPrevConditions;			//	‘O‚ÌğŒ‚Ì•Û‘¶
+	int			m_effectResourceHandle;		//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆãƒªã‚½ãƒ¼ã‚¹ãƒãƒ³ãƒ‰ãƒ«
+	int			m_playingEffectHandle;		//	å†ç”Ÿä¸­ã®ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ãƒãƒ³ãƒ‰ãƒ«
+	VECTOR		m_pos;						//	ãƒã‚¸ã‚·ãƒ§ãƒ³
+	VECTOR		m_scale;					//	æ‹¡å¤§ç‡
+	VECTOR		m_angle;					//	è§’åº¦
+	float		m_speed;					//	é€Ÿåº¦
+	bool		m_isUsePos;					//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã®è¨­å®šã‚’ä½¿ã†
+	bool		m_isUseAngle;				//	è§’åº¦ã®è¨­å®šã‚’ä½¿ã†
+	bool		m_isUseScale;				//	æ‹¡å¤§ç‡ã®è¨­å®šã‚’ä½¿ã†
+	bool		m_isUseSpeed;				//	é€Ÿåº¦ã®è¨­å®šã‚’ä½¿ã†
+	bool		m_isPlayEffect;				//	å†ç”Ÿä¸­ã‹ã®ãƒ•ãƒ©ã‚°
+	bool		m_isStartEffect;			//	é–‹å§‹ã™ã‚‹ã‹ã®ãƒ•ãƒ©ã‚°
+	float		m_playTime;					//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®å†ç”Ÿæ™‚é–“
+	bool		m_isPrevConditions;			//	å‰ã®æ¡ä»¶ã®ä¿å­˜
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
 };

@@ -1,121 +1,121 @@
-
+ï»¿
 //=============================================================================
 //	@file	Production.h
-//	@brief	‰‰oƒNƒ‰ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	æ¼”å‡ºã‚¯ãƒ©ã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/24
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct Rect;
 
 //-----------------------------------------------------------------------------
-//	@brief	‰‰oƒNƒ‰ƒX
+//	@brief	æ¼”å‡ºã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class Production final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒfƒXƒgƒ‰ƒNƒ^
+	//	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~Production();
 
-	//	ƒCƒ“ƒXƒ^ƒ“ƒX‚Ì¶¬
+	//	ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã®ç”Ÿæˆ
 	static Production* GetInstance()
 	{
 		static Production s_instance;
 		return &s_instance;
 	}
 
-	//	XV
+	//	æ›´æ–°
 	void Update();
 
-	//	•`‰æ
+	//	æç”»
 	void Draw();
 
-	//	•KE‹Z‚ÌƒŠƒZƒbƒg
+	//	å¿…æ®ºæŠ€ã®ãƒªã‚»ãƒƒãƒˆ
 	void ResetSpecialProduction();
 
-	//	‚·‚×‚Ä‚ÌƒŠƒZƒbƒg
+	//	ã™ã¹ã¦ã®ãƒªã‚»ãƒƒãƒˆ
 	void AllReset();
 
 //==================== getter =====================//
 
-	//	ƒQ[ƒ€’†‚ÌƒV[ƒ“ˆÚ“®‚Ì‰‰o‚Ì getter
+	//	ã‚²ãƒ¼ãƒ ä¸­ã®ã‚·ãƒ¼ãƒ³ç§»å‹•ã®æ¼”å‡ºã® getter
 	const bool GetIsSceneProduction() const { return m_isSceneProduction; }
 
-	//	•KE‹Zg—p‚Ì‰‰o‚Ì getter
+	//	å¿…æ®ºæŠ€ä½¿ç”¨æ™‚ã®æ¼”å‡ºã® getter
 	const bool GetIsSpecialProduction() const { return m_isSpecialProduction; }
 
-	//	ƒNƒŠƒA‚Ì‰‰o‚Ì getter
+	//	ã‚¯ãƒªã‚¢æ™‚ã®æ¼”å‡ºã® getter
 	const bool GetIsClearProduction() const { return m_isClearProduction; }
 
-	//	ƒ^ƒCƒgƒ‹‚Ì‰‰o‚Ì getter
+	//	ã‚¿ã‚¤ãƒˆãƒ«æ™‚ã®æ¼”å‡ºã® getter
 	const bool GetIsTitleProduction() const { return m_isTitleProduction; }
 
 //==================== setter =====================//
 
-	//	ƒQ[ƒ€’†‚ÌƒV[ƒ“ˆÚ“®‚Ì‰‰o‚Ì setter
+	//	ã‚²ãƒ¼ãƒ ä¸­ã®ã‚·ãƒ¼ãƒ³ç§»å‹•ã®æ¼”å‡ºã® setter
 	void SetIsSceneProduction(const bool _set) { m_isSceneProduction = _set; }
 
-	//	•KE‹Zg—p‚Ì‰‰o‚Ì setter
+	//	å¿…æ®ºæŠ€ä½¿ç”¨æ™‚ã®æ¼”å‡ºã® setter
 	void SetIsSpecialProduction(const bool _set) { m_isSpecialProduction = _set; }
 
-	//	ƒNƒŠƒA‚Ì‰‰o‚Ì setter
+	//	ã‚¯ãƒªã‚¢æ™‚ã®æ¼”å‡ºã® setter
 	void SetIsClearProduction(const bool _set) { m_isClearProduction = _set; }
 
-	//	ƒ^ƒCƒgƒ‹‚Ì‰‰o‚Ì setter
+	//	ã‚¿ã‚¤ãƒˆãƒ«æ™‚ã®æ¼”å‡ºã® setter
 	void SetIsTitleProduction(const bool _set) { m_isTitleProduction = _set; }
 
 private:
 
-//================== ƒVƒ“ƒOƒ‹ƒgƒ“ ==================//
+//================== ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ ==================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	Production();
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒQ[ƒW‚ÌoŒ»
+	//	ã‚²ãƒ¼ã‚¸ã®å‡ºç¾
 	void _EmergenceGauge();
 
-	//	ƒQ[ƒW‚ğŒ³‚É–ß‚·
+	//	ã‚²ãƒ¼ã‚¸ã‚’å…ƒã«æˆ»ã™
 	void _RestoreGauge();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	Rect	m_gaugeBar1;					//	‰‰o’†‚ÌƒQ[ƒW
-	Rect	m_gaugeBar2;					//	‰‰o’†‚ÌƒQ[ƒW
-	int		m_gaugeColor;					//	ƒQ[ƒW‚ÌF
-	bool	m_isSceneProduction;			//	ƒQ[ƒ€’†‚ÌƒV[ƒ“ˆÚ“®‚Ì‰‰o’†ƒtƒ‰ƒO
-	bool	m_isSpecialProduction;			//	•KE‹Zg—p‚Ì‰‰o’†ƒtƒ‰ƒO
-	bool	m_isClearProduction;			//	ƒNƒŠƒA‚Ì‰‰o’†ƒtƒ‰ƒO
-	bool	m_isTitleProduction;			//	ƒ^ƒCƒgƒ‹‚Ì‰‰o
-	float	m_specialProductionTime;		//	•KE‹Zg—p‚ÌŠÔ
+	Rect	m_gaugeBar1;					//	æ¼”å‡ºä¸­ã®ã‚²ãƒ¼ã‚¸
+	Rect	m_gaugeBar2;					//	æ¼”å‡ºä¸­ã®ã‚²ãƒ¼ã‚¸
+	int		m_gaugeColor;					//	ã‚²ãƒ¼ã‚¸ã®è‰²
+	bool	m_isSceneProduction;			//	ã‚²ãƒ¼ãƒ ä¸­ã®ã‚·ãƒ¼ãƒ³ç§»å‹•ã®æ¼”å‡ºä¸­ãƒ•ãƒ©ã‚°
+	bool	m_isSpecialProduction;			//	å¿…æ®ºæŠ€ä½¿ç”¨æ™‚ã®æ¼”å‡ºä¸­ãƒ•ãƒ©ã‚°
+	bool	m_isClearProduction;			//	ã‚¯ãƒªã‚¢æ™‚ã®æ¼”å‡ºä¸­ãƒ•ãƒ©ã‚°
+	bool	m_isTitleProduction;			//	ã‚¿ã‚¤ãƒˆãƒ«æ™‚ã®æ¼”å‡º
+	float	m_specialProductionTime;		//	å¿…æ®ºæŠ€ä½¿ç”¨æ™‚ã®æ™‚é–“
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const VECTOR	GAUGE_START_VERTEX_1;		//	ƒQ[ƒW‚ÌŠJn’¸“_‚P
-	static const VECTOR	GAUGE_START_VERTEX_2;		//	ƒQ[ƒW‚ÌŠJn’¸“_‚Q
-	static const VECTOR	GAUGE_END_VERTEX_1;			//	ƒQ[ƒW‚ÌI—¹’¸“_‚P
-	static const VECTOR	GAUGE_END_VERTEX_2;			//	ƒQ[ƒW‚ÌI—¹’¸“_‚Q
-	static const float	MAX_Y_AXIS_1;				//	ƒQ[ƒW‚ÌÅ‘å’l
-	static const float	MAX_Y_AXIS_2;				//	ƒQ[ƒW‚ÌÅ‘å’l
-	static const float	GAUGE_ADD_SPEED;			//	ƒQ[ƒW‚Ì‰ÁZ‘¬“x‚P
+	static const VECTOR	GAUGE_START_VERTEX_1;		//	ã‚²ãƒ¼ã‚¸ã®é–‹å§‹é ‚ç‚¹ï¼‘
+	static const VECTOR	GAUGE_START_VERTEX_2;		//	ã‚²ãƒ¼ã‚¸ã®é–‹å§‹é ‚ç‚¹ï¼’
+	static const VECTOR	GAUGE_END_VERTEX_1;			//	ã‚²ãƒ¼ã‚¸ã®çµ‚äº†é ‚ç‚¹ï¼‘
+	static const VECTOR	GAUGE_END_VERTEX_2;			//	ã‚²ãƒ¼ã‚¸ã®çµ‚äº†é ‚ç‚¹ï¼’
+	static const float	MAX_Y_AXIS_1;				//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§å€¤
+	static const float	MAX_Y_AXIS_2;				//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§å€¤
+	static const float	GAUGE_ADD_SPEED;			//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—é€Ÿåº¦ï¼‘
 
 };
 

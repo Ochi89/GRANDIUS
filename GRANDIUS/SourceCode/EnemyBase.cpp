@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	EnemyBase.cpp
-//	@brief	ƒGƒlƒ~[ƒx[ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒ™ãƒ¼ã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "EnemyBase.h"
 #include "Common.h"
@@ -18,25 +18,25 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const VECTOR	EnemyBase::RECT_CORRECTION = VGet(6.0f, 6.0f, 6.0f);				//	’†SÀ•W‚Ì•â³
-const float		EnemyBase::SHOT_SPEED = 0.8f;										//	ƒVƒ‡ƒbƒg‚Ì‘¬“x
-const float		EnemyBase::MAX_WAIT_TIME = 100.0f;									//	ƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-const float		EnemyBase::HIT_RADIUS = 6.0f;										//	“–‚½‚è”»’è—p‚Ì”¼Œa
-const float		EnemyBase::CENTER_CORRECTION = -1.0f;								//	’†SÀ•W‚Ì•â³
-const COLOR_F	EnemyBase::COLOR_NORMAL = GetColorF(1.0f, 1.0f, 1.0f, 1.0f);		//	ƒfƒtƒHƒ‹ƒgF
-const COLOR_F	EnemyBase::COLOR_DECAY_NORMAL = GetColorF(0.0f, 0.0f, 0.0f, 1.0f);	//	ƒfƒtƒHƒ‹ƒgF‚ÌŒ¸Š
-const COLOR_F	EnemyBase::COLOR_RED = GetColorF(1.0f, 0.0f, 0.0f, 1.0f);			//	ÔF
-const COLOR_F	EnemyBase::COLOR_DECAY_RED = GetColorF(0.5f, 0.0f, 0.0f, 1.0f);		//	ÔF‚ÌŒ¸Š
+const VECTOR	EnemyBase::RECT_CORRECTION = VGet(6.0f, 6.0f, 6.0f);				//	ä¸­å¿ƒåº§æ¨™ã®è£œæ­£
+const float		EnemyBase::SHOT_SPEED = 0.8f;										//	ã‚·ãƒ§ãƒƒãƒˆã®é€Ÿåº¦
+const float		EnemyBase::MAX_WAIT_TIME = 100.0f;									//	ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+const float		EnemyBase::HIT_RADIUS = 6.0f;										//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+const float		EnemyBase::CENTER_CORRECTION = -1.0f;								//	ä¸­å¿ƒåº§æ¨™ã®è£œæ­£
+const COLOR_F	EnemyBase::COLOR_NORMAL = GetColorF(1.0f, 1.0f, 1.0f, 1.0f);		//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè‰²
+const COLOR_F	EnemyBase::COLOR_DECAY_NORMAL = GetColorF(0.0f, 0.0f, 0.0f, 1.0f);	//	ãƒ‡ãƒ•ã‚©ãƒ«ãƒˆè‰²ã®æ¸›è¡°
+const COLOR_F	EnemyBase::COLOR_RED = GetColorF(1.0f, 0.0f, 0.0f, 1.0f);			//	èµ¤è‰²
+const COLOR_F	EnemyBase::COLOR_DECAY_RED = GetColorF(0.5f, 0.0f, 0.0f, 1.0f);		//	èµ¤è‰²ã®æ¸›è¡°
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 EnemyBase::EnemyBase(const int _modelHandle)
 	: m_effectExplosion(NULL)
 {
-	//	ƒ‚ƒfƒ‹‚Ì•¡»
+	//	ãƒ¢ãƒ‡ãƒ«ã®è¤‡è£½
 	m_modelHandle = MV1DuplicateModel(_modelHandle);
 	CommonDebug::Assert((m_modelHandle <= -1), " [ EnemyBase.cpp ] : error : missing duplicat model.");
 
@@ -52,76 +52,76 @@ EnemyBase::EnemyBase(const int _modelHandle)
 	m_isOffDraw = false;
 	m_isDeleate = false;
 
-	//	ƒGƒtƒFƒNƒg‚Ì“Ç‚İ‚İ
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®èª­ã¿è¾¼ã¿
 	m_effectExplosion = new EffekseerEmitter("Data/Effect/Explosion/Explosion3.efk");
 	CommonDebug::Assert((m_effectExplosion == NULL), " [ EnemyBase.cpp ] : error : missing effect is null.");
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 EnemyBase::~EnemyBase()
 {
-	//	ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_modelHandle);
 
-	//	ƒGƒtƒFƒNƒg‚Ì‰ğ•ú
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®è§£æ”¾
 	CommonSafe::Delete(m_effectExplosion);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æ
+//	@brief	æç”»
 //-----------------------------------------------------------------------------
 void EnemyBase::Draw()
 {
 	const bool isDelete = m_isHit;
 	if (!isDelete)
 	{
-		//	Œ¸ŠF‚Ìİ’è
+		//	æ¸›è¡°è‰²ã®è¨­å®š
 		_AttenuationColor();
 
-		//	ƒ‚ƒfƒ‹‚ÌF‚ğ•ÏX
+		//	ãƒ¢ãƒ‡ãƒ«ã®è‰²ã‚’å¤‰æ›´
 		MV1SetDifColorScale(m_modelHandle, m_color);
 
-		//	ƒ‚ƒfƒ‹‚Ì•`‰æ
+		//	ãƒ¢ãƒ‡ãƒ«ã®æç”»
 		if (!m_isOffDraw) { MV1DrawModel(m_modelHandle); }
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	F‚Ì•ÏX
+//	@brief	è‰²ã®å¤‰æ›´
 //-----------------------------------------------------------------------------
 void EnemyBase::_ChangeColor()
 {
-	//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚È‚ç
-	//	F‚ğ•ÏX‚·‚é
+	//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ãªã‚‰
+	//	è‰²ã‚’å¤‰æ›´ã™ã‚‹
 	if (m_isHavingItems) { m_color = COLOR_RED; }
 	else { m_color = COLOR_NORMAL; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒVƒ‡ƒbƒg‚Ì“o˜^
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆã®ç™»éŒ²
 //-----------------------------------------------------------------------------
 void EnemyBase::_ShotEntry(PlayerManager& _playerManager, ShotManager& _shotManager)
 {
-	//	¶‚«‚Ä‚¢‚éŠÔ‚Ì‚İ
+	//	ç”Ÿãã¦ã„ã‚‹é–“ã®ã¿
 	const bool isAlive = !m_isHit;
 	if (isAlive)
 	{
-		//	ƒ|ƒCƒ“ƒ^‚Ìæ“¾
+		//	ãƒã‚¤ãƒ³ã‚¿ã®å–å¾—
 		PlayerBase* player = _playerManager.GetPlayerPtr();
 		if (player)
 		{
-			//	oŒ»‰‰o‚ªI‚í‚Á‚Ä‚¢‚½‚çA
-			//	ƒvƒŒƒCƒ„[‚Ö‚ÌƒxƒNƒgƒ‹‚ğ‹‚ßA
-			//	’e‚Ì’Ç‰Á‚ğ‚·‚é
+			//	å‡ºç¾æ¼”å‡ºãŒçµ‚ã‚ã£ã¦ã„ãŸã‚‰ã€
+			//	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã¸ã®ãƒ™ã‚¯ãƒˆãƒ«ã‚’æ±‚ã‚ã€
+			//	å¼¾ã®è¿½åŠ ã‚’ã™ã‚‹
 			const bool isPossible = !player->GetIsEmerge();
 			if (isPossible)
 			{
 				const bool isActive = m_shotWaitTime++ == MAX_WAIT_TIME;
 				if (isActive)
 				{
-					//	’e‚ğ¶¬‚·‚é
+					//	å¼¾ã‚’ç”Ÿæˆã™ã‚‹
 					VECTOR targetDir = VSub(player->GetCircle().m_centerPoint, m_pos);
 					_shotManager.RegisterOnList(ShotManager::SHOT_KIND::ENEMY_SHOT, m_pos, targetDir, SHOT_SPEED);
 				}
@@ -131,17 +131,17 @@ void EnemyBase::_ShotEntry(PlayerManager& _playerManager, ShotManager& _shotMana
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	”š”­ƒGƒtƒFƒNƒg
+//	@brief	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 //-----------------------------------------------------------------------------
 void EnemyBase::_OnEffectExplosion(SoundEffect& _soundEffect)
 {
-	//	ƒqƒbƒg‚µ‚½‚Æ‚«
+	//	ãƒ’ãƒƒãƒˆã—ãŸã¨ã
 	if (m_isHit)
 	{
 		const bool isExplosionStart = m_effectExplosion->GetPlayTime() == 0.0f;
 		const bool isExplosionEnd = m_effectExplosion->GetPlayTime() == 200.0f;
 
-		//	”š”­ƒGƒtƒFƒNƒg‚ÌŠJn
+		//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹
 		if (isExplosionStart)
 		{
 			m_effectExplosion->SetPos(m_pos);
@@ -150,14 +150,14 @@ void EnemyBase::_OnEffectExplosion(SoundEffect& _soundEffect)
 			m_effectExplosion->OnPlayEffect();
 			m_isOffDraw = true;
 
-			//	“¢”°”‚Ì‰ÁZ
+			//	è¨ä¼æ•°ã®åŠ ç®—
 			HAND_OVER_RESULT->AddDestructionNum();
 
-			//	SE‚ÌÄ¶
+			//	SEã®å†ç”Ÿ
 			_soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_EXPLOSION);
 		}
 
-		//	”š”­ƒGƒtƒFƒNƒg‚ÌI—¹
+		//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†
 		if (isExplosionEnd)
 		{
 			m_effectExplosion->OnEndEffect();
@@ -171,23 +171,23 @@ void EnemyBase::_OnEffectExplosion(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	Œ¸Fİ’è
+//	@brief	æ¸›è‰²è¨­å®š
 //-----------------------------------------------------------------------------
 void EnemyBase::_AttenuationColor()
 {
-	//	‰œ‚©‚ç—ˆ‚é“G‚ÍA
-	//	Œ¸Š‚·‚é
+	//	å¥¥ã‹ã‚‰æ¥ã‚‹æ•µã¯ã€
+	//	æ¸›è¡°ã™ã‚‹
 	if (m_isAttenuation)
 	{
-		//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚È‚ç
-		//	F‚ğ•ÏX‚·‚é
+		//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ãªã‚‰
+		//	è‰²ã‚’å¤‰æ›´ã™ã‚‹
 		if (m_isHavingItems) { m_color = COLOR_DECAY_RED;}
 		else { m_color = COLOR_DECAY_NORMAL; }
 	}
 	else
 	{
-		//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚È‚ç
-		//	F‚ğ•ÏX‚·‚é
+		//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ãªã‚‰
+		//	è‰²ã‚’å¤‰æ›´ã™ã‚‹
 		const float lerpSpeed = 0.00001f;
 		if (m_isHavingItems) { m_color = CommonFunction::AddColor(m_color, COLOR_RED, lerpSpeed); }
 		else { m_color = CommonFunction::AddColor(m_color, COLOR_NORMAL, lerpSpeed); }

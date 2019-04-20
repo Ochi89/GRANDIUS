@@ -1,108 +1,108 @@
-
+ï»¿
 //=============================================================================
 //	@file	CharacterBase.h
-//	@brief	ƒLƒƒƒ‰ƒNƒ^[ƒx[ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼ãƒ™ãƒ¼ã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct Circle;
 struct Rect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒLƒƒƒ‰ƒNƒ^[Šî’êƒNƒ‰ƒX
+//	@brief	ã‚­ãƒ£ãƒ©ã‚¯ã‚¿ãƒ¼åŸºåº•ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class CharacterBase
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	CharacterBase();
 	virtual ~CharacterBase();
 
-	//	ì¬ˆ—gett
+	//	ä½œæˆå‡¦ç†gett
 	virtual void Create() = 0;
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	virtual void Release() = 0;
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	virtual void Initialize() = 0;
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
     virtual void Draw() = 0;
 
 //==================== getter =====================//
 
-	//	ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹‚Ì getter
+	//	ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«ã® getter
 	const int& GetModelHandle() const { return m_modelHandle; }
 
-	//	ƒ|ƒWƒVƒ‡ƒ“‚Ì getter
+	//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã® getter
 	const VECTOR& GetPos() const { return m_pos; }
 
-	//	ƒfƒBƒŒƒNƒVƒ‡ƒ“‚Ì getter
+	//	ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã® getter
 	const VECTOR& GetDir() const { return m_dir; }
 
-	//	ƒAƒ“ƒOƒ‹‚Ì getter
+	//	ã‚¢ãƒ³ã‚°ãƒ«ã® getter
 	const VECTOR& GetAngle() const { return m_angle; }
 
-	//	ƒTƒCƒY‚Ì getter
+	//	ã‚µã‚¤ã‚ºã® getter
 	const VECTOR& GetSize() const { return m_size; }
 
-	//	“–‚½‚è”»’è—p‚Ì‰~Œ`‚Ì@getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††å½¢ã®ã€€getter
 	const Circle& GetCircle() const { return m_hitCircle; };
 
-	//	“–‚½‚è”»’è—p‚Ì’·•ûŒ`‚Ì@getter
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢ã®ã€€getter
 	const Rect& GetRect() const { return m_hitRect; };
 
 //==================== setter =====================//
 
-	//	ƒ|ƒWƒVƒ‡ƒ“‚Ì setter
+	//	ãƒã‚¸ã‚·ãƒ§ãƒ³ã® setter
 	const void SetPos(const VECTOR& _set) { m_pos = _set; }
 
-	//	ƒfƒBƒŒƒNƒVƒ‡ƒ“‚Ì setter
+	//	ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³ã® setter
 	const void SetDir(const VECTOR& _set) { m_dir = _set; }
 
-	//	ƒAƒ“ƒOƒ‹‚Ì setter
+	//	ã‚¢ãƒ³ã‚°ãƒ«ã® setter
 	const void SetAngle(const VECTOR& _set) { m_angle = _set; }
 
-	//	ƒTƒCƒY‚Ì setter
+	//	ã‚µã‚¤ã‚ºã® setter
 	const void SetSize(const VECTOR& _set) { m_size = _set; }
 	
 protected:
 	
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	virtual void _FinalRelease() = 0;
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 	
-	int			m_modelHandle;		//	ƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹
-	VECTOR		m_pos;				//	ƒ|ƒWƒVƒ‡ƒ“
-	VECTOR		m_dir;				//	ƒfƒBƒŒƒNƒVƒ‡ƒ“
-	VECTOR		m_angle;			//	ƒAƒ“ƒOƒ‹
-	VECTOR		m_size;				//	ƒTƒCƒY
+	int			m_modelHandle;		//	ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«
+	VECTOR		m_pos;				//	ãƒã‚¸ã‚·ãƒ§ãƒ³
+	VECTOR		m_dir;				//	ãƒ‡ã‚£ãƒ¬ã‚¯ã‚·ãƒ§ãƒ³
+	VECTOR		m_angle;			//	ã‚¢ãƒ³ã‚°ãƒ«
+	VECTOR		m_size;				//	ã‚µã‚¤ã‚º
 
-	Circle		m_hitCircle;		//	“–‚½‚è”»’è—p‚Ì‰~‚Ì\‘¢‘Ì
-	Rect		m_hitRect;			//	“–‚½‚è”»’è—p‚Ì’·•ûŒ`‚Ì\‘¢‘Ì
+	Circle		m_hitCircle;		//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®å††ã®æ§‹é€ ä½“
+	Rect		m_hitRect;			//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®é•·æ–¹å½¢ã®æ§‹é€ ä½“
 
-	float		m_shotWaitTime;		//	’e‚Ì’x‰„ŠÔ
+	float		m_shotWaitTime;		//	å¼¾ã®é…å»¶æ™‚é–“
 
 };

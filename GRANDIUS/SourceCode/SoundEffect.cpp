@@ -1,23 +1,23 @@
-
+ï»¿
 //=============================================================================
 //	@file	SoundManager.cpp
-//	@brief	ƒTƒEƒ“ƒhƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/04
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "SoundEffect.h"
 #include "Sound.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 SoundEffect::SoundEffect()
 {
-	//	ƒƒ‚ƒŠ‚ÌŠm•Û‚ğ‚·‚é‚ÆAg—pƒtƒ‰ƒO‚Ì‰Šú‰»
+	//	ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿ã‚’ã™ã‚‹ã¨ã€ä½¿ç”¨ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
 	for (int i = 0; i < SE_KIND::SE_NUM; i++)
 	{
 		for (int j = 0; j < CommonConstant::MAX_ENEMY_SE_NUM; j++)
@@ -31,20 +31,20 @@ SoundEffect::SoundEffect()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 SoundEffect::~SoundEffect()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void SoundEffect::Create()
 {
-	//	‘å–{‚Ì‰¹Œ¹‚Ì“Ç‚İ‚İ
+	//	å¤§æœ¬ã®éŸ³æºã®èª­ã¿è¾¼ã¿
 	m_sourceSoundHandle[SE_KIND::SE_ITEM] = LoadSoundMem("Data/Sound/SE/GetItem.mp3");
 	m_sourceSoundHandle[SE_KIND::SE_SHOT] = LoadSoundMem("Data/Sound/SE/Shot.mp3");
 	m_sourceSoundHandle[SE_KIND::SE_MOVE_SHOT] = LoadSoundMem("Data/Sound/SE/MoveShot.mp3");
@@ -62,7 +62,7 @@ void SoundEffect::Create()
 		m_seBuffer[SE_KIND::SE_EXPLOSION].m_pBuf[i] = new Sound(m_sourceSoundHandle[SE_KIND::SE_EXPLOSION]);
 	}
 
-	//	‘å–{‚Ì‰¹Œ¹‚Ì“Ç‚İ‚İs
+	//	å¤§æœ¬ã®éŸ³æºã®èª­ã¿è¾¼ã¿s
 	m_sourceOneSoundHandle[ONE_SE_KIND::ONE_SE_SELECT] = LoadSoundMem("Data/Sound/SE/Select.mp3");
 	m_sourceOneSoundHandle[ONE_SE_KIND::ONE_SE_PLAYER_LASER] = LoadSoundMem("Data/Sound/SE/PlayerLaser.mp3");
 	m_sourceOneSoundHandle[ONE_SE_KIND::ONE_SE_ENEMY_LASER] = LoadSoundMem("Data/Sound/SE/EnemyLaser.mp3");
@@ -99,47 +99,47 @@ void SoundEffect::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void SoundEffect::Release()
 {
-	//	ƒŠƒXƒg“à‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«AƒNƒŠƒA‚·‚é
+	//	ãƒªã‚¹ãƒˆå†…ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ãã€ã‚¯ãƒªã‚¢ã™ã‚‹
 	if (!m_useList.empty()) { m_useList.clear(); }
 
 	for (int i = 0; i < SE_KIND::SE_NUM; i++)
 	{
 		for (int j = 0; j < CommonConstant::MAX_ENEMY_SE_NUM; j++)
 		{
-			//	ƒƒ‚ƒŠ‚Ì‰ğ•ú
+			//	ãƒ¡ãƒ¢ãƒªã®è§£æ”¾
 			CommonSafe::Delete(m_seBuffer[i].m_pBuf[j]);
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void SoundEffect::Update()
 {
-	//	ƒŠƒXƒg‚ÌXV
+	//	ãƒªã‚¹ãƒˆã®æ›´æ–°
 	_ListUpdate();
 
-	//	ƒŠƒXƒg‚©‚çíœ
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 	_RemoveFromList();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒTƒEƒ“ƒh‚ÌÄ¶
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰ã®å†ç”Ÿ
 //-----------------------------------------------------------------------------
 void SoundEffect::OnPlaySound(const SE_KIND _kind)
 {
 	for (int i = 0; i < CommonConstant::MAX_ENEMY_SE_NUM; i++)
 	{
-		//	‚Ü‚¾g—p‚µ‚Ä‚¢‚È‚¢‚Æ‚«
+		//	ã¾ã ä½¿ç”¨ã—ã¦ã„ãªã„ã¨ã
 		const bool isNoUse = !m_seBuffer[_kind].m_pBuf[i]->GetIsUsedStatus();
 		if (isNoUse)
 		{
-			//	g—pƒŠƒXƒg‚É“o˜^
+			//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 			m_useList.push_back(m_seBuffer[_kind].m_pBuf[i]);
 			return;
 		}
@@ -147,63 +147,63 @@ void SoundEffect::OnPlaySound(const SE_KIND _kind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒTƒEƒ“ƒh‚ÌÄ¶
+//	@brief	ã‚µã‚¦ãƒ³ãƒ‰ã®å†ç”Ÿ
 //-----------------------------------------------------------------------------
 void SoundEffect::OnPlaySound(const ONE_SE_KIND _kind)
 {
-	//	‚Ü‚¾g—p‚µ‚Ä‚¢‚È‚¢‚Æ‚«
+	//	ã¾ã ä½¿ç”¨ã—ã¦ã„ãªã„ã¨ã
 	const bool isNoUse = !m_oneSeBuffer[_kind].m_pBuf->GetIsUsedStatus();
 	if (isNoUse)
 	{
-		//	g—pƒŠƒXƒg‚É“o˜^
+		//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		m_useList.push_back(m_oneSeBuffer[_kind].m_pBuf);
 		return;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚ÌXV
+//	@brief	ãƒªã‚¹ãƒˆã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void SoundEffect::_ListUpdate()
 {
-	//	g—pƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ã
 	const bool isAlreadyEntry = !m_useList.empty();
 	if (isAlreadyEntry)
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Sound*>::iterator ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	SEÄ¶
+			//	SEå†ç”Ÿ
 			(*ite)->OnPlay(DX_PLAYTYPE_BACK);
 
-			//	XV
+			//	æ›´æ–°
 			(*ite)->Update();
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚ç‰ğ•ú
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰è§£æ”¾
 //-----------------------------------------------------------------------------
 void SoundEffect::_RemoveFromList()
 {
-	//	g—pƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ã
 	const bool isAlreadyEntry = !m_useList.empty();
 	if (isAlreadyEntry)
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<Sound*>::iterator ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	íœ
+			//	å‰Šé™¤
 			const bool isDelete = (*ite)->GetIsDelete();
 			if (isDelete)
 			{
-				//	‰Šú‰»
+				//	åˆæœŸåŒ–
 				(*ite)->Initialize();
 
-				//	g—pƒŠƒXƒg‚©‚çíœ
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 				m_useList.remove(*ite);
 				break;
 			}
@@ -212,18 +212,18 @@ void SoundEffect::_RemoveFromList()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void SoundEffect::_FinalRelease()
 {
-	//	ƒŠƒXƒg“à‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«AƒNƒŠƒA‚·‚é
+	//	ãƒªã‚¹ãƒˆå†…ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ãã€ã‚¯ãƒªã‚¢ã™ã‚‹
 	if (!m_useList.empty()) { m_useList.clear(); }
 
 	for (int i = 0; i < SE_KIND::SE_NUM; i++)
 	{
 		for (int j = 0; j < CommonConstant::MAX_ENEMY_SE_NUM; j++)
 		{
-			//	ƒƒ‚ƒŠ‚Ì‰ğ•ú
+			//	ãƒ¡ãƒ¢ãƒªã®è§£æ”¾
 			CommonSafe::Delete(m_seBuffer[i].m_pBuf[j]);
 		}
 	}

@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	AngleHelper.cpp
-//	@brief	Šp“xˆ—
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	è§’åº¦å‡¦ç†
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/15
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "AngleHelper.h"
 #include "Common.h"
@@ -15,100 +15,100 @@
 #include "Key.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float AngleHelper::ADD_ANGLE_SPEED = 0.2f;	//	Šp“x‚Ì‰ÁZ‘¬“x
-const float AngleHelper::SUB_ANGLE_SPEED = -0.2f;	//	Šp“x‚ÌŒ¸Z‘¬“x
-const float AngleHelper::LERP_SPEED = 0.1f;			//	üŒ`•ÛŠÇ‚Ì‘¬“x
-const float AngleHelper::LERP_RETURN_SPEED = 0.5f;	//	üŒ`•ÛŠÇ‚Ì–ß‚é‘¬“x
-const float AngleHelper::ANGLE_NONE = 0.0f;			//	Šp“x‚Ì‰Šú‰»
-const float AngleHelper::MAX_ANGLE = 0.2f;			//	‚’¼•ûŒü‚ÌŠp“x‚ÌÅ‘å
-const float AngleHelper::MIN_ANGLE = -0.2f;			//	‚’¼•ûŒü‚ÌŠp“x‚ÌÅ‘å
+const float AngleHelper::ADD_ANGLE_SPEED = 0.2f;	//	è§’åº¦ã®åŠ ç®—é€Ÿåº¦
+const float AngleHelper::SUB_ANGLE_SPEED = -0.2f;	//	è§’åº¦ã®æ¸›ç®—é€Ÿåº¦
+const float AngleHelper::LERP_SPEED = 0.1f;			//	ç·šå½¢ä¿ç®¡ã®é€Ÿåº¦
+const float AngleHelper::LERP_RETURN_SPEED = 0.5f;	//	ç·šå½¢ä¿ç®¡ã®æˆ»ã‚‹é€Ÿåº¦
+const float AngleHelper::ANGLE_NONE = 0.0f;			//	è§’åº¦ã®åˆæœŸåŒ–
+const float AngleHelper::MAX_ANGLE = 0.2f;			//	å‚ç›´æ–¹å‘ã®è§’åº¦ã®æœ€å¤§
+const float AngleHelper::MIN_ANGLE = -0.2f;			//	å‚ç›´æ–¹å‘ã®è§’åº¦ã®æœ€å¤§
 
 //-----------------------------------------------------------------------------
-//	@brief	Šp“x‚ğ‹‚ß‚é
+//	@brief	è§’åº¦ã‚’æ±‚ã‚ã‚‹
 //-----------------------------------------------------------------------------
 void AngleHelper::AskAngle(VECTOR& _angle, Pad& _pad)
 {
-	//	–Ú“I‚ÌŠp“x‚ğ‹‚ß‚é
+	//	ç›®çš„ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	_angle = _GetTargetAngle(_angle, _pad);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	Šp“x‚ğ‹‚ß‚é
+//	@brief	è§’åº¦ã‚’æ±‚ã‚ã‚‹
 //-----------------------------------------------------------------------------
 void AngleHelper::AskAngle(VECTOR& _angle, VECTOR _dir)
 {
-	//	–Ú“I‚ÌŠp“x‚ğ‹‚ß‚é
+	//	ç›®çš„ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	_angle = _GetTargetAngle(_angle, _dir);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	–Ú“I‚ÌŠp“x‚ğ‹‚ß‚é
+//	@brief	ç›®çš„ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 //-----------------------------------------------------------------------------
 VECTOR AngleHelper::_GetTargetAngle(VECTOR& _angle, Pad& _pad)
 {
 	VECTOR targetAngle = _angle;
 
-	//	“ü—Í‚É‚æ‚éŠp“x‚Ìæ“¾
+	//	å…¥åŠ›ã«ã‚ˆã‚‹è§’åº¦ã®å–å¾—
 	const bool isUp = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_UP, PadInfo::STICK_DEAD_ZONE) || KEY->Press(KEY_INPUT_W) || KEY->Press(KEY_INPUT_UP);
 	const bool isDown = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_DOWN, PadInfo::STICK_DEAD_ZONE) || KEY->Press(KEY_INPUT_S) || KEY->Press(KEY_INPUT_DOWN);
 
-	//	“ü—Í‚³‚ê‚½•ûŒü‚ÉŠp“x‚Ì•ÏX
-	_ChangeTargetAngleByInput(isUp, targetAngle.z, ADD_ANGLE_SPEED);	//	ãŒü‚«
-	_ChangeTargetAngleByInput(isDown, targetAngle.z, SUB_ANGLE_SPEED);	//	‰ºŒü‚«
+	//	å…¥åŠ›ã•ã‚ŒãŸæ–¹å‘ã«è§’åº¦ã®å¤‰æ›´
+	_ChangeTargetAngleByInput(isUp, targetAngle.z, ADD_ANGLE_SPEED);	//	ä¸Šå‘ã
+	_ChangeTargetAngleByInput(isDown, targetAngle.z, SUB_ANGLE_SPEED);	//	ä¸‹å‘ã
 
-	//	Å‘åÅ¬‚Ìİ’è
+	//	æœ€å¤§æœ€å°ã®è¨­å®š
 	_SetMaxToMin(targetAngle.z, MAX_ANGLE, MIN_ANGLE);
 
-	//	“ü—Í‚ª‚È‚¢‚Æ‚«‚Ì‰Šú‰»
-	const bool isNotVertical = !isUp && !isDown;			//	‚’¼•ûŒü‚Ì“ü—Í‚È‚µ
+	//	å…¥åŠ›ãŒãªã„ã¨ãã®åˆæœŸåŒ–
+	const bool isNotVertical = !isUp && !isDown;			//	å‚ç›´æ–¹å‘ã®å…¥åŠ›ãªã—
 
-	//	“ü—Í‚ª‚È‚¯‚ê‚ÎAüŒ`•ÛŠÇ‚ğ—˜—p‚µ0‚É–ß‚·
-	_ChangeTargetAngleNoInput(isNotVertical, targetAngle.z);		//	‚’¼•ûŒü‚Ì“ü—Í‚È‚µ
+	//	å…¥åŠ›ãŒãªã‘ã‚Œã°ã€ç·šå½¢ä¿ç®¡ã‚’åˆ©ç”¨ã—0ã«æˆ»ã™
+	_ChangeTargetAngleNoInput(isNotVertical, targetAngle.z);		//	å‚ç›´æ–¹å‘ã®å…¥åŠ›ãªã—
 
-		//	üŒ`•ÛŠÇ‚ğ—˜—p‚µŠp“x‚ğ‹‚ß‚é
+		//	ç·šå½¢ä¿ç®¡ã‚’åˆ©ç”¨ã—è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	VECTOR angle = _angle;
 	angle = CommonFunction::Lerp(angle, targetAngle, LERP_SPEED);
 
-	//	Šp“x‚ğ•Ô‚·
+	//	è§’åº¦ã‚’è¿”ã™
 	return angle;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	–Ú“I‚ÌŠp“x‚ğ‹‚ß‚é
+//	@brief	ç›®çš„ã®è§’åº¦ã‚’æ±‚ã‚ã‚‹
 //-----------------------------------------------------------------------------
 VECTOR AngleHelper::_GetTargetAngle(VECTOR& _angle, VECTOR _dir)
 {
 	VECTOR targetAngle = _angle;
 
-	//	Œü‚«‚É‚æ‚éŠp“x‚Ìæ“¾
+	//	å‘ãã«ã‚ˆã‚‹è§’åº¦ã®å–å¾—
 	const bool isUp = _dir.y > 0.0f;
 	const bool isDown = _dir.y < 0.0f;
 
-	//	“ü—Í‚³‚ê‚½•ûŒü‚ÉŠp“x‚Ì•ÏX
-	_ChangeTargetAngleByInput(isUp, targetAngle.z, ADD_ANGLE_SPEED);	//	ãŒü‚«
-	_ChangeTargetAngleByInput(isDown, targetAngle.z, SUB_ANGLE_SPEED);	//	‰ºŒü‚«
+	//	å…¥åŠ›ã•ã‚ŒãŸæ–¹å‘ã«è§’åº¦ã®å¤‰æ›´
+	_ChangeTargetAngleByInput(isUp, targetAngle.z, ADD_ANGLE_SPEED);	//	ä¸Šå‘ã
+	_ChangeTargetAngleByInput(isDown, targetAngle.z, SUB_ANGLE_SPEED);	//	ä¸‹å‘ã
 
-	//	Å‘åÅ¬‚Ìİ’è
+	//	æœ€å¤§æœ€å°ã®è¨­å®š
 	_SetMaxToMin(targetAngle.z, MAX_ANGLE, MIN_ANGLE);
 
-	//	“ü—Í‚ª‚È‚¢‚Æ‚«‚Ì‰Šú‰»
-	const bool isNotVertical = !isUp && !isDown;			//	‚’¼•ûŒü‚Ì“ü—Í‚È‚µ
+	//	å…¥åŠ›ãŒãªã„ã¨ãã®åˆæœŸåŒ–
+	const bool isNotVertical = !isUp && !isDown;			//	å‚ç›´æ–¹å‘ã®å…¥åŠ›ãªã—
 
-	//	“ü—Í‚ª‚È‚¯‚ê‚ÎAüŒ`•ÛŠÇ‚ğ—˜—p‚µ0‚É–ß‚·
-	_ChangeTargetAngleNoInput(isNotVertical, targetAngle.z);		//	‚’¼•ûŒü‚Ì“ü—Í‚È‚µ
+	//	å…¥åŠ›ãŒãªã‘ã‚Œã°ã€ç·šå½¢ä¿ç®¡ã‚’åˆ©ç”¨ã—0ã«æˆ»ã™
+	_ChangeTargetAngleNoInput(isNotVertical, targetAngle.z);		//	å‚ç›´æ–¹å‘ã®å…¥åŠ›ãªã—
 
-		//	üŒ`•ÛŠÇ‚ğ—˜—p‚µŠp“x‚ğ‹‚ß‚é
+		//	ç·šå½¢ä¿ç®¡ã‚’åˆ©ç”¨ã—è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	VECTOR angle = _angle;
 	angle = CommonFunction::Lerp(angle, targetAngle, LERP_SPEED);
 
-	//	Šp“x‚ğ•Ô‚·
+	//	è§’åº¦ã‚’è¿”ã™
 	return angle;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“ü—Í‚É‚æ‚éŠp“x‚Ì•ÏX
+//	@brief	å…¥åŠ›ã«ã‚ˆã‚‹è§’åº¦ã®å¤‰æ›´
 //-----------------------------------------------------------------------------
 void AngleHelper::_ChangeTargetAngleByInput(const bool _isState, float& _angle, const float _speed)
 {
@@ -116,16 +116,16 @@ void AngleHelper::_ChangeTargetAngleByInput(const bool _isState, float& _angle, 
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	Å‘åÅ¬‚Ìİ’è
+//	@brief	æœ€å¤§æœ€å°ã®è¨­å®š
 //-----------------------------------------------------------------------------
 void AngleHelper::_SetMaxToMin(float& _angle, const float _maxAngle, const float _minAngle)
 {
-	if (_angle >= _maxAngle) { _angle = _maxAngle; }		//	Å‘åŠp“x
-	if (_angle <= _minAngle) { _angle = _minAngle; }		//	Å¬Šp“x
+	if (_angle >= _maxAngle) { _angle = _maxAngle; }		//	æœ€å¤§è§’åº¦
+	if (_angle <= _minAngle) { _angle = _minAngle; }		//	æœ€å°è§’åº¦
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“ü—Í‚ª‚È‚¢‚Ì‘Î‰
+//	@brief	å…¥åŠ›ãŒãªã„æ™‚ã®å¯¾å¿œ
 //-----------------------------------------------------------------------------
 void AngleHelper::_ChangeTargetAngleNoInput(const bool _isState, float& _angle)
 {

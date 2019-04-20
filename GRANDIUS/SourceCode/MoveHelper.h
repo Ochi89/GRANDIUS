@@ -1,64 +1,64 @@
-
+ï»¿
 //=============================================================================
 //	@file	Moving.h
-//	@brief	ˆÚ“®ˆ—
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ç§»å‹•å‡¦ç†
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/15
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class Pad;
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆÚ“®ˆ—ƒNƒ‰ƒX
+//	@brief	ç§»å‹•å‡¦ç†ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class MoveHelper final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ˆÚ“®—Ê‚ğ‹‚ß‚é
+	//	ç§»å‹•é‡ã‚’æ±‚ã‚ã‚‹
 	static VECTOR AskMoveAmount(VECTOR& _dir, Pad& _pad, const float _moveSpeed, const bool _isInputKey, const bool _isUseAxisXY);
 
-	//	ˆÚ“®—Ê‚ğ‹‚ß‚é
+	//	ç§»å‹•é‡ã‚’æ±‚ã‚ã‚‹
 	static VECTOR AskMoveAmount(VECTOR& _dir, const float _moveSpeed);
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒŠƒZƒbƒg
+	//	ãƒªã‚»ãƒƒãƒˆ
 	static void _ResetDir(VECTOR& _dir);
 
-	//	3D‚ÌˆÚ“®ˆ—
+	//	3Dæ™‚ã®ç§»å‹•å‡¦ç†
 	static VECTOR _MoveAxisXZ(VECTOR& _dir, Pad& _pad, const float _moveSpeed, const bool _isInputKey);
 
-	//	2D‚ÌˆÚ“®ˆ—
+	//	2Dæ™‚ã®ç§»å‹•å‡¦ç†
 	static VECTOR _MoveAxisXY(VECTOR& _dir, Pad& _pad, const float _moveSpeed, const bool _isInputKey);
 
-	//	í‚ÉˆÚ“®ˆ—
+	//	å¸¸ã«ç§»å‹•å‡¦ç†
 	static VECTOR _AlwaysMove(VECTOR& _dir, const float _moveSpeed);
 
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	static VECTOR _Move(VECTOR& _dir, const float _moveSpeed);
 
-	//	“ü—Í‚ÌŒü‚«‚ğİ’è‚·‚é
+	//	å…¥åŠ›æ™‚ã®å‘ãã‚’è¨­å®šã™ã‚‹
 	static void _SetInputDirKeyToPad(float& _verticalAxis, float& _horizontalAxis, Pad& _pad);
 
-	//	“ü—Í‚ÌŒü‚«‚ğİ’è‚·‚é
+	//	å…¥åŠ›æ™‚ã®å‘ãã‚’è¨­å®šã™ã‚‹
 	static void _SetInputDirPad(float& _verticalAxis, float& _horizontalAxis, Pad& _pad);
 
 };

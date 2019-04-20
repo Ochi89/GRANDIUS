@@ -1,177 +1,177 @@
-
+ï»¿
 //=============================================================================
 //	@file	Common.h
-//	@brief	‹¤’Ê
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	å…±é€š
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include <random>
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class Camera;
 class Pad;
 
 //-----------------------------------------------------------------------------
-//	@brief	’·•ûŒ`‚Ì\‘¢‘Ì
+//	@brief	é•·æ–¹å½¢ã®æ§‹é€ ä½“
 //-----------------------------------------------------------------------------
 struct Rect
 {
-	VECTOR	m_vertexTop;		//	ã‚Ì’¸“_
-	VECTOR	m_vertexUnder;		//	‰º‚Ì’¸“_
+	VECTOR	m_vertexTop;		//	ä¸Šã®é ‚ç‚¹
+	VECTOR	m_vertexUnder;		//	ä¸‹ã®é ‚ç‚¹
 };
 
 //-----------------------------------------------------------------------------
-//	@brief	‰~Œ`‚Ì\‘¢‘Ì
+//	@brief	å††å½¢ã®æ§‹é€ ä½“
 //-----------------------------------------------------------------------------
 struct Circle
 {
-	float	m_radius;			//	”¼Œa
-	VECTOR	m_centerPoint;		//	’†S“_
+	float	m_radius;			//	åŠå¾„
+	VECTOR	m_centerPoint;		//	ä¸­å¿ƒç‚¹
 };
 
 //-----------------------------------------------------------------------------
-//	@brief	UI‚Ì\‘¢‘Ì
+//	@brief	UIã®æ§‹é€ ä½“
 //-----------------------------------------------------------------------------
 struct UI
 {
-	int		m_spriteHendle;		//	ƒXƒvƒ‰ƒCƒgƒnƒ“ƒhƒ‹
-	VECTOR	m_pos;				//	ƒ|ƒWƒVƒ‡ƒ“
-	float	m_scale;			//	ƒXƒP[ƒ‹
-	float	m_angle;			//	ƒAƒ“ƒOƒ‹
-	float	m_radian;			//	ƒ‰ƒWƒAƒ“
-	float	m_flashingTime;		//	“_–Å•`‰æ—p‚ÌŠÔ
+	int		m_spriteHendle;		//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒ³ãƒ‰ãƒ«
+	VECTOR	m_pos;				//	ãƒã‚¸ã‚·ãƒ§ãƒ³
+	float	m_scale;			//	ã‚¹ã‚±ãƒ¼ãƒ«
+	float	m_angle;			//	ã‚¢ãƒ³ã‚°ãƒ«
+	float	m_radian;			//	ãƒ©ã‚¸ã‚¢ãƒ³
+	float	m_flashingTime;		//	ç‚¹æ»…æç”»ç”¨ã®æ™‚é–“
 };
 
 //-----------------------------------------------------------------------------
-//	@brief	F‚Ì\‘¢‘Ì
+//	@brief	è‰²ã®æ§‹é€ ä½“
 //-----------------------------------------------------------------------------
 struct Color
 {
-	int m_red;			//	ÔF
-	int m_green;		//	—ÎF
-	int m_blue;			//	ÂF
-	int m_color;		//	F
+	int m_red;			//	èµ¤è‰²
+	int m_green;		//	ç·‘è‰²
+	int m_blue;			//	é’è‰²
+	int m_color;		//	è‰²
 };
 
 //-----------------------------------------------------------------------------
-//	@brief	F‚Ì\‘¢‘Ì
+//	@brief	è‰²ã®æ§‹é€ ä½“
 //-----------------------------------------------------------------------------
 struct ColorF
 {
-	float m_red;			//	ÔF
-	float m_green;			//	—ÎF
-	float m_blue;			//	ÂF
-	float m_alpha;			//	ƒAƒ‹ƒtƒ@
-	COLOR_F m_color;		//	F
+	float m_red;			//	èµ¤è‰²
+	float m_green;			//	ç·‘è‰²
+	float m_blue;			//	é’è‰²
+	float m_alpha;			//	ã‚¢ãƒ«ãƒ•ã‚¡
+	COLOR_F m_color;		//	è‰²
 };
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒAƒjƒ[ƒVƒ‡ƒ“‚Ì\‘¢‘Ì
+//	@brief	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®æ§‹é€ ä½“
 //-----------------------------------------------------------------------------
 struct Animation
 {
-	int		m_count;		//	ƒJƒEƒ“ƒg
-	float	m_time;			//	ƒ^ƒCƒ€
-	float	m_maxTime;		//	ƒ^ƒCƒ€‚ÌÅ‘å
-	int		m_maxCount;		//	ƒJƒEƒ“ƒg‚ÌÅ‘å
+	int		m_count;		//	ã‚«ã‚¦ãƒ³ãƒˆ
+	float	m_time;			//	ã‚¿ã‚¤ãƒ 
+	float	m_maxTime;		//	ã‚¿ã‚¤ãƒ ã®æœ€å¤§
+	int		m_maxCount;		//	ã‚«ã‚¦ãƒ³ãƒˆã®æœ€å¤§
 };
 
 //-----------------------------------------------------------------------------
-//	@brief	–¼‘O‹óŠÔ	[ŠÖ”]
+//	@brief	åå‰ç©ºé–“	[é–¢æ•°]
 //-----------------------------------------------------------------------------
 namespace CommonFunction
 {
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒ‰ƒWƒAƒ“‚ğ“x‚É•ÏŠ·‚·‚é
+	//	ãƒ©ã‚¸ã‚¢ãƒ³ã‚’åº¦ã«å¤‰æ›ã™ã‚‹
 	float RadToDeg(float _rad);
 
-	//	ƒ‰ƒWƒAƒ“‚ğ“x‚É•ÏŠ·‚·‚é
+	//	ãƒ©ã‚¸ã‚¢ãƒ³ã‚’åº¦ã«å¤‰æ›ã™ã‚‹
 	VECTOR RadToDeg(VECTOR _rad);
 
-	//	“x‚ğƒ‰ƒWƒAƒ“‚É•ÏŠ·‚·‚é
+	//	åº¦ã‚’ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›ã™ã‚‹
 	float DegToRad(float _deg);
 
-	//	“x‚ğƒ‰ƒWƒAƒ“‚É•ÏŠ·‚·‚é
+	//	åº¦ã‚’ãƒ©ã‚¸ã‚¢ãƒ³ã«å¤‰æ›ã™ã‚‹
 	VECTOR DegToRad(VECTOR _rad);
 
-	//	ƒOƒŠƒbƒh‚Ìì¬
+	//	ã‚°ãƒªãƒƒãƒ‰ã®ä½œæˆ
 	void CreateGrid();
 
-	//	w’è”ÍˆÍ‚Ì—”¶¬
+	//	æŒ‡å®šç¯„å›²ã®ä¹±æ•°ç”Ÿæˆ
 	int GetRand(const int _min, const int _max);
 
-	//	w’è”ÍˆÍ‚Ì—”¶¬
+	//	æŒ‡å®šç¯„å›²ã®ä¹±æ•°ç”Ÿæˆ
 	float GetRand(const float _min, const float _max);
 
-	//	w’è”ÍˆÍ‚Ì—”¶¬
+	//	æŒ‡å®šç¯„å›²ã®ä¹±æ•°ç”Ÿæˆ
 	VECTOR GetRand(const VECTOR _min, const VECTOR _max);
 
-	//	üŒ`•âŠÔ
+	//	ç·šå½¢è£œé–“
 	float Lerp(const float _a, const float _b, const float _t, const float _ignoreVal = 0.0f);
 
-	//	üŒ`•âŠÔ
+	//	ç·šå½¢è£œé–“
 	VECTOR Lerp(const VECTOR _a, const VECTOR _b, const float _t, const float _ignoreVal = 0.0f);
 
-	//	F‚Ì‰ÁZ
+	//	è‰²ã®åŠ ç®—
 	COLOR_F AddColor(COLOR_F _a, COLOR_F _b, float _t);
 
-	//	üŒ`•âŠÔ‚ÅŠp“x‚ğ‹‚ß‚é
+	//	ç·šå½¢è£œé–“ã§è§’åº¦ã‚’æ±‚ã‚ã‚‹
 	float LerpRadian(float _a, float _b, float _t);
 
-	//	“ñ‚Â‚ÌƒxƒNƒgƒ‹‚ÌŠp“x‚ğ•Ô‚·
+	//	äºŒã¤ã®ãƒ™ã‚¯ãƒˆãƒ«ã®è§’åº¦ã‚’è¿”ã™
 	float Vec2Radian(const VECTOR _base, const VECTOR _dir);
 
-	//  ƒJƒƒ‰‚É‚æ‚é’²®
+	//  ã‚«ãƒ¡ãƒ©ã«ã‚ˆã‚‹èª¿æ•´
 	VECTOR AdjustmentByCamera(const VECTOR& _velocity, const Camera& _camera);
 
-	//	ƒxƒNƒgƒ‹‚Í”ÍˆÍ“à‚©
+	//	ãƒ™ã‚¯ãƒˆãƒ«ã¯ç¯„å›²å†…ã‹
 	bool VectorWithinRange(const VECTOR _vec1, const VECTOR _vec2, const float _range);
 
-	//	ƒxƒNƒgƒ‹‚Í“™‚µ‚¢‚©
+	//	ãƒ™ã‚¯ãƒˆãƒ«ã¯ç­‰ã—ã„ã‹
 	bool VectorSame(const VECTOR _vec1, const VECTOR _vec2);
 
-	//	Šp“x‚©‚çŒü‚«‚ğæ‚é
+	//	è§’åº¦ã‹ã‚‰å‘ãã‚’å–ã‚‹
 	VECTOR AskDirFromAngle(const float _angle);
 
-	//	Œü‚«‚©‚çŠp“x‚ğæ‚é
+	//	å‘ãã‹ã‚‰è§’åº¦ã‚’å–ã‚‹
 	float AskAngleFromDir(const VECTOR _dir);
 
-	//	Œü‚«‚©‚çƒ‰ƒWƒAƒ““x‚ğæ‚é
+	//	å‘ãã‹ã‚‰ãƒ©ã‚¸ã‚¢ãƒ³åº¦ã‚’å–ã‚‹
 	float AskRadianFromDir(const VECTOR _dir);
 
-	//	F‚Ìæ“¾
+	//	è‰²ã®å–å¾—
 	int GetColor(const Color _color);
 
-	//	F‚Ìæ“¾
+	//	è‰²ã®å–å¾—
 	Color GetColor(const int _red, const int _green, const int _blue);
 
-	//	F‚Ìæ“¾
+	//	è‰²ã®å–å¾—
 	COLOR_F GetColor(const ColorF _colorf);
 
-	//	F‚Ìæ“¾
+	//	è‰²ã®å–å¾—
 	ColorF GetColor(const float _red, const float _green, const float _blue, const float _alpha);
 
-	//	ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ‹‚ß‚é
+	//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ±‚ã‚ã‚‹
 	void AskAnimationCount(Animation& _animation);
 
-	//	ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌƒŠƒZƒbƒg
+	//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒªã‚»ãƒƒãƒˆ
 	void ResetAnimationCount(Animation& _animation);
 
-	//	”z—ñ‚ÌƒTƒCƒY‚Ìæ“¾
+	//	é…åˆ—ã®ã‚µã‚¤ã‚ºã®å–å¾—
 	template<typename Template>
 	int GetArraySize(const Template& _array)
 	{
@@ -182,46 +182,46 @@ namespace CommonFunction
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	–¼‘O‹óŠÔ	[’è”]
+//	@brief	åå‰ç©ºé–“	[å®šæ•°]
 //-----------------------------------------------------------------------------
 namespace CommonConstant
 {
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const int		WINDOW_WIDTH = 1920;							//	ƒEƒBƒ“ƒhƒE‚Ì•
-	static const int		WINDOW_HEIGHT = 1080;							//	ƒEƒBƒ“ƒhƒE‚Ì‚‚³
-	static const int		COLOR_BIT = 16;									//	ƒJƒ‰[ƒrƒbƒg”
-	static const VECTOR		ORIGIN = VGet(0.0f, 0.0f, 0.0f);				//	Œ´“_
-	static const float		LINE_AREA_SIZE = 1000.0f;						//	ƒ‰ƒCƒ“‚ğ•`‚­”ÍˆÍ
-	static const int		LINE_NUM = 100;									//	ƒ‰ƒCƒ“‚Ì”
-	static const float		PI = 3.14159265359f;							//	ƒÎ
-	static const float		PI2 = 6.28318530718f;							//	2ƒÎ
-	static const int		MAX_KEY_INPUT_NUM = 256;						//	ƒL[‚Ì”
-	static const int		MAX_CSV_NUM = 256;								//	CSV‚Ì“Ç‚İ‚İ”ÍˆÍ‚ÌÅ‘å
-	static const int		MAX_ENEMY_ENTRY_NUM = 50;						//	ƒGƒlƒ~[‚Ì“o˜^”
-	static const int		MAX_ITEM_NUM = 10;								//	ƒAƒCƒeƒ€‚Ì“o˜^”
-	static const int		MAX_SHOT_NUM = 50;								//	’e‚Ì“o˜^”
-	static const int		MAX_STAY_SHOT_NUM = 10;							//	‘Øİ’e‚Ì“o˜^”
-	static const int		MAX_PLAYER_LIFE = 5;							//	ƒ‰ƒCƒt
-	static const int		MAX_EFFECT_NUM = 50;							//	ƒGƒtƒFƒNƒg‚Ì“o˜^”
-	static const int		MAX_BOSS_EXPLOSION_NUM = 5;						//	ƒ{ƒX”š”­ƒGƒtƒFƒNƒg”
-	static const int		MAX_SCORE_NUM = 128;							//	ƒXƒRƒA‚Ì”
-	static const int		FONT_NUM = 255;									//	ƒtƒHƒ“ƒg‚ÌÅ‘å”
-	static const int		MAX_RANKING_NUM = 10;							//	ƒ‰ƒ“ƒLƒ“ƒO‚ÌÅ‘å”
-	static const int		MAX_ENEMY_SE_NUM = 20;							//	SE‚Ì“o˜^”
-	static const int		STAY_SHOT_UI_ANIM_NUM = 10;						//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚ÌƒAƒjƒ[ƒVƒ‡ƒ“”
-	static const int		MAX_BACK_PIXEL_NUM = 150;						//	”wŒiƒsƒNƒZƒ‹”
+	static const int		WINDOW_WIDTH = 1920;							//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®å¹…
+	static const int		WINDOW_HEIGHT = 1080;							//	ã‚¦ã‚£ãƒ³ãƒ‰ã‚¦ã®é«˜ã•
+	static const int		COLOR_BIT = 16;									//	ã‚«ãƒ©ãƒ¼ãƒ“ãƒƒãƒˆæ•°
+	static const VECTOR		ORIGIN = VGet(0.0f, 0.0f, 0.0f);				//	åŸç‚¹
+	static const float		LINE_AREA_SIZE = 1000.0f;						//	ãƒ©ã‚¤ãƒ³ã‚’æãç¯„å›²
+	static const int		LINE_NUM = 100;									//	ãƒ©ã‚¤ãƒ³ã®æ•°
+	static const float		PI = 3.14159265359f;							//	Ï€
+	static const float		PI2 = 6.28318530718f;							//	2Ï€
+	static const int		MAX_KEY_INPUT_NUM = 256;						//	ã‚­ãƒ¼ã®æ•°
+	static const int		MAX_CSV_NUM = 256;								//	CSVã®èª­ã¿è¾¼ã¿ç¯„å›²ã®æœ€å¤§
+	static const int		MAX_ENEMY_ENTRY_NUM = 50;						//	ã‚¨ãƒãƒŸãƒ¼ã®ç™»éŒ²æ•°
+	static const int		MAX_ITEM_NUM = 10;								//	ã‚¢ã‚¤ãƒ†ãƒ ã®ç™»éŒ²æ•°
+	static const int		MAX_SHOT_NUM = 50;								//	å¼¾ã®ç™»éŒ²æ•°
+	static const int		MAX_STAY_SHOT_NUM = 10;							//	æ»åœ¨å¼¾ã®ç™»éŒ²æ•°
+	static const int		MAX_PLAYER_LIFE = 5;							//	ãƒ©ã‚¤ãƒ•
+	static const int		MAX_EFFECT_NUM = 50;							//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®ç™»éŒ²æ•°
+	static const int		MAX_BOSS_EXPLOSION_NUM = 5;						//	ãƒœã‚¹çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆæ•°
+	static const int		MAX_SCORE_NUM = 128;							//	ã‚¹ã‚³ã‚¢ã®æ•°
+	static const int		FONT_NUM = 255;									//	ãƒ•ã‚©ãƒ³ãƒˆã®æœ€å¤§æ•°
+	static const int		MAX_RANKING_NUM = 10;							//	ãƒ©ãƒ³ã‚­ãƒ³ã‚°ã®æœ€å¤§æ•°
+	static const int		MAX_ENEMY_SE_NUM = 20;							//	SEã®ç™»éŒ²æ•°
+	static const int		STAY_SHOT_UI_ANIM_NUM = 10;						//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³æ•°
+	static const int		MAX_BACK_PIXEL_NUM = 150;						//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«æ•°
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	–¼‘O‹óŠÔ	[ƒfƒoƒbƒO]
+//	@brief	åå‰ç©ºé–“	[ãƒ‡ãƒãƒƒã‚°]
 //-----------------------------------------------------------------------------
 namespace CommonDebug
 {
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒƒO
+	//	ãƒ­ã‚°
 	void Log();
 	void Log(const char* _log);
 	void Log(const int _value);
@@ -243,28 +243,28 @@ namespace CommonDebug
 	void Log(const char* _log, const float _value1, const float _value2, const float _value3);
 	void Log(const char* _log, const VECTOR _value1, const VECTOR _value2, const VECTOR _value3);
 	
-	//	ƒAƒT[ƒg
+	//	ã‚¢ã‚µãƒ¼ãƒˆ
 	bool Assert(const bool _isConditions, const char* _assate);
 
-	//	ƒpƒbƒh“ü—ÍƒeƒXƒg [‰Ÿ‚µ‚½uŠÔ]
+	//	ãƒ‘ãƒƒãƒ‰å…¥åŠ›ãƒ†ã‚¹ãƒˆ [æŠ¼ã—ãŸç¬é–“]
 	void PadInputPushTest(Pad& _pad);
 
-	//	ƒpƒbƒh“ü—ÍƒeƒXƒg [—£‚µ‚½uŠÔ]
+	//	ãƒ‘ãƒƒãƒ‰å…¥åŠ›ãƒ†ã‚¹ãƒˆ [é›¢ã—ãŸç¬é–“]
 	void PadInputDisuniteTest(Pad& _pad);
 
-	//	ƒpƒbƒh“ü—ÍƒeƒXƒg [‰Ÿ‚µ‚Ä‚¢‚éŠÔ]
+	//	ãƒ‘ãƒƒãƒ‰å…¥åŠ›ãƒ†ã‚¹ãƒˆ [æŠ¼ã—ã¦ã„ã‚‹é–“]
 	void PadInputTest(Pad& _pad);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	–¼‘O‹óŠÔ	[ˆÀ‘Sˆ—]
-//  TODO :: nullƒ`ƒFƒbƒN‚ª•K—v‚Èˆ—‚ğ‚Ü‚Æ‚ß‚½–¼‘O‹óŠÔAƒƒ‚ƒŠ‚Ì‰ğ•ú‚È‚Ç‚ğ‚µ‚Ä‚¢‚é
-//  TODO :: CommonSafe‚Å‚Í–¼‘O‚ª•s“K³‚È‚Ì‚ÅA•ÏX‚µ‚½‚Ù‚¤‚ª—Ç‚¢‚©‚à
+//	@brief	åå‰ç©ºé–“	[å®‰å…¨å‡¦ç†]
+//  TODO :: nullãƒã‚§ãƒƒã‚¯ãŒå¿…è¦ãªå‡¦ç†ã‚’ã¾ã¨ã‚ãŸåå‰ç©ºé–“ã€ãƒ¡ãƒ¢ãƒªã®è§£æ”¾ãªã©ã‚’ã—ã¦ã„ã‚‹
+//  TODO :: CommonSafeã§ã¯åå‰ãŒä¸é©æ­£ãªã®ã§ã€å¤‰æ›´ã—ãŸã»ã†ãŒè‰¯ã„ã‹ã‚‚
 //-----------------------------------------------------------------------------
 namespace CommonSafe
 {
     //-----------------------------------------------------------------------------
-    //	@brief	íœˆ—
+    //	@brief	å‰Šé™¤å‡¦ç†
     //-----------------------------------------------------------------------------
     template<class Template>
     void Delete(Template*& _pointer)
@@ -278,7 +278,7 @@ namespace CommonSafe
     }
 
     //-----------------------------------------------------------------------------
-    //	@brief	‰ğ•úˆ—
+    //	@brief	è§£æ”¾å‡¦ç†
     //-----------------------------------------------------------------------------
     template<class Template>
     void Release(Template*& _pointer)
@@ -294,7 +294,7 @@ namespace CommonSafe
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‹¤’ÊƒCƒ“ƒNƒ‹[ƒh
+//	@brief	å…±é€šã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Key.h"
 #include "Production.h"

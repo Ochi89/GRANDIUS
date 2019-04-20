@@ -1,81 +1,81 @@
-
+ï»¿
 //=============================================================================
 //	@file	HandOverToResult.h
-//	@brief	ƒŠƒUƒ‹ƒg‚Öˆø‚«“n‚µ
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒªã‚¶ãƒ«ãƒˆã¸å¼•ãæ¸¡ã—
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/03
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆø‚«“n‚µƒNƒ‰ƒX
+//	@brief	å¼•ãæ¸¡ã—ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class HandOverToResult final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒfƒXƒgƒ‰ƒNƒ^
+	//	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	~HandOverToResult();
 
-	//	¶¬
+	//	ç”Ÿæˆ
 	static HandOverToResult* GetInstance()
 	{
 		static HandOverToResult s_instance;
 		return &s_instance;
 	}
 
-	//	ƒŠƒZƒbƒg
+	//	ãƒªã‚»ãƒƒãƒˆ
 	void Reset();
 
-	//	“¢”°”‚Ì‰ÁZ
+	//	è¨ä¼æ•°ã®åŠ ç®—
 	void AddDestructionNum() { m_destructionNum++; }
 
 //==================== getter =====================//
 
-	//	ƒ‰ƒCƒt‚Ì getter
+	//	ãƒ©ã‚¤ãƒ•ã® getter
 	const int& GetLife() const { return m_life; }
 
-	//	“¢”°”‚Ì getter
+	//	è¨ä¼æ•°ã® getter
 	const int& GetDestructionNum() const { return m_destructionNum; }
 
-	//	ƒNƒŠƒA‚µ‚½‚©‚Ì getter
+	//	ã‚¯ãƒªã‚¢ã—ãŸã‹ã® getter
 	const bool& GetIsClear() const { return m_isClear; }
 
 //==================== setter =====================//
 
-	//	ƒ‰ƒCƒt‚Ì setter
+	//	ãƒ©ã‚¤ãƒ•ã® setter
 	void SetLife(const int _set) { m_life = _set; }
 
-	//	“¢”°”‚Ì setter
+	//	è¨ä¼æ•°ã® setter
 	void SetDestructionNum(const int _set) { m_destructionNum = _set; }
 
-	//	ƒNƒŠƒA‚µ‚½‚©‚Ì setter
+	//	ã‚¯ãƒªã‚¢ã—ãŸã‹ã® setter
 	void SetIsClear(const bool _set) { m_isClear = _set; }
 
 private:
 
-//================== ƒVƒ“ƒOƒ‹ƒgƒ“ ==================//
+//================== ã‚·ãƒ³ã‚°ãƒ«ãƒˆãƒ³ ==================//
 
-	// ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+	// ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	HandOverToResult();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int		m_life;					//	ƒ‰ƒCƒt
-	int		m_destructionNum;		//	“¢”°”
-	bool	m_isClear;				//	ƒNƒŠƒA‚µ‚½‚©
+	int		m_life;					//	ãƒ©ã‚¤ãƒ•
+	int		m_destructionNum;		//	è¨ä¼æ•°
+	bool	m_isClear;				//	ã‚¯ãƒªã‚¢ã—ãŸã‹
 
 };
 

@@ -1,58 +1,58 @@
-
+ï»¿
 //=============================================================================
 //	@file	Title.cpp
-//	@brief	ƒ^ƒCƒgƒ‹
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¿ã‚¤ãƒˆãƒ«
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/6
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Title.h"
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float Title::EQUAL = 1.0f;				//	“™”{
-const float Title::SUB_SCALE_SPEED = 1.0f;		//	Šg‘å—¦‚Ì‘¬“x
+const float Title::EQUAL = 1.0f;				//	ç­‰å€
+const float Title::SUB_SCALE_SPEED = 1.0f;		//	æ‹¡å¤§ç‡ã®é€Ÿåº¦
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Title::Title()
 {
-	//	ˆ—‚È‚µ
+	//	å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Title::~Title()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void Title::Create()
 {
-	//	ƒ^ƒCƒgƒ‹ƒƒS‚Ì‰Šú‰»
+	//	ã‚¿ã‚¤ãƒˆãƒ«ãƒ­ã‚´ã®åˆæœŸåŒ–
 	m_titleLogo.m_spriteHendle = LoadGraph("Data/Sprite/Title/TitleLogo.png");
 	CommonDebug::Assert((m_titleLogo.m_spriteHendle <= -1), " [ Title.cpp ] : error : sprite loading failed.");
 	m_titleLogo.m_pos = VGet(1090.0f, 150.0f, 0.0f);
 
-	//	ƒ^ƒCƒgƒ‹‚Ì‰Šú‰»
+	//	ã‚¿ã‚¤ãƒˆãƒ«ã®åˆæœŸåŒ–
 	m_title.m_spriteHendle = LoadGraph("Data/Sprite/Title/Title.png");
 	CommonDebug::Assert((m_title.m_spriteHendle <= -1), " [ Title.cpp ] : error : sprite loading failed.");
 	m_title.m_pos = VGet(1430.0f, 425.0f, 0.0f);
 	m_title.m_scale = 10.0f;
 	m_title.m_angle = 0.0f;
 
-	//	ƒXƒ^[ƒg‚Ì‰Šú‰»
+	//	ã‚¹ã‚¿ãƒ¼ãƒˆã®åˆæœŸåŒ–
 	m_start.m_spriteHendle = LoadGraph("Data/Sprite/Title/Start.png");
 	CommonDebug::Assert((m_start.m_spriteHendle <= -1), " [ Title.cpp ] : error : sprite loading failed.");
 	m_start.m_pos = VGet(550.0f, 925.0f, 0.0f);
@@ -62,46 +62,46 @@ void Title::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void Title::Release()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_titleLogo.m_spriteHendle);
 	DeleteGraph(m_title.m_spriteHendle);
 	DeleteGraph(m_start.m_spriteHendle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XV
+//	@brief	æ›´æ–°
 //-----------------------------------------------------------------------------
 void Title::Update(SoundEffect& _soundEffect)
 {
-	//	ƒ^ƒCƒgƒ‹‚ÌŠg‘å—¦
+	//	ã‚¿ã‚¤ãƒˆãƒ«ã®æ‹¡å¤§ç‡
 	_AskTitleScale(_soundEffect);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æ
+//	@brief	æç”»
 //-----------------------------------------------------------------------------
 void Title::Draw()
 {
 	DrawGraph((int)m_titleLogo.m_pos.x, (int)m_titleLogo.m_pos.y, m_titleLogo.m_spriteHendle, TRUE);
 	DrawRotaGraph((int)m_title.m_pos.x, (int)m_title.m_pos.y, (double)m_title.m_scale, (double)m_title.m_angle, m_title.m_spriteHendle, TRUE);
 
-	//	“_–Å•`‰æ
+	//	ç‚¹æ»…æç”»
 	_FlashingDraw(m_start);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ^ƒCƒgƒ‹‚ÌŠgk—¦‚ğ‹‚ß‚é
+//	@brief	ã‚¿ã‚¤ãƒˆãƒ«ã®æ‹¡ç¸®ç‡ã‚’æ±‚ã‚ã‚‹
 //-----------------------------------------------------------------------------
 void Title::_AskTitleScale(SoundEffect& _soundEffect)
 {
-	//	SE‚ÌŠJn
+	//	SEã®é–‹å§‹
 	if (!m_isSeStart)
 	{
-		//	Šg‘å—¦‚ğ¬‚³‚­‚·‚é
+		//	æ‹¡å¤§ç‡ã‚’å°ã•ãã™ã‚‹
 		m_title.m_scale -= SUB_SCALE_SPEED;
 		const bool isMinVal = m_title.m_scale <= EQUAL;
 		if (isMinVal)
@@ -114,7 +114,7 @@ void Title::_AskTitleScale(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“_–Å•`‰æ
+//	@brief	ç‚¹æ»…æç”»
 //-----------------------------------------------------------------------------
 void Title::_FlashingDraw(UI& _ui)
 {
@@ -128,11 +128,11 @@ void Title::_FlashingDraw(UI& _ui)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void Title::_FinalRelease()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_titleLogo.m_spriteHendle);
 	DeleteGraph(m_title.m_spriteHendle);
 	DeleteGraph(m_start.m_spriteHendle);

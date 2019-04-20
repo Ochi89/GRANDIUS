@@ -1,23 +1,23 @@
-
+ï»¿
 //=============================================================================
 //	@file	BassManager.cpp
-//	@brief	ƒ{ƒXƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒœã‚¹ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/18
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class LastBoss;
 class MediumBoss;
@@ -25,85 +25,85 @@ class ShotManager;
 class SoundEffect;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒXŠÇ—ƒNƒ‰ƒX
+//	@brief	ãƒœã‚¹ç®¡ç†ã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class BossManager final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^ / ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿ / ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	BossManager();
 	~BossManager();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create();
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release();
 
-	//	‰Šúˆ—
+	//	åˆæœŸå‡¦ç†
 	void Initialize();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(ShotManager& _shot, SoundEffect& _soundEffect);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw();
 
 //==================== getter =====================//
 
-	//	’†ƒ{ƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ì getter
+	//	ä¸­ãƒœã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã® getter
 	MediumBoss* GetMediumBoss() { return m_mediumBoss.m_pBuf; }
 
-	//	ƒ{ƒX‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ì getter
+	//	ãƒœã‚¹ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã® getter
 	LastBoss* GetLastBossPtr() { return m_lastBoss.m_pBuf; }
 
 //==================== setter =====================//
 
-	//	oŒ»ƒtƒ‰ƒO
+	//	å‡ºç¾ãƒ•ãƒ©ã‚°
 	void SetIsMediumBossEmerge(const bool _set) { m_mediumBoss.m_isEmerge = _set; }
 
-	//	oŒ»ƒtƒ‰ƒO
+	//	å‡ºç¾ãƒ•ãƒ©ã‚°
 	void SetIsLastBossEmerge(const bool _set) { m_lastBoss.m_isEmerge = _set; }
 
 private:
 
-//===================== \‘¢‘Ì =====================//
+//===================== æ§‹é€ ä½“ =====================//
 
-	//	’†ƒ{ƒXƒoƒbƒtƒ@
+	//	ä¸­ãƒœã‚¹ãƒãƒƒãƒ•ã‚¡
 	struct MediumBossBuffer
 	{
-		int				m_sourceModelHandle;				//	‘å–{ƒnƒ“ƒhƒ‹
-		MediumBoss*		m_pBuf;								//	ƒoƒbƒtƒ@
-		bool			m_isEmerge;							//	oŒ»ƒtƒ‰ƒO
+		int				m_sourceModelHandle;				//	å¤§æœ¬ãƒãƒ³ãƒ‰ãƒ«
+		MediumBoss*		m_pBuf;								//	ãƒãƒƒãƒ•ã‚¡
+		bool			m_isEmerge;							//	å‡ºç¾ãƒ•ãƒ©ã‚°
 	};
 
-	//	ÅIƒ{ƒXƒoƒbƒtƒ@
+	//	æœ€çµ‚ãƒœã‚¹ãƒãƒƒãƒ•ã‚¡
 	struct LastBossBuffer
 	{
-		int				m_sourceModelHandle;				//	‘å–{ƒnƒ“ƒhƒ‹
-		int				m_coreSourceModelHandle;			//	ƒRƒA‚Ì‘å–{ƒnƒ“ƒhƒ‹
-		int				m_sideBarrelSourceModelHandle;		//	ƒTƒCƒhƒoƒŒƒ‹‚Ì‘å–{ƒnƒ“ƒhƒ‹
-		int				m_armSourceModelHandle;				//	ƒA[ƒ€‚Ì‘å–{ƒnƒ“ƒhƒ‹
-		LastBoss*		m_pBuf;								//	ƒoƒbƒtƒ@
-		bool			m_isEmerge;							//	oŒ»ƒtƒ‰ƒO
+		int				m_sourceModelHandle;				//	å¤§æœ¬ãƒãƒ³ãƒ‰ãƒ«
+		int				m_coreSourceModelHandle;			//	ã‚³ã‚¢ã®å¤§æœ¬ãƒãƒ³ãƒ‰ãƒ«
+		int				m_sideBarrelSourceModelHandle;		//	ã‚µã‚¤ãƒ‰ãƒãƒ¬ãƒ«ã®å¤§æœ¬ãƒãƒ³ãƒ‰ãƒ«
+		int				m_armSourceModelHandle;				//	ã‚¢ãƒ¼ãƒ ã®å¤§æœ¬ãƒãƒ³ãƒ‰ãƒ«
+		LastBoss*		m_pBuf;								//	ãƒãƒƒãƒ•ã‚¡
+		bool			m_isEmerge;							//	å‡ºç¾ãƒ•ãƒ©ã‚°
 	};
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	MediumBossBuffer	m_mediumBoss;						//	’†ƒ{ƒX
-	LastBossBuffer		m_lastBoss;							//	ÅIƒ{ƒX
+	MediumBossBuffer	m_mediumBoss;						//	ä¸­ãƒœã‚¹
+	LastBossBuffer		m_lastBoss;							//	æœ€çµ‚ãƒœã‚¹
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float OUT_RANGE_MEDIUM_BOSS;			//	’†ƒ{ƒX‚Ì”ÍˆÍŠO
-	static const float OUT_RANGE_LAST_BOSS;				//	ÅIƒ{ƒX‚Ì”ÍˆÍŠO
+	static const float OUT_RANGE_MEDIUM_BOSS;			//	ä¸­ãƒœã‚¹ã®ç¯„å›²å¤–
+	static const float OUT_RANGE_LAST_BOSS;				//	æœ€çµ‚ãƒœã‚¹ã®ç¯„å›²å¤–
 
 };

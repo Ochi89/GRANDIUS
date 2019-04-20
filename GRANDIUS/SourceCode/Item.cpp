@@ -1,32 +1,32 @@
-
+ï»¿
 //=============================================================================
 //	@file	Item.
-//	@brief	ƒAƒCƒeƒ€‚Ğ‚Æ‚Â•ª‚Ìˆ—
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¢ã‚¤ãƒ†ãƒ ã²ã¨ã¤åˆ†ã®å‡¦ç†
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/14
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Item.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const VECTOR	Item::RECT_CORRECTION = VGet(4.0f, 4.0f, 1.0f);		//	À•W‚Ì•â³
-const float		Item::MOVE_SPEED = 0.5f;							//	ˆÚ“®‘¬“x
-const float		Item::HIT_RADIUS = 4.0f;							//	“–‚½‚è”»’è—p‚Ì”¼Œa
-const float		Item::ANGLE_SPEED_1 = 0.05f;						//	‰ñ“]‘¬“x‚P
-const float		Item::ANGLE_SPEED_2 = 0.03f;						//	‰ñ“]‘¬“x‚Q
+const VECTOR	Item::RECT_CORRECTION = VGet(4.0f, 4.0f, 1.0f);		//	åº§æ¨™ã®è£œæ­£
+const float		Item::MOVE_SPEED = 0.5f;							//	ç§»å‹•é€Ÿåº¦
+const float		Item::HIT_RADIUS = 4.0f;							//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+const float		Item::ANGLE_SPEED_1 = 0.05f;						//	å›è»¢é€Ÿåº¦ï¼‘
+const float		Item::ANGLE_SPEED_2 = 0.03f;						//	å›è»¢é€Ÿåº¦ï¼’
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Item::Item(const int _modelHandle1, const int _modelHandle2, const int _modelHandle3)
 {
-	//	ƒ‚ƒfƒ‹‚Ì•¡»‚·‚é
+	//	ãƒ¢ãƒ‡ãƒ«ã®è¤‡è£½ã™ã‚‹
 	m_modelHandle1 = MV1DuplicateModel(_modelHandle1);
 	m_modelHandle2 = MV1DuplicateModel(_modelHandle2);
 	m_modelHandle3 = MV1DuplicateModel(_modelHandle3);
@@ -41,7 +41,7 @@ Item::Item(const int _modelHandle1, const int _modelHandle2, const int _modelHan
 	m_angle1 = CommonConstant::ORIGIN;
 	m_angle2 = CommonConstant::ORIGIN;
 
-	//	“–‚½‚è”»’è—p‚Ì\‘¢‘Ì‚Ì‰Šú‰»
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ§‹é€ ä½“ã®åˆæœŸåŒ–
 	m_hitCircle.m_radius = HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 	m_hitRect.m_vertexTop = CommonConstant::ORIGIN;
@@ -49,16 +49,16 @@ Item::Item(const int _modelHandle1, const int _modelHandle2, const int _modelHan
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Item::~Item()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void Item::Initialize()
 {
@@ -69,7 +69,7 @@ void Item::Initialize()
 	m_angle1 = CommonConstant::ORIGIN;
 	m_angle2 = CommonConstant::ORIGIN;
 
-	//	“–‚½‚è”»’è—p‚Ì\‘¢‘Ì‚Ì‰Šú‰»
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ§‹é€ ä½“ã®åˆæœŸåŒ–
 	m_hitCircle.m_radius = HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 	m_hitRect.m_vertexTop = CommonConstant::ORIGIN;
@@ -77,69 +77,69 @@ void Item::Initialize()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void Item::Update()
 {
-	//	“–‚½‚è”»’è—p‚Ì’†SÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ä¸­å¿ƒåº§æ¨™ã®æ›´æ–°
 	m_hitCircle.m_centerPoint = m_pos;
 
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°
 	m_hitRect.m_vertexTop = VSub(m_pos, RECT_CORRECTION);
 	m_hitRect.m_vertexUnder = VAdd(m_pos, RECT_CORRECTION);
 
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	_Move();
 
-	//	‰ñ“]ˆ—
+	//	å›è»¢å‡¦ç†
 	_Rotation();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void Item::Draw()
 {
-	//	ƒ‚ƒfƒ‹‚Ì•`‰æ
+	//	ãƒ¢ãƒ‡ãƒ«ã®æç”»
 	MV1DrawModel(m_modelHandle1);
 	MV1DrawModel(m_modelHandle2);
 	MV1DrawModel(m_modelHandle3);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒVƒ‡ƒbƒgƒNƒ‰ƒX
+//	@brief	ã‚·ãƒ§ãƒƒãƒˆã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 void Item::_Move()
 {
-	//	ˆÚ“®
+	//	ç§»å‹•
 	VECTOR velocity = VScale(m_dir, MOVE_SPEED);
 	m_pos = VAdd(m_pos, velocity);
 
-	//	ƒ‚ƒfƒ‹‚Ìƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä
+	//	ãƒ¢ãƒ‡ãƒ«ã®ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦
 	MV1SetPosition(m_modelHandle1, m_pos);
 	MV1SetPosition(m_modelHandle2, m_pos);
 	MV1SetPosition(m_modelHandle3, m_pos);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ñ“]ˆ—
+//	@brief	å›è»¢å‡¦ç†
 //-----------------------------------------------------------------------------
 void Item::_Rotation()
 {
 	m_angle1.x += ANGLE_SPEED_1;
 	m_angle2.x += ANGLE_SPEED_2;
 
-	//	ƒ‚ƒfƒ‹‚Ì‰ñ“]‚ÌŠ„‚è“–‚Ä
+	//	ãƒ¢ãƒ‡ãƒ«ã®å›è»¢ã®å‰²ã‚Šå½“ã¦
 	MV1SetRotationXYZ(m_modelHandle2, m_angle1);
 	MV1SetRotationXYZ(m_modelHandle3, m_angle2);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void Item::_FinalRelease()
 {
-	//	ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_modelHandle1);
 	MV1DeleteModel(m_modelHandle2);
 	MV1DeleteModel(m_modelHandle3);

@@ -1,58 +1,58 @@
-
+ï»¿
 //=============================================================================
 //	@file	UIDemoPlay.cpp
-//	@brief	ƒfƒ‚ƒvƒŒƒCUI
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UI
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/15
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "UIDemoPlay.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const int		UIDemoPlay::MIN_ALPHA = 128;			//	ƒAƒ‹ƒtƒ@’l‚ÌÅ¬
-const int		UIDemoPlay::MAX_ALPHA = 255;			//	ƒAƒ‹ƒtƒ@’l‚ÌÅ‘å
-const int		UIDemoPlay::ALPHA_SPEED = 5;			//	ƒAƒ‹ƒtƒ@’l‚Ì‘¬“x
+const int		UIDemoPlay::MIN_ALPHA = 128;			//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å°
+const int		UIDemoPlay::MAX_ALPHA = 255;			//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®æœ€å¤§
+const int		UIDemoPlay::ALPHA_SPEED = 5;			//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®é€Ÿåº¦
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UIDemoPlay::UIDemoPlay()
 {
-	//	ˆ—‚È‚µ
+	//	å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UIDemoPlay::~UIDemoPlay()
 {
-	//	ÅI“I‚È‰ğ•ú
+	//	æœ€çµ‚çš„ãªè§£æ”¾
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬
+//	@brief	ä½œæˆ
 //-----------------------------------------------------------------------------
 void UIDemoPlay::Create()
 {
-	//	ƒ^ƒCƒgƒ‹ƒƒS‚Ì‰Šú‰»
+	//	ã‚¿ã‚¤ãƒˆãƒ«ãƒ­ã‚´ã®åˆæœŸåŒ–
 	m_titleLogo.m_spriteHendle = LoadGraph("Data/Sprite/DemoPlay/DemoLog.png");
 	CommonDebug::Assert((m_titleLogo.m_spriteHendle <= -1), " [ UIDemoPlay.cpp ] : error : sprite loading failed.");
 	m_titleLogo.m_pos = VGet(1600.0f, 0.0f, 0.0f);
 
-	//	ƒXƒ^[ƒg‚Ì‰Šú‰»
+	//	ã‚¹ã‚¿ãƒ¼ãƒˆã®åˆæœŸåŒ–
 	m_start.m_spriteHendle = LoadGraph("Data/Sprite/DemoPlay/Start.png");
 	CommonDebug::Assert((m_start.m_spriteHendle <= -1), " [ UIDemoPlay.cpp ] : error : sprite loading failed.");
 	m_start.m_pos = VGet(550.0f, 925.0f, 0.0f);
 	m_start.m_flashingTime = 0.0f;
 
-	//	ƒfƒ‚ƒvƒŒƒCUI
+	//	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UI
 	m_demoPlayUI.m_spriteHendle = LoadGraph("Data/Sprite/DemoPlay/DemoPlay.png");
 	CommonDebug::Assert((m_demoPlayUI.m_spriteHendle <= -1), " [ UIDemoPlay.cpp ] : error : sprite loading failed.");
 	m_demoPlayUI.m_pos = VGet(575.0f, 475.0f, 0.0f);
@@ -61,26 +61,26 @@ void UIDemoPlay::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•ú
+//	@brief	è§£æ”¾
 //-----------------------------------------------------------------------------
 void UIDemoPlay::Release()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_titleLogo.m_spriteHendle);
 	DeleteGraph(m_start.m_spriteHendle);
 	DeleteGraph(m_demoPlayUI.m_spriteHendle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIDemoPlay::Update()
 {
-	//	ƒAƒ‹ƒtƒ@’l‚Ì‰ÁZŒ¸Z‚ÌØ‚è‘Ö‚¦
+	//	ã‚¢ãƒ«ãƒ•ã‚¡å€¤ã®åŠ ç®—æ¸›ç®—ã®åˆ‡ã‚Šæ›¿ãˆ
 	if (m_isChangeAlpha) { m_alpha -= ALPHA_SPEED; }
 	else { m_alpha += ALPHA_SPEED; }
 
-	//	Å‘åÅ¬ˆ—
+	//	æœ€å¤§æœ€å°å‡¦ç†
 	const bool isMaxVal = m_alpha >= MAX_ALPHA;
 	const bool isMinVal = m_alpha <= MIN_ALPHA;
 	if (isMaxVal) { m_alpha = MAX_ALPHA; m_isChangeAlpha = true; }
@@ -89,26 +89,26 @@ void UIDemoPlay::Update()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIDemoPlay::Draw()
 {
-	//“_–Å•`‰æ
+	//ç‚¹æ»…æç”»
 	_FlashingDraw(m_start);
 
-	//	ƒ^ƒCƒgƒ‹ƒƒS•`‰æ
+	//	ã‚¿ã‚¤ãƒˆãƒ«ãƒ­ã‚´æç”»
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, MIN_ALPHA);
 	DrawGraph((int)m_titleLogo.m_pos.x, (int)m_titleLogo.m_pos.y, m_titleLogo.m_spriteHendle, TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 
-	//	ƒfƒ‚ƒvƒŒƒCUI‚Ì•`‰æ
+	//	ãƒ‡ãƒ¢ãƒ—ãƒ¬ã‚¤UIã®æç”»
 	SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_alpha);
 	DrawGraph((int)m_demoPlayUI.m_pos.x , (int)m_demoPlayUI.m_pos.y, m_demoPlayUI.m_spriteHendle, TRUE);
 	SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“_–Å•`‰æ
+//	@brief	ç‚¹æ»…æç”»
 //-----------------------------------------------------------------------------
 void UIDemoPlay::_FlashingDraw(UI& _ui)
 {
@@ -122,11 +122,11 @@ void UIDemoPlay::_FlashingDraw(UI& _ui)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void UIDemoPlay::_FinalRelease()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	DeleteGraph(m_titleLogo.m_spriteHendle);
 	DeleteGraph(m_start.m_spriteHendle);
 	DeleteGraph(m_demoPlayUI.m_spriteHendle);

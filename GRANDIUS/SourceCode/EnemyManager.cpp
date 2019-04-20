@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	EnemyManager.cpp
-//	@brief	ƒGƒlƒ~[ƒ}ƒl[ƒWƒƒ[
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/16
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "EnemyManager.h"
 #include "EnemyBase.h"
@@ -28,34 +28,34 @@
 #include "Warning.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const float EnemyManager::MAX_EMERGNCE_INTERVAL_TIME = 100.0f;	//	oŒ‚ƒ^ƒCƒ}[‚ÌÅ‘åŠÔŠu
-const float	EnemyManager::MAX_WAIT_TIME = 20.0f;				//	‘Ò‹@ŠÔ‚ÌÅ‘å
-const float	EnemyManager::PART_INTERAL = 250.0f;				//	ƒp[ƒg‚ÌŠÔŠu
-const float	EnemyManager::MIN_ALIVE_TIME = 80.0f;				//	¶‘¶ŠÔ‚ÌÅ¬
-const float	EnemyManager::MEDIUM_BOSS_EMERGE_TIME = 1700.0f;	//	’†ƒ{ƒX‚ÌoŒ»‚ÌŠÔ
-const float	EnemyManager::LAST_BOSS_EMERGE_TIME = 10500.0f;		//	ÅIƒ{ƒX‚ÌoŒ»‚ÌŠÔ
-const float	EnemyManager::WARNING_SE_TIME = 10430.0f;			//	Œx‰¹‚ÌŠÔ
-const float	EnemyManager::PRODUCTION_TIME = 5100.0f;			//	‰‰o‚ÌŠÔ
-const float	EnemyManager::MAX_FLAME = 14625.0f;					//	ƒtƒŒ[ƒ€‚ÌÅ‘å
-const float	EnemyManager::RESET_FLAME = 10825.0f;				//	ƒtƒŒ[ƒ€‚ÌƒŠƒZƒbƒg’l
-const float EnemyManager::MAX_X_POS = 130.0f;					//	XÀ•W‚ÌÅ‘å
-const float EnemyManager::MIN_X_POS = -130.0f;					//	XÀ•W‚ÌÅ¬
-const float EnemyManager::MAX_Y_POS = 120.0f;					//	YÀ•W‚ÌÅ‘å
-const float EnemyManager::MIN_Y_POS = 0.0f;						//	YÀ•W‚ÌÅ¬
-const float	EnemyManager::SKIP = 1.0f;						//	ƒXƒLƒbƒv
+const float EnemyManager::MAX_EMERGNCE_INTERVAL_TIME = 100.0f;	//	å‡ºæ’ƒã‚¿ã‚¤ãƒãƒ¼ã®æœ€å¤§é–“éš”
+const float	EnemyManager::MAX_WAIT_TIME = 20.0f;				//	å¾…æ©Ÿæ™‚é–“ã®æœ€å¤§
+const float	EnemyManager::PART_INTERAL = 250.0f;				//	ãƒ‘ãƒ¼ãƒˆã®é–“éš”
+const float	EnemyManager::MIN_ALIVE_TIME = 80.0f;				//	ç”Ÿå­˜æ™‚é–“ã®æœ€å°
+const float	EnemyManager::MEDIUM_BOSS_EMERGE_TIME = 1700.0f;	//	ä¸­ãƒœã‚¹ã®å‡ºç¾æ™‚ã®æ™‚é–“
+const float	EnemyManager::LAST_BOSS_EMERGE_TIME = 10500.0f;		//	æœ€çµ‚ãƒœã‚¹ã®å‡ºç¾æ™‚ã®æ™‚é–“
+const float	EnemyManager::WARNING_SE_TIME = 10430.0f;			//	è­¦å‘ŠéŸ³ã®æ™‚é–“
+const float	EnemyManager::PRODUCTION_TIME = 5100.0f;			//	æ¼”å‡ºã®æ™‚é–“
+const float	EnemyManager::MAX_FLAME = 14625.0f;					//	ãƒ•ãƒ¬ãƒ¼ãƒ ã®æœ€å¤§
+const float	EnemyManager::RESET_FLAME = 10825.0f;				//	ãƒ•ãƒ¬ãƒ¼ãƒ ã®ãƒªã‚»ãƒƒãƒˆå€¤
+const float EnemyManager::MAX_X_POS = 130.0f;					//	Xåº§æ¨™ã®æœ€å¤§
+const float EnemyManager::MIN_X_POS = -130.0f;					//	Xåº§æ¨™ã®æœ€å°
+const float EnemyManager::MAX_Y_POS = 120.0f;					//	Yåº§æ¨™ã®æœ€å¤§
+const float EnemyManager::MIN_Y_POS = 0.0f;						//	Yåº§æ¨™ã®æœ€å°
+const float	EnemyManager::SKIP = 1.0f;						//	ã‚¹ã‚­ãƒƒãƒ—
 
 //#define TEST_ENEMY_ENTRY 0
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 EnemyManager::EnemyManager()
 {
 	m_entryTime = 0.0f;
 
-	//	ƒƒ‚ƒŠ‚ÌŠm•Û‚ğ‚·‚é‚ÆAg—pƒtƒ‰ƒO‚Ì‰Šú‰»
+	//	ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿ã‚’ã™ã‚‹ã¨ã€ä½¿ç”¨ãƒ•ãƒ©ã‚°ã®åˆæœŸåŒ–
 	for (int i = 0; i < ENEMY_KIND::ENEMY_NUM; i++)
 	{
 		for (int j = 0; j < CommonConstant::MAX_ENEMY_ENTRY_NUM; j++)
@@ -67,20 +67,20 @@ EnemyManager::EnemyManager()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 EnemyManager::~EnemyManager()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void EnemyManager::Create()
 {
-	//	‘å–{‚Ìƒ‚ƒfƒ‹ƒnƒ“ƒhƒ‹‚Ì“Ç‚İ‚İ
+	//	å¤§æœ¬ã®ãƒ¢ãƒ‡ãƒ«ãƒãƒ³ãƒ‰ãƒ«ã®èª­ã¿è¾¼ã¿
 	m_sourceModelHandle[ENEMY_KIND::ENEMY_LINE] = MV1LoadModel("Data/Model/Enemy/LineEnemy.mqo");
 	m_sourceModelHandle[ENEMY_KIND::ENEMY_FLOATING] = MV1LoadModel("Data/Model/Enemy/FloatingEnemy.mqo");
 	m_sourceModelHandle[ENEMY_KIND::ENEMY_CURVE] = MV1LoadModel("Data/Model/Enemy/CurveEnemy.mqo");
@@ -95,7 +95,7 @@ void EnemyManager::Create()
 	CommonDebug::Assert((m_sourceModelHandle[ENEMY_KIND::ENEMY_TURNING] <= -1), " [ EnemyManager.cpp ] : error : model loading failed.");
 	CommonDebug::Assert((m_sourceModelHandle[ENEMY_KIND::ENEMY_UP_DOWN] <= -1), " [ EnemyManager.cpp ] : error : model loading failed.");
 
-	//	ƒƒ‚ƒŠ‚ÌŠm•Û‚ğ‚·‚é
+	//	ãƒ¡ãƒ¢ãƒªã®ç¢ºä¿ã‚’ã™ã‚‹
 	for (int i = 0; i < CommonConstant::MAX_ENEMY_ENTRY_NUM; i++)
 	{
 		m_entryBuffer[ENEMY_KIND::ENEMY_LINE].m_pBuf[i] = new LineEnemy(m_sourceModelHandle[ENEMY_KIND::ENEMY_LINE]);
@@ -106,7 +106,7 @@ void EnemyManager::Create()
 		m_entryBuffer[ENEMY_KIND::ENEMY_UP_DOWN].m_pBuf[i] = new UpDownEnemy(m_sourceModelHandle[ENEMY_KIND::ENEMY_UP_DOWN]);
 	}
 
-	//	‰Šú‰»‚µAƒGƒlƒ~[ŒÂX‚Ì”\—Í‚Ìì¬
+	//	åˆæœŸåŒ–ã—ã€ã‚¨ãƒãƒŸãƒ¼å€‹ã€…ã®èƒ½åŠ›ã®ä½œæˆ
 	for (int i = 0; i < ENEMY_KIND::ENEMY_NUM; i++)
 	{
 		for (int j = 0; j < CommonConstant::MAX_ENEMY_ENTRY_NUM; j++)
@@ -118,40 +118,40 @@ void EnemyManager::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void EnemyManager::Release()
 {
-	//	ƒŠƒXƒg“à‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«AƒNƒŠƒA‚·‚é
+	//	ãƒªã‚¹ãƒˆå†…ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ãã€ã‚¯ãƒªã‚¢ã™ã‚‹
 	if (!m_useList.empty()) { m_useList.clear(); }
 
 	for (int i = 0; i < ENEMY_KIND::ENEMY_NUM; i++)
 	{
-		//	ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+		//	ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 		MV1DeleteModel(m_sourceModelHandle[i]);
 
 		for (int j = 0; j < CommonConstant::MAX_ENEMY_ENTRY_NUM; j++)
 		{
-			//	ƒƒ‚ƒŠ‚Ì‰ğ•ú
+			//	ãƒ¡ãƒ¢ãƒªã®è§£æ”¾
 			CommonSafe::Delete(m_entryBuffer[i].m_pBuf[j]);
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void EnemyManager::Initialize()
 {
 #ifdef TEST_ENEMY_ENTRY
-	//	ƒGƒlƒ~[oŒ»ƒ^ƒCƒ€‚Ì‰Šú‰»
+	//	ã‚¨ãƒãƒŸãƒ¼å‡ºç¾ã‚¿ã‚¤ãƒ ã®åˆæœŸåŒ–
 	m_entryTime = 0.0f;
 #else
-	//	ƒGƒlƒ~[oŒ»ƒ^ƒCƒ€‚Ì‰Šú‰»
+	//	ã‚¨ãƒãƒŸãƒ¼å‡ºç¾ã‚¿ã‚¤ãƒ ã®åˆæœŸåŒ–
 	m_entryTime = 0.0f;
 #endif
 
-	//	ƒGƒlƒ~[‚ÌŒv‘ªƒJƒEƒ“ƒg‚Ì‰Šú‰»
+	//	ã‚¨ãƒãƒŸãƒ¼ã®è¨ˆæ¸¬ã‚«ã‚¦ãƒ³ãƒˆã®åˆæœŸåŒ–
 	for (int i = 0; i < ENEMY_FORMATION_NUM::FORMATION_NUM; i++)
 	{
 		m_enemyCounter[i] = 0;
@@ -159,11 +159,11 @@ void EnemyManager::Initialize()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void EnemyManager::Update(PlayerManager& _playerManager, ShotManager& _shotManager, BossManager& _bossManager, ItemManager& _item, Sound& _sound, SoundEffect& _soundEffect, Warning& _warning)
 {
-	//	’†ƒ{ƒX‚Ì“o˜^
+	//	ä¸­ãƒœã‚¹ã®ç™»éŒ²
 	const bool isEntryMediumBoss = m_entryTime == MEDIUM_BOSS_EMERGE_TIME;
 	if (isEntryMediumBoss) { _bossManager.SetIsMediumBossEmerge(true); }
 
@@ -171,87 +171,87 @@ void EnemyManager::Update(PlayerManager& _playerManager, ShotManager& _shotManag
 	const bool isWarningSE = m_entryTime == WARNING_SE_TIME;
 	if (isWarningSE) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_WARNING); _sound.SetIsChageSound(true); _warning.SetIsWarningStart(true); }
 
-	//	ÅIƒ{ƒX‚Ì“o˜^
+	//	æœ€çµ‚ãƒœã‚¹ã®ç™»éŒ²
 	const bool isEntryLastBoss = m_entryTime == LAST_BOSS_EMERGE_TIME;
 	if (isEntryLastBoss) { _bossManager.SetIsLastBossEmerge(true); }
 
-	///		ƒQ[ƒ€ŠÔ’²®‚Ì‚½‚ßAíœ
-	////	‰‰oŠJn
+	///		ã‚²ãƒ¼ãƒ æ™‚é–“èª¿æ•´ã®ãŸã‚ã€å‰Šé™¤
+	////	æ¼”å‡ºé–‹å§‹
 	//const bool isProduction = m_entryTime == PRODUCTION_TIME;
 	//if (isProduction) { PRODUCTION->SetIsSceneProduction(true); }
 
-	//	•KE‹ZˆÈŠO‚Ì‚Æ‚«‚Æ
-	//	ƒNƒŠƒA‚µ‚Ä‚¢‚È‚¢‚Æ‚«‚Ì‚İ
-	//	XV‚·‚é
+	//	å¿…æ®ºæŠ€ä»¥å¤–ã®ã¨ãã¨
+	//	ã‚¯ãƒªã‚¢ã—ã¦ã„ãªã„ã¨ãã®ã¿
+	//	æ›´æ–°ã™ã‚‹
 	const bool isNotClearProduction = !PRODUCTION->GetIsClearProduction();
 	const bool isNotSpecialProduction = !PRODUCTION->GetIsSpecialProduction();
 	const bool isNotClear = !_playerManager.GetIsClear();
 	const bool isActive = isNotSpecialProduction && isNotClearProduction && isNotClear;
 	if (isActive)
 	{
-		//	ƒŠƒXƒg‚É“o˜^
+		//	ãƒªã‚¹ãƒˆã«ç™»éŒ²
 		_EnemyEntry();
 	}
 
-	//	ƒŠƒXƒg‚ÌXV
+	//	ãƒªã‚¹ãƒˆã®æ›´æ–°
 	_ListUpdate(_playerManager, _shotManager, _soundEffect);
 
-	//	ƒŠƒXƒg‚©‚çíœ
+	//	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 	_RemoveFromList(_item);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void EnemyManager::Draw()
 {
-	//	g—pƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ã
 	const bool isAlreadyEntry = !m_useList.empty();
 	if (isAlreadyEntry)
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<EnemyBase*>::iterator ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	•`‰æ
+			//	æç”»
 			(*ite)->Draw();
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void EnemyManager::RemoveFromList(const EnemyBase* _enemyPtr, ItemManager& _item)
 {
-	//	g—pƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ã
 	const bool isAlreadyEntry = !m_useList.empty();
 	if (isAlreadyEntry)
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<EnemyBase*>::iterator ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	_enemyPtr ‚Æˆê’v‚µ‚½A
-			//	ƒGƒlƒ~[‚ğƒŠƒXƒg‚©‚çíœ‚·‚é
+			//	_enemyPtr ã¨ä¸€è‡´ã—ãŸã€
+			//	ã‚¨ãƒãƒŸãƒ¼ã‚’ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤ã™ã‚‹
 			const bool isSame = _enemyPtr == (*ite);
 			if (isSame)
 			{
-				//	ƒGƒlƒ~[‚Ì€–S‚ÉƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚È‚çA
-				//	ƒAƒCƒeƒ€ƒŠƒXƒg‚É’Ç‰Á‚·‚é
+				//	ã‚¨ãƒãƒŸãƒ¼ã®æ­»äº¡æ™‚ã«ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ãªã‚‰ã€
+				//	ã‚¢ã‚¤ãƒ†ãƒ ãƒªã‚¹ãƒˆã«è¿½åŠ ã™ã‚‹
 				const bool isHavingItems = (*ite)->GetIsHavingItems();
 				if (isHavingItems) { _item.RegisterOnList((*ite)->GetPos()); }
 
-				//	ƒGƒlƒ~[‚ğg—p‰Â”\‚É‚·‚é
+				//	ã‚¨ãƒãƒŸãƒ¼ã‚’ä½¿ç”¨å¯èƒ½ã«ã™ã‚‹
 				int enemyID = (*ite)->GetEntryID();
 				int enemyKind = (*ite)->GetEntryKind();
 				m_entryBuffer[enemyKind].m_isInUse[enemyID] = false;
 
-				//	ƒƒ‚ƒŠ‚©‚ç‚ÍÁ‚³‚È‚¢‚Ì‚Å
-				//	‰Šú‰»‚ğ‚·‚é
+				//	ãƒ¡ãƒ¢ãƒªã‹ã‚‰ã¯æ¶ˆã•ãªã„ã®ã§
+				//	åˆæœŸåŒ–ã‚’ã™ã‚‹
 				(*ite)->Initialize();
 
-				//	g—pƒŠƒXƒg‚©‚çíœ
+				//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 				m_useList.remove(*ite);
 
 				break;
@@ -261,21 +261,21 @@ void EnemyManager::RemoveFromList(const EnemyBase* _enemyPtr, ItemManager& _item
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[‚Ö‚Ìƒ|ƒCƒ“ƒ^‚Ì getter
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ã¸ã®ãƒã‚¤ãƒ³ã‚¿ã® getter
 //-----------------------------------------------------------------------------
 EnemyBase* EnemyManager::GetEnemyPtr(const int _num)
 {
 	int counter = 0;
 
-	//	g—pƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ã
 	const bool isAlreadyEntry = !m_useList.empty();
 	if (isAlreadyEntry)
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<EnemyBase*>::iterator ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	_num ‚Æˆê’v‚µ‚½ƒ|ƒCƒ“ƒ^‚ğ•Ô‚·
+			//	_num ã¨ä¸€è‡´ã—ãŸãƒã‚¤ãƒ³ã‚¿ã‚’è¿”ã™
 			const bool isSame = counter == _num;
 			if (isSame) { return (*ite); }
 			counter++;
@@ -286,7 +286,7 @@ EnemyBase* EnemyManager::GetEnemyPtr(const int _num)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[‚Ì“o˜^
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ã®ç™»éŒ²
 //-----------------------------------------------------------------------------
 void EnemyManager::_EnemyEntry()
 {
@@ -294,72 +294,72 @@ void EnemyManager::_EnemyEntry()
 
 #else
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚P
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼‘
 	_EnemyParts1();
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚Q
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼’
 	_EnemyParts2();
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚R
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼“
 	_EnemyParts3();
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚S
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼”
 	_EnemyParts4();
 
-	//	ƒGƒlƒ~[ƒp[ƒg‚T
+	//	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼•
 	_EnemyParts5();
 
 #endif // TEST_ENEMY_ENTRY
 
 	m_entryTime++;
 
-	//	ƒGƒlƒ~[oŒ»ŠÔ‚ÌÅ‘å‚È‚Ì‚ÅA
-	//	ƒ{ƒX’†‚ÌƒUƒRƒp[ƒg‚ÌŒJ‚è•Ô‚µ
+	//	ã‚¨ãƒãƒŸãƒ¼å‡ºç¾æ™‚é–“ã®æœ€å¤§ãªã®ã§ã€
+	//	ãƒœã‚¹ä¸­ã®ã‚¶ã‚³ãƒ‘ãƒ¼ãƒˆã®ç¹°ã‚Šè¿”ã—
 	const bool isMaxTime = m_entryTime >= MAX_FLAME;
 	if (isMaxTime) { m_entryTime = RESET_FLAME; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚ÌXV
+//	@brief	ãƒªã‚¹ãƒˆã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void EnemyManager::_ListUpdate(PlayerManager& _playerManager, ShotManager& _shot, SoundEffect& _soundEffect)
 {
-	//	g—pƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ã
 	const bool isAlreadyEntry = !m_useList.empty();
 	if (isAlreadyEntry)
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<EnemyBase*>::iterator ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	¶‘¶ŠÔ‚Ì‰ÁZ
+			//	ç”Ÿå­˜æ™‚é–“ã®åŠ ç®—
 			(*ite)->AddAliveTime();
 
-			//	XV
+			//	æ›´æ–°
 			(*ite)->Update(_playerManager, _shot, _soundEffect);
 		}
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒXƒg‚©‚çíœ
+//	@brief	ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 //-----------------------------------------------------------------------------
 void EnemyManager::_RemoveFromList(ItemManager& _item)
 {
-	//	g—pƒŠƒXƒg‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ã
 	const bool isAlreadyEntry = !m_useList.empty();
 	if (isAlreadyEntry)
 	{
-		//	ƒŠƒXƒg‚Ì‰ñ”•ª‰ñ‚·
+		//	ãƒªã‚¹ãƒˆã®å›æ•°åˆ†å›ã™
 		std::list<EnemyBase*>::iterator ite;
 		for (ite = m_useList.begin(); ite != m_useList.end(); ite++)
 		{
-			//	¶¬‚µ‚Ä‚·‚®‚ÉÁ–Å‚µ‚È‚¢‚æ‚¤‚ÉA
-			//	Å¬‚Ì¶‘¶ŠÔ‚ğ’´‚¦‚½‚çAíœ‚·‚é
+			//	ç”Ÿæˆã—ã¦ã™ãã«æ¶ˆæ»…ã—ãªã„ã‚ˆã†ã«ã€
+			//	æœ€å°ã®ç”Ÿå­˜æ™‚é–“ã‚’è¶…ãˆãŸã‚‰ã€å‰Šé™¤ã™ã‚‹
 			const bool isActiveMinAlive = (*ite)->GetAliveTime() >= MIN_ALIVE_TIME;
 			if (isActiveMinAlive)
 			{
-				//	‰æ–ÊŠO‚Ì‚Æ‚«Aíœ
+				//	ç”»é¢å¤–ã®ã¨ãã€å‰Šé™¤
 				const bool isOverTop = (*ite)->GetPos().y >= MAX_Y_POS;
 				const bool isOverButtom = (*ite)->GetPos().y <= MIN_Y_POS;
 				const bool isOverRight = (*ite)->GetPos().x >= MAX_X_POS;
@@ -367,39 +367,39 @@ void EnemyManager::_RemoveFromList(ItemManager& _item)
 				const bool isOverPos = isOverTop || isOverButtom || isOverRight || isOverLeft;
 				if (isOverPos)
 				{
-					//	ƒGƒlƒ~[‚ğg—p‰Â”\‚É‚·‚é
+					//	ã‚¨ãƒãƒŸãƒ¼ã‚’ä½¿ç”¨å¯èƒ½ã«ã™ã‚‹
 					const int enemyID = (*ite)->GetEntryID();
 					const int enemyKind = (*ite)->GetEntryKind();
 					m_entryBuffer[enemyKind].m_isInUse[enemyID] = false;
 
-					//	‘à—ñ‚©‚çíœ
+					//	éšŠåˆ—ã‹ã‚‰å‰Šé™¤
 					const int formationID = (*ite)->GetFormationID();
 					SubEnemyCount(formationID);
 
-					//	ƒƒ‚ƒŠ‚©‚ç‚ÍÁ‚³‚È‚¢‚Ì‚Å
-					//	‰Šú‰»‚ğ‚·‚é
+					//	ãƒ¡ãƒ¢ãƒªã‹ã‚‰ã¯æ¶ˆã•ãªã„ã®ã§
+					//	åˆæœŸåŒ–ã‚’ã™ã‚‹
 					(*ite)->Initialize();
 
-					//	g—pƒŠƒXƒg‚©‚çíœ
+					//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 					m_useList.remove(*ite);
 
 					break;
 				}
 
-				//	‰½‚ç‚©‚Éƒqƒbƒg‚µ‚½‚Ì‚ÅAíœ
+				//	ä½•ã‚‰ã‹ã«ãƒ’ãƒƒãƒˆã—ãŸã®ã§ã€å‰Šé™¤
 				const bool isDeleateActive = (*ite)->GetIsDeleate();
 				if (isDeleateActive)
 				{
-					//	ƒGƒlƒ~[‚ğg—p‰Â”\‚É‚·‚é
+					//	ã‚¨ãƒãƒŸãƒ¼ã‚’ä½¿ç”¨å¯èƒ½ã«ã™ã‚‹
 					int enemyID = (*ite)->GetEntryID();
 					int enemyKind = (*ite)->GetEntryKind();
 					m_entryBuffer[enemyKind].m_isInUse[enemyID] = false;
 
-					//	ƒƒ‚ƒŠ‚©‚ç‚ÍÁ‚³‚È‚¢‚Ì‚Å
-					//	‰Šú‰»‚ğ‚·‚é
+					//	ãƒ¡ãƒ¢ãƒªã‹ã‚‰ã¯æ¶ˆã•ãªã„ã®ã§
+					//	åˆæœŸåŒ–ã‚’ã™ã‚‹
 					(*ite)->Initialize();
 
-					//	g—pƒŠƒXƒg‚©‚çíœ
+					//	ä½¿ç”¨ãƒªã‚¹ãƒˆã‹ã‚‰å‰Šé™¤
 					m_useList.remove(*ite);
 
 					break;
@@ -410,11 +410,11 @@ void EnemyManager::_RemoveFromList(ItemManager& _item)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[ƒp[ƒg‚P
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼‘
 //-----------------------------------------------------------------------------
 void EnemyManager::_EnemyParts1()
 {
-	//	‘O”¼ƒUƒRƒp[ƒg‚P
+	//	å‰åŠã‚¶ã‚³ãƒ‘ãƒ¼ãƒˆï¼‘
 	_FormationEntry(ENEMY_KIND::ENEMY_CURVE, 50.0f, 10.0f, VGet(120.0f, 90.0f, 0.0f), 10, true, true, (int)ENEMY_FORMATION_NUM::FORMATION_1);
 	_FormationEntry(ENEMY_KIND::ENEMY_CURVE, 200.0f, 10.0f, VGet(120.0f, 20.0f, 0.0f), 10, true, true, (int)ENEMY_FORMATION_NUM::FORMATION_2);
 	_FormationEntry(ENEMY_KIND::ENEMY_CURVE, 350.0f, 10.0f, VGet(120.0f, 90.0f, 0.0f), 10, true, true, (int)ENEMY_FORMATION_NUM::FORMATION_3);
@@ -436,11 +436,11 @@ void EnemyManager::_EnemyParts1()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[ƒp[ƒg‚Q
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼’
 //-----------------------------------------------------------------------------
 void EnemyManager::_EnemyParts2()
 {
-	//	’†ƒ{ƒXƒp[ƒg
+	//	ä¸­ãƒœã‚¹ãƒ‘ãƒ¼ãƒˆ
 	_VerticalFormationEntry(ENEMY_KIND::ENEMY_FLOATING, 1850.0f, 0.0f, 10.0f, VGet(120.0f, 85.0f, 0.0f), 3, true, true, (int)ENEMY_FORMATION_NUM::FORMATION_NONE);
 	_VerticalFormationEntry(ENEMY_KIND::ENEMY_FLOATING, 1850.0f, 0.0f, 10.0f, VGet(120.0f, 30.0f, 0.0f), 3, true, true, (int)ENEMY_FORMATION_NUM::FORMATION_NONE);
 	_VerticalFormationEntry(ENEMY_KIND::ENEMY_FLOATING, 1950.0f, 0.0f, 10.0f, VGet(120.0f, 85.0f, 0.0f), 5, true, true, (int)ENEMY_FORMATION_NUM::FORMATION_NONE);
@@ -461,16 +461,16 @@ void EnemyManager::_EnemyParts2()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[ƒp[ƒg‚R
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼“
 //-----------------------------------------------------------------------------
 void EnemyManager::_EnemyParts3()
 {
-	///		ƒQ[ƒ€ŠÔ’²®‚Ì‚½‚ßAíœ‚µ‚½•”•ª‚ğƒXƒLƒbƒv
+	///		ã‚²ãƒ¼ãƒ æ™‚é–“èª¿æ•´ã®ãŸã‚ã€å‰Šé™¤ã—ãŸéƒ¨åˆ†ã‚’ã‚¹ã‚­ãƒƒãƒ—
 	const bool isSkip = m_entryTime == 3000.0f;
 	if (isSkip) { m_entryTime = 5500.0f - SKIP; }
 
-	///		ƒQ[ƒ€ŠÔ’²®‚Ì‚½‚ßAíœ
-	////	‘O”¼ƒUƒRƒp[ƒg‚Q
+	///		ã‚²ãƒ¼ãƒ æ™‚é–“èª¿æ•´ã®ãŸã‚ã€å‰Šé™¤
+	////	å‰åŠã‚¶ã‚³ãƒ‘ãƒ¼ãƒˆï¼’
 	//_FormationEntry(ENEMY_KIND::ENEMY_LINE, 3000.0f, 10.0f, VGet(120.0f, 90.0f, 0.0f), 15, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_1);
 	//_FormationEntry(ENEMY_KIND::ENEMY_LINE, 3000.0f, 10.0f, VGet(120.0f, 30.0f, 0.0f), 15, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_2);
 	//_FormationEntry(ENEMY_KIND::ENEMY_LINE, 3100.0f, 10.0f, VGet(120.0f, 60.0f, 0.0f), 15, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_3);
@@ -492,11 +492,11 @@ void EnemyManager::_EnemyParts3()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[ƒp[ƒg‚S
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼”
 //-----------------------------------------------------------------------------
 void EnemyManager::_EnemyParts4()
 {
-	//	Œã”¼ƒUƒRƒp[ƒg
+	//	å¾ŒåŠã‚¶ã‚³ãƒ‘ãƒ¼ãƒˆ
 	_FormationEntry(ENEMY_KIND::ENEMY_TURNING, 5500.0f, 20.0f, VGet(120.0f, 90.0f, 0.0f), 5, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_1);
 	_FormationEntry(ENEMY_KIND::ENEMY_TURNING, 5500.0f, 20.0f, VGet(120.0f, 30.0f, 0.0f), 5, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_2);
 	_FormationEntry(ENEMY_KIND::ENEMY_TURNING, 5900.0f, 20.0f, VGet(200.0f, 70.0f, 0.0f), 5, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_3);
@@ -513,11 +513,11 @@ void EnemyManager::_EnemyParts4()
 	_FormationEntry(ENEMY_KIND::ENEMY_FLOATING, 7300.0f, 10.0f, VGet(120.0f, 20.0f, 0.0f), 10, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_4);
 	_FormationEntry(ENEMY_KIND::ENEMY_LINE, 7400.0f, 10.0f, VGet(120.0f, 60.0f, 0.0f), 10, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_5);
 
-	///		ƒQ[ƒ€ŠÔ’²®‚Ì‚½‚ßAíœ‚µ‚½•”•ª‚ğƒXƒLƒbƒv
+	///		ã‚²ãƒ¼ãƒ æ™‚é–“èª¿æ•´ã®ãŸã‚ã€å‰Šé™¤ã—ãŸéƒ¨åˆ†ã‚’ã‚¹ã‚­ãƒƒãƒ—
 	const bool isSkip1 = m_entryTime == 7600.0f;
 	if (isSkip1) { m_entryTime = 8800.0f - SKIP; }
 
-	///		ƒQ[ƒ€ŠÔ’²®‚Ì‚½‚ßAíœ
+	///		ã‚²ãƒ¼ãƒ æ™‚é–“èª¿æ•´ã®ãŸã‚ã€å‰Šé™¤
 	//_FormationEntry(ENEMY_KIND::ENEMY_TURNING, 7700.0f, 20.0f, VGet(120.0f, 90.0f, 0.0f), 5, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_5);
 	//_FormationEntry(ENEMY_KIND::ENEMY_TURNING, 7900.0f, 20.0f, VGet(140.0f, 70.0f, 0.0f), 5, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_1);
 	//_FormationEntry(ENEMY_KIND::ENEMY_TURNING, 8100.0f, 20.0f, VGet(160.0f, 50.1f, 0.0f), 5, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_2);
@@ -530,11 +530,11 @@ void EnemyManager::_EnemyParts4()
 	_VerticalFormationEntry(ENEMY_KIND::ENEMY_UP_DOWN, 9400.0f, 10.0f, 40.0f, VGet(90.0f, -50.0f, 50.0f), 5, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_3);
 	_VerticalFormationEntry(ENEMY_KIND::ENEMY_UP_DOWN, 9600.0f, 10.0f, 40.0f, VGet(70.0f, 170.0f, 50.0f), 4, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_4);
 	
-	///		ƒQ[ƒ€ŠÔ’²®‚Ì‚½‚ßAíœ‚µ‚½•”•ª‚ğƒXƒLƒbƒv
+	///		ã‚²ãƒ¼ãƒ æ™‚é–“èª¿æ•´ã®ãŸã‚ã€å‰Šé™¤ã—ãŸéƒ¨åˆ†ã‚’ã‚¹ã‚­ãƒƒãƒ—
 	const bool isSkip2 = m_entryTime == 9800.0f;
 	if (isSkip2) { m_entryTime = 10300.0f; }
 
-	///		ƒQ[ƒ€ŠÔ’²®‚Ì‚½‚ßAíœ
+	///		ã‚²ãƒ¼ãƒ æ™‚é–“èª¿æ•´ã®ãŸã‚ã€å‰Šé™¤
 	//_VerticalFormationEntry(ENEMY_KIND::ENEMY_UP_DOWN, 9800.0f, 10.0f, 40.0f, VGet(70.0f, -50.0f, 50.0f), 4, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_5);
 	//_VerticalFormationEntry(ENEMY_KIND::ENEMY_UP_DOWN, 9800.0f, 10.0f, 40.0f, VGet(90.0f, 170.0f, 50.0f), 5, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_1);
 	//_VerticalFormationEntry(ENEMY_KIND::ENEMY_UP_DOWN, 10000.0f, 10.0f, 40.0f, VGet(70.0f, -50.0f, 50.0f), 4, false, false, (int)ENEMY_FORMATION_NUM::FORMATION_2);
@@ -542,11 +542,11 @@ void EnemyManager::_EnemyParts4()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒGƒlƒ~[ƒp[ƒg‚T
+//	@brief	ã‚¨ãƒãƒŸãƒ¼ãƒ‘ãƒ¼ãƒˆï¼•
 //-----------------------------------------------------------------------------
 void EnemyManager::_EnemyParts5()
 {
-	//	ƒ{ƒX’†‚ÌƒUƒRƒp[ƒg
+	//	ãƒœã‚¹ä¸­ã®ã‚¶ã‚³ãƒ‘ãƒ¼ãƒˆ
 	_FormationEntry(ENEMY_KIND::ENEMY_LINE, 10825.0f, 10.0f, VGet(120.0f, 80.0f, 0.0f), 8, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_4);
 	_FormationEntry(ENEMY_KIND::ENEMY_LINE, 11225.0f, 10.0f, VGet(120.0f, 30.0f, 0.0f), 8, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_5);
 	_FormationEntry(ENEMY_KIND::ENEMY_LINE, 11625.0f, 10.0f, VGet(120.0f, 30.0f, 0.0f), 8, true, false, (int)ENEMY_FORMATION_NUM::FORMATION_1);
@@ -557,71 +557,71 @@ void EnemyManager::_EnemyParts5()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘à—ñ‚ğ‘g‚Ü‚¹‚Ä“o˜^
+//	@brief	éšŠåˆ—ã‚’çµ„ã¾ã›ã¦ç™»éŒ²
 //-----------------------------------------------------------------------------
 void EnemyManager::_FormationEntry(const ENEMY_KIND _enemyKind, const float _startTime, const float _intervalTime, const VECTOR _startPos, const int _formationNum, 
 									const bool _isUseShot, const bool _isRestriction, const int _formation)
 {
-	//	í‘°”ÍˆÍŠO”»’è
+	//	ç¨®æ—ç¯„å›²å¤–åˆ¤å®š
 	const bool isKindSizeOver = _enemyKind < ENEMY_KIND::NONE || _enemyKind > ENEMY_KIND::ENEMY_NUM;
 	CommonDebug::Assert(isKindSizeOver, " [ EnemyManager.cpp ] : error : enemy kind over.");
 	if (isKindSizeOver) { return; }
 
-	//	‚Ü‚¾ŠJnŠÔ‚Å‚È‚¢‚Í–³‹‚·‚é
+	//	ã¾ã é–‹å§‹æ™‚é–“ã§ãªã„æ™‚ã¯ç„¡è¦–ã™ã‚‹
 	if (m_entryTime < _startTime) { return; }
 
-	//	‘à—ñ“àƒGƒlƒ~[”‚Ì‰ÁZ
+	//	éšŠåˆ—å†…ã‚¨ãƒãƒŸãƒ¼æ•°ã®åŠ ç®—
 	if (m_entryTime == _startTime) { m_enemyCounter[_formation] = _formationNum; }
 
 	for (int num = 0; num < _formationNum; num++)
 	{
-		//	‚Ü‚¾ŠJnŠÔ‚Å‚È‚¢‚Í–³‹‚·‚é
+		//	ã¾ã é–‹å§‹æ™‚é–“ã§ãªã„æ™‚ã¯ç„¡è¦–ã™ã‚‹
 		float entryTime = (_startTime + (_intervalTime * num));
 		if (m_entryTime != entryTime) { continue; }
 
-		//	“o˜^ˆ—
+		//	ç™»éŒ²å‡¦ç†
 		_Registration(_enemyKind, _startPos, entryTime, _isUseShot, _isRestriction, _formation);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“o˜^ˆ—
+//	@brief	ç™»éŒ²å‡¦ç†
 //-----------------------------------------------------------------------------
 void EnemyManager::_Registration(const ENEMY_KIND _enemyKind, const VECTOR _startPos, const float _entryTime, const bool _isUseShot, const bool _isRestriction, const int _formation)
 {
-	//	g—pƒŠƒXƒg“o˜^ˆ—
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆç™»éŒ²å‡¦ç†
 	const bool isListEntry = m_entryTime == _entryTime;
 	if (isListEntry)
 	{
 		VECTOR tmpPos = CommonConstant::ORIGIN;
 
-		//	‹ó‚¢‚Ä‚¢‚éƒoƒbƒtƒ@‚ğ’T‚µA
-		//	ƒGƒlƒ~[‚ğ’Ç‰Á
+		//	ç©ºã„ã¦ã„ã‚‹ãƒãƒƒãƒ•ã‚¡ã‚’æ¢ã—ã€
+		//	ã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		switch (_enemyKind)
 		{
-			//	’¼üƒGƒlƒ~[‚ğ’Ç‰Á
+			//	ç›´ç·šã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		case ENEMY_KIND::ENEMY_LINE:
 			tmpPos = VGet(_startPos.x, _startPos.y, _startPos.z);
 			if (_OneEnemyRegistrationToShotProbaility((int)ENEMY_KIND::ENEMY_LINE, tmpPos, _isUseShot, _isRestriction, _formation)) { return; }
 			break;
 
-			//	•‚—VƒGƒlƒ~[‚ğ’Ç‰Á
+			//	æµ®éŠã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		case ENEMY_KIND::ENEMY_FLOATING:
 			tmpPos = VGet(_startPos.x, _startPos.y, _startPos.z);
 			if (_OneEnemyRegistrationToShotProbaility((int)ENEMY_KIND::ENEMY_FLOATING, tmpPos, _isUseShot, _isRestriction, _formation)) { return; }
 			break;
 
-			//	‹ÈüƒGƒlƒ~[‚ğ’Ç‰Á
+			//	æ›²ç·šã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		case ENEMY_KIND::ENEMY_CURVE:
 			tmpPos = VGet(_startPos.x, _startPos.y, _startPos.z);
 			if (_OneEnemyRegistrationToShotProbaility((int)ENEMY_KIND::ENEMY_CURVE, tmpPos, _isUseShot, _isRestriction, _formation)) { return; }
 			break;
 
-			//	‹AŠÒƒGƒlƒ~[‚ğ’Ç‰Á
+			//	å¸°é‚„ã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		case ENEMY_KIND::ENEMY_RETURN:
 
-			//	‹AŠÒƒGƒlƒ~[‚Ì XÀ•W ‚Íƒ}ƒCƒiƒX‚Ì•ûŒü‚©‚ç‚µ‚©A
-			//	—ˆ‚ç‚ê‚È‚¢‚Ì‚ÅAƒvƒ‰ƒX‚ª“ü‚Á‚Ä‚½‚çAƒ}ƒCƒiƒX‚É•ÏŠ·‚·‚é
+			//	å¸°é‚„ã‚¨ãƒãƒŸãƒ¼ã® Xåº§æ¨™ ã¯ãƒã‚¤ãƒŠã‚¹ã®æ–¹å‘ã‹ã‚‰ã—ã‹ã€
+			//	æ¥ã‚‰ã‚Œãªã„ã®ã§ã€ãƒ—ãƒ©ã‚¹ãŒå…¥ã£ã¦ãŸã‚‰ã€ãƒã‚¤ãƒŠã‚¹ã«å¤‰æ›ã™ã‚‹
 			if (_startPos.x >= 0) { tmpPos = VGet(-_startPos.x, _startPos.y, _startPos.z); }
 			else { tmpPos = VGet(_startPos.x, _startPos.y, _startPos.z); }
 			if (_OneEnemyRegistrationToShotProbaility((int)ENEMY_KIND::ENEMY_RETURN, tmpPos, _isUseShot, _isRestriction, _formation)) { return; }
@@ -641,54 +641,54 @@ void EnemyManager::_Registration(const ENEMY_KIND _enemyKind, const VECTOR _star
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‘à—ñ‚ğ‘g‚Ü‚¹‚Ä‹AŠÒƒGƒlƒ~[‚Ì“o˜^
+//	@brief	éšŠåˆ—ã‚’çµ„ã¾ã›ã¦å¸°é‚„ã‚¨ãƒãƒŸãƒ¼ã®ç™»éŒ²
 //-----------------------------------------------------------------------------
 void EnemyManager::_VerticalFormationEntry(const ENEMY_KIND _enemyKind, const float _startTime, const float _intervalTime, const float _shiftInterval, const VECTOR _startPos, 
 										   const int _formationNum, const bool _isUseShot, const bool _isHavingItem, const int _formation)
 {
-	//	‚Ü‚¾ŠJnŠÔ‚Å‚È‚¢‚Í–³‹‚·‚é
+	//	ã¾ã é–‹å§‹æ™‚é–“ã§ãªã„æ™‚ã¯ç„¡è¦–ã™ã‚‹
 	if (m_entryTime < _startTime) { return; }
 
 	if(m_entryTime == _startTime) { m_enemyCounter[_formation] = _formationNum; }
 	
 	for (int num = 0; num < _formationNum; num++)
 	{
-		//	‚Ü‚¾ŠJnŠÔ‚Å‚È‚¢‚Í–³‹‚·‚é
+		//	ã¾ã é–‹å§‹æ™‚é–“ã§ãªã„æ™‚ã¯ç„¡è¦–ã™ã‚‹
 		float entryTime = (_startTime + (_intervalTime * num));
 		if (m_entryTime != entryTime) { continue; }
 
-		//	ƒGƒlƒ~[‚ğ’Ç‰Á
+		//	ã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		_VerticalRegistration(_enemyKind, _startPos, entryTime, _shiftInterval, num, _isUseShot, _isHavingItem, _formation);
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‹AŠÒƒGƒlƒ~[‚Ì“o˜^
+//	@brief	å¸°é‚„ã‚¨ãƒãƒŸãƒ¼ã®ç™»éŒ²
 //-----------------------------------------------------------------------------
 void EnemyManager::_VerticalRegistration(const ENEMY_KIND _enemyKind, const VECTOR _startPos, const float _entryTime, const float _shiftInterval,
 										 const int _num, const bool _isUseShot, const bool _isHavingItem, const int _formation)
 {
 	VECTOR tmpPos = CommonConstant::ORIGIN;
 
-	//	g—pƒŠƒXƒg“o˜^ˆ—
+	//	ä½¿ç”¨ãƒªã‚¹ãƒˆç™»éŒ²å‡¦ç†
 	const bool isListEntry = m_entryTime == _entryTime;
 	if (isListEntry)
 	{
-		//	ƒGƒlƒ~[‚ğ’Ç‰Á
+		//	ã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		switch (_enemyKind)
 		{
-			//	•‚—VƒGƒlƒ~[‚ğ’Ç‰Á
+			//	æµ®éŠã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		case ENEMY_KIND::ENEMY_FLOATING:
-			//	ƒGƒlƒ~[ˆê‘Ì•ª‚Ì“o˜^
+			//	ã‚¨ãƒãƒŸãƒ¼ä¸€ä½“åˆ†ã®ç™»éŒ²
 			tmpPos = VGet(_startPos.x, _startPos.y - (_shiftInterval * _num), _startPos.z);
 			if (_OneEnemyRegistration((int)ENEMY_KIND::ENEMY_FLOATING, tmpPos, _isUseShot, _isHavingItem, _formation)) { return; }
 			break;
 
-			//	‹AŠÒƒGƒlƒ~[‚ğ’Ç‰Á
+			//	å¸°é‚„ã‚¨ãƒãƒŸãƒ¼ã‚’è¿½åŠ 
 		case ENEMY_KIND::ENEMY_RETURN:
 
-			//	‹AŠÒƒGƒlƒ~[‚Ì XÀ•W ‚Íƒ}ƒCƒiƒX‚Ì•ûŒü‚©‚ç‚µ‚©A
-			//	—ˆ‚ç‚ê‚È‚¢‚Ì‚ÅAƒvƒ‰ƒX‚ª“ü‚Á‚Ä‚½‚çAƒ}ƒCƒiƒX‚É•ÏŠ·‚·‚é
+			//	å¸°é‚„ã‚¨ãƒãƒŸãƒ¼ã® Xåº§æ¨™ ã¯ãƒã‚¤ãƒŠã‚¹ã®æ–¹å‘ã‹ã‚‰ã—ã‹ã€
+			//	æ¥ã‚‰ã‚Œãªã„ã®ã§ã€ãƒ—ãƒ©ã‚¹ãŒå…¥ã£ã¦ãŸã‚‰ã€ãƒã‚¤ãƒŠã‚¹ã«å¤‰æ›ã™ã‚‹
 			if (_startPos.x >= 0) { tmpPos = VGet(-_startPos.x, _startPos.y - (_shiftInterval * _num), _startPos.z); }
 			else { tmpPos = VGet(_startPos.x, _startPos.y - (_shiftInterval * _num), _startPos.z); }
 			if (_OneEnemyRegistration((int)ENEMY_KIND::ENEMY_RETURN, tmpPos, _isUseShot, _isHavingItem, _formation)) { return; }
@@ -703,40 +703,40 @@ void EnemyManager::_VerticalRegistration(const ENEMY_KIND _enemyKind, const VECT
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆê‘Ì•ª‚ÌƒGƒlƒ~[‚Ì“o˜^
+//	@brief	ä¸€ä½“åˆ†ã®ã‚¨ãƒãƒŸãƒ¼ã®ç™»éŒ²
 //-----------------------------------------------------------------------------
 bool EnemyManager::_OneEnemyRegistration(const int _enemyKind, const VECTOR _startPos, const bool _isUseShot, const bool _isHavingItem, const int _formation)
 {
 	for (int i = 0; i < CommonConstant::MAX_ENEMY_ENTRY_NUM; i++)
 	{
-		//	g—p‚µ‚Ä‚¢‚È‚¢ƒGƒlƒ~[‚ğ’T‚·
+		//	ä½¿ç”¨ã—ã¦ã„ãªã„ã‚¨ãƒãƒŸãƒ¼ã‚’æ¢ã™
 		if (!m_entryBuffer[_enemyKind].m_isInUse[i])
 		{
-			//	‰Šúó‘Ô‚Ìİ’è
+			//	åˆæœŸçŠ¶æ…‹ã®è¨­å®š
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetPos(_startPos);
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetEntryID(i);
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetEntryKind(_enemyKind);
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetFormationID((int)_formation);
 
-			//	ƒGƒlƒ~[‚ğg—pó‘Ô‚É‚·‚é
+			//	ã‚¨ãƒãƒŸãƒ¼ã‚’ä½¿ç”¨çŠ¶æ…‹ã«ã™ã‚‹
 			m_entryBuffer[_enemyKind].m_isInUse[i] = true;
 
-			//	ƒVƒ‡ƒbƒg‚ğg‚¤‚©‚Ç‚¤‚©‚ÆA
-			//	ƒAƒCƒeƒ€‚ğ‚Á‚Ä‚¢‚é‚©
+			//	ã‚·ãƒ§ãƒƒãƒˆã‚’ä½¿ã†ã‹ã©ã†ã‹ã¨ã€
+			//	ã‚¢ã‚¤ãƒ†ãƒ ã‚’æŒã£ã¦ã„ã‚‹ã‹
 			if (_isUseShot)
 			{
-				//	ƒVƒ‡ƒbƒg‚ğg‚¤
+				//	ã‚·ãƒ§ãƒƒãƒˆã‚’ä½¿ã†
 				m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsUseShot(true);
 			}
 			else
 			{
-				//	ƒVƒ‡ƒbƒg‚ğg‚í‚È‚¢
+				//	ã‚·ãƒ§ãƒƒãƒˆã‚’ä½¿ã‚ãªã„
 				m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsUseShot(false);
 			}
 
 			if (_isHavingItem)
 			{
-				//	ƒAƒCƒeƒ€‚Í5•ª‚Ì1‚Å‚Â
+				//	ã‚¢ã‚¤ãƒ†ãƒ ã¯5åˆ†ã®1ã§æŒã¤
 				bool isActive = CommonFunction::GetRand(0, 5) == 0;
 				if (isActive) { m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsHavingItems(true); }
 				else { m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsHavingItems(false); }
@@ -746,7 +746,7 @@ bool EnemyManager::_OneEnemyRegistration(const int _enemyKind, const VECTOR _sta
 				m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsHavingItems(false);
 			}
 
-			//	g—pƒŠƒXƒg‚É“o˜^
+			//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 			m_useList.push_back(m_entryBuffer[_enemyKind].m_pBuf[i]);
 			return true;
 		}
@@ -756,32 +756,32 @@ bool EnemyManager::_OneEnemyRegistration(const int _enemyKind, const VECTOR _sta
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆê‘Ì•ª‚Ì“o˜^‚µAƒVƒ‡ƒbƒg‚Í“ñ•ª‚Ìˆê‚ÌŠm—¦‚Åg—p‚·‚é
+//	@brief	ä¸€ä½“åˆ†ã®ç™»éŒ²ã—ã€ã‚·ãƒ§ãƒƒãƒˆã¯äºŒåˆ†ã®ä¸€ã®ç¢ºç‡ã§ä½¿ç”¨ã™ã‚‹
 //-----------------------------------------------------------------------------
 bool EnemyManager::_OneEnemyRegistrationToShotProbaility(const int _enemyKind, const VECTOR _startPos, const bool _isUseShot, const bool _isRestriction, const int _formation)
 {
 	for (int i = 0; i < CommonConstant::MAX_ENEMY_ENTRY_NUM; i++)
 	{
-		//	g—p‚µ‚Ä‚¢‚È‚¢ƒGƒlƒ~[‚ğ’T‚·
+		//	ä½¿ç”¨ã—ã¦ã„ãªã„ã‚¨ãƒãƒŸãƒ¼ã‚’æ¢ã™
 		if (!m_entryBuffer[_enemyKind].m_isInUse[i])
 		{
-			//	‰Šúó‘Ô‚Ìİ’è
+			//	åˆæœŸçŠ¶æ…‹ã®è¨­å®š
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetPos(_startPos);
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetEntryID(i);
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetEntryKind(_enemyKind);
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetFormationID((int)_formation);
 
-			//	ƒGƒlƒ~[‚ğg—pó‘Ô‚É‚·‚é
+			//	ã‚¨ãƒãƒŸãƒ¼ã‚’ä½¿ç”¨çŠ¶æ…‹ã«ã™ã‚‹
 			m_entryBuffer[_enemyKind].m_isInUse[i] = true;
 
-			//	ƒVƒ‡ƒbƒg‚ğg‚¤‚©
+			//	ã‚·ãƒ§ãƒƒãƒˆã‚’ä½¿ã†ã‹
 			if (_isUseShot)
 			{
-				//	§ŒÀ‚·‚é
+				//	åˆ¶é™ã™ã‚‹
 				if (_isRestriction)
 				{
-					//	“Y‚¦š‚ª‹ô”‚Ì‚Æ‚«‚Í
-					//	ƒVƒ‡ƒbƒg‚Íg‚¤
+					//	æ·»ãˆå­—ãŒå¶æ•°ã®ã¨ãã¯
+					//	ã‚·ãƒ§ãƒƒãƒˆã¯ä½¿ã†
 					bool isActive = i % 2 == 0;
 					if (isActive) { m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsUseShot(true); }
 					else { m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsUseShot(false); }
@@ -793,14 +793,14 @@ bool EnemyManager::_OneEnemyRegistrationToShotProbaility(const int _enemyKind, c
 			}
 			else
 			{
-				//	ƒVƒ‡ƒbƒg‚Íg‚í‚È‚¢
+				//	ã‚·ãƒ§ãƒƒãƒˆã¯ä½¿ã‚ãªã„
 				m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsUseShot(false);
 			}
 
-			//	ƒAƒCƒeƒ€‚Í‚½‚È‚¢
+			//	ã‚¢ã‚¤ãƒ†ãƒ ã¯æŒãŸãªã„
 			m_entryBuffer[_enemyKind].m_pBuf[i]->SetIsHavingItems(false);
 
-			//	g—pƒŠƒXƒg‚É“o˜^
+			//	ä½¿ç”¨ãƒªã‚¹ãƒˆã«ç™»éŒ²
 			m_useList.push_back(m_entryBuffer[_enemyKind].m_pBuf[i]);
 			return true;
 		}
@@ -810,21 +810,21 @@ bool EnemyManager::_OneEnemyRegistrationToShotProbaility(const int _enemyKind, c
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void EnemyManager::_FinalRelease()
 {
-	//	ƒŠƒXƒg“à‚É“o˜^‚³‚ê‚Ä‚¢‚é‚Æ‚«AƒNƒŠƒA‚·‚é
+	//	ãƒªã‚¹ãƒˆå†…ã«ç™»éŒ²ã•ã‚Œã¦ã„ã‚‹ã¨ãã€ã‚¯ãƒªã‚¢ã™ã‚‹
 	if (!m_useList.empty()) { m_useList.clear(); }
 
 	for (int i = 0; i < ENEMY_KIND::ENEMY_NUM; i++)
 	{
-		//	ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+		//	ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 		MV1DeleteModel(m_sourceModelHandle[i]);
 
 		for (int j = 0; j < CommonConstant::MAX_ENEMY_ENTRY_NUM; j++)
 		{
-			//	ƒƒ‚ƒŠ‚Ì‰ğ•ú
+			//	ãƒ¡ãƒ¢ãƒªã®è§£æ”¾
 			CommonSafe::Delete(m_entryBuffer[i].m_pBuf[j]);
 		}
 	}

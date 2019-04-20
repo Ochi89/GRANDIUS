@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	Moving.cpp
-//	@brief	ˆÚ“®ˆ—
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ç§»å‹•å‡¦ç†
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/11/15
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "MoveHelper.h"
 #include "Common.h"
@@ -15,16 +15,16 @@
 #include "Key.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆÚ“®—Ê‚ğ‹‚ß‚é
+//	@brief	ç§»å‹•é‡ã‚’æ±‚ã‚ã‚‹
 //-----------------------------------------------------------------------------
 VECTOR MoveHelper::AskMoveAmount(VECTOR& _dir, Pad& _pad, const float _moveSpeed, const bool _isInputKey, const bool _isUseAxisXY)
 {
-	if (_isUseAxisXY) { return _MoveAxisXY(_dir, _pad, _moveSpeed, _isInputKey); }		//	XY²‚Å‚ÌˆÚ“®
-	else { return _MoveAxisXZ(_dir, _pad, _moveSpeed, _isInputKey); }					//	XZ²‚Å‚ÌˆÚ“®
+	if (_isUseAxisXY) { return _MoveAxisXY(_dir, _pad, _moveSpeed, _isInputKey); }		//	XYè»¸ã§ã®ç§»å‹•
+	else { return _MoveAxisXZ(_dir, _pad, _moveSpeed, _isInputKey); }					//	XZè»¸ã§ã®ç§»å‹•
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆÚ“®—Ê‚ğ‹‚ß‚é
+//	@brief	ç§»å‹•é‡ã‚’æ±‚ã‚ã‚‹
 //-----------------------------------------------------------------------------
 VECTOR MoveHelper::AskMoveAmount(VECTOR& _dir, const float _moveSpeed)
 {
@@ -32,7 +32,7 @@ VECTOR MoveHelper::AskMoveAmount(VECTOR& _dir, const float _moveSpeed)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒZƒbƒg
+//	@brief	ãƒªã‚»ãƒƒãƒˆ
 //-----------------------------------------------------------------------------
 void MoveHelper::_ResetDir(VECTOR& _dir)
 {
@@ -40,84 +40,84 @@ void MoveHelper::_ResetDir(VECTOR& _dir)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XZ²‚Å‚ÌˆÚ“®ˆ—
+//	@brief	XZè»¸ã§ã®ç§»å‹•å‡¦ç†
 //-----------------------------------------------------------------------------
 VECTOR MoveHelper::_MoveAxisXZ(VECTOR& _dir, Pad& _pad, const float _moveSpeed, const bool _isInputKey)
 {
-	//	Œü‚«‚ÌƒŠƒZƒbƒg
+	//	å‘ãã®ãƒªã‚»ãƒƒãƒˆ
 	_ResetDir(_dir);
 
 	if (_isInputKey)
 	{
-		//	ƒXƒeƒbƒN‚ÆƒL[“ü—Í‚É‚æ‚éŒü‚«‚Ìİ’è
+		//	ã‚¹ãƒ†ãƒƒã‚¯ã¨ã‚­ãƒ¼å…¥åŠ›ã«ã‚ˆã‚‹å‘ãã®è¨­å®š
 		_SetInputDirKeyToPad(_dir.z, _dir.x, _pad);
 	}
 	else
 	{
-		//	ƒXƒeƒbƒN“ü—Í‚É‚æ‚éŒü‚«‚Ìİ’è
+		//	ã‚¹ãƒ†ãƒƒã‚¯å…¥åŠ›ã«ã‚ˆã‚‹å‘ãã®è¨­å®š
 		_SetInputDirPad(_dir.z, _dir.x, _pad);
 	}
 
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	return _Move(_dir, _moveSpeed);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XY²‚Å‚ÌˆÚ“®ˆ—
+//	@brief	XYè»¸ã§ã®ç§»å‹•å‡¦ç†
 //-----------------------------------------------------------------------------
 VECTOR MoveHelper::_MoveAxisXY(VECTOR& _dir, Pad& _pad, const float _moveSpeed, const bool _isInputKey)
 {
-	//	Œü‚«‚ÌƒŠƒZƒbƒg
+	//	å‘ãã®ãƒªã‚»ãƒƒãƒˆ
 	_ResetDir(_dir);
 
 	if (_isInputKey)
 	{
-		//	ƒXƒeƒbƒN‚ÆƒL[“ü—Í‚É‚æ‚éŒü‚«‚Ìİ’è
+		//	ã‚¹ãƒ†ãƒƒã‚¯ã¨ã‚­ãƒ¼å…¥åŠ›ã«ã‚ˆã‚‹å‘ãã®è¨­å®š
 		_SetInputDirKeyToPad(_dir.y, _dir.x, _pad);
 	}
 	else
 	{
-		//	ƒXƒeƒbƒN“ü—Í‚É‚æ‚éŒü‚«‚Ìİ’è
+		//	ã‚¹ãƒ†ãƒƒã‚¯å…¥åŠ›ã«ã‚ˆã‚‹å‘ãã®è¨­å®š
 		_SetInputDirPad(_dir.y, _dir.x, _pad);
 	}
 
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	return _Move(_dir, _moveSpeed);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XY²‚Å‚ÌˆÚ“®ˆ—
+//	@brief	XYè»¸ã§ã®ç§»å‹•å‡¦ç†
 //-----------------------------------------------------------------------------
 VECTOR MoveHelper::_AlwaysMove(VECTOR& _dir, const float _moveSpeed)
 {
-	//	ˆÚ“®ˆ—
+	//	ç§»å‹•å‡¦ç†
 	return _Move(_dir, _moveSpeed);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“ü—Í‚ÌŒü‚«‚ğİ’è‚·‚é
+//	@brief	å…¥åŠ›æ™‚ã®å‘ãã‚’è¨­å®šã™ã‚‹
 //-----------------------------------------------------------------------------
 void MoveHelper::_SetInputDirKeyToPad(float& _verticalAxis, float& _horizontalAxis, Pad& _pad)
 {
-	//	ƒL[“ü—Í
+	//	ã‚­ãƒ¼å…¥åŠ›
 	const bool isUpKey = KEY->Press(KEY_INPUT_W) || KEY->Press(KEY_INPUT_UP);
 	const bool isDownKey = KEY->Press(KEY_INPUT_S) || KEY->Press(KEY_INPUT_DOWN);
 	const bool isRightKey = KEY->Press(KEY_INPUT_D) || KEY->Press(KEY_INPUT_RIGHT);
 	const bool isLeftKey = KEY->Press(KEY_INPUT_A) || KEY->Press(KEY_INPUT_LEFT);
 
-	//	ƒpƒbƒh“ü—Í
+	//	ãƒ‘ãƒƒãƒ‰å…¥åŠ›
 	const bool isUpStick = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_UP, PadInfo::STICK_DEAD_ZONE);
 	const bool isDownStick = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_DOWN, PadInfo::STICK_DEAD_ZONE);
 	const bool isRightStick = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_RIGHT, PadInfo::STICK_DEAD_ZONE);
 	const bool isLeftStick = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_LEFT, PadInfo::STICK_DEAD_ZONE);
 
-	//	ƒL[‚Æƒpƒbƒh‚Ì“ü—Í
+	//	ã‚­ãƒ¼ã¨ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›
 	const bool isUp = isUpStick || isUpKey;
 	const bool isDown = isDownStick || isDownKey;
 	const bool isRight = isRightStick || isRightKey;
 	const bool isLeft = isLeftStick || isLeftKey;
 
-	//	“ü—Í‚ª‚ ‚ê‚ÎŒü‚«‚ğæ“¾
+	//	å…¥åŠ›ãŒã‚ã‚Œã°å‘ãã‚’å–å¾—
 	if (isUp) { _verticalAxis = 1; }
 	if (isDown) { _verticalAxis = -1; }
 	if (isRight) { _horizontalAxis = 1; }
@@ -125,17 +125,17 @@ void MoveHelper::_SetInputDirKeyToPad(float& _verticalAxis, float& _horizontalAx
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“ü—Í‚ÌŒü‚«‚ğİ’è‚·‚é
+//	@brief	å…¥åŠ›æ™‚ã®å‘ãã‚’è¨­å®šã™ã‚‹
 //-----------------------------------------------------------------------------
 void MoveHelper::_SetInputDirPad(float& _verticalAxis, float& _horizontalAxis, Pad& _pad)
 {
-	//	ƒpƒbƒh“ü—Í
+	//	ãƒ‘ãƒƒãƒ‰å…¥åŠ›
 	const bool isUpStick = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_UP, PadInfo::STICK_DEAD_ZONE);
 	const bool isDownStick = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_DOWN, PadInfo::STICK_DEAD_ZONE);
 	const bool isRightStick = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_RIGHT, PadInfo::STICK_DEAD_ZONE);
 	const bool isLeftStick = _pad.GetXInputStickToDpad(PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_LEFT, PadInfo::STICK_DEAD_ZONE);
 
-	//	“ü—Í‚ª‚ ‚ê‚ÎŒü‚«‚ğæ“¾
+	//	å…¥åŠ›ãŒã‚ã‚Œã°å‘ãã‚’å–å¾—
 	if (isUpStick) { _verticalAxis = 1; }
 	if (isDownStick) { _verticalAxis = -1; }
 	if (isRightStick) { _horizontalAxis = 1; }
@@ -143,16 +143,16 @@ void MoveHelper::_SetInputDirPad(float& _verticalAxis, float& _horizontalAxis, P
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆÚ“®ˆ—
+//	@brief	ç§»å‹•å‡¦ç†
 //-----------------------------------------------------------------------------
 VECTOR MoveHelper::_Move(VECTOR& _dir, const float _moveSpeed)
 {
-	//	ˆÚ“®—Ê‚ÌŒv‘ª
+	//	ç§»å‹•é‡ã®è¨ˆæ¸¬
 	VECTOR velocity = VScale(_dir, _moveSpeed);
 
-	//	³‹K‰»
+	//	æ­£è¦åŒ–
 	if (VSquareSize(_dir) != 0) { _dir = VNorm(_dir); }
 
-	//	ˆÚ“®—Ê‚ğ•Ô‚·
+	//	ç§»å‹•é‡ã‚’è¿”ã™
 	return velocity;
 }

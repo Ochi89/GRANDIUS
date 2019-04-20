@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	SceneGame.h
-//	@brief	ƒQ[ƒ€ƒV[ƒ“
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚²ãƒ¼ãƒ ã‚·ãƒ¼ãƒ³
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "SceneBase.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 class SceneManager;
 class PlayerManager;
@@ -40,76 +40,76 @@ class Warning;
 class PlayCounter;
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ^ƒCƒgƒ‹ƒV[ƒ“”h¶ƒNƒ‰ƒX
+//	@brief	ã‚¿ã‚¤ãƒˆãƒ«ã‚·ãƒ¼ãƒ³æ´¾ç”Ÿã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class SceneGame : public SceneBase
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^/ /ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿/ /ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	SceneGame();
 	~SceneGame();
 
-    //	ì¬ˆ—
+    //	ä½œæˆå‡¦ç†
     void Create() override;
 
-    //	‰ğ•úˆ—
+    //	è§£æ”¾å‡¦ç†
     void Release() override;
 
-    //	‰Šúˆ—
+    //	åˆæœŸå‡¦ç†
     void Initialize(Pad& _pad, Camera& _camera) override;
 
-    //	XVˆ—
+    //	æ›´æ–°å‡¦ç†
     void Update(Pad& _pad, Camera& _camera, BackGround& _backGround, SoundEffect& _soundEffect, SceneManager* _sceneManager) override;
 
-    //	•`‰æˆ—
+    //	æç”»å‡¦ç†
     void Draw(BackGround& _backGround) override;
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒqƒbƒgƒ`ƒFƒbƒN
+	//	ãƒ’ãƒƒãƒˆãƒã‚§ãƒƒã‚¯
 	void _AllHitChecker(SoundEffect& _soundEffect);
 
-	//	ƒqƒbƒgƒ`ƒFƒbƒN‚Ì•`‰æ
+	//	ãƒ’ãƒƒãƒˆãƒã‚§ãƒƒã‚¯ã®æç”»
 	void _AllHitCheckerOfDraw();
 
-	//	ƒfƒoƒbƒO
+	//	ãƒ‡ãƒãƒƒã‚°
 	void _Debug();
 
-	//	ƒV[ƒ“Ø‚è‘Ö‚¦
+	//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆ
 	void _ChangeScene(Pad& _pad, SoundEffect& _soundEffect, SceneManager* _sceneManager) override;
 
-	//	ÅI“I‚È‰ğ•ú
+	//	æœ€çµ‚çš„ãªè§£æ”¾
 	void _FinalRelease() override;
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-    PlayerManager*		m_pPlayerManager;	    //	ƒvƒŒƒCƒ„[
-	EnemyManager*		m_pEnemyManager;		//	ƒGƒlƒ~[
-	BossManager*		m_pBossManager;			//	ƒ{ƒX
-	ShotManager*		m_pShotManager;			//	ƒVƒ‡ƒbƒg
-	StayShotManager*	m_pStayShotManager;		//	‘ØİƒVƒ‡ƒbƒg
-	ItemManager*		m_pItemManager;			//	ƒAƒCƒeƒ€
-	UILife*				m_pUILife;				//	ƒ‰ƒCƒtUI
-	UIGauge*			m_pUIGauge;				//	ƒQ[ƒWUI
-	UIStayShot*			m_pUIStayShot;			//	ƒXƒeƒCƒVƒ‡ƒbƒgUI
-	UIGameOver*			m_pUIGameOver;			//	ƒQ[ƒ€ƒI[ƒo[UI
-	UIBackPixel*		m_pUIBackPixel;			//	”wŒiƒsƒNƒZƒ‹UI
-	UICongratulation*	m_pUICongratulation;	//	ƒNƒŠƒAUI
-	EffekseerManager*	m_pEffekseerManager;	//	ƒGƒtƒFƒNƒg
-	Warning*			m_pWarning;				//	Œx
-	PlayCounter*		m_pPlayCounter;			//	ƒvƒŒƒC‰ñ”
-	bool				m_isDebug;				//	ƒfƒoƒbƒO
-	bool				m_isDebugDraw;			//	ƒfƒoƒbƒO•`‰æ
+    PlayerManager*		m_pPlayerManager;	    //	ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼
+	EnemyManager*		m_pEnemyManager;		//	ã‚¨ãƒãƒŸãƒ¼
+	BossManager*		m_pBossManager;			//	ãƒœã‚¹
+	ShotManager*		m_pShotManager;			//	ã‚·ãƒ§ãƒƒãƒˆ
+	StayShotManager*	m_pStayShotManager;		//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆ
+	ItemManager*		m_pItemManager;			//	ã‚¢ã‚¤ãƒ†ãƒ 
+	UILife*				m_pUILife;				//	ãƒ©ã‚¤ãƒ•UI
+	UIGauge*			m_pUIGauge;				//	ã‚²ãƒ¼ã‚¸UI
+	UIStayShot*			m_pUIStayShot;			//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUI
+	UIGameOver*			m_pUIGameOver;			//	ã‚²ãƒ¼ãƒ ã‚ªãƒ¼ãƒãƒ¼UI
+	UIBackPixel*		m_pUIBackPixel;			//	èƒŒæ™¯ãƒ”ã‚¯ã‚»ãƒ«UI
+	UICongratulation*	m_pUICongratulation;	//	ã‚¯ãƒªã‚¢UI
+	EffekseerManager*	m_pEffekseerManager;	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
+	Warning*			m_pWarning;				//	è­¦å‘Š
+	PlayCounter*		m_pPlayCounter;			//	ãƒ—ãƒ¬ã‚¤å›æ•°
+	bool				m_isDebug;				//	ãƒ‡ãƒãƒƒã‚°
+	bool				m_isDebugDraw;			//	ãƒ‡ãƒãƒƒã‚°æç”»
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const float MAX_CHANGE_LOSE_SCENE_WAIT_TIME;		//	ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì’x‰„‚ÌÅ‘å
-	static const float MAX_CHANGE_WIN_SCENE_WAIT_TIME;		//	ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì’x‰„‚ÌÅ‘å
-	static const float MAX_CHANGE_TITLE_SCENE_WAIT_TIME;	//	ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì’x‰„‚ÌÅ‘å
-	static const float MAX_CHANGE_BGM_WAIT_TIME;			//	BGMØ‚è‘Ö‚¦‚Ì’x‰„‚ÌÅ‘å
+	static const float MAX_CHANGE_LOSE_SCENE_WAIT_TIME;		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã®é…å»¶ã®æœ€å¤§
+	static const float MAX_CHANGE_WIN_SCENE_WAIT_TIME;		//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã®é…å»¶ã®æœ€å¤§
+	static const float MAX_CHANGE_TITLE_SCENE_WAIT_TIME;	//	ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆã®é…å»¶ã®æœ€å¤§
+	static const float MAX_CHANGE_BGM_WAIT_TIME;			//	BGMåˆ‡ã‚Šæ›¿ãˆã®é…å»¶ã®æœ€å¤§
 };

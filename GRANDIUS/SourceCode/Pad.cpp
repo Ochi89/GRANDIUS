@@ -1,51 +1,51 @@
-
+ï»¿
 //=============================================================================
 //	@file	Pad.h
-//	@brief	ƒpƒbƒh
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ãƒ‘ãƒƒãƒ‰
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/9/28
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "Pad.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	–¼‘O‹óŠÔ	[ƒpƒbƒh‚Ì]î•ñ
+//	@brief	åå‰ç©ºé–“	[ãƒ‘ãƒƒãƒ‰ã®]æƒ…å ±
 //-----------------------------------------------------------------------------
 namespace PadInfo
 {
 	//-----------------------------------------------------------------------------
-	//	@brief	ƒpƒbƒh‚ÌU“®‹@”\‚ÌƒJƒo[ŠÖ”
+	//	@brief	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½ã®ã‚«ãƒãƒ¼é–¢æ•°
 	//-----------------------------------------------------------------------------
 	namespace Function
 	{
 		//-----------------------------------------------------------------------------
-		//	@brief	U“®‹@”\
-		//			U“®‚Ì‹­‚³( 0`1000 )
+		//	@brief	æŒ¯å‹•æ©Ÿèƒ½
+		//			æŒ¯å‹•ã®å¼·ã•( 0ï½1000 )
 		//-----------------------------------------------------------------------------
 		void VibrationFunction(const PAD_KIND _padKind, const int _vibrationPower, const int _vibrationTime)
 		{
-			//	ƒpƒbƒh‚ÌU“®‹@”\
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½
 			switch (_padKind)
 			{
-				//	ƒpƒbƒh‚P
+				//	ãƒ‘ãƒƒãƒ‰ï¼‘
 			case PadInfo::PAD_KIND::PAD_1:
 				StartJoypadVibration(DX_INPUT_PAD1, _vibrationPower, _vibrationTime);
 				break;
 
-				//	ƒpƒbƒh‚Q
+				//	ãƒ‘ãƒƒãƒ‰ï¼’
 			case PadInfo::PAD_KIND::PAD_2:
 				StartJoypadVibration(DX_INPUT_PAD2, _vibrationPower, _vibrationTime);
 				break;
 
-				//	ƒpƒbƒh‚R
+				//	ãƒ‘ãƒƒãƒ‰ï¼“
 			case PadInfo::PAD_KIND::PAD_3:
 				StartJoypadVibration(DX_INPUT_PAD3, _vibrationPower, _vibrationTime);
 				break;
 
-				//	ƒpƒbƒh‚S
+				//	ãƒ‘ãƒƒãƒ‰ï¼”
 			case PadInfo::PAD_KIND::PAD_4:
 				StartJoypadVibration(DX_INPUT_PAD4, _vibrationPower, _vibrationTime);
 				break;
@@ -53,31 +53,31 @@ namespace PadInfo
 		}
 		
 		//-----------------------------------------------------------------------------
-		//	@brief	U“®‹@”\
-		//			U“®‚Ì‹­‚³ : Å‘å
-		//			‰i‹vƒ‹[ƒv
+		//	@brief	æŒ¯å‹•æ©Ÿèƒ½
+		//			æŒ¯å‹•ã®å¼·ã• : æœ€å¤§
+		//			æ°¸ä¹…ãƒ«ãƒ¼ãƒ—
 		//-----------------------------------------------------------------------------
 		void VibrationFunction(const PadInfo::PAD_KIND _padKind)
 		{
-			//	ƒpƒbƒh‚ÌU“®‹@”\
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½
 			switch (_padKind)
 			{
-				//	ƒpƒbƒh‚P
+				//	ãƒ‘ãƒƒãƒ‰ï¼‘
 			case PadInfo::PAD_KIND::PAD_1:
 				StartJoypadVibration(DX_INPUT_PAD1, PAD_VIBRATION_POWER, PAD_VIBRATION_LOOP);
 				break;
 
-				//	ƒpƒbƒh‚Q
+				//	ãƒ‘ãƒƒãƒ‰ï¼’
 			case PadInfo::PAD_KIND::PAD_2:
 				StartJoypadVibration(DX_INPUT_PAD2, PAD_VIBRATION_POWER, PAD_VIBRATION_LOOP);
 				break;
 
-				//	ƒpƒbƒh‚R
+				//	ãƒ‘ãƒƒãƒ‰ï¼“
 			case PadInfo::PAD_KIND::PAD_3:
 				StartJoypadVibration(DX_INPUT_PAD3, PAD_VIBRATION_POWER, PAD_VIBRATION_LOOP);
 				break;
 
-				//	ƒpƒbƒh‚S
+				//	ãƒ‘ãƒƒãƒ‰ï¼”
 			case PadInfo::PAD_KIND::PAD_4:
 				StartJoypadVibration(DX_INPUT_PAD4, PAD_VIBRATION_POWER, PAD_VIBRATION_LOOP);
 				break;
@@ -85,31 +85,31 @@ namespace PadInfo
 		}
 
 		//-----------------------------------------------------------------------------
-		//	@brief	U“®‹@”\
-		//			U“®‚Ì‹­‚³( 0`1000 )
-		//			‰i‹vƒ‹[ƒv
+		//	@brief	æŒ¯å‹•æ©Ÿèƒ½
+		//			æŒ¯å‹•ã®å¼·ã•( 0ï½1000 )
+		//			æ°¸ä¹…ãƒ«ãƒ¼ãƒ—
 		//-----------------------------------------------------------------------------
 		void VibrationFunction(const PAD_KIND _padKind, const int _vibrationPower)
 		{
-			//	ƒpƒbƒh‚ÌU“®‹@”\
+			//	ãƒ‘ãƒƒãƒ‰ã®æŒ¯å‹•æ©Ÿèƒ½
 			switch (_padKind)
 			{
-				//	ƒpƒbƒh‚P
+				//	ãƒ‘ãƒƒãƒ‰ï¼‘
 			case PadInfo::PAD_KIND::PAD_1:
 				StartJoypadVibration(DX_INPUT_PAD1, _vibrationPower, PAD_VIBRATION_LOOP);
 				break;
 
-				//	ƒpƒbƒh‚Q
+				//	ãƒ‘ãƒƒãƒ‰ï¼’
 			case PadInfo::PAD_KIND::PAD_2:
 				StartJoypadVibration(DX_INPUT_PAD2, _vibrationPower, PAD_VIBRATION_LOOP);
 				break;
 
-				//	ƒpƒbƒh‚R
+				//	ãƒ‘ãƒƒãƒ‰ï¼“
 			case PadInfo::PAD_KIND::PAD_3:
 				StartJoypadVibration(DX_INPUT_PAD3, _vibrationPower, PAD_VIBRATION_LOOP);
 				break;
 
-				//	ƒpƒbƒh‚S
+				//	ãƒ‘ãƒƒãƒ‰ï¼”
 			case PadInfo::PAD_KIND::PAD_4:
 				StartJoypadVibration(DX_INPUT_PAD4, _vibrationPower, PAD_VIBRATION_LOOP);
 				break;
@@ -117,29 +117,29 @@ namespace PadInfo
 		}
 
 		//-----------------------------------------------------------------------------
-		//	@brief	U“®‹@”\‚ÌI—¹
+		//	@brief	æŒ¯å‹•æ©Ÿèƒ½ã®çµ‚äº†
 		//-----------------------------------------------------------------------------
 		void EndVibrationFunction(const PAD_KIND _padKind)
 		{
-			//	U“®‹@”\‚Ìƒ‹[ƒv‚ğI—¹‚·‚é
+			//	æŒ¯å‹•æ©Ÿèƒ½ã®ãƒ«ãƒ¼ãƒ—ã‚’çµ‚äº†ã™ã‚‹
 			switch (_padKind)
 			{
-				//	ƒpƒbƒh‚P
+				//	ãƒ‘ãƒƒãƒ‰ï¼‘
 			case PadInfo::PAD_KIND::PAD_1:
 				StopJoypadVibration(DX_INPUT_PAD1);
 				break;
 
-				//	ƒpƒbƒh‚Q
+				//	ãƒ‘ãƒƒãƒ‰ï¼’
 			case PadInfo::PAD_KIND::PAD_2:
 				StopJoypadVibration(DX_INPUT_PAD2);
 				break;
 
-				//	ƒpƒbƒh‚R
+				//	ãƒ‘ãƒƒãƒ‰ï¼“
 			case PadInfo::PAD_KIND::PAD_3:
 				StopJoypadVibration(DX_INPUT_PAD3);
 				break;
 
-				//	ƒpƒbƒh‚S
+				//	ãƒ‘ãƒƒãƒ‰ï¼”
 			case PadInfo::PAD_KIND::PAD_4:
 				StopJoypadVibration(DX_INPUT_PAD4);
 				break;
@@ -151,7 +151,7 @@ namespace PadInfo
 
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Pad::Pad()
 {
@@ -163,16 +163,16 @@ Pad::Pad()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 Pad::~Pad()
 {
-	// ˆ—‚È‚µ
+	// å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‚·‚×‚Äg—p’†‚É‚·‚é
-//			ƒV[ƒ“Ø‚è‘Ö‚¦‚Ì‚Æ‚«‚Ì‚İŒÄ‚Ô
+//	@brief	ã™ã¹ã¦ä½¿ç”¨ä¸­ã«ã™ã‚‹
+//			ã‚·ãƒ¼ãƒ³åˆ‡ã‚Šæ›¿ãˆæ™‚ã®ã¨ãã®ã¿å‘¼ã¶
 //-----------------------------------------------------------------------------
 void Pad::AllInUse()
 {
@@ -183,29 +183,29 @@ void Pad::AllInUse()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒpƒbƒh‚Ì“o˜^
+//	@brief	ãƒ‘ãƒƒãƒ‰ã®ç™»éŒ²
 //-----------------------------------------------------------------------------
 bool Pad::InputPadNum(const PadInfo::PAD_KIND _padKind)
 {
-	//	ƒpƒbƒh‚Ì“ü—Í‚ğæ‚é
+	//	ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›ã‚’å–ã‚‹
 	switch (_padKind)
 	{
-		//	ƒpƒbƒh‚P
+		//	ãƒ‘ãƒƒãƒ‰ï¼‘
 	case PadInfo::PAD_KIND::PAD_1:
 		GetJoypadXInputState(DX_INPUT_PAD1, &m_xInput);
 		return true;
 
-		//	ƒpƒbƒh‚Q
+		//	ãƒ‘ãƒƒãƒ‰ï¼’
 	case PadInfo::PAD_KIND::PAD_2:
 		GetJoypadXInputState(DX_INPUT_PAD2, &m_xInput);
 		return true;
 
-		//	ƒpƒbƒh‚R
+		//	ãƒ‘ãƒƒãƒ‰ï¼“
 	case PadInfo::PAD_KIND::PAD_3:
 		GetJoypadXInputState(DX_INPUT_PAD3, &m_xInput);
 		return true;
 
-		//	ƒpƒbƒh‚S
+		//	ãƒ‘ãƒƒãƒ‰ï¼”
 	case PadInfo::PAD_KIND::PAD_4:
 		GetJoypadXInputState(DX_INPUT_PAD4, &m_xInput);
 		return true;
@@ -215,75 +215,75 @@ bool Pad::InputPadNum(const PadInfo::PAD_KIND _padKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒ^ƒ“‚ª‰Ÿ‚³‚ê‚½uŠÔ
+//	@brief	ãƒœã‚¿ãƒ³ãŒæŠ¼ã•ã‚ŒãŸç¬é–“
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputPushButton(const PadInfo::PAD_BUTTON_KIND _buttonKind)
 {
 	switch (_buttonKind)
 	{
 
-	//	Aƒ{ƒ^ƒ“
+	//	Aãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_A:
 		if (_PushButton(XINPUT_BUTTON_A, PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { return true; }
 		return false;
 
-	//	Bƒ{ƒ^ƒ“
+	//	Bãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_B:
 		if (_PushButton(XINPUT_BUTTON_B, PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { return true; }
 		return false;
 
-	//	Xƒ{ƒ^ƒ“
+	//	Xãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_X:
 		if (_PushButton(XINPUT_BUTTON_X, PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { return true; }
 		return false;
 
-	//	Yƒ{ƒ^ƒ“
+	//	Yãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_Y:
 		if (_PushButton(XINPUT_BUTTON_Y, PadInfo::PAD_BUTTON_KIND::BUTTON_Y)) { return true; }
 		return false;
 
-	//	LBƒ{ƒ^ƒ“
+	//	LBãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LB:
 		if (_PushButton(XINPUT_BUTTON_LEFT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_LB)) { return true; }
 		return false;
 
-	//	RBƒ{ƒ^ƒ“
+	//	RBãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RB:
 		if (_PushButton(XINPUT_BUTTON_RIGHT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_RB)) { return true; }
 		return false;
 
-	//	STARTƒ{ƒ^ƒ“
+	//	STARTãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_START:
 		if (_PushButton(XINPUT_BUTTON_START, PadInfo::PAD_BUTTON_KIND::BUTTON_START)) { return true; }
 		return false;
 
-	//	BACKƒ{ƒ^ƒ“
+	//	BACKãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_BACK:
 		if (_PushButton(XINPUT_BUTTON_BACK, PadInfo::PAD_BUTTON_KIND::BUTTON_BACK)) { return true; }
 		return false;
 
-	//	¶ƒXƒ`ƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+	//	å·¦ã‚¹ãƒãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LSB:
 		if (_PushButton(XINPUT_BUTTON_LEFT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_LSB)) { return true; }
 		return false;
 
-	//	‰EƒXƒeƒBƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RSB:
 		if (_PushButton(XINPUT_BUTTON_RIGHT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_RSB)) { return true; }
 		return false;
 
-	//	‚·‚×‚Ä
+	//	ã™ã¹ã¦
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_ALL:
-		if (_PushButton(XINPUT_BUTTON_A, PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { return true; }				//	Aƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_B, PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { return true; }				//	Bƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_X, PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { return true; }				//	Xƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_Y, PadInfo::PAD_BUTTON_KIND::BUTTON_Y)) { return true; }				//	Yƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_LEFT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_LB)) { return true; }	//	LBƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_RIGHT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_RB)) { return true; }	//	RBƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_START, PadInfo::PAD_BUTTON_KIND::BUTTON_START)) { return true; }		//	STARTƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_BACK, PadInfo::PAD_BUTTON_KIND::BUTTON_BACK)) { return true; }			//	BACKƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_LEFT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_LSB)) { return true; }	//	¶ƒXƒ`ƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
-		if (_PushButton(XINPUT_BUTTON_RIGHT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_RSB)) { return true; }	//	‰EƒXƒeƒBƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+		if (_PushButton(XINPUT_BUTTON_A, PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { return true; }				//	Aãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_B, PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { return true; }				//	Bãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_X, PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { return true; }				//	Xãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_Y, PadInfo::PAD_BUTTON_KIND::BUTTON_Y)) { return true; }				//	Yãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_LEFT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_LB)) { return true; }	//	LBãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_RIGHT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_RB)) { return true; }	//	RBãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_START, PadInfo::PAD_BUTTON_KIND::BUTTON_START)) { return true; }		//	STARTãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_BACK, PadInfo::PAD_BUTTON_KIND::BUTTON_BACK)) { return true; }			//	BACKãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_LEFT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_LSB)) { return true; }	//	å·¦ã‚¹ãƒãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
+		if (_PushButton(XINPUT_BUTTON_RIGHT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_RSB)) { return true; }	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 		return false;
 	}
 
@@ -291,75 +291,75 @@ bool Pad::GetXInputPushButton(const PadInfo::PAD_BUTTON_KIND _buttonKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒ^ƒ“‚ª—£‚³‚ê‚½uŠÔ
+//	@brief	ãƒœã‚¿ãƒ³ãŒé›¢ã•ã‚ŒãŸç¬é–“
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputDisuniteButton(const PadInfo::PAD_BUTTON_KIND _buttonKind)
 {
 	switch (_buttonKind)
 	{
 
-		//	Aƒ{ƒ^ƒ“
+		//	Aãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_A:
 		if (_DisuniteButton(XINPUT_BUTTON_A, PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { return true; }
 		return false;
 
-		//	Bƒ{ƒ^ƒ“
+		//	Bãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_B:
 		if (_DisuniteButton(XINPUT_BUTTON_B, PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { return true; }
 		return false;
 
-		//	Xƒ{ƒ^ƒ“
+		//	Xãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_X:
 		if (_DisuniteButton(XINPUT_BUTTON_X, PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { return true; }
 		return false;
 
-		//	Yƒ{ƒ^ƒ“
+		//	Yãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_Y:
 		if (_DisuniteButton(XINPUT_BUTTON_Y, PadInfo::PAD_BUTTON_KIND::BUTTON_Y)) { return true; }
 		return false;
 
-		//	LBƒ{ƒ^ƒ“
+		//	LBãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LB:
 		if (_DisuniteButton(XINPUT_BUTTON_LEFT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_LB)) { return true; }
 		return false;
 
-		//	RBƒ{ƒ^ƒ“
+		//	RBãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RB:
 		if (_DisuniteButton(XINPUT_BUTTON_RIGHT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_RB)) { return true; }
 		return false;
 
-		//	STARTƒ{ƒ^ƒ“
+		//	STARTãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_START:
 		if (_DisuniteButton(XINPUT_BUTTON_START, PadInfo::PAD_BUTTON_KIND::BUTTON_START)) { return true; }
 		return false;
 
-		//	BACKƒ{ƒ^ƒ“
+		//	BACKãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_BACK:
 		if (_DisuniteButton(XINPUT_BUTTON_BACK, PadInfo::PAD_BUTTON_KIND::BUTTON_BACK)) { return true; }
 		return false;
 
-		//	¶ƒXƒ`ƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+		//	å·¦ã‚¹ãƒãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LSB:
 		if (_DisuniteButton(XINPUT_BUTTON_LEFT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_LSB)) { return true; }
 		return false;
 
-		//	‰EƒXƒeƒBƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RSB:
 		if (_DisuniteButton(XINPUT_BUTTON_RIGHT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_RSB)) { return true; }
 		return false;
 
-		//	‚·‚×‚Ä
+		//	ã™ã¹ã¦
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_ALL:
-		if (_DisuniteButton(XINPUT_BUTTON_A, PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { return true; }				//	Aƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_B, PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { return true; }				//	Bƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_X, PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { return true; }				//	Xƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_Y, PadInfo::PAD_BUTTON_KIND::BUTTON_Y)) { return true; }				//	Yƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_LEFT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_LB)) { return true; }	//	LBƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_RIGHT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_RB)) { return true; }	//	RBƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_START, PadInfo::PAD_BUTTON_KIND::BUTTON_START)) { return true; }		//	STARTƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_BACK, PadInfo::PAD_BUTTON_KIND::BUTTON_BACK)) { return true; }			//	BACKƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_LEFT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_LSB)) { return true; }	//	¶ƒXƒ`ƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
-		if (_DisuniteButton(XINPUT_BUTTON_RIGHT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_RSB)) { return true; }	//	‰EƒXƒeƒBƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+		if (_DisuniteButton(XINPUT_BUTTON_A, PadInfo::PAD_BUTTON_KIND::BUTTON_A)) { return true; }				//	Aãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_B, PadInfo::PAD_BUTTON_KIND::BUTTON_B)) { return true; }				//	Bãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_X, PadInfo::PAD_BUTTON_KIND::BUTTON_X)) { return true; }				//	Xãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_Y, PadInfo::PAD_BUTTON_KIND::BUTTON_Y)) { return true; }				//	Yãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_LEFT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_LB)) { return true; }	//	LBãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_RIGHT_SHOULDER, PadInfo::PAD_BUTTON_KIND::BUTTON_RB)) { return true; }	//	RBãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_START, PadInfo::PAD_BUTTON_KIND::BUTTON_START)) { return true; }		//	STARTãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_BACK, PadInfo::PAD_BUTTON_KIND::BUTTON_BACK)) { return true; }			//	BACKãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_LEFT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_LSB)) { return true; }	//	å·¦ã‚¹ãƒãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
+		if (_DisuniteButton(XINPUT_BUTTON_RIGHT_THUMB, PadInfo::PAD_BUTTON_KIND::BUTTON_RSB)) { return true; }	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 		return false;
 	}
 
@@ -367,74 +367,74 @@ bool Pad::GetXInputDisuniteButton(const PadInfo::PAD_BUTTON_KIND _buttonKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒ^ƒ““ü—Í
+//	@brief	ãƒœã‚¿ãƒ³å…¥åŠ›
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputButton(const PadInfo::PAD_BUTTON_KIND _buttonKind)
 {
 	switch (_buttonKind)
 	{
-		//	Aƒ{ƒ^ƒ“
+		//	Aãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_A:
 		if (m_xInput.Buttons[XINPUT_BUTTON_A]) { return true; }
 		return false;
 
-		//	Bƒ{ƒ^ƒ“
+		//	Bãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_B:
 		if (m_xInput.Buttons[XINPUT_BUTTON_B]) { return true; }
 		return false;
 
-		//	Xƒ{ƒ^ƒ“
+		//	Xãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_X:
 		if (m_xInput.Buttons[XINPUT_BUTTON_X]) { return true; }
 		return false;
 
-		//	Yƒ{ƒ^ƒ“
+		//	Yãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_Y:
 		if (m_xInput.Buttons[XINPUT_BUTTON_Y]) { return true; }
 		return false;
 
-		//	LBƒ{ƒ^ƒ“
+		//	LBãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LB:
 		if (m_xInput.Buttons[XINPUT_BUTTON_LEFT_SHOULDER]) { return true; }
 		return false;
 
-		//	RBƒ{ƒ^ƒ“
+		//	RBãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RB:
 		if (m_xInput.Buttons[XINPUT_BUTTON_RIGHT_SHOULDER]) { return true; }
 		return false;
 
-		//	STARTƒ{ƒ^ƒ“
+		//	STARTãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_START:
 		if (m_xInput.Buttons[XINPUT_BUTTON_START]) { return true; }
 		return false;
 
-		//	BACKƒ{ƒ^ƒ“
+		//	BACKãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_BACK:
 		if (m_xInput.Buttons[XINPUT_BUTTON_BACK]) { return true; }
 		return false;
 
-		//	¶ƒXƒ`ƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+		//	å·¦ã‚¹ãƒãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LSB:
 		if (m_xInput.Buttons[XINPUT_BUTTON_LEFT_THUMB]) { return true; }
 		return false;
 
-		//	‰EƒXƒeƒBƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RSB:
 		if (m_xInput.Buttons[XINPUT_BUTTON_RIGHT_THUMB]) { return true; }
 		return false;
 
-		//	‚·‚×‚Ä
+		//	ã™ã¹ã¦
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_ALL:
-		if (m_xInput.Buttons[XINPUT_BUTTON_A]) { return true; }					//	Aƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_B]) { return true; }					//	Bƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_X]) { return true; }					//	Xƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_Y]) { return true; }					//	Yƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_LEFT_SHOULDER]) { return true; }		//	LBƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_RIGHT_SHOULDER]) { return true; }	//	RBƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_START]) { return true; }				//	STARTƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_BACK]) { return true; }				//	BACKƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_LEFT_THUMB]) { return true; }		//	¶ƒXƒ`ƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
-		if (m_xInput.Buttons[XINPUT_BUTTON_RIGHT_THUMB]) { return true; }		//	‰EƒXƒeƒBƒbƒN‰Ÿ‚µ‚İƒ{ƒ^ƒ“
+		if (m_xInput.Buttons[XINPUT_BUTTON_A]) { return true; }					//	Aãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_B]) { return true; }					//	Bãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_X]) { return true; }					//	Xãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_Y]) { return true; }					//	Yãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_LEFT_SHOULDER]) { return true; }		//	LBãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_RIGHT_SHOULDER]) { return true; }	//	RBãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_START]) { return true; }				//	STARTãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_BACK]) { return true; }				//	BACKãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_LEFT_THUMB]) { return true; }		//	å·¦ã‚¹ãƒãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
+		if (m_xInput.Buttons[XINPUT_BUTTON_RIGHT_THUMB]) { return true; }		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯æŠ¼ã—è¾¼ã¿ãƒœã‚¿ãƒ³
 		return false;
 	}
 
@@ -442,18 +442,18 @@ bool Pad::GetXInputButton(const PadInfo::PAD_BUTTON_KIND _buttonKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒgƒŠƒK[‰Ÿ‚µ‚½uŠÔ
+//	@brief	ãƒˆãƒªã‚¬ãƒ¼æŠ¼ã—ãŸç¬é–“
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputPushTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, const short _deadZone)
 {
 	switch (_buttonKind)
 	{
-		//	¶ƒgƒŠƒK[
+		//	å·¦ãƒˆãƒªã‚¬ãƒ¼
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LT:
 		if (_PushTrigger(m_xInput.LeftTrigger >= _deadZone, PadInfo::PAD_BUTTON_KIND::BUTTON_LT)) { return true; }
 		return false;
 
-		//	‰EƒgƒŠƒK[
+		//	å³ãƒˆãƒªã‚¬ãƒ¼
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RT:
 		if (_PushTrigger(m_xInput.RightTrigger >= _deadZone, PadInfo::PAD_BUTTON_KIND::BUTTON_RT)) { return true; }
 		return false;
@@ -463,18 +463,18 @@ bool Pad::GetXInputPushTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, const
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒgƒŠƒK[—£‚µ‚½uŠÔ
+//	@brief	ãƒˆãƒªã‚¬ãƒ¼é›¢ã—ãŸç¬é–“
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputDisuniteTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, const short _deadZone)
 {
 	switch (_buttonKind)
 	{
-		//	¶ƒgƒŠƒK[
+		//	å·¦ãƒˆãƒªã‚¬ãƒ¼
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LT:
 		if (_DisuniteTrigger(m_xInput.LeftTrigger >= _deadZone, PadInfo::PAD_BUTTON_KIND::BUTTON_LT)) { return true; }
 		return false;
 
-		//	‰EƒgƒŠƒK[
+		//	å³ãƒˆãƒªã‚¬ãƒ¼
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RT:
 		if (_DisuniteTrigger(m_xInput.RightTrigger >= _deadZone, PadInfo::PAD_BUTTON_KIND::BUTTON_RT)) { return true; }
 		return false;
@@ -484,18 +484,18 @@ bool Pad::GetXInputDisuniteTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, c
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒgƒŠƒK[“ü—Í
+//	@brief	ãƒˆãƒªã‚¬ãƒ¼å…¥åŠ›
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, const short _deadZone)
 {
 	switch (_buttonKind)
 	{
-		//	¶ƒgƒŠƒK[
+		//	å·¦ãƒˆãƒªã‚¬ãƒ¼
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_LT:
 		if (m_xInput.LeftTrigger >= _deadZone) { return true; }
 		return false;
 
-		//	‰EƒgƒŠƒK[
+		//	å³ãƒˆãƒªã‚¬ãƒ¼
 	case PadInfo::PAD_BUTTON_KIND::BUTTON_RT:
 		if (m_xInput.RightTrigger >= _deadZone) { return true; }
 		return false;
@@ -505,28 +505,28 @@ bool Pad::GetXInputTrigger(const PadInfo::PAD_BUTTON_KIND _buttonKind, const sho
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	DPAD“ü—Í
+//	@brief	DPADå…¥åŠ›
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputDpad(const PadInfo::PAD_DPAD_KIND _dpadKind)
 {
 	switch (_dpadKind)
 	{
-		//	\šƒL[‚Ìã•ûŒü
+		//	åå­—ã‚­ãƒ¼ã®ä¸Šæ–¹å‘
 	case PadInfo::PAD_DPAD_KIND::DPAD_UP:
 		if (m_xInput.Buttons[XINPUT_BUTTON_DPAD_UP]) { return true; }
 		return false;
 
-	//	\šƒL[‚Ì‰º•ûŒü
+	//	åå­—ã‚­ãƒ¼ã®ä¸‹æ–¹å‘
 	case PadInfo::PAD_DPAD_KIND::DPAD_DOWN:
 		if (m_xInput.Buttons[XINPUT_BUTTON_DPAD_DOWN]) { return true; }
 		return false;
 
-	//	\šƒL[‚Ì‰E•ûŒü
+	//	åå­—ã‚­ãƒ¼ã®å³æ–¹å‘
 	case PadInfo::PAD_DPAD_KIND::DPAD_RIGHT:
 		if (m_xInput.Buttons[XINPUT_BUTTON_DPAD_RIGHT]) { return true; }
 		return false;
 
-	//	\šƒL[‚Ì¶•ûŒü
+	//	åå­—ã‚­ãƒ¼ã®å·¦æ–¹å‘
 	case PadInfo::PAD_DPAD_KIND::DPAD_LEFT:
 		if (m_xInput.Buttons[XINPUT_BUTTON_DPAD_LEFT]) { return true; }
 		return false;
@@ -535,49 +535,49 @@ bool Pad::GetXInputDpad(const PadInfo::PAD_DPAD_KIND _dpadKind)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒXƒeƒbƒN“ü—Í
+//	@brief	ã‚¹ãƒ†ãƒƒã‚¯å…¥åŠ›
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputStick(const PadInfo::PAD_STICK_KIND _stickKind, const short _deadZone)
 {
 	switch (_stickKind)
 	{
 
-		//	¶ƒXƒeƒBƒbƒN@ã•ûŒü
+		//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã€€ä¸Šæ–¹å‘
 	case PadInfo::PAD_STICK_KIND::LEFT_STICK_UP:
 		if (m_xInput.ThumbLY >= _deadZone) { return true; }
 		return false;
 
-		//	¶ƒXƒeƒBƒbƒN@‰º•ûŒü
+		//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã€€ä¸‹æ–¹å‘
 	case PadInfo::PAD_STICK_KIND::LEFT_STICK_DOWN:
 		if (m_xInput.ThumbLY <= -_deadZone) { return true; }
 		return false;
 
-		//	¶ƒXƒeƒBƒbƒN@‰E•ûŒü
+		//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã€€å³æ–¹å‘
 	case PadInfo::PAD_STICK_KIND::LEFT_STICK_RIGHT:
 		if (m_xInput.ThumbLX >= _deadZone) { return true; }
 		return false;
 
-		//	¶ƒXƒeƒBƒbƒN@¶•ûŒü
+		//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã€€å·¦æ–¹å‘
 	case PadInfo::PAD_STICK_KIND::LEFT_STICK_LEFT:
 		if (m_xInput.ThumbLX <= -_deadZone) { return true; }
 		return false;
 
-		//	‰EƒXƒeƒBƒbƒN@ã•ûŒü
+		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã€€ä¸Šæ–¹å‘
 	case PadInfo::PAD_STICK_KIND::RIGHT_STICK_UP:
 		if (m_xInput.ThumbRY >= _deadZone) { return true; }
 		return false;
 
-		//	‰EƒXƒeƒBƒbƒN@‰º•ûŒü
+		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã€€ä¸‹æ–¹å‘
 	case PadInfo::PAD_STICK_KIND::RIGHT_STICK_DOWN:
 		if (m_xInput.ThumbRY <= -_deadZone) { return true; }
 		return false;
 
-		//	‰EƒXƒeƒBƒbƒN@‰E•ûŒü
+		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã€€å³æ–¹å‘
 	case PadInfo::PAD_STICK_KIND::RIGHT_STICK_RIGHT:
 		if (m_xInput.ThumbRX >= _deadZone) { return true; }
 		return false;
 
-		//	‰EƒXƒeƒBƒbƒN@¶•ûŒü
+		//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã€€å·¦æ–¹å‘
 	case PadInfo::PAD_STICK_KIND::RIGHT_STICK_LEFT:
 		if (m_xInput.ThumbRX <= -_deadZone) { return true; }
 		return false;
@@ -587,13 +587,13 @@ bool Pad::GetXInputStick(const PadInfo::PAD_STICK_KIND _stickKind, const short _
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒXƒeƒbƒN“ü—Í‚ÆDPAD“ü—Í
+//	@brief	ã‚¹ãƒ†ãƒƒã‚¯å…¥åŠ›ã¨DPADå…¥åŠ›
 //-----------------------------------------------------------------------------
 bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpadKind, const short _deadZone)
 {
 	switch (_stickToDpadKind)
 	{
-		//	¶ƒXƒeƒBƒbƒN‚Æ\šƒL[‚Ìã•ûŒü
+		//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨åå­—ã‚­ãƒ¼ã®ä¸Šæ–¹å‘
 	case PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_UP:
 	{
 		const bool isActive = m_xInput.Buttons[XINPUT_BUTTON_DPAD_UP] || m_xInput.ThumbLY >= _deadZone;
@@ -601,7 +601,7 @@ bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpa
 		return false;
 	}
 
-	//	¶ƒXƒeƒBƒbƒN‚Æ\šƒL[‚Ì‰º•ûŒü
+	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨åå­—ã‚­ãƒ¼ã®ä¸‹æ–¹å‘
 	case PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_DOWN:
 	{
 		const bool isActive = m_xInput.Buttons[XINPUT_BUTTON_DPAD_DOWN] || m_xInput.ThumbLY <= -_deadZone;
@@ -609,7 +609,7 @@ bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpa
 		return false;
 	}
 
-	//	¶ƒXƒeƒBƒbƒN‚Æ\šƒL[‚Ì‰E•ûŒü
+	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨åå­—ã‚­ãƒ¼ã®å³æ–¹å‘
 	case PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_RIGHT:
 	{
 		const bool isActive = m_xInput.Buttons[XINPUT_BUTTON_DPAD_RIGHT] || m_xInput.ThumbLX >= _deadZone;
@@ -617,7 +617,7 @@ bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpa
 		return false;
 	}
 
-	//	¶ƒXƒeƒBƒbƒN‚Æ\šƒL[‚Ì¶•ûŒü
+	//	å·¦ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨åå­—ã‚­ãƒ¼ã®å·¦æ–¹å‘
 	case PadInfo::PAD_STICK_TO_DPAD_KIND::LEFT_STICK_TO_DPAD_LEFT:
 	{
 		const bool isActive = m_xInput.Buttons[XINPUT_BUTTON_DPAD_LEFT] || m_xInput.ThumbLX <= -_deadZone;
@@ -625,7 +625,7 @@ bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpa
 		return false;
 	}
 
-	//	‰EƒXƒeƒBƒbƒN‚Æ\šƒL[‚Ìã•ûŒü
+	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨åå­—ã‚­ãƒ¼ã®ä¸Šæ–¹å‘
 	case PadInfo::PAD_STICK_TO_DPAD_KIND::RIGHT_STICK_TO_DPAD_UP:
 	{
 		const bool isActive = m_xInput.Buttons[XINPUT_BUTTON_DPAD_UP] || m_xInput.ThumbRY >= _deadZone;
@@ -633,7 +633,7 @@ bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpa
 		return false;
 	}
 
-	//	‰EƒXƒeƒBƒbƒN‚Æ\šƒL[‚Ì‰º•ûŒü
+	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨åå­—ã‚­ãƒ¼ã®ä¸‹æ–¹å‘
 	case PadInfo::PAD_STICK_TO_DPAD_KIND::RIGHT_STICK_TO_DPAD_DOWN:
 	{
 		const bool isActive = m_xInput.Buttons[XINPUT_BUTTON_DPAD_DOWN] || m_xInput.ThumbRY <= -_deadZone;
@@ -641,7 +641,7 @@ bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpa
 		return false;
 	}
 
-	//	‰EƒXƒeƒBƒbƒN‚Æ\šƒL[‚Ì‰E•ûŒü
+	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨åå­—ã‚­ãƒ¼ã®å³æ–¹å‘
 	case PadInfo::PAD_STICK_TO_DPAD_KIND::RIGHT_STICK_TO_DPAD_RIGHT:
 	{
 		const bool isActive = m_xInput.Buttons[XINPUT_BUTTON_DPAD_RIGHT] || m_xInput.ThumbRX >= _deadZone;
@@ -649,7 +649,7 @@ bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpa
 		return false;
 	}
 
-	//	‰EƒXƒeƒBƒbƒN‚Æ\šƒL[‚Ì¶•ûŒü
+	//	å³ã‚¹ãƒ†ã‚£ãƒƒã‚¯ã¨åå­—ã‚­ãƒ¼ã®å·¦æ–¹å‘
 	case PadInfo::PAD_STICK_TO_DPAD_KIND::RIGHT_STICK_TO_DPAD_LEFT:
 	{
 		const bool isActive = m_xInput.Buttons[XINPUT_BUTTON_DPAD_LEFT] || m_xInput.ThumbRX <= -_deadZone;
@@ -663,7 +663,7 @@ bool Pad::GetXInputStickToDpad(const PadInfo::PAD_STICK_TO_DPAD_KIND _stickToDpa
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½uŠÔ
+//	@brief	ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸç¬é–“
 //-----------------------------------------------------------------------------
 bool Pad::_PushButton(const int _button, const int _buttonNum)
 {
@@ -671,7 +671,7 @@ bool Pad::_PushButton(const int _button, const int _buttonNum)
 	{
 		if (m_prevButton[_buttonNum] == 0)
 		{
-			//	‰Ÿ‚µ‚½
+			//	æŠ¼ã—ãŸ
 			m_prevButton[_buttonNum] = 1;
 			return true;
 		}
@@ -679,14 +679,14 @@ bool Pad::_PushButton(const int _button, const int _buttonNum)
 	}
 	else
 	{
-		//	—£‚µ‚½
+		//	é›¢ã—ãŸ
 		m_prevButton[_buttonNum] = 0;
 		return false;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒ^ƒ“‚ğ—£‚µ‚½uŠÔ
+//	@brief	ãƒœã‚¿ãƒ³ã‚’é›¢ã—ãŸç¬é–“
 //-----------------------------------------------------------------------------
 bool Pad::_DisuniteButton(const int _button, const int _buttonNum)
 {
@@ -694,7 +694,7 @@ bool Pad::_DisuniteButton(const int _button, const int _buttonNum)
 	{
 		if (m_prevButton[_buttonNum] == 0)
 		{
-			//	‰Ÿ‚µ‚½
+			//	æŠ¼ã—ãŸ
 			m_nowButton[_buttonNum] = 1;
 		}
 	}
@@ -702,7 +702,7 @@ bool Pad::_DisuniteButton(const int _button, const int _buttonNum)
 	{
 		if (m_prevButton[_buttonNum] == 1)
 		{
-			//	—£‚µ‚½
+			//	é›¢ã—ãŸ
 			m_nowButton[_buttonNum] = 0;
 			m_prevButton[_buttonNum] = m_nowButton[_buttonNum];
 			return true;
@@ -714,7 +714,7 @@ bool Pad::_DisuniteButton(const int _button, const int _buttonNum)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒ^ƒ“‚ğ‰Ÿ‚µ‚½uŠÔ
+//	@brief	ãƒœã‚¿ãƒ³ã‚’æŠ¼ã—ãŸç¬é–“
 //-----------------------------------------------------------------------------
 bool Pad::_PushTrigger(const bool _trigger, const int _buttonNum)
 {
@@ -722,7 +722,7 @@ bool Pad::_PushTrigger(const bool _trigger, const int _buttonNum)
 	{
 		if (m_prevButton[_buttonNum] == 0)
 		{
-			//	‰Ÿ‚µ‚½
+			//	æŠ¼ã—ãŸ
 			m_prevButton[_buttonNum] = 1;
 			return true;
 		}
@@ -730,14 +730,14 @@ bool Pad::_PushTrigger(const bool _trigger, const int _buttonNum)
 	}
 	else
 	{
-		//	—£‚µ‚½
+		//	é›¢ã—ãŸ
 		m_prevButton[_buttonNum] = 0;
 		return false;
 	}
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒ^ƒ“‚ğ—£‚µ‚½uŠÔ
+//	@brief	ãƒœã‚¿ãƒ³ã‚’é›¢ã—ãŸç¬é–“
 //-----------------------------------------------------------------------------
 bool Pad::_DisuniteTrigger(const bool _trigger, const int _buttonNum)
 {
@@ -745,7 +745,7 @@ bool Pad::_DisuniteTrigger(const bool _trigger, const int _buttonNum)
 	{
 		if (m_prevButton[_buttonNum] == 0)
 		{
-			//	‰Ÿ‚µ‚½
+			//	æŠ¼ã—ãŸ
 			m_nowButton[_buttonNum] = 1;
 		}
 	}
@@ -753,7 +753,7 @@ bool Pad::_DisuniteTrigger(const bool _trigger, const int _buttonNum)
 	{
 		if (m_prevButton[_buttonNum] == 1)
 		{
-			//	—£‚µ‚½
+			//	é›¢ã—ãŸ
 			m_nowButton[_buttonNum] = 0;
 			m_prevButton[_buttonNum] = m_nowButton[_buttonNum];
 			return true;

@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	MediumBoss.cpp
-//	@brief	’†ƒ{ƒX
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ä¸­ãƒœã‚¹
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/12/18
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "MediumBoss.h"
 #include "Common.h"
@@ -19,80 +19,80 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const VECTOR	MediumBoss::EMERGE_POS = VGet(40.0f, -100.0f, 100.0f);					//	oŒ»‚ÌÀ•W
-const VECTOR	MediumBoss::START_POS = VGet(65.0f, 55.0f, 0.0f);						//	ŠJn‚ÌÀ•W
-const VECTOR	MediumBoss::END_POS = VGet(-300.0f, 55.0f, 0.0f);						//	‘Ş‹p‚ÌÀ•W
-const VECTOR	MediumBoss::MOVE_PATTERN_1 = VGet(65.0f, 55.0f, 0.0f);					//	s“®ƒpƒ^[ƒ“‚P
-const VECTOR	MediumBoss::MOVE_PATTERN_2 = VGet(20.0f, 55.0f, 0.0f);					//	s“®ƒpƒ^[ƒ“‚Q
-const VECTOR	MediumBoss::MOVE_PATTERN_3 = VGet(65.0f, 30.0f, 0.0f);					//	s“®ƒpƒ^[ƒ“‚R
-const VECTOR	MediumBoss::MOVE_PATTERN_4 = VGet(20.0f, 30.0f, 0.0f);					//	s“®ƒpƒ^[ƒ“‚S
-const VECTOR	MediumBoss::SHOT_START_POS_CORRECTION_1 = VGet(5.0f, 4.0f, 0.0f);		//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-const VECTOR	MediumBoss::SHOT_START_POS_CORRECTION_2 = VGet(10.0f, 2.0f, 0.0f);		//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-const VECTOR	MediumBoss::SHOT_START_POS_CORRECTION_3 = VGet(10.0f, 2.0f, 0.0f);		//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-const VECTOR	MediumBoss::SHOT_START_POS_CORRECTION_4 = VGet(5.0f, 4.0f, 0.0f);		//	ƒVƒ‡ƒbƒgŠJnˆÊ’uÀ•W‚Ì•â³
-const VECTOR	MediumBoss::RECT_CORRECTION = VGet(12.0f, 12.0f, 5.0f);					//	À•W‚Ì•â³
-const float		MediumBoss::SHOT_SPEED = 1.0f;											//	ƒVƒ‡ƒbƒg‚Ì‘¬“x
-const float		MediumBoss::MAX_START_WAIT_TIME = 35.0f;								//	ƒVƒ‡ƒbƒg‚ÌŠJn‚Ì’x‰„ŠÔ
-const float		MediumBoss::MAX_WAIT_TIME = 100.0f;										//	ƒVƒ‡ƒbƒg‚Ì’x‰„ŠÔ
-const float		MediumBoss::HIT_RADIUS = 12.0f;											//	“–‚½‚è”»’è—p‚Ì”¼Œa
-const int		MediumBoss::MAX_LIFE = 15;												//	ƒ‰ƒCƒt‚ÌÅ‘å
-const int		MediumBoss::MIN_LIFE = 0;												//	ƒ‰ƒCƒt‚ÌÅ¬
+const VECTOR	MediumBoss::EMERGE_POS = VGet(40.0f, -100.0f, 100.0f);					//	å‡ºç¾æ™‚ã®åº§æ¨™
+const VECTOR	MediumBoss::START_POS = VGet(65.0f, 55.0f, 0.0f);						//	é–‹å§‹æ™‚ã®åº§æ¨™
+const VECTOR	MediumBoss::END_POS = VGet(-300.0f, 55.0f, 0.0f);						//	é€€å´æ™‚ã®åº§æ¨™
+const VECTOR	MediumBoss::MOVE_PATTERN_1 = VGet(65.0f, 55.0f, 0.0f);					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼‘
+const VECTOR	MediumBoss::MOVE_PATTERN_2 = VGet(20.0f, 55.0f, 0.0f);					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼’
+const VECTOR	MediumBoss::MOVE_PATTERN_3 = VGet(65.0f, 30.0f, 0.0f);					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼“
+const VECTOR	MediumBoss::MOVE_PATTERN_4 = VGet(20.0f, 30.0f, 0.0f);					//	è¡Œå‹•ãƒ‘ã‚¿ãƒ¼ãƒ³ï¼”
+const VECTOR	MediumBoss::SHOT_START_POS_CORRECTION_1 = VGet(5.0f, 4.0f, 0.0f);		//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+const VECTOR	MediumBoss::SHOT_START_POS_CORRECTION_2 = VGet(10.0f, 2.0f, 0.0f);		//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+const VECTOR	MediumBoss::SHOT_START_POS_CORRECTION_3 = VGet(10.0f, 2.0f, 0.0f);		//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+const VECTOR	MediumBoss::SHOT_START_POS_CORRECTION_4 = VGet(5.0f, 4.0f, 0.0f);		//	ã‚·ãƒ§ãƒƒãƒˆé–‹å§‹ä½ç½®åº§æ¨™ã®è£œæ­£
+const VECTOR	MediumBoss::RECT_CORRECTION = VGet(12.0f, 12.0f, 5.0f);					//	åº§æ¨™ã®è£œæ­£
+const float		MediumBoss::SHOT_SPEED = 1.0f;											//	ã‚·ãƒ§ãƒƒãƒˆã®é€Ÿåº¦
+const float		MediumBoss::MAX_START_WAIT_TIME = 35.0f;								//	ã‚·ãƒ§ãƒƒãƒˆã®é–‹å§‹æ™‚ã®é…å»¶æ™‚é–“
+const float		MediumBoss::MAX_WAIT_TIME = 100.0f;										//	ã‚·ãƒ§ãƒƒãƒˆã®é…å»¶æ™‚é–“
+const float		MediumBoss::HIT_RADIUS = 12.0f;											//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åŠå¾„
+const int		MediumBoss::MAX_LIFE = 15;												//	ãƒ©ã‚¤ãƒ•ã®æœ€å¤§
+const int		MediumBoss::MIN_LIFE = 0;												//	ãƒ©ã‚¤ãƒ•ã®æœ€å°
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 MediumBoss::MediumBoss(const int _modelHandle)
 {
-	//	ƒ‚ƒfƒ‹‚Ì•¡»
+	//	ãƒ¢ãƒ‡ãƒ«ã®è¤‡è£½
 	m_modelHandle = MV1DuplicateModel(_modelHandle);
 	CommonDebug::Assert((m_modelHandle <= -1), " [ MediumBoss.cpp ] : error : missing duplicat model.");
 
-	//	Še•Ï”‚ğ‰Šú‰»
+	//	å„å¤‰æ•°ã‚’åˆæœŸåŒ–
 	m_pos = CommonConstant::ORIGIN;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
 
-	//	‚Ü‚¾‚Ç‚±‚àw‚µ‚Ä‚¢‚È‚¢‚Ì‚ÅANULL‚Å‰Šú‰»
+	//	ã¾ã ã©ã“ã‚‚æŒ‡ã—ã¦ã„ãªã„ã®ã§ã€NULLã§åˆæœŸåŒ–
 	m_effectHit = NULL;
 	m_effectExplosion = NULL;
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 MediumBoss::~MediumBoss()
 {
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::Create()
 {
-	//	ƒGƒtƒFƒNƒg‚Ì“Ç‚İ‚İ
+	//	ã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®èª­ã¿è¾¼ã¿
 	m_effectHit = new EffekseerEmitter("Data/Effect/Hit/Hit.efk");
 	m_effectExplosion = new EffekseerEmitter("Data/Effect/Explosion/Explosion.efk");
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::Release()
 {
-	//	ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_modelHandle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰Šúˆ—
+//	@brief	åˆæœŸå‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::Initialize()
 {
-	//	Še•Ï”‚ğ‰Šúó‘Ô‚Éİ’è
+	//	å„å¤‰æ•°ã‚’åˆæœŸçŠ¶æ…‹ã«è¨­å®š
 	m_pos = EMERGE_POS;
 	m_dir = CommonConstant::ORIGIN;
 	m_angle = CommonConstant::ORIGIN;
@@ -108,54 +108,54 @@ void MediumBoss::Initialize()
 	m_isOffDraw = false;
 	m_life = MAX_LIFE;
 
-	//	“–‚½‚è”»’è—p‚Ì\‘¢‘Ì‚Ì‰Šú‰»
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®æ§‹é€ ä½“ã®åˆæœŸåŒ–
 	m_hitCircle.m_radius = HIT_RADIUS;
 	m_hitCircle.m_centerPoint = CommonConstant::ORIGIN;
 
-	//	Šp“x‚ğŠ„‚è“–‚Ä‚é
+	//	è§’åº¦ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	MV1SetRotationXYZ(m_modelHandle, m_angle);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::Update(ShotManager& _shot, SoundEffect& _soundEffect)
 {
-	//	oŒ»‚Ì‰‰o
+	//	å‡ºç¾æ™‚ã®æ¼”å‡º
 	_EmergeMove();
 
-	//	n“®‚µ‚Ä‚¢‚ÄA
-	//	ƒ‰ƒCƒt‚ªc‚Á‚Ä‚¢‚é‚Æ‚Æ‚«
+	//	å§‹å‹•ã—ã¦ã„ã¦ã€
+	//	ãƒ©ã‚¤ãƒ•ãŒæ®‹ã£ã¦ã„ã‚‹ã¨ã¨ã
 	const bool isActive = m_isStarted && m_life > MIN_LIFE && !PRODUCTION->GetIsSpecialProduction();
 	if (isActive)
 	{
-		//	ˆÚ“®ˆ—
+		//	ç§»å‹•å‡¦ç†
 		_Move();
 
-		//	ËŒ‚ˆ—
+		//	å°„æ’ƒå‡¦ç†
 		_Shot(_shot);
 	}
 
-	//	ƒ‚ƒfƒ‹‚Éƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä‚é
+	//	ãƒ¢ãƒ‡ãƒ«ã«ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	MV1SetPosition(m_modelHandle, m_pos);
 
-	//	ƒ‚ƒfƒ‹‚ÉŠp“x‚ğŠ„‚è“–‚Ä‚é
+	//	ãƒ¢ãƒ‡ãƒ«ã«è§’åº¦ã‚’å‰²ã‚Šå½“ã¦ã‚‹
 	MV1SetRotationXYZ(m_modelHandle, m_angle);
 
-	//	ƒqƒbƒgƒGƒtƒFƒNƒg
+	//	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	_OnHitEffect(_soundEffect);
 
-	//	”š”­ƒGƒtƒFƒNƒg
+	//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 	_OnEffectExplosion(_soundEffect);
 
-	//	“–‚½‚è”»’è‚ª‚¸‚ê‚é‚Ì‚ÅA
-	//	ƒ‚ƒfƒ‹‚Éƒ|ƒWƒVƒ‡ƒ“‚ğŠ„‚è“–‚Ä‚½Œã‚ÉA
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV‚·‚é
+	//	å½“ãŸã‚Šåˆ¤å®šãŒãšã‚Œã‚‹ã®ã§ã€
+	//	ãƒ¢ãƒ‡ãƒ«ã«ãƒã‚¸ã‚·ãƒ§ãƒ³ã‚’å‰²ã‚Šå½“ã¦ãŸå¾Œã«ã€
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°ã™ã‚‹
 	_UpdateHitPoint();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::Draw()
 {
@@ -163,20 +163,20 @@ void MediumBoss::Draw()
 	{
 		if (!m_isOffDraw)
 		{
-			//	“_–Å
+			//	ç‚¹æ»…
 			if (m_isDamage)
 			{
 				m_flashingTime++;
 				const bool isFlashingEnd = m_flashingTime > 6.0f;
 				if (isFlashingEnd) { m_flashingTime = 0.0f; }
 
-				//	“_–Å
+				//	ç‚¹æ»…
 				const bool isFlashing = m_flashingTime >= 0.0f && m_flashingTime <= 3.0f;
 				if (isFlashing) { MV1DrawModel(m_modelHandle); }
 			}
 			else
 			{
-				//	ƒ‚ƒfƒ‹‚Ì•`‰æ
+				//	ãƒ¢ãƒ‡ãƒ«ã®æç”»
 				MV1DrawModel(m_modelHandle);
 			}
 		}
@@ -184,14 +184,14 @@ void MediumBoss::Draw()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ŠJn‚ÌˆÚ“®
+//	@brief	é–‹å§‹æ™‚ã®ç§»å‹•
 //-----------------------------------------------------------------------------
 void MediumBoss::_EmergeMove()
 {
-	//	oŒ»‚Ì‰‰o
+	//	å‡ºç¾æ™‚ã®æ¼”å‡º
 	if (m_isEmerge)
 	{
-		//	oŒ»‚Ì‰‰o
+		//	å‡ºç¾æ™‚ã®æ¼”å‡º
 		m_emergeMoveTaim++;
 		const bool isEmergeMoveStart = m_emergeMoveTaim <= 5.0f;
 		const bool isEmergeMove1 = m_emergeMoveTaim >= 5.0f && m_emergeMoveTaim <= 120.0f;
@@ -199,24 +199,24 @@ void MediumBoss::_EmergeMove()
 		const bool isEmergeRota = m_emergeMoveTaim >= 100.0f && m_emergeMoveTaim <= 162.0f;
 		const bool isEmergeMoveEnd = m_emergeMoveTaim == 162.0f;
 
-		//	‰‰oŠJn
+		//	æ¼”å‡ºé–‹å§‹
 		if (isEmergeMoveStart) { m_pos = EMERGE_POS; }
 
 		if (isEmergeMove1)
 		{
-			//	•‚ã
+			//	æµ®ä¸Š
 			m_dir = VGet(0.0f, 1.5f, 0.0f);
 			VECTOR moving = MoveHelper::AskMoveAmount(m_dir, m_moveSpeed);
 			m_pos = VAdd(m_pos, moving);
 		}
 
-		//	ƒ‰[ƒv‚ğg‚Á‚½ˆÚ“®ˆ—
+		//	ãƒ©ãƒ¼ãƒ—ã‚’ä½¿ã£ãŸç§»å‹•å‡¦ç†
 		_LerpMove(isEmergeMove2, START_POS, 0.1f);
 
-		//	ƒ‚ƒfƒ‹‚Ì‰ñ“]
+		//	ãƒ¢ãƒ‡ãƒ«ã®å›è»¢
 		if (isEmergeRota) { m_angle.x -= 0.1f; }
 
-		//	‰‰oI—¹
+		//	æ¼”å‡ºçµ‚äº†
 		if (isEmergeMoveEnd)
 		{
 			m_pos = START_POS;
@@ -229,7 +229,7 @@ void MediumBoss::_EmergeMove()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ˆÚ“®ˆ—
+//	@brief	ç§»å‹•å‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::_Move()
 {
@@ -246,7 +246,7 @@ void MediumBoss::_Move()
 	const bool isMovePattern10 = m_behaviorTime >= 1000.0f && m_behaviorTime <= 1100.0f;
 	const bool isMovePattern11 = m_behaviorTime >= 1100.0f;
 	
-	//	ƒ‰[ƒv‚ğg‚Á‚½ˆÚ“®ˆ—
+	//	ãƒ©ãƒ¼ãƒ—ã‚’ä½¿ã£ãŸç§»å‹•å‡¦ç†
 	_LerpMove(isMovePattern1, MOVE_PATTERN_3, 0.05f);
 	_LerpMove(isMovePattern2, MOVE_PATTERN_1, 0.05f);
 	_LerpMove(isMovePattern3, MOVE_PATTERN_2, 0.05f);
@@ -261,7 +261,7 @@ void MediumBoss::_Move()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	üŒ`•ÛŠÇ‚ğg‚Á‚½ˆÚ“®ˆ—
+//	@brief	ç·šå½¢ä¿ç®¡ã‚’ä½¿ã£ãŸç§»å‹•å‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::_LerpMove(bool _isConditions, VECTOR _targetPos, float _lerpSpeed)
 {
@@ -269,7 +269,7 @@ void MediumBoss::_LerpMove(bool _isConditions, VECTOR _targetPos, float _lerpSpe
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ËŒ‚ˆ—
+//	@brief	å°„æ’ƒå‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::_Shot(ShotManager& _shot)
 {
@@ -296,11 +296,11 @@ void MediumBoss::_Shot(ShotManager& _shot)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒqƒbƒgƒGƒtƒFƒNƒg
+//	@brief	ãƒ’ãƒƒãƒˆã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 //-----------------------------------------------------------------------------
 void MediumBoss::_OnHitEffect(SoundEffect& _soundEffect)
 {
-	//	ƒ_ƒ[ƒW‚ª“ü‚Á‚½‚Æ‚«
+	//	ãƒ€ãƒ¡ãƒ¼ã‚¸ãŒå…¥ã£ãŸã¨ã
 	if (m_isDamage)
 	{
 		const bool isHitStart = m_effectHit->GetPlayTime() == 0.0f;
@@ -331,11 +331,11 @@ void MediumBoss::_OnHitEffect(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	”š”­ƒGƒtƒFƒNƒg
+//	@brief	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆ
 //-----------------------------------------------------------------------------
 void MediumBoss::_OnEffectExplosion(SoundEffect& _soundEffect)
 {
-	//	ƒ‰ƒCƒt‚ª‚È‚­‚È‚Á‚½‚Æ‚«
+	//	ãƒ©ã‚¤ãƒ•ãŒãªããªã£ãŸã¨ã
 	const bool isNotLife = m_life <= MIN_LIFE && !m_isDeleate;
 	if (isNotLife)
 	{
@@ -343,7 +343,7 @@ void MediumBoss::_OnEffectExplosion(SoundEffect& _soundEffect)
 		const bool isExplosion1 = m_effectExplosion->GetPlayTime() == 60.0f;
 		const bool isExplosionEnd = m_effectExplosion->GetPlayTime() == 100.0f;
 
-		//	”š”­ƒGƒtƒFƒNƒg‚ÌŠJn
+		//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®é–‹å§‹
 		if (isExplosionStart)
 		{
 			m_effectExplosion->SetPos(m_pos);
@@ -354,7 +354,7 @@ void MediumBoss::_OnEffectExplosion(SoundEffect& _soundEffect)
 
 		if(isExplosion1) { m_isOffDraw = true; _soundEffect.OnPlaySound(_soundEffect.SE_KIND::SE_EXPLOSION); }
 
-		//	”š”­ƒGƒtƒFƒNƒg‚ÌI—¹
+		//	çˆ†ç™ºã‚¨ãƒ•ã‚§ã‚¯ãƒˆã®çµ‚äº†
 		if (isExplosionEnd)
 		{
 			m_effectExplosion->OnEndEffect();
@@ -368,24 +368,24 @@ void MediumBoss::_OnEffectExplosion(SoundEffect& _soundEffect)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	“–‚½‚è”»’è—p‚Ì“_‚ÌXV
+//	@brief	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ç‚¹ã®æ›´æ–°
 //-----------------------------------------------------------------------------
 void MediumBoss::_UpdateHitPoint()
 {
-	//	“–‚½‚è”»’è—p‚Ì’†SÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®ä¸­å¿ƒåº§æ¨™ã®æ›´æ–°
 	m_hitCircle.m_centerPoint = VGet(m_pos.x, m_pos.y, m_pos.z);
 
-	//	“–‚½‚è”»’è—p‚ÌÀ•W‚ÌXV
+	//	å½“ãŸã‚Šåˆ¤å®šç”¨ã®åº§æ¨™ã®æ›´æ–°
 	m_hitRect.m_vertexTop = VGet(m_pos.x + RECT_CORRECTION.x, m_pos.y + RECT_CORRECTION.y, m_pos.z + RECT_CORRECTION.z);
 	m_hitRect.m_vertexUnder = VGet(m_pos.x - RECT_CORRECTION.x, m_pos.y - RECT_CORRECTION.y, m_pos.z - RECT_CORRECTION.z);
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•úˆ—
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void MediumBoss::_FinalRelease()
 {
-	//	ƒ‚ƒfƒ‹‚ÌƒAƒ“ƒ[ƒh
+	//	ãƒ¢ãƒ‡ãƒ«ã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	MV1DeleteModel(m_modelHandle);
 }
 

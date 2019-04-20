@@ -1,13 +1,13 @@
-
+ï»¿
 //=============================================================================
 //	@file	UIStayShot.h
-//	@brief	ƒXƒeƒCƒVƒ‡ƒbƒgUI
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUI
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/10
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "UIStayShot.h"
 #include "PlayerManager.h"
@@ -15,37 +15,37 @@
 #include "SoundEffect.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	Ã“I’è”
+//	@brief	é™çš„å®šæ•°
 //-----------------------------------------------------------------------------
-const VECTOR	UIStayShot::START_POS = VGet(475.0f, 11.0f, 0.0f);	//	ŠJnˆÊ’u
-const VECTOR	UIStayShot::END_POS = VGet(674.0f, 109.0f, 0.0f);	//	I—¹ˆÊ’u
-const float		UIStayShot::MIN_BUTTON_SCALE = 1.0f;				//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌÅ¬
-const float		UIStayShot::MAX_BUTTON_SCALE = 1.2f;				//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌÅ‘å
-const float		UIStayShot::BUTTON_SCALE_SPEED = 0.03f;				//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚Ì‘¬“x
+const VECTOR	UIStayShot::START_POS = VGet(475.0f, 11.0f, 0.0f);	//	é–‹å§‹ä½ç½®
+const VECTOR	UIStayShot::END_POS = VGet(674.0f, 109.0f, 0.0f);	//	çµ‚äº†ä½ç½®
+const float		UIStayShot::MIN_BUTTON_SCALE = 1.0f;				//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®æœ€å°
+const float		UIStayShot::MAX_BUTTON_SCALE = 1.2f;				//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®æœ€å¤§
+const float		UIStayShot::BUTTON_SCALE_SPEED = 0.03f;				//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®é€Ÿåº¦
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒRƒ“ƒXƒgƒ‰ƒNƒ^
+//	@brief	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UIStayShot::UIStayShot()
 {
-	//	ˆ—‚È‚µ
+	//	å‡¦ç†ãªã—
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒfƒXƒgƒ‰ƒNƒ^
+//	@brief	ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 //-----------------------------------------------------------------------------
 UIStayShot::~UIStayShot()
 {
-	//	ÅI“I‚È‰ğ•ú
+	//	æœ€çµ‚çš„ãªè§£æ”¾
 	_FinalRelease();
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ì¬ˆ—
+//	@brief	ä½œæˆå‡¦ç†
 //-----------------------------------------------------------------------------
 void UIStayShot::Create()
 {
-	//	‰Šú‰»
+	//	åˆæœŸåŒ–
 	LoadDivGraph("Data/Sprite/StayShot/StayShot.png", 10, 10, 1, 300, 150, m_stayShotSpriteHendle);
 	CommonDebug::Assert((m_stayShotSpriteHendle[0] <= -1), " [ UIStayShot.cpp ] : error : sprite loading failed.");
 	m_stayShotPos = VGet(575.0f, 60.0f, 0.0f);
@@ -55,19 +55,19 @@ void UIStayShot::Create()
 	m_stayShotAnimation.m_maxCount = CommonConstant::STAY_SHOT_UI_ANIM_NUM;
 	m_stayShotScale = 0.7f;
 
-	//	ƒ{ƒ^ƒ“UI
+	//	ãƒœã‚¿ãƒ³UI
 	m_buttonUI.m_spriteHendle = LoadGraph("Data/Sprite/StayShot/ButtonB.png");
 	CommonDebug::Assert((m_buttonUI.m_spriteHendle <= -1), " [ UIStayShot.cpp ] : error : sprite loading failed.");
 	m_buttonUI.m_pos = VGet(575.0f, 60.0f, 0.0f);
 	m_buttonUI.m_scale = MIN_BUTTON_SCALE;
 	m_isChangeButtonScale = false;
 
-	//	ƒQ[ƒW
+	//	ã‚²ãƒ¼ã‚¸
 	m_gauge.m_vertexTop = START_POS;
 	m_gauge.m_vertexUnder = END_POS;
 	m_gaugeAlpha = 180;
 
-	//	F
+	//	è‰²
 	m_gaugeColor.m_red = 50;
 	m_gaugeColor.m_green = 50;
 	m_gaugeColor.m_blue = 50;
@@ -78,11 +78,11 @@ void UIStayShot::Create()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	‰ğ•úˆ—
+//	@brief	è§£æ”¾å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIStayShot::Release()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	for (int i = 0; i < CommonConstant::STAY_SHOT_UI_ANIM_NUM; i++)
 	{
 		DeleteGraph(m_stayShotSpriteHendle[i]);
@@ -92,37 +92,37 @@ void UIStayShot::Release()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	XVˆ—
+//	@brief	æ›´æ–°å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIStayShot::Update(PlayerManager& _playerManager, SoundEffect& _soundEffect)
 {
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 	if (player)
 	{
-		//	‘ØİƒVƒ‡ƒbƒg‚Íg—p‰Â”\
+		//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã¯ä½¿ç”¨å¯èƒ½
 		const bool isUseStayShot = player->GetIsUseStayShot();
 		if (isUseStayShot)
 		{
 			if (!m_isOneTimeSE) { _soundEffect.OnPlaySound(_soundEffect.ONE_SE_KIND::ONE_SE_STAY_SHOT_GAUGE_MAX); m_isOneTimeSE = true; }
 
-			//	ƒAƒjƒ[ƒVƒ‡ƒ“‚ğ‹‚ß‚é
+			//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã‚’æ±‚ã‚ã‚‹
 			CommonFunction::AskAnimationCount(m_stayShotAnimation);
 
-			//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌØ‚è‘Ö‚¦
+			//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®åˆ‡ã‚Šæ›¿ãˆ
 			_ChangeButtonScale();
 
 			m_isOneTimeReset = false;
 		}
 		else
 		{
-			//	ƒ_ƒ[ƒW‚ğó‚¯‚Ä‚¢‚È‚¢‚Æ‚«
+			//	ãƒ€ãƒ¡ãƒ¼ã‚¸ã‚’å—ã‘ã¦ã„ãªã„ã¨ã
 			const bool isNotDamage = !player->GetIsDamage();
 			if (isNotDamage)
 			{
-				//	ƒŠƒZƒbƒg
+				//	ãƒªã‚»ãƒƒãƒˆ
 				_Reset();
 
-				//	ƒQ[ƒW‚Ì‰ÁZ
+				//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 				_AddGauge();
 			}
 		}
@@ -130,7 +130,7 @@ void UIStayShot::Update(PlayerManager& _playerManager, SoundEffect& _soundEffect
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	•`‰æˆ—
+//	@brief	æç”»å‡¦ç†
 //-----------------------------------------------------------------------------
 void UIStayShot::Draw(PlayerManager& _playerManager)
 {
@@ -139,7 +139,7 @@ void UIStayShot::Draw(PlayerManager& _playerManager)
 	PlayerBase* player = _playerManager.GetPlayerPtr();
 	if (player)
 	{
-		//	‘ØİƒVƒ‡ƒbƒg‚Íg—p‰Â”\
+		//	æ»åœ¨ã‚·ãƒ§ãƒƒãƒˆã¯ä½¿ç”¨å¯èƒ½
 		const bool isUseStayShot = player->GetIsUseStayShot();
 		if (isUseStayShot)
 		{
@@ -147,7 +147,7 @@ void UIStayShot::Draw(PlayerManager& _playerManager)
 		}
 		else
 		{
-			//	ƒQ[ƒW‚Ì•`‰æ
+			//	ã‚²ãƒ¼ã‚¸ã®æç”»
 			SetDrawBlendMode(DX_BLENDMODE_ALPHA, m_gaugeAlpha);
 			DrawBox((int)m_gauge.m_vertexTop.x, (int)m_gauge.m_vertexTop.y, (int)m_gauge.m_vertexUnder.x, (int)m_gauge.m_vertexUnder.y, m_gaugeColor.m_color, TRUE);
 			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
@@ -156,15 +156,15 @@ void UIStayShot::Draw(PlayerManager& _playerManager)
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌØ‚è‘Ö‚¦
+//	@brief	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®åˆ‡ã‚Šæ›¿ãˆ
 //-----------------------------------------------------------------------------
 void UIStayShot::_ChangeButtonScale()
 {
-	//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚Ì•ÏX
+	//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®å¤‰æ›´
 	if (m_isChangeButtonScale) { m_buttonUI.m_scale -= BUTTON_SCALE_SPEED; }
 	else { m_buttonUI.m_scale += BUTTON_SCALE_SPEED; }
 
-	//	Å‘åÅ¬ˆ—
+	//	æœ€å¤§æœ€å°å‡¦ç†
 	const bool isMaxVal = m_buttonUI.m_scale >= MAX_BUTTON_SCALE;
 	const bool isMinVal = m_buttonUI.m_scale <= MIN_BUTTON_SCALE;
 	if (isMaxVal) { m_buttonUI.m_scale = MAX_BUTTON_SCALE; m_isChangeButtonScale = true; }
@@ -172,20 +172,20 @@ void UIStayShot::_ChangeButtonScale()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒŠƒZƒbƒg
+//	@brief	ãƒªã‚»ãƒƒãƒˆ
 //-----------------------------------------------------------------------------
 void UIStayShot::_Reset()
 {
 	if (!m_isOneTimeReset)
 	{
-		//	ƒQ[ƒW‚Ì‰Šú‰»
+		//	ã‚²ãƒ¼ã‚¸ã®åˆæœŸåŒ–
 		m_gauge.m_vertexTop = START_POS;
 		m_gauge.m_vertexUnder = END_POS;
 
-		//	ƒAƒjƒ[ƒVƒ‡ƒ“‚ÌƒŠƒZƒbƒg
+		//	ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³ã®ãƒªã‚»ãƒƒãƒˆ
 		m_stayShotAnimation.m_time = 0.0f;
 
-		//	ƒ{ƒ^ƒ“‰Šú‰»
+		//	ãƒœã‚¿ãƒ³åˆæœŸåŒ–
 		m_buttonUI.m_scale = MIN_BUTTON_SCALE;
 		m_isChangeButtonScale = false;
 
@@ -195,24 +195,24 @@ void UIStayShot::_Reset()
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒQ[ƒW‚Ì‰ÁZ
+//	@brief	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 //-----------------------------------------------------------------------------
 void UIStayShot::_AddGauge()
 {
-	//	ƒQ[ƒW‚Ì‰ÁZ
+	//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 	m_gauge.m_vertexTop.x += 3.0f;
 
-	//	ƒQ[ƒW‚ÌÅ‘å
+	//	ã‚²ãƒ¼ã‚¸ã®æœ€å¤§
 	const bool isMaxVal = m_gauge.m_vertexTop.x >= END_POS.x;
 	if (isMaxVal) { m_gauge.m_vertexTop.x = END_POS.x; }
 }
 
 //-----------------------------------------------------------------------------
-//	@brief	ÅI“I‚È‰ğ•ú
+//	@brief	æœ€çµ‚çš„ãªè§£æ”¾
 //-----------------------------------------------------------------------------
 void UIStayShot::_FinalRelease()
 {
-	//	ƒXƒvƒ‰ƒCƒg‚ÌƒAƒ“ƒ[ƒh
+	//	ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆã®ã‚¢ãƒ³ãƒ­ãƒ¼ãƒ‰
 	for (int i = 0; i < CommonConstant::STAY_SHOT_UI_ANIM_NUM; i++)
 	{
 		DeleteGraph(m_stayShotSpriteHendle[i]);

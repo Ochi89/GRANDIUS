@@ -1,24 +1,24 @@
-
+ï»¿
 //=============================================================================
 //	@file	UIStayShot.h
-//	@brief	ƒXƒeƒCƒVƒ‡ƒbƒgUI
-//	@autor	‘Š’m ‘ñ–í
+//	@brief	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUI
+//	@autor	ç›¸çŸ¥ æ‹“å¼¥
 //	@date	2018/1/10
 //=============================================================================
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒvƒŠƒvƒƒZƒbƒT
+//	@brief	ãƒ—ãƒªãƒ—ãƒ­ã‚»ãƒƒã‚µ
 //-----------------------------------------------------------------------------
 #pragma once
 
 //-----------------------------------------------------------------------------
-//	@brief	ƒCƒ“ƒNƒ‹[ƒh
+//	@brief	ã‚¤ãƒ³ã‚¯ãƒ«ãƒ¼ãƒ‰
 //-----------------------------------------------------------------------------
 #include "DxLib.h"
 #include "Common.h"
 
 //-----------------------------------------------------------------------------
-//	@brief	‘O•ûéŒ¾
+//	@brief	å‰æ–¹å®£è¨€
 //-----------------------------------------------------------------------------
 struct Rect;
 struct UI;
@@ -28,66 +28,66 @@ class SoundEffect;
 class PlayerManager;
 
 //-----------------------------------------------------------------------------
-//	@brief	UIStayShotƒNƒ‰ƒX
+//	@brief	UIStayShotã‚¯ãƒ©ã‚¹
 //-----------------------------------------------------------------------------
 class UIStayShot final
 {
 public:
 
-//===================== ŠÖ” ======================//
+//===================== é–¢æ•° ======================//
 
-	//	ƒRƒ“ƒXƒgƒ‰ƒNƒ^/ƒfƒXƒgƒ‰ƒNƒ^
+	//	ã‚³ãƒ³ã‚¹ãƒˆãƒ©ã‚¯ã‚¿/ãƒ‡ã‚¹ãƒˆãƒ©ã‚¯ã‚¿
 	UIStayShot();
 	~UIStayShot();
 
-	//	ì¬ˆ—
+	//	ä½œæˆå‡¦ç†
 	void Create();
 
-	//	‰ğ•úˆ—
+	//	è§£æ”¾å‡¦ç†
 	void Release();
 
-	//	XVˆ—
+	//	æ›´æ–°å‡¦ç†
 	void Update(PlayerManager& _playerManager, SoundEffect& _soundEffect);
 
-	//	•`‰æˆ—
+	//	æç”»å‡¦ç†
 	void Draw(PlayerManager& _playerManager);
 
 private:
 
-//================== “à•”ˆ—ŠÖ” ==================//
+//================== å†…éƒ¨å‡¦ç†é–¢æ•° ==================//
 
-	//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌØ‚è‘Ö‚¦
+	//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®åˆ‡ã‚Šæ›¿ãˆ
 	void _ChangeButtonScale();
 
-	//	ƒŠƒZƒbƒg
+	//	ãƒªã‚»ãƒƒãƒˆ
 	void _Reset();
 
-	//	ƒQ[ƒW‚Ì‰ÁZ
+	//	ã‚²ãƒ¼ã‚¸ã®åŠ ç®—
 	void _AddGauge();
 
-	//	ÅI“I‚È‰ğ•úˆ—
+	//	æœ€çµ‚çš„ãªè§£æ”¾å‡¦ç†
 	void _FinalRelease();
 
-//=================== ƒƒ“ƒo•Ï” ===================//
+//=================== ãƒ¡ãƒ³ãƒå¤‰æ•° ===================//
 
-	int			m_stayShotSpriteHendle[CommonConstant::STAY_SHOT_UI_ANIM_NUM];	//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚ÌƒXƒvƒ‰ƒCƒgƒnƒ“ƒhƒ‹
-	VECTOR		m_stayShotPos;													//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚Ìƒ|ƒWƒVƒ‡ƒ“
-	Animation	m_stayShotAnimation;											//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚ÌƒAƒjƒ[ƒVƒ‡ƒ“
-	float		m_stayShotScale;												//	ƒXƒeƒCƒVƒ‡ƒbƒgUI‚ÌŠg‘å—¦
-	UI			m_buttonUI;														//	ƒ{ƒ^ƒ“UI
-	bool		m_isChangeButtonScale;											//	ƒ{ƒ^ƒ“ƒTƒCƒYØ‚è‘Ö‚¦
-	Rect		m_gauge;														//	ƒQ[ƒW
-	int			m_gaugeAlpha;													//	ƒQ[ƒW‚ÌƒAƒ‹ƒtƒ@’l
-	Color		m_gaugeColor;													//	ƒQ[ƒW‚ÌF
-	bool		m_isOneTimeReset;												//	ƒŠƒZƒbƒgƒtƒ‰ƒO
-	bool		m_isOneTimeSE;													//	SEƒtƒ‰ƒO
+	int			m_stayShotSpriteHendle[CommonConstant::STAY_SHOT_UI_ANIM_NUM];	//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®ã‚¹ãƒ—ãƒ©ã‚¤ãƒˆãƒãƒ³ãƒ‰ãƒ«
+	VECTOR		m_stayShotPos;													//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®ãƒã‚¸ã‚·ãƒ§ãƒ³
+	Animation	m_stayShotAnimation;											//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®ã‚¢ãƒ‹ãƒ¡ãƒ¼ã‚·ãƒ§ãƒ³
+	float		m_stayShotScale;												//	ã‚¹ãƒ†ã‚¤ã‚·ãƒ§ãƒƒãƒˆUIã®æ‹¡å¤§ç‡
+	UI			m_buttonUI;														//	ãƒœã‚¿ãƒ³UI
+	bool		m_isChangeButtonScale;											//	ãƒœã‚¿ãƒ³ã‚µã‚¤ã‚ºåˆ‡ã‚Šæ›¿ãˆ
+	Rect		m_gauge;														//	ã‚²ãƒ¼ã‚¸
+	int			m_gaugeAlpha;													//	ã‚²ãƒ¼ã‚¸ã®ã‚¢ãƒ«ãƒ•ã‚¡å€¤
+	Color		m_gaugeColor;													//	ã‚²ãƒ¼ã‚¸ã®è‰²
+	bool		m_isOneTimeReset;												//	ãƒªã‚»ãƒƒãƒˆãƒ•ãƒ©ã‚°
+	bool		m_isOneTimeSE;													//	SEãƒ•ãƒ©ã‚°
 
-//===================== Ã“I’è” ===================//
+//===================== é™çš„å®šæ•° ===================//
 
-	static const VECTOR		START_POS;					//	ŠJnˆÊ’u
-	static const VECTOR		END_POS;					//	I—¹ˆÊ’u
-	static const float		MIN_BUTTON_SCALE;			//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌÅ¬
-	static const float		MAX_BUTTON_SCALE;			//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚ÌÅ‘å
-	static const float		BUTTON_SCALE_SPEED;			//	ƒ{ƒ^ƒ“‚ÌŠg‘å—¦‚Ì‘¬“x
+	static const VECTOR		START_POS;					//	é–‹å§‹ä½ç½®
+	static const VECTOR		END_POS;					//	çµ‚äº†ä½ç½®
+	static const float		MIN_BUTTON_SCALE;			//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®æœ€å°
+	static const float		MAX_BUTTON_SCALE;			//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®æœ€å¤§
+	static const float		BUTTON_SCALE_SPEED;			//	ãƒœã‚¿ãƒ³ã®æ‹¡å¤§ç‡ã®é€Ÿåº¦
 
 };
