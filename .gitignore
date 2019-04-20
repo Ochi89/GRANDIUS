@@ -30,3 +30,16 @@
 *.exe
 *.out
 *.app
+*.db
+*.user
+GRANDIUS/操作説明.txt
+*.suo
+GRANDIUS/.vs/CraftGame3D/v15/
+GRANDIUS/ビルドするには/
+GRANDIUS/x64/
+GRANDIUS/Debug/
+GRANDIUS/Release/
+*.filters
+GRANDIUS/CraftGame3D.vcxproj
+Dxlib.h/
+GRANDIUS/Log.txt
