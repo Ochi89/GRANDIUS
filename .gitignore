@@ -32,15 +32,13 @@
 *.app
 *.db
 *.user
-GRANDIUS/操作説明.txt
+GRANDIUS/操作説昁Etxt
 *.suo
 GRANDIUS/.vs/CraftGame3D/v15/
 GRANDIUS/ビルドするには/
 GRANDIUS/x64/
 GRANDIUS/Debug/
 GRANDIUS/Release/
-*.filters
-GRANDIUS/CraftGame3D.vcxproj
 Dxlib.h/
 GRANDIUS/Log.txt
 .vs/
