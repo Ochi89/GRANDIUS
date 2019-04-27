@@ -16,13 +16,13 @@
 //-----------------------------------------------------------------------------
 Font::Font()
 {
-	widht = 0;
-	height = 0;
+	m_widht = 0;
+	m_height = 0;
 
 	for (int i = 0; i < CommonConstant::FONT_NUM; i++)
 	{
-		textMap[i] = -1;
-		textImg[i] = 0;
+		m_textMap[i] = -1;
+		m_textImg[i] = 0;
 	}
 }
 
@@ -32,6 +32,14 @@ Font::Font()
 Font::~Font()
 {
 	//処理なし
+}
+
+//-----------------------------------------------------------------------------
+// @brief  インスタンス生成
+//-----------------------------------------------------------------------------
+Font* Font::GetInstance()
+{
+	return &s_instance;
 }
 
 //-----------------------------------------------------------------------------
@@ -64,7 +72,7 @@ void Font::Draw(int x, int y, char* string)
 		{
 			//ｘは初期値へ、ｙは１文字分下へ
 			tmpX = x;
-			tmpY += height;
+			tmpY += m_height;
 
 			//文字列を次へ
 			string++;
@@ -74,16 +82,16 @@ void Font::Draw(int x, int y, char* string)
 		}
 
 		//画像の添え字を代入
-		index = textMap[*string];
+		index = m_textMap[*string];
 
 		//１文字分の画像の描画
 		if (index >= 0)
 		{
-			DrawGraph(tmpX, tmpY, textImg[index], TRUE);
+			DrawGraph(tmpX, tmpY, m_textImg[index], TRUE);
 		}
 
 		//ｘは１文字分右へ
-		tmpX += widht;
+		tmpX += m_widht;
 
 		//文字列を次へ
 		string++;
@@ -106,11 +114,11 @@ void Font::_SetGraph(int _xNum, int _yNum, const char* _fileName)
 	DeleteGraph(tmpImg);
 
 	//画像の大きさから文字の個数で割ることで、１文字の大きさを取る
-	widht = tmpWidht / _xNum;
-	height = tmpHeight / _yNum;
+	m_widht = tmpWidht / _xNum;
+	m_height = tmpHeight / _yNum;
 
 	//１文字分の大きさをもとに画像の分割読み込み
-	LoadDivGraph(_fileName, _xNum * _yNum, _xNum, _yNum, widht, height, textImg);
+	LoadDivGraph(_fileName, _xNum * _yNum, _xNum, _yNum, m_widht, m_height, m_textImg);
 }
 
 //-----------------------------------------------------------------------------
@@ -125,6 +133,6 @@ void Font::_ReMap(const char* _reMap)
 	//画像と文字の連結
 	while (*tmpReMap && tmpNum < CommonConstant::FONT_NUM)
 	{
-		textMap[*tmpReMap++] = tmpNum++;
+		m_textMap[*tmpReMap++] = tmpNum++;
 	}
 }

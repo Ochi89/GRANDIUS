@@ -30,11 +30,7 @@ public:
 	~Font();
 
 	//	生成
-	static Font* GetInstance()
-	{
-		static Font s_instance;
-		return &s_instance;
-	}
+	Font* GetInstance();
 
 	//	作成処理
 	void Create();
@@ -59,10 +55,11 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	int widht;									// １文字分の横の大きさ
-	int height;									// １文字分の縦の大きさ
-	int textImg[CommonConstant::FONT_NUM];		// １文字分の画像ハンドル
-	int textMap[CommonConstant::FONT_NUM];		// 画像ハンドルへの添え字
+	static Font		s_instance;									// インスタンス
+	int				m_widht;									// １文字分の横の大きさ
+	int				m_height;									// １文字分の縦の大きさ
+	int				m_textImg[CommonConstant::FONT_NUM];		// １文字分の画像ハンドル
+	int				m_textMap[CommonConstant::FONT_NUM];		// 画像ハンドルへの添え字
 };
 
 #define FONT Font::GetInstance()

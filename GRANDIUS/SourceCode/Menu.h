@@ -37,11 +37,7 @@ public:
 	~Menu();
 
 	//	生成
-	static Menu* GetInstance()
-	{
-		static Menu s_instance;
-		return &s_instance;
-	}
+	Menu* GetInstance();
 
 	//	初期処理
 	void Initialize();
@@ -121,25 +117,26 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	int		m_modeNumber;								//	モード番号
-	int		m_countdown;								//	カウントダウン
-	float	m_watiTime;									//	遅延時間
-	float	m_countdownTime;							//	カウントダウン時間
-	bool	m_isMenuState;								//	メニュ－の状態
-	bool	m_isMenuDraw;								//	メニュ－の描画
-	bool	m_isMenu;									//	メニュ－
-	bool	m_isOperation;								//	操作説明
-	bool	m_isGoToTitle;								//	タイトルへ
-	bool	m_isSelectScaleState;						//	選択フレームの拡大率の状態
-	bool	m_isSkipUpdate;								//	更新のスキップ
-	bool	m_isCountdownStart;							//	カウントダウンの開始
-	Rect	m_menuFlame;								//	メニューフレーム
-	UI		m_topFlame;									//	上フレームUI
-	UI		m_underFlame;								//	下フレームUI
-	UI		m_mode[MODE::MODE_NUM];						//	モードUI
-	UI		m_select;									//	選択UI
-	UI		m_operation;								//	説明UI
-	UI		m_countdownUI[COUNTDOWN::COUNTDOWN_NUM];	//	カウントダウンUI
+	static Menu		s_instance;									//	インスタンス
+	int				m_modeNumber;								//	モード番号
+	int				m_countdown;								//	カウントダウン
+	float			m_watiTime;									//	遅延時間
+	float			m_countdownTime;							//	カウントダウン時間
+	bool			m_isMenuState;								//	メニュ－の状態
+	bool			m_isMenuDraw;								//	メニュ－の描画
+	bool			m_isMenu;									//	メニュ－
+	bool			m_isOperation;								//	操作説明
+	bool			m_isGoToTitle;								//	タイトルへ
+	bool			m_isSelectScaleState;						//	選択フレームの拡大率の状態
+	bool			m_isSkipUpdate;								//	更新のスキップ
+	bool			m_isCountdownStart;							//	カウントダウンの開始
+	Rect			m_menuFlame;								//	メニューフレーム
+	UI				m_topFlame;									//	上フレームUI
+	UI				m_underFlame;								//	下フレームUI
+	UI				m_mode[MODE::MODE_NUM];						//	モードUI
+	UI				m_select;									//	選択UI
+	UI				m_operation;								//	説明UI
+	UI				m_countdownUI[COUNTDOWN::COUNTDOWN_NUM];	//	カウントダウンUI
 
 //===================== 静的定数 ===================//
 

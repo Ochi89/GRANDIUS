@@ -33,11 +33,7 @@ public:
 	~LoadFile();								//	デストラクタ
 	
 	//	生成
-	static LoadFile* GetInstance()
-	{
-		static LoadFile m_instance;
-		return &m_instance;
-	}
+	LoadFile* GetInstance();
 
 	//	CSV ２次元ファイルの読み込み
 	bool LoadCsvTwoDimensionsFile(const char* _fileName);
@@ -92,8 +88,9 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	int m_twoDimensionsData[CommonConstant::MAX_CSV_NUM][CommonConstant::MAX_CSV_NUM];	//	2次元ファイル読み込み用
-	int m_data[CommonConstant::MAX_CSV_NUM];								//	ファイル読み込み用
+	static LoadFile		m_instance;																		//	インスタンス
+	int					m_twoDimensionsData[CommonConstant::MAX_CSV_NUM][CommonConstant::MAX_CSV_NUM];	//	2次元ファイル読み込み用
+	int					m_data[CommonConstant::MAX_CSV_NUM];											//	ファイル読み込み用
 
 };
 

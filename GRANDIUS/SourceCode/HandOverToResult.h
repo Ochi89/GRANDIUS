@@ -30,11 +30,7 @@ public:
 	~HandOverToResult();
 
 	//	生成
-	static HandOverToResult* GetInstance()
-	{
-		static HandOverToResult s_instance;
-		return &s_instance;
-	}
+	HandOverToResult* GetInstance();
 
 	//	リセット
 	void Reset();
@@ -73,9 +69,10 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	int		m_life;					//	ライフ
-	int		m_destructionNum;		//	討伐数
-	bool	m_isClear;				//	クリアしたか
+	static HandOverToResult		s_instance;				//	インスタンス
+	int							m_life;					//	ライフ
+	int							m_destructionNum;		//	討伐数
+	bool						m_isClear;				//	クリアしたか
 
 };
 

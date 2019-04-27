@@ -30,11 +30,7 @@ public:
 	~Loading();
 
 	//	生成
-	static Loading* GetInstance()
-	{
-		static Loading m_instance;
-		return &m_instance;
-	}
+	Loading* GetInstance();
 
 	//	描画
 	void Draw();
@@ -48,7 +44,8 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	int		m_spriteHendle;		//	スプライトハンドル
+	static Loading	m_instance;			//	インスタンス
+	int				m_spriteHendle;		//	スプライトハンドル
 
 };
 

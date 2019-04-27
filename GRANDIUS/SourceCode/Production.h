@@ -35,11 +35,7 @@ public:
 	~Production();
 
 	//	インスタンスの生成
-	static Production* GetInstance()
-	{
-		static Production s_instance;
-		return &s_instance;
-	}
+	Production* GetInstance();
 
 	//	更新
 	void Update();
@@ -98,14 +94,15 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	Rect	m_gaugeBar1;					//	演出中のゲージ
-	Rect	m_gaugeBar2;					//	演出中のゲージ
-	int		m_gaugeColor;					//	ゲージの色
-	bool	m_isSceneProduction;			//	ゲーム中のシーン移動の演出中フラグ
-	bool	m_isSpecialProduction;			//	必殺技使用時の演出中フラグ
-	bool	m_isClearProduction;			//	クリア時の演出中フラグ
-	bool	m_isTitleProduction;			//	タイトル時の演出
-	float	m_specialProductionTime;		//	必殺技使用時の時間
+	static Production	s_instance;						//	インスタンス
+	Rect				m_gaugeBar1;					//	演出中のゲージ
+	Rect				m_gaugeBar2;					//	演出中のゲージ
+	int					m_gaugeColor;					//	ゲージの色
+	bool				m_isSceneProduction;			//	ゲーム中のシーン移動の演出中フラグ
+	bool				m_isSpecialProduction;			//	必殺技使用時の演出中フラグ
+	bool				m_isClearProduction;			//	クリア時の演出中フラグ
+	bool				m_isTitleProduction;			//	タイトル時の演出
+	float				m_specialProductionTime;		//	必殺技使用時の時間
 
 //===================== 静的定数 ===================//
 

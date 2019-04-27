@@ -42,11 +42,7 @@ public:
 	~UIScore();
 
 	//	生成
-	static UIScore* GetInstance()
-	{
-		static UIScore s_instance;
-		return &s_instance;
-	}
+	UIScore* GetInstance();
 
 	//	更新
 	void Update();
@@ -80,10 +76,11 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	VECTOR	m_pos;											//	ポジション
-	float	m_score;										//	スコア
-	float	m_targetScore;									//	スコアのターゲット
-	char	m_scoreText[CommonConstant::MAX_SCORE_NUM];		//	スコアの文字列
+	static UIScore	s_instance;										//	インスタンス
+	VECTOR			m_pos;											//	ポジション
+	float			m_score;										//	スコア
+	float			m_targetScore;									//	スコアのターゲット
+	char			m_scoreText[CommonConstant::MAX_SCORE_NUM];		//	スコアの文字列
 
 //===================== 静的定数 ===================//
 

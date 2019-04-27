@@ -28,6 +28,9 @@ public:
 	//	デストラクタ
 	~Mouse();
 
+	//	インスタンスの生成
+	Mouse* GetInstance();
+
 	//	更新処理
 	void Update();
 
@@ -36,13 +39,6 @@ public:
 
 	//	押されている間
 	bool Press(const char* _mode);
-
-	//	インスタンスの生成
-	static Mouse* GetInstance()
-	{
-		static Mouse s_instance;
-		return &s_instance;
-	}
 
 //==================== getter =====================//
 
@@ -63,11 +59,12 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	VECTOR	m_pos;			//	ポジション
-	int		m_newPosX;		//	新しいｘ座標
-	int		m_newPosY;		//	新しいｙ座標
-	int		m_prevLeft;		//	前フレームに左ボタン入力があるか
-	int		m_prevRight;	//	前フレームに右ボタン入力があるか
+	static Mouse	s_instance;		//	インスタンス
+	VECTOR			m_pos;			//	ポジション
+	int				m_newPosX;		//	新しいｘ座標
+	int				m_newPosY;		//	新しいｙ座標
+	int				m_prevLeft;		//	前フレームに左ボタン入力があるか
+	int				m_prevRight;	//	前フレームに右ボタン入力があるか
 };
 
 //===================== マクロ =====================//

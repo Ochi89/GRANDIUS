@@ -35,11 +35,7 @@ public:
 	void IsFadeStart();
 
 	//	インスタンスの生成
-	static Fade* GetInstance()
-	{
-		static Fade s_instance;
-		return &s_instance;
-	}
+	Fade* GetInstance();
 
 private:
 
@@ -61,11 +57,12 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	int		m_alpha;			//	不透明度
-	bool	m_isOneTime;		//	開始時のみ
-	bool	m_isFadeIn;			//	フェードイン
-	bool	m_isFadeOut;		//	フェードアウト
-	bool	m_isEndFade;		//	エンドフェード
+	static Fade		s_instance;			//	インスタンス
+	int				m_alpha;			//	不透明度
+	bool			m_isOneTime;		//	開始時のみ
+	bool			m_isFadeIn;			//	フェードイン
+	bool			m_isFadeOut;		//	フェードアウト
+	bool			m_isEndFade;		//	エンドフェード
 };
 
 #define FADE Fade::GetInstance()		//	フェードのインスタンス

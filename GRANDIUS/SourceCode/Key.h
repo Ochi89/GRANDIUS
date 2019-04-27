@@ -28,6 +28,9 @@ public:
 
 	//	デストラクタ
 	~Key();
+	
+	//	インスタンスの生成
+	Key* GetInstance();
 
 	//	すべて使用中にする
 	//	シーン切り替え時のときのみ呼ぶ
@@ -38,13 +41,6 @@ public:
 
 	//	押している間
 	bool Press(const int _keyCode);
-
-	//	インスタンスの生成
-	static Key* GetInstance()
-	{
-		static Key s_instance;
-		return &s_instance;
-	}
 
 private:
 
@@ -64,8 +60,9 @@ private:
 
 //=================== メンバ変数 ===================//
 
-	char		m_key[CommonConstant::MAX_KEY_INPUT_NUM];		//	現在のキー入力
-	int		m_prevKey[CommonConstant::MAX_KEY_INPUT_NUM];		//	前のキー入力
+	static Key	s_instance;											//	インスタンス
+	char		m_key[CommonConstant::MAX_KEY_INPUT_NUM];			//	現在のキー入力
+	int			m_prevKey[CommonConstant::MAX_KEY_INPUT_NUM];		//	前のキー入力
 };
 
 //===================== マクロ =====================//
