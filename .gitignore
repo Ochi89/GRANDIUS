@@ -31,7 +31,6 @@
 *.out
 *.app
 *.db
-*.user
 GRANDIUS/操作説昁Etxt
 *.suo
 GRANDIUS/.vs/CraftGame3D/v15/
@@ -42,3 +41,4 @@ GRANDIUS/Release/
 Dxlib.h/
 GRANDIUS/Log.txt
 .vs/
+GRANDIUS/CraftGame3D.vcxproj.user
